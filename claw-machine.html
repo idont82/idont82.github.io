@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>꿈의 인형뽑기</title>
+<link href="claw-machine.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div id="nicknameOverlay">
+  <div id="nicknameModal">
+    <h2>🎮 반가워!</h2>
+    <p>닉네임을 알려줘! 게임에서 불러줄게</p>
+    <input type="text" id="nicknameInput" placeholder="닉네임 입력" maxlength="10" autocomplete="off">
+    <br>
+    <button id="nicknameSave">시작하기!</button>
+  </div>
+</div>
+<button id="nicknameEdit"></button>
+
+<div id="charSelector">
+  <button class="active" data-theme="shinchan"><span class="char-icon">🖍️</span>짱구</button>
+  <button data-theme="cinnamoroll"><span class="char-icon">☁️</span>시나모롤</button>
+  <button data-theme="dino"><span class="char-icon">🦕</span>공룡</button>
+  <button data-theme="maenggu"><span class="char-icon">🤧</span>맹구</button>  <button data-theme="hangyodon"><span class="char-icon">🐟</span>한교동</button>
+  <button data-theme="doraemon"><span class="char-icon">🐱</span>도라에몽</button>
+  <button data-theme="loopy"><span class="char-icon">🌸</span>루피</button>
+  </div>
+<button id="collectionToggle">🎁 내 인형함 <span id="collBadge" class="badge">0</span></button>
+<button id="sizeToggle" class="size-btn">🪄 큰 인형 버전</button>
+<div id="collectionBackdrop"></div>
+<div id="collectionPanel">
+  <div id="collectionHeader">
+    <h2>🎁 내가 뽑은 인형</h2>
+    <button id="collectionClose">&times;</button>
+  </div>
+  <div id="collectionList"></div>
+</div>
+
+<div id="cabinet">
+  <div id="titleBar">
+    <div id="ledStrip"></div>
+    <h1>🌟 꿈의 인형뽑기 🌟</h1>
+  </div>
+  <div id="viewport"></div>
+  <div id="controlPanel">
+    <div id="panelJoystick">
+      <span class="joy-arrow up">▲</span>
+      <span class="joy-arrow down">▼</span>
+      <span class="joy-arrow left">◀</span>
+      <span class="joy-arrow right">▶</span>
+      <div id="joyStick"><div id="joyBall"></div></div>
+    </div>
+    <div id="coinBtn"><span>💰<br>COIN</span></div>
+    <div id="startBtn"><span>START</span></div>
+    <div id="creditDisplay">
+      <div style="color:#0f0" id="creditTxt">CREDIT: 3</div>
+      <div style="color:#ff0" id="timeTxt">TIME: --</div>
+      <div style="color:#0ff" id="scoreTxt">SCORE: 0</div>
+    </div>
+  </div>
+  <div id="prizeExit">
+    <div id="prizeHole">🎁 경품 입구</div>
+  </div>
+</div>
+
+<!-- Mobile touch controls -->
+<div id="touchOverlay">
+  <div id="touchJoystickArea"><div id="touchKnob"></div></div>
+  <div id="touchGrabBtn">🪝<br>뽑기!</div>
+</div>
+
+<div id="msgOverlay"></div>
+
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js"}}
+</script>
+<script src="claw-machine.js" type="module">
+</script>
+</body>
+</html>
