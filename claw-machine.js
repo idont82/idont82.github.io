@@ -1267,6 +1267,34 @@ function spawnPlushies(){
   plushieGroup.clear();
   plushies.length = 0;
 
+  // ─── Special Large Mode: 4 Dinosaurs in a neat grid ───
+  if (isLargeMode) {
+    const dinoTypes = PLUSHIE_THEMES['dino'];
+    const gridRows = 2;
+    const gridCols = 2;
+    const spacingX = 1.2;
+    const spacingZ = 1.0;
+    const startX = -0.6;
+    const startZ = -0.3;
+
+    for (let i = 0; i < 4; i++) {
+      const col = i % gridCols;
+      const row = Math.floor(i / gridCols);
+      const type = dinoTypes[i % dinoTypes.length];
+      
+      const x = startX + col * spacingX;
+      const z = startZ + row * spacingZ;
+      const y = 0.5; // Slightly above floor to settle
+      
+      // Face forward (ry = 0 or Math.PI)
+      const p = createPlushie(type, new THREE.Vector3(x, y, z), {x: 0, y: Math.PI, z: 0});
+      plushies.push(p);
+      plushieGroup.add(p);
+    }
+    return;
+  }
+
+  // ─── Normal Mode Logic (Rest of the function) ───
   // Play area bounds for spawning (full width)
   const playMinX = -BOX_W/2 + 0.3;
   const playMaxX = BOX_W/2 - 0.3;
@@ -1287,8 +1315,8 @@ function spawnPlushies(){
   }
 
   // Layer 1: bottom layer, tightly packed
-  const layer1Count = isLargeMode ? 6 : 18;
-  const cols = isLargeMode ? 3 : 6;
+  const layer1Count = 18;
+  const cols = 6;
   for(let i = 0; i < layer1Count; i++){
     const typeIdx = i % PLUSHIE_TYPES.length;
     const type = PLUSHIE_TYPES[typeIdx];
@@ -1301,7 +1329,7 @@ function spawnPlushies(){
       z = -BOX_D*0.2 + Math.random() * BOX_D * 0.2;
     }
     const clamped1 = clampInBox(x, z); x = clamped1.x; z = clamped1.z;
-    const y = (isLargeMode ? 0.45 : 0.28) + Math.random() * 0.05;
+    const y = 0.28 + Math.random() * 0.05;
     const rx = (Math.random()-0.5) * 2.0;
     const ry = Math.random() * Math.PI * 2;
     const rz = (Math.random()-0.5) * 1.0;
@@ -1311,7 +1339,7 @@ function spawnPlushies(){
   }
 
   // Layer 2: stacked on top
-  const layer2Count = isLargeMode ? 4 : (currentTheme === 'dino' ? 20 : 10);
+  const layer2Count = (currentTheme === 'dino' ? 20 : 10);
   for(let i = 0; i < layer2Count; i++){
     const typeIdx = (i+3) % PLUSHIE_TYPES.length;
     const type = PLUSHIE_TYPES[typeIdx];
@@ -1332,7 +1360,7 @@ function spawnPlushies(){
   }
 
   // Layer 3 & 4: Massive mountain for 'dino' theme
-  if(currentTheme === 'dino' && !isLargeMode){
+  if(currentTheme === 'dino'){
     // 3층 (더 많이)
     const layer3Count = 12;
     for(let i = 0; i < layer3Count; i++){
