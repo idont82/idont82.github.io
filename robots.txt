@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://idont82.github.io/sitemap.xml
