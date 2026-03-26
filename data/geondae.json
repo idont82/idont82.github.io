@@ -5,36 +5,83 @@
   "exit": "6번 출구",
   "route": {
     "steps": [
-      "6번 출구 나와서 직진",
-      "커먼그라운드 방면 200m 직진",
-      "좌측 대형 뽑기 매장"
+      "건대입구역 6번 출구로 나와 커먼그라운드 방면으로 직진합니다.",
+      "화양동 먹자골목을 따라 펀시티, 메가오락실 등 대형 매장을 탐방합니다.",
+      "골목 안쪽의 가챠샵, 소형 뽑기방까지 순회합니다."
     ],
     "totalDistance": "도보 약 8분 (전체 순회)",
-    "naverMapUrl": "https://map.naver.com/v5/search/%EA%B1%B4%EB%8C%80%20%EC%9D%B8%ED%98%95%EB%BD%91%EA%B8%B0",
-    "naverStreetViewUrl": "https://map.naver.com/v5/search/%EA%B1%B4%EB%8C%80%20%EC%9D%B8%ED%98%95%EB%BD%91%EA%B8%B0"
+    "mapImage": "images/geondae-map.png"
   },
   "spots": [
     {
-      "name": "건대 뽑기랜드",
-      "address": "광진구 아차산로 200",
-      "machineCount": 40,
-      "priceRange": "1,000원 ~ 3,000원",
-      "rating": 4.0,
-      "comment": "대형 인형 전문, 포켓몬 쿠로미 라인업",
-      "recommended": true,
-      "hours": "11:00 ~ 22:00",
-      "naverStreetViewUrl": ""
+      "name": "펀시티 건대점",
+      "size": "대형",
+      "rating": 4.7,
+      "comment": "리뷰 96개, 건대 최대 규모의 인기 매장",
+      "recommended": true
     },
     {
-      "name": "건대 프라이즈존",
-      "address": "광진구 아차산로 212",
-      "machineCount": 20,
-      "priceRange": "1,000원 ~ 2,000원",
+      "name": "메가오락실 건대점",
+      "size": "대형",
+      "rating": 4.5,
+      "comment": "리뷰 43개, 다양한 오락기기와 뽑기 기계 겸비",
+      "recommended": true
+    },
+    {
+      "name": "유에프오인형뽑기 건대점",
+      "size": "중형",
+      "rating": 4.4,
+      "comment": "24시간 연중무휴, 새벽에도 뽑기 가능",
+      "recommended": true
+    },
+    {
+      "name": "앨리스인원더랜드",
+      "size": "중형",
+      "rating": 4.2,
+      "comment": "독특한 컨셉의 중형 매장",
+      "recommended": false
+    },
+    {
+      "name": "프리미엄 와와 가차샵",
+      "size": "중형",
+      "rating": 4.2,
+      "comment": "프리미엄 인형과 가챠를 함께 즐길 수 있는 곳",
+      "recommended": false
+    },
+    {
+      "name": "캑티 가챠샵 건대점",
+      "size": "중형",
+      "rating": 4.1,
+      "comment": "가챠와 뽑기를 동시에 즐길 수 있는 프랜차이즈. 자정까지 영업",
+      "recommended": false
+    },
+    {
+      "name": "엑스탑 오락실 건대점",
+      "size": "중형",
+      "rating": 4.0,
+      "comment": "새벽 2시까지 영업, 늦은 시간 방문 가능",
+      "recommended": false
+    },
+    {
+      "name": "브라더굿즈가차샵",
+      "size": "소형",
+      "rating": 3.8,
+      "comment": "소규모 가챠 전문 매장",
+      "recommended": false
+    },
+    {
+      "name": "미니돌",
+      "size": "소형",
       "rating": 3.5,
-      "comment": "먹자골목 옆이라 접근성 좋음",
-      "recommended": false,
-      "hours": "11:00 ~ 23:00",
-      "naverStreetViewUrl": ""
+      "comment": "화양동 소형 뽑기방",
+      "recommended": false
+    },
+    {
+      "name": "보보랜드",
+      "size": "소형",
+      "rating": 3.5,
+      "comment": "자양동 위치의 소형 매장",
+      "recommended": false
     }
   ]
 }

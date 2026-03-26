@@ -5,36 +5,83 @@
   "exit": "11번 출구",
   "route": {
     "steps": [
-      "11번 출구 지하상가 진입",
-      "직진 50m 좌측 첫번째 뽑기존",
-      "100m 더 가면 두번째 매장"
+      "강남역 11번 출구로 나옵니다.",
+      "강남대로를 따라 북쪽(역삼역 방면)으로 이동하며 짱오락실, 와와오락실 등 메인 매장을 탐방합니다.",
+      "강남역으로 돌아와 남쪽(서초 방면) 캐칭덕, 미니돌 등을 순회합니다."
     ],
-    "totalDistance": "도보 약 5분 (전체 순회)",
-    "naverMapUrl": "https://map.naver.com/v5/search/%EA%B0%95%EB%82%A8%EC%97%AD%20%EC%9D%B8%ED%98%95%EB%BD%91%EA%B8%B0",
-    "naverStreetViewUrl": "https://map.naver.com/v5/search/%EA%B0%95%EB%82%A8%EC%97%AD%20%EC%9D%B8%ED%98%95%EB%BD%91%EA%B8%B0"
+    "totalDistance": "도보 약 10분 (전체 순회)",
+    "mapImage": "images/gangnam-map.png"
   },
   "spots": [
     {
-      "name": "강남 지하상가 뽑기존 A",
-      "address": "강남구 강남대로 지하 396",
-      "machineCount": 30,
-      "priceRange": "500원 ~ 1,000원",
-      "rating": 4.0,
-      "comment": "500원짜리 많아서 가성비 최고, 비 올 때 추천",
-      "recommended": true,
-      "hours": "10:00 ~ 22:00",
-      "naverStreetViewUrl": ""
+      "name": "짱오락실 강남대로점",
+      "size": "대형",
+      "rating": 4.8,
+      "comment": "강남 뽑기 성지의 랜드마크! 리뷰 455개, 자정까지 영업",
+      "recommended": true
     },
     {
-      "name": "강남 지하상가 뽑기존 B",
-      "address": "강남구 강남대로 지하 402",
-      "machineCount": 20,
-      "priceRange": "1,000원",
+      "name": "짱오락실 강남2호점",
+      "size": "대형",
+      "rating": 4.6,
+      "comment": "짱오락실 2호점, 자정까지 영업. 1호점과 함께 순회 추천",
+      "recommended": true
+    },
+    {
+      "name": "와와오락실",
+      "size": "중형",
+      "rating": 4.3,
+      "comment": "안정적인 세팅과 다양한 인형 라인업이 강점",
+      "recommended": true
+    },
+    {
+      "name": "겟챠 서울 강남점",
+      "size": "중형",
+      "rating": 4.2,
+      "comment": "겟챠 프랜차이즈 강남점, 22시까지 영업",
+      "recommended": false
+    },
+    {
+      "name": "미니돌 강남오락실",
+      "size": "중형",
+      "rating": 4.1,
+      "comment": "서초동에 위치한 알짜 중형 매장",
+      "recommended": false
+    },
+    {
+      "name": "앨리스인원더랜드",
+      "size": "소형",
+      "rating": 4.0,
+      "comment": "서초동의 독특한 컨셉 매장",
+      "recommended": false
+    },
+    {
+      "name": "핑미핑미오락실",
+      "size": "소형",
+      "rating": 3.9,
+      "comment": "역삼동의 아기자기한 소형 뽑기방",
+      "recommended": false
+    },
+    {
+      "name": "캐칭덕 강남역점",
+      "size": "소형",
+      "rating": 4.0,
+      "comment": "캐칭덕 프랜차이즈, 최신 캐릭터 라인업",
+      "recommended": false
+    },
+    {
+      "name": "지지게임존",
+      "size": "소형",
+      "rating": 3.8,
+      "comment": "소규모 게임존, 한적하게 즐기기 좋음",
+      "recommended": false
+    },
+    {
+      "name": "모모스테이션 엘라스틴 강남역점",
+      "size": "소형",
       "rating": 3.5,
-      "comment": "치이카와, 스폰지밥 라인업 특화",
-      "recommended": false,
-      "hours": "10:00 ~ 22:00",
-      "naverStreetViewUrl": ""
+      "comment": "24시간 영업, 연중무휴로 새벽에도 뽑기 가능",
+      "recommended": false
     }
   ]
 }

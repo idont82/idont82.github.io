@@ -6,53 +6,60 @@
   "route": {
     "steps": [
       "종로3가역 4번 출구 건너편 익선동 한옥거리 입구로 진입합니다.",
-      "익선동의 중심부에 위치한 '대빵오락실'에서 대형 인형들을 공략해 보세요.",
-      "종로 거리를 따라 종각 방향으로 이동하며 종각 '젊음의 거리'에 진입합니다.",
-      "2층 규모의 '캑티가챠샵'과 활기찬 분위기의 '짱오락실'을 방문하는 풀코스 투어입니다."
+      "익선동의 '대빵오락실'에서 대형 인형들을 공략한 뒤 종로 방향으로 이동합니다.",
+      "종각 젊음의 거리로 진입하여 '짱오락실', '캑티 가챠샵', '와쿠와쿠' 등을 순회합니다."
     ],
     "totalDistance": "약 900m (투어 코스)",
-    "naverMapUrl": "https://map.naver.com/v5/search/종로%20인형뽑기",
-    "naverStreetViewUrl": ""
+    "mapImage": "images/jongro-map.png"
   },
   "spots": [
     {
       "name": "대빵오락실 익선점",
-      "address": "종로구 돈화문로11길 31",
-      "machineCount": 50,
-      "priceRange": "1,000원 ~ 2,000원",
-      "hours": "10:00 ~ 24:00",
-      "rating": 4.8,
-      "comment": "한옥마을 분위기와 어우러진 초대형 매장. 대형 인형 비중이 매우 높음.",
-      "recommended": true
-    },
-    {
-      "name": "캑티가챠샵 종각점",
-      "address": "종로구 종로12길 14",
-      "machineCount": 30,
-      "priceRange": "1,000원 ~ 5,000원",
-      "hours": "11:00 ~ 23:00",
+      "size": "대형",
       "rating": 4.7,
-      "comment": "세련된 2층 매장. 뽑기뿐만 아니라 가챠, 랜덤박스, 산리오 굿즈가 매우 다양함.",
+      "comment": "한옥마을 분위기와 어우러진 초대형 매장. 대형 인형 비중이 매우 높음",
       "recommended": true
     },
     {
-      "name": "짱오락실 종각점",
-      "address": "종로구 종로12길 10",
-      "machineCount": 40,
-      "priceRange": "1,000원 ~ 2,000원",
-      "hours": "24시간",
-      "rating": 4.4,
-      "comment": "젊음의 거리 중심. 전국 체인답게 기계 상태가 우수하고 업데이트가 빠름.",
+      "name": "지지게임존 종로3가직영점",
+      "size": "소형",
+      "rating": 3.7,
+      "comment": "낙원동 소규모 게임존",
       "recommended": false
     },
     {
-      "name": "종각 젊음의거리 무인샵",
-      "address": "종로구 관철동 일대",
-      "machineCount": 12,
-      "priceRange": "1,000원",
-      "hours": "24시간",
-      "rating": 4.1,
-      "comment": "거리 곳곳의 소형 매장들. 가볍게 즐기기 좋은 키링 위주의 기계가 많음.",
+      "name": "뽑아핑",
+      "size": "소형",
+      "rating": 3.9,
+      "comment": "묘동 위치, 24시간 연중무휴 운영",
+      "recommended": false
+    },
+    {
+      "name": "GG게임존 종로2가직영점",
+      "size": "소형",
+      "rating": 3.8,
+      "comment": "종로2가 소규모 게임존",
+      "recommended": false
+    },
+    {
+      "name": "짱오락실 종로점",
+      "size": "대형",
+      "rating": 4.6,
+      "comment": "리뷰 94개, 종각 젊음의 거리 중심. 기계 상태 우수하고 업데이트가 빠름",
+      "recommended": true
+    },
+    {
+      "name": "캑티 가챠샵 종각점",
+      "size": "중형",
+      "rating": 4.5,
+      "comment": "뽑기와 가챠, 랜덤박스를 동시에 즐길 수 있는 곳. 자정까지 영업",
+      "recommended": true
+    },
+    {
+      "name": "와쿠와쿠 종각점",
+      "size": "중형",
+      "rating": 4.4,
+      "comment": "24시간 연중무휴, 새벽에도 뽑기 가능",
       "recommended": false
     }
   ]
