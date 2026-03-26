@@ -10,7 +10,11 @@
       "짱구게임장을 먼저 방문한 뒤 로데오거리를 따라 매장을 순회합니다."
     ],
     "totalDistance": "약 350m",
-    "mapImage": "images/yeonsinnae-map.png"
+    "mapImage": "images/yeonsinnae-map.png",
+    "shortsUrls": [
+      "https://youtube.com/shorts/j5PFOZxSBjk",
+      "https://youtube.com/shorts/8y9F_ZlmNQA"
+    ]
   },
   "spots": [
     {

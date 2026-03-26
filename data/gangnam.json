@@ -10,7 +10,12 @@
       "강남역으로 돌아와 남쪽(서초 방면) 캐칭덕, 미니돌 등을 순회합니다."
     ],
     "totalDistance": "도보 약 10분 (전체 순회)",
-    "mapImage": "images/gangnam-map.png"
+    "mapImage": "images/gangnam-map.png",
+    "shortsUrls": [
+      "https://youtube.com/shorts/OkBCunfL7c0",
+      "https://youtube.com/shorts/SHE6PUgdqRE",
+      "https://youtube.com/shorts/S9vcy16Lwz0"
+    ]
   },
   "spots": [
     {

@@ -185,6 +185,14 @@ main{max-width:900px;margin:0 auto;padding:16px}
 .map-container iframe{
   width:100%;height:300px;border:none;
 }
+.shorts-list{
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  padding:4px 0 12px;
+}
+.shorts-container iframe{
+  width:min(100%, 360px);height:640px;border:none;
+  border-radius:12px;border:1px solid #2a2a55;
+}
 .map-actions{
   display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;
 }
@@ -392,6 +400,17 @@ function renderDetailView(d){
         ${d.route.steps.map(s=>`<li>${s}</li>`).join('')}
       </ol>
       <div class="route-distance">📏 ${d.route.totalDistance}</div>`;
+
+    const shortsUrls = d.route.shortsUrls || (d.route.shortsUrl ? [d.route.shortsUrl] : []);
+    if(shortsUrls.length){
+      html += `<div class="section-title">🎬 영상으로 보기</div>
+        <div class="shorts-list">
+          ${shortsUrls.map(url => {
+            const id = url.split('/shorts/')[1]?.split('?')[0];
+            return id ? `<div class="shorts-container"><iframe src="https://www.youtube.com/embed/${id}" allowfullscreen loading="lazy"></iframe></div>` : '';
+          }).join('')}
+        </div>`;
+    }
 
     if(d.route.mapImage){
       html += `
