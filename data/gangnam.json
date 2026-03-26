@@ -9,7 +9,7 @@
       "강남대로를 따라 북쪽(역삼역 방면)으로 이동하며 짱오락실, 와와오락실 등 메인 매장을 탐방합니다.",
       "강남역으로 돌아와 남쪽(서초 방면) 캐칭덕, 미니돌 등을 순회합니다."
     ],
-    "totalDistance": "도보 약 10분 (전체 순회)",
+    "totalDistance": "약 1000m",
     "mapImage": "images/gangnam-map.png",
     "shortsUrls": [
       "https://youtube.com/shorts/OkBCunfL7c0"
@@ -20,20 +20,23 @@
       "name": "짱오락실 강남대로점",
       "size": "대형",
       "rating": 4.8,
-      "comment": "강남 뽑기 성지의 랜드마크! 리뷰 455개, 자정까지 영업",
+      "hours": "24시간",
+      "comment": "강남 뽑기 성지의 랜드마크! 리뷰 455개",
       "recommended": true
     },
     {
       "name": "짱오락실 강남2호점",
       "size": "대형",
       "rating": 4.6,
-      "comment": "짱오락실 2호점, 자정까지 영업. 1호점과 함께 순회 추천",
+      "hours": "24시간",
+      "comment": "짱오락실 2호점, 1호점과 함께 순회 추천",
       "recommended": true
     },
     {
       "name": "와와오락실",
       "size": "중형",
       "rating": 4.3,
+      "hours": "24시간",
       "comment": "안정적인 세팅과 다양한 인형 라인업이 강점",
       "recommended": true
     },
@@ -41,13 +44,15 @@
       "name": "겟챠 서울 강남점",
       "size": "중형",
       "rating": 4.2,
-      "comment": "겟챠 프랜차이즈 강남점, 22시까지 영업",
+      "hours": "24시간",
+      "comment": "겟챠 프랜차이즈 강남점",
       "recommended": false
     },
     {
       "name": "미니돌 강남오락실",
       "size": "중형",
       "rating": 4.1,
+      "hours": "24시간",
       "comment": "서초동에 위치한 알짜 중형 매장",
       "recommended": false
     },
@@ -55,6 +60,7 @@
       "name": "앨리스인원더랜드",
       "size": "소형",
       "rating": 4.0,
+      "hours": "24시간",
       "comment": "서초동의 독특한 컨셉 매장",
       "recommended": false
     },
@@ -62,6 +68,7 @@
       "name": "핑미핑미오락실",
       "size": "소형",
       "rating": 3.9,
+      "hours": "24시간",
       "comment": "역삼동의 아기자기한 소형 뽑기방",
       "recommended": false
     },
@@ -69,6 +76,7 @@
       "name": "캐칭덕 강남역점",
       "size": "소형",
       "rating": 4.0,
+      "hours": "~23시",
       "comment": "캐칭덕 프랜차이즈, 최신 캐릭터 라인업",
       "recommended": false
     },
@@ -76,6 +84,7 @@
       "name": "지지게임존",
       "size": "소형",
       "rating": 3.8,
+      "hours": "24시간",
       "comment": "소규모 게임존, 한적하게 즐기기 좋음",
       "recommended": false
     },
@@ -83,7 +92,8 @@
       "name": "모모스테이션 엘라스틴 강남역점",
       "size": "소형",
       "rating": 3.5,
-      "comment": "24시간 영업, 연중무휴로 새벽에도 뽑기 가능",
+      "hours": "24시간",
+      "comment": "연중무휴로 새벽에도 뽑기 가능",
       "recommended": false
     }
   ]
