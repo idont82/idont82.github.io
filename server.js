@@ -16,6 +16,7 @@ const MIME_TYPES = {
 const server = http.createServer((req, res) => {
   let filePath = '.' + req.url;
   if (filePath === './') filePath = './index.html';
+  if (filePath.endsWith('/')) filePath += 'index.html';
 
   const extname = String(path.extname(filePath)).toLowerCase();
   const contentType = MIME_TYPES[extname] || 'application/octet-stream';
