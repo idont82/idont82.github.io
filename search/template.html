@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{CATEGORY}} 비교 TOP 3 추천 ({{YEAR}}) | 구매 가이드</title>
+<meta name="description" content="{{CATEGORY}} 비교 TOP 3. 가격·성능·장단점을 한눈에 비교하고 나에게 맞는 제품을 고르세요. ({{YEAR}} 최신)">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://idont82.github.io/search/{{SLUG}}.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{CATEGORY}} 비교 TOP 3 추천 ({{YEAR}})">
+<meta property="og:description" content="{{CATEGORY}} TOP 3 비교 — 가격·성능·장단점 한눈에">
+<meta property="og:url" content="https://idont82.github.io/search/{{SLUG}}.html">
+
+<link rel="stylesheet" href="/search/assets/style.css">
+
+<!-- ItemList structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "{{PRODUCT_1_NAME}}" },
+    { "@type": "ListItem", "position": 2, "name": "{{PRODUCT_2_NAME}}" },
+    { "@type": "ListItem", "position": 3, "name": "{{PRODUCT_3_NAME}}" }
+  ]
+}
+</script>
+
+<!-- FAQPage structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "{{FAQ_Q1}}",
+      "acceptedAnswer": { "@type": "Answer", "text": "{{FAQ_A1}}" }
+    },
+    {
+      "@type": "Question",
+      "name": "{{FAQ_Q2}}",
+      "acceptedAnswer": { "@type": "Answer", "text": "{{FAQ_A2}}" }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="site-title">구매 가이드</div>
+    <nav class="site-nav">
+      <a href="/search/">전체 글</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <div class="disclosure">
+    이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+  </div>
+
+  <section class="article-header">
+    <h1>{{CATEGORY}} 비교 TOP 3 추천 ({{YEAR}})</h1>
+    <div class="article-meta">게시일: {{PUBLISH_DATE}} · 최종 업데이트: {{UPDATE_DATE}}</div>
+  </section>
+
+  <p class="intro">
+    {{INTRO_PARAGRAPH}}
+  </p>
+
+  <h2>한눈에 비교표</h2>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>항목</th>
+        <th>🥇 {{PRODUCT_1_NAME}}</th>
+        <th>🥈 {{PRODUCT_2_NAME}}</th>
+        <th>🥉 {{PRODUCT_3_NAME}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>가격대</td><td>{{P1_PRICE}}</td><td>{{P2_PRICE}}</td><td>{{P3_PRICE}}</td></tr>
+      <tr><td>{{SPEC_ROW_1_LABEL}}</td><td>{{P1_SPEC1}}</td><td>{{P2_SPEC1}}</td><td>{{P3_SPEC1}}</td></tr>
+      <tr><td>{{SPEC_ROW_2_LABEL}}</td><td>{{P1_SPEC2}}</td><td>{{P2_SPEC2}}</td><td>{{P3_SPEC2}}</td></tr>
+      <tr><td>추천 대상</td><td>{{P1_TARGET}}</td><td>{{P2_TARGET}}</td><td>{{P3_TARGET}}</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Product 1 -->
+  <article class="product">
+    <h2><span class="rank-badge rank-1">1위</span>{{PRODUCT_1_NAME}}</h2>
+    <img src="{{P1_IMAGE_URL}}" alt="{{PRODUCT_1_NAME}} 제품 이미지">
+    <p class="one-liner">{{P1_ONELINER}}</p>
+
+    <div class="pros-cons">
+      <div class="pros">
+        <h3>✅ 장점</h3>
+        <ul>
+          <li>{{P1_PRO_1}}</li>
+          <li>{{P1_PRO_2}}</li>
+          <li>{{P1_PRO_3}}</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h3>❌ 단점</h3>
+        <ul>
+          <li>{{P1_CON_1}}</li>
+          <li>{{P1_CON_2}}</li>
+        </ul>
+      </div>
+    </div>
+
+    <dl class="specs">
+      <dt>{{SPEC_ROW_1_LABEL}}:</dt><dd>{{P1_SPEC1}}</dd>
+      <dt>{{SPEC_ROW_2_LABEL}}:</dt><dd>{{P1_SPEC2}}</dd>
+      <dt>가격대:</dt><dd>{{P1_PRICE}}</dd>
+    </dl>
+
+    <a class="cta" href="{{P1_COUPANG_LINK}}" rel="sponsored nofollow" target="_blank">쿠팡에서 보기 →</a>
+  </article>
+
+  <!-- Product 2 -->
+  <article class="product">
+    <h2><span class="rank-badge rank-2">2위</span>{{PRODUCT_2_NAME}}</h2>
+    <img src="{{P2_IMAGE_URL}}" alt="{{PRODUCT_2_NAME}} 제품 이미지">
+    <p class="one-liner">{{P2_ONELINER}}</p>
+
+    <div class="pros-cons">
+      <div class="pros">
+        <h3>✅ 장점</h3>
+        <ul>
+          <li>{{P2_PRO_1}}</li>
+          <li>{{P2_PRO_2}}</li>
+          <li>{{P2_PRO_3}}</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h3>❌ 단점</h3>
+        <ul>
+          <li>{{P2_CON_1}}</li>
+          <li>{{P2_CON_2}}</li>
+        </ul>
+      </div>
+    </div>
+
+    <dl class="specs">
+      <dt>{{SPEC_ROW_1_LABEL}}:</dt><dd>{{P2_SPEC1}}</dd>
+      <dt>{{SPEC_ROW_2_LABEL}}:</dt><dd>{{P2_SPEC2}}</dd>
+      <dt>가격대:</dt><dd>{{P2_PRICE}}</dd>
+    </dl>
+
+    <a class="cta" href="{{P2_COUPANG_LINK}}" rel="sponsored nofollow" target="_blank">쿠팡에서 보기 →</a>
+  </article>
+
+  <!-- Product 3 -->
+  <article class="product">
+    <h2><span class="rank-badge rank-3">3위</span>{{PRODUCT_3_NAME}}</h2>
+    <img src="{{P3_IMAGE_URL}}" alt="{{PRODUCT_3_NAME}} 제품 이미지">
+    <p class="one-liner">{{P3_ONELINER}}</p>
+
+    <div class="pros-cons">
+      <div class="pros">
+        <h3>✅ 장점</h3>
+        <ul>
+          <li>{{P3_PRO_1}}</li>
+          <li>{{P3_PRO_2}}</li>
+          <li>{{P3_PRO_3}}</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h3>❌ 단점</h3>
+        <ul>
+          <li>{{P3_CON_1}}</li>
+          <li>{{P3_CON_2}}</li>
+        </ul>
+      </div>
+    </div>
+
+    <dl class="specs">
+      <dt>{{SPEC_ROW_1_LABEL}}:</dt><dd>{{P3_SPEC1}}</dd>
+      <dt>{{SPEC_ROW_2_LABEL}}:</dt><dd>{{P3_SPEC2}}</dd>
+      <dt>가격대:</dt><dd>{{P3_PRICE}}</dd>
+    </dl>
+
+    <a class="cta" href="{{P3_COUPANG_LINK}}" rel="sponsored nofollow" target="_blank">쿠팡에서 보기 →</a>
+  </article>
+
+  <section class="guide">
+    <h2>💡 어떤 분께 어떤 제품을 추천할까?</h2>
+    <p>{{GUIDE_PARAGRAPH_1}}</p>
+    <p>{{GUIDE_PARAGRAPH_2}}</p>
+  </section>
+
+  <section class="faq">
+    <h2>자주 묻는 질문</h2>
+    <details>
+      <summary>{{FAQ_Q1}}</summary>
+      <p>{{FAQ_A1}}</p>
+    </details>
+    <details>
+      <summary>{{FAQ_Q2}}</summary>
+      <p>{{FAQ_A2}}</p>
+    </details>
+  </section>
+
+  <div class="disclosure">
+    이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    © idont82.github.io · 구매 가이드
+  </div>
+</footer>
+
+</body>
+</html>
