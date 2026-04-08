@@ -157,9 +157,17 @@ a:hover { text-decoration: underline; }
     "image one-liner"
     "image proscons"
     "image specs"
-    "image cta";
+    "image cta"
+    "image disclosure";
   column-gap: 24px;
   row-gap: 6px;
+}
+.product > .cta-disclosure {
+  grid-area: disclosure;
+  font-size: 10px;
+  color: var(--text-muted);
+  margin: 4px 0 0;
+  opacity: 0.8;
 }
 .product > h2 {
   grid-area: header;
@@ -167,7 +175,8 @@ a:hover { text-decoration: underline; }
   font-size: 22px;
   line-height: 1.3;
 }
-.product > img {
+.product > img,
+.product > a:has(img) {
   grid-area: image;
   align-self: start;
   display: block;
@@ -179,6 +188,14 @@ a:hover { text-decoration: underline; }
   margin: 0;
   background: var(--bg-soft);
   border: 1px solid var(--border);
+}
+.product > a:has(img) img {
+  display: block;
+  width: 100%;
+  max-height: 300px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: contain;
 }
 .product > .one-liner {
   grid-area: one-liner;
@@ -289,9 +306,19 @@ a:hover { text-decoration: underline; }
       "one-liner"
       "proscons"
       "specs"
-      "cta";
+      "cta"
+      "disclosure";
   }
-  .product > img { max-width: 100%; }
+  .product > img,
+  .product > a:has(img) {
+    margin: 0 auto 16px;
+    justify-self: center;
+  }
+  .product > a:has(img) img {
+    width: 100%;
+    height: auto;
+  }
+  .product > .cta { justify-self: stretch; text-align: center; }
   .pros-cons { grid-template-columns: 1fr; }
   .compare-table th, .compare-table td { font-size: 13px; padding: 8px 6px; }
 }
