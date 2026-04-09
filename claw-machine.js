@@ -1585,13 +1585,20 @@ function updateNickUI(){
 
 function saveNickname(){
   const val = nickInput.value.trim();
-  if(val){
+  if(!val){
+    // 랜덤 닉네임 생성
+    const prefixes = ['행운의', '깜찍한', '전설의', '인형사냥꾼', '뽑기천재', '용감한', '배고픈', '신비한'];
+    const suffixes = ['뽑기왕', '수집가', '꿈나무', '마스터', '탐험가', '빌런', '히어로'];
+    playerName = prefixes[Math.floor(Math.random() * prefixes.length)] + ' ' + 
+                 suffixes[Math.floor(Math.random() * suffixes.length)];
+  } else {
     playerName = val;
-    localStorage.setItem(NICK_KEY, playerName);
-    nickOverlay.classList.remove('open');
-    updateNickUI();
-    showMessage('🌟 '+nn()+' 반가워! START 눌러봐!', 3000);
   }
+  
+  localStorage.setItem(NICK_KEY, playerName);
+  nickOverlay.classList.remove('open');
+  updateNickUI();
+  showMessage('🌟 ' + nn() + ' 마음에 드는 인형을 뽑아봐!', 3000);
 }
 
 // Show modal if no nickname
@@ -2192,5 +2199,5 @@ sizeBtn.addEventListener('click', () => {
 });
 
 updateUI();
-if(playerName) showMessage('🌟 '+nn()+' 반가워! START 눌러봐!', 3000);
+if(playerName) showMessage('🌟 ' + nn() + ' 마음에 드는 인형을 뽑아봐!', 3000);
 animate();
