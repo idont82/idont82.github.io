@@ -39,18 +39,43 @@ body{
 
 /* ── Character Selector ── */
 #charSelector {
-  width: 100%; display: flex; gap: 4px; overflow-x: auto;
-  padding: 10px 4px; scrollbar-width: none;
+  width: 100%; display: flex; gap: 8px; overflow-x: auto;
+  padding: 12px 6px; scrollbar-width: none;
+  flex-wrap: nowrap; /* Ensure they stay on one line */
+  -webkit-overflow-scrolling: touch;
 }
 #charSelector::-webkit-scrollbar { display: none; }
+
 #charSelector button {
-  flex: 0 0 auto; padding: 6px 14px;
-  background: rgba(25, 40, 80, 0.6);
-  border: 1px solid #335; border-radius: 10px;
-  color: #aac; font-size: 13px; font-weight: bold;
+  flex: 0 0 74px; /* Fixed width for consistent look */
+  height: 90px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: rgba(25, 40, 80, 0.5);
+  border: 1px solid rgba(85, 153, 255, 0.3);
+  border-radius: 14px;
+  color: #88aacc; font-size: 11px; font-weight: bold;
   cursor: pointer; transition: all 0.2s;
+  padding: 6px 4px;
 }
-#charSelector button.active { background: #2a60cc; color: #fff; border-color: #5599ff; box-shadow: 0 0 10px rgba(60,120,255,0.4); }
+#charSelector button.active {
+  background: rgba(42, 96, 204, 0.8);
+  color: #fff; border-color: #5599ff;
+  box-shadow: 0 0 15px rgba(60,120,255,0.4);
+  transform: translateY(-2px);
+}
+.char-thumb {
+  width: 48px; height: 48px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%; margin-bottom: 6px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.char-thumb img {
+  width: 110%; height: 110%; object-fit: contain;
+}
+#charSelector button span {
+  display: block; width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
 
 /* ── Cabinet ── */
 #cabinet {

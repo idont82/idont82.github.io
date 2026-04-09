@@ -1395,7 +1395,7 @@ function spawnPlushies(){
     { x: HOLE_POS.x + (Math.random()-0.5)*0.3,   z: HOLE_POS.z - (holeD/2 + wallT + offset) }  // front of hole
   ];
   for(let i = 0; i < 2; i++){
-    const type = PLUSHIE_TYPES[i];
+    const type = PLUSHIE_TYPES[i % PLUSHIE_TYPES.length];
     let x = nearHolePositions[i].x;
     let z = nearHolePositions[i].z;
     const clampedH = clampInBox(x, z); x = clampedH.x; z = clampedH.z;
@@ -2217,6 +2217,19 @@ sizeBtn.addEventListener('click', () => {
   spawnPlushies();
 });
 
+// ─── Initializer ───
+function initCharSelectorThumbs(){
+  document.querySelectorAll('.char-thumb').forEach(thumb => {
+    const char = thumb.dataset.char;
+    const themeId = thumb.dataset.themeId;
+    if(char && themeId){
+      const imgUrl = getPlushieThumbnail(char, themeId);
+      thumb.innerHTML = `<img src="${imgUrl}" alt="${char}" loading="lazy">`;
+    }
+  });
+}
+
 updateUI();
 if(playerName) showMessage('🌟 ' + nn() + ' 마음에 드는 인형을 뽑아봐!', 3000);
+initCharSelectorThumbs();
 animate();
