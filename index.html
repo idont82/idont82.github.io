@@ -91,7 +91,23 @@ header p{
   text-align:center;
 }
 .ad-footer .ad-label{
-  font-size:11px;color:#555;margin-bottom:6px;
+  font-size:12px;color:#ffcc44;margin-bottom:10px;
+  background:rgba(255,204,68,0.1);padding:8px 12px;
+  border-radius:8px;border:1px solid rgba(255,204,68,0.2);
+  display:inline-block;font-weight:600;
+}
+
+/* ── Coupang Banner In Detail ── */
+.detail-ad-banner{
+  margin:20px 0;text-align:center;
+  background:rgba(255,255,255,0.03);padding:16px;
+  border-radius:14px;border:1px solid rgba(255,255,255,0.05);
+}
+.detail-ad-banner a{display:inline-block;transition:transform 0.2s}
+.detail-ad-banner a:hover{transform:scale(1.02)}
+.detail-ad-banner img{border-radius:8px;box-shadow:0 4px 15px rgba(0,0,0,0.3)}
+.detail-ad-label{
+  font-size:11px;color:#7788aa;margin-top:10px;font-weight:500;
 }
 
 /* ── Main ── */
@@ -369,9 +385,11 @@ async function loadDetail(id){
 
 // ─── Render: List View ───
 function renderListView(areas){
-  return `<div class="area-grid">${areas.map(a => {
+  let html = '<div class="area-grid">';
+  
+  areas.forEach(a => {
     const isEmpty = a.spotCount === 0;
-    return `
+    html += `
       <div class="area-card${isEmpty?' empty':''}" ${isEmpty?'':`onclick="location.hash='${a.id}'"`}>
         <div class="card-top">
           <span class="card-emoji">${a.emoji}</span>
@@ -397,7 +415,36 @@ function renderListView(areas){
           ${a.tags.map(t=>`<span class="spot-tag tag-${t}">${t}</span>`).join('')}
         </div>` : ''}
       </div>`;
-  }).join('')}</div>`;
+    
+    // 건대(geondae) 다음에 첫 번째 쿠팡 배너 삽입
+    if(a.id === 'geondae'){
+      html += `
+        <div class="area-card" style="cursor:default; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px; border-color:rgba(255,204,68,0.3); background:rgba(255,255,255,0.02);">
+          <a href="https://link.coupang.com/a/ek4gDo" target="_blank" referrerpolicy="unsafe-url" style="display:block; transform:scale(0.85); margin:-15px 0;">
+            <img src="https://image1.coupangcdn.com/image/affiliate/banner/e862e13c7284f83115bf1e796a0c81f8@2x.jpg" alt="업소용 미니 인형뽑기 기계" width="120" height="240" style="border-radius:8px;">
+          </a>
+          <div style="font-size:10px; color:#667799; text-align:center; margin-top:5px; font-weight:500; line-height:1.2;">
+            이 포스팅은 쿠팡 파트너스 활동의 일환으로<br>일정액의 수수료를 제공받습니다
+          </div>
+        </div>`;
+    }
+
+    // 신림(sinlim) 다음에 두 번째 쿠팡 배너 삽입
+    if(a.id === 'sinlim'){
+      html += `
+        <div class="area-card" style="cursor:default; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px; border-color:rgba(255,204,68,0.3); background:rgba(255,255,255,0.02);">
+          <a href="https://link.coupang.com/a/ek4rgW" target="_blank" referrerpolicy="unsafe-url" style="display:block; transform:scale(0.85); margin:-15px 0;">
+            <img src="https://image13.coupangcdn.com/image/affiliate/banner/a5ea46c9cfa6c620061e5de6d74733cf@2x.jpg" alt="캐치핑 미니 인형뽑기 기계" width="120" height="240" style="border-radius:8px;">
+          </a>
+          <div style="font-size:10px; color:#667799; text-align:center; margin-top:5px; font-weight:500; line-height:1.2;">
+            이 포스팅은 쿠팡 파트너스 활동의 일환으로<br>일정액의 수수료를 제공받습니다
+          </div>
+        </div>`;
+    }
+  });
+  
+  html += '</div>';
+  return html;
 }
 
 // ─── Render: Stars ───
@@ -463,6 +510,29 @@ function renderDetailView(d){
 
   // Spots section
   html += `<div class="section-title">🏪 매장 정보 (${d.spots?.length || 0}곳)</div>`;
+  
+  // Coupang Ad for specific areas
+  const targetAreas1 = ['hongdae', 'gangnam', 'geondae'];
+  const targetAreas2 = ['yeonsinnae', 'jongro', 'sinlim'];
+  
+  if(targetAreas1.includes(d.id)){
+    html += `
+      <div class="detail-ad-banner">
+        <a href="https://link.coupang.com/a/ek4gDo" target="_blank" referrerpolicy="unsafe-url">
+          <img src="https://image1.coupangcdn.com/image/affiliate/banner/e862e13c7284f83115bf1e796a0c81f8@2x.jpg" alt="업소용 미니 인형뽑기 기계" width="120" height="240">
+        </a>
+        <div class="detail-ad-label">이 포스팅은 쿠팡 파트너스 활동의 일환으로 일정액의 수수료를 제공받습니다</div>
+      </div>`;
+  } else if(targetAreas2.includes(d.id)){
+    html += `
+      <div class="detail-ad-banner">
+        <a href="https://link.coupang.com/a/ek4rgW" target="_blank" referrerpolicy="unsafe-url">
+          <img src="https://image13.coupangcdn.com/image/affiliate/banner/a5ea46c9cfa6c620061e5de6d74733cf@2x.jpg" alt="캐치핑 미니 인형뽑기 기계" width="120" height="240">
+        </a>
+        <div class="detail-ad-label">이 포스팅은 쿠팡 파트너스 활동의 일환으로 일정액의 수수료를 제공받습니다</div>
+      </div>`;
+  }
+
   if(hasSpots){
     html += `<div class="spot-list">${d.spots.map(sp => `
       <div class="spot-card${sp.recommended?' recommended':''}">

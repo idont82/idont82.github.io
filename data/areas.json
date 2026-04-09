@@ -83,6 +83,62 @@
       "totalMachines": 150,
       "environment": ["별빛거리", "순대타운", "24시간"],
       "tags": ["가성비", "HOT"]
+    },
+    {
+      "id": "jamsilsaenae",
+      "name": "잠실새내",
+      "emoji": "⚾",
+      "station": "잠실새내역",
+      "exit": "4번 출구",
+      "summary": "잠실 야구장 인근 먹자골목 중심의 투어 예정지",
+      "spotCount": 0,
+      "radius": "-",
+      "totalDistance": "-",
+      "totalMachines": 0,
+      "environment": ["먹자골목", "Coming Soon"],
+      "tags": ["투어예정"]
+    },
+    {
+      "id": "jamsil",
+      "name": "잠실",
+      "emoji": "🏰",
+      "station": "잠실역",
+      "exit": "2번 출구",
+      "summary": "롯데월드와 석촌호수 인근의 대형 오락실 투어 예정지",
+      "spotCount": 0,
+      "radius": "-",
+      "totalDistance": "-",
+      "totalMachines": 0,
+      "environment": ["롯데월드", "Coming Soon"],
+      "tags": ["투어예정"]
+    },
+    {
+      "id": "sungshin",
+      "name": "성신여대",
+      "emoji": "🌸",
+      "station": "성신여대입구역",
+      "exit": "1번 출구",
+      "summary": "대학가 로데오거리 중심의 실속 투어 예정지",
+      "spotCount": 0,
+      "radius": "-",
+      "totalDistance": "-",
+      "totalMachines": 0,
+      "environment": ["대학가", "Coming Soon"],
+      "tags": ["투어예정"]
+    },
+    {
+      "id": "yongsan",
+      "name": "용산",
+      "emoji": "🚄",
+      "station": "용산역",
+      "exit": "1번 출구",
+      "summary": "용산 아이파크몰과 전자상가 인근의 대형 매장 투어 예정지",
+      "spotCount": 0,
+      "radius": "-",
+      "totalDistance": "-",
+      "totalMachines": 0,
+      "environment": ["아이파크몰", "Coming Soon"],
+      "tags": ["투어예정"]
     }
   ]
 }
