@@ -3,8 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>꿈의 인형뽑기</title>
-<link href="claw-machine.css" rel="stylesheet" type="text/css">
+<title>꿈의 인형뽑기 | 서울 인형뽑기 성지 가이드 게임</title>
+<meta name="description" content="서울 인형뽑기 성지 가이드와 연동된 온라인 3D 인형뽑기 게임! 짱구, 시나모롤, 한교동 등 귀여운 인형을 직접 뽑아보세요.">
+<meta name="keywords" content="인형뽑기, 인형뽑기 게임, 3D 인형뽑기, 서울 인형뽑기, 홍대 인형뽑기, 강남 인형뽑기, 시나모롤 인형, 짱구 인형, 인형뽑기 시뮬레이터">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://idont82.github.io/claw-machine.html">
+<meta property="og:title" content="꿈의 인형뽑기 | 귀여운 인형을 내 폰 안에서 뽑아보세요!">
+<meta property="og:description" content="홍대, 강남, 건대 성지에서 보던 인형뽑기를 온라인에서 무료로 즐겨보세요! 컬렉션을 완성하고 성지 정보도 확인하세요.">
+<meta property="og:image" content="https://idont82.github.io/images/claw-machine-thumbnail.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://idont82.github.io/claw-machine.html">
+<meta property="twitter:title" content="꿈의 인형뽑기 | 3D 인형뽑기 시뮬레이터">
+<meta property="twitter:description" content="실제 인형뽑기 기계의 손맛을 그대로! 다양한 캐릭터 인형을 수집해보세요.">
+<meta property="twitter:image" content="https://idont82.github.io/images/claw-machine-thumbnail.png">
+
+<link href="claw-machine.css" rel="stylesheet">
 </head>
 <body>
 
@@ -17,19 +34,66 @@
     <button id="nicknameSave">시작하기!</button>
   </div>
 </div>
-<button id="nicknameEdit"></button>
 
-<div id="charSelector">
-  <button class="active" data-theme="shinchan"><span class="char-icon">🖍️</span>짱구</button>
-  <button data-theme="cinnamoroll"><span class="char-icon">☁️</span>시나모롤</button>
-  <button data-theme="dino"><span class="char-icon">🦕</span>공룡</button>
-  <button data-theme="maenggu"><span class="char-icon">🤧</span>맹구</button>  <button data-theme="hangyodon"><span class="char-icon">🐟</span>한교동</button>
-  <button data-theme="doraemon"><span class="char-icon">🐱</span>도라에몽</button>
-  <button data-theme="loopy"><span class="char-icon">🌸</span>루피</button>
+<div id="topMenuBar">
+  <a href="index.html" class="menu-btn back-btn">📍 성지 보기</a>
+  <button id="nicknameEdit">👤 닉네임 설정</button>
+  <div class="menu-right">
+    <button id="sizeToggle" class="menu-btn size-btn">🪄 모드</button>
+    <button id="collectionToggle" class="menu-btn coll-btn">🎁 <span id="collBadge" class="badge">0</span></button>
   </div>
-<button id="collectionToggle">🎁 내 인형함 <span id="collBadge" class="badge">0</span></button>
-<button id="sizeToggle" class="size-btn">🪄 큰 인형 버전</button>
-<a href="index.html" id="backToGuide">📍 성지 보기</a>
+</div>
+
+<div id="gameContainer">
+  <div id="charSelector">
+    <button class="active" data-theme="shinchan">짱구</button>
+    <button data-theme="cinnamoroll">시나모롤</button>
+    <button data-theme="dino">공룡</button>
+    <button data-theme="maenggu">맹구</button>  
+    <button data-theme="hangyodon">한교동</button>
+    <button data-theme="doraemon">도라에몽</button>
+    <button data-theme="loopy">루피</button>
+  </div>
+
+  <div id="cabinet">
+    <div id="titleBar">
+      <div id="ledStrip"></div>
+      <h1>🌟 꿈의 인형뽑기 🌟</h1>
+    </div>
+    <div id="viewport"></div>
+    <div id="controlPanel">
+      <div id="panelJoystick">
+        <span class="joy-arrow up">▲</span>
+        <span class="joy-arrow down">▼</span>
+        <span class="joy-arrow left">◀</span>
+        <span class="joy-arrow right">▶</span>
+        <div id="joyStick"><div id="joyBall"></div></div>
+      </div>
+      <div id="coinBtn"><span>💰<br>COIN</span></div>
+      <div id="startBtn"><span>CATCH</span></div>
+      <div id="creditDisplay">
+        <div style="color:#0f0" id="creditTxt">CREDIT: 3</div>
+        <div style="color:#ff0" id="timeTxt">TIME: --</div>
+        <div style="color:#0ff" id="scoreTxt">SCORE: 0</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="gameAdFooter">
+    <div class="ad-disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로 수수료를 제공받습니다</div>
+    <div id="bannerContainer">
+      <a href="https://link.coupang.com/a/ek4gDo" target="_blank" referrerpolicy="unsafe-url" class="q-banner">
+        <img src="https://image1.coupangcdn.com/image/affiliate/banner/e862e13c7284f83115bf1e796a0c81f8@2x.jpg" alt="미니 인형뽑기">
+      </a>
+      <a href="https://link.coupang.com/a/ek4rgW" target="_blank" referrerpolicy="unsafe-url" class="q-banner">
+        <img src="https://image13.coupangcdn.com/image/affiliate/banner/a5ea46c9cfa6c620061e5de6d74733cf@2x.jpg" alt="캐치핑 인형뽑기">
+      </a>
+      <a href="https://link.coupang.com/a/ek6ZFc" target="_blank" referrerpolicy="unsafe-url" class="q-banner">
+        <img src="https://image13.coupangcdn.com/image/affiliate/banner/6ec5c3d390e8b7a962b8b7cc32f7390e@2x.jpg" alt="유니콘 인형뽑기">
+      </a>
+    </div>
+  </div>
+</div>
 
 <div id="collectionBackdrop"></div>
 <div id="collectionPanel">
@@ -38,30 +102,6 @@
     <button id="collectionClose">&times;</button>
   </div>
   <div id="collectionList"></div>
-</div>
-
-<div id="cabinet">
-  <div id="titleBar">
-    <div id="ledStrip"></div>
-    <h1>🌟 꿈의 인형뽑기 🌟</h1>
-  </div>
-  <div id="viewport"></div>
-  <div id="controlPanel">
-    <div id="panelJoystick">
-      <span class="joy-arrow up">▲</span>
-      <span class="joy-arrow down">▼</span>
-      <span class="joy-arrow left">◀</span>
-      <span class="joy-arrow right">▶</span>
-      <div id="joyStick"><div id="joyBall"></div></div>
-    </div>
-    <div id="coinBtn"><span>💰<br>COIN</span></div>
-    <div id="startBtn"><span>CATCH</span></div>
-    <div id="creditDisplay">
-      <div style="color:#0f0" id="creditTxt">CREDIT: 3</div>
-      <div style="color:#ff0" id="timeTxt">TIME: --</div>
-      <div style="color:#0ff" id="scoreTxt">SCORE: 0</div>
-    </div>
-  </div>
 </div>
 
 <!-- Mobile touch controls -->

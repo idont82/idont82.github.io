@@ -1578,15 +1578,15 @@ const nickOverlay = document.getElementById('nicknameOverlay');
 const nickInput = document.getElementById('nicknameInput');
 const nickEditBtn = document.getElementById('nicknameEdit');
 
-function nn(){ return playerName ? playerName+'아' : '친구야'; }
+function nn(){ return playerName ? playerName : '친구'; }
 function updateNickUI(){
-  nickEditBtn.textContent = playerName ? '👤 '+playerName : '👤 닉네임 설정';
+  const editBtn = document.getElementById('nicknameEdit');
+  if(editBtn) editBtn.textContent = playerName ? '👤 ' + playerName : '👤 닉네임 설정';
 }
 
 function saveNickname(){
   const val = nickInput.value.trim();
   if(!val){
-    // 랜덤 닉네임 생성
     const prefixes = ['행운의', '깜찍한', '전설의', '인형사냥꾼', '뽑기천재', '용감한', '배고픈', '신비한'];
     const suffixes = ['뽑기왕', '수집가', '꿈나무', '마스터', '탐험가', '빌런', '히어로'];
     playerName = prefixes[Math.floor(Math.random() * prefixes.length)] + ' ' + 
@@ -1598,7 +1598,7 @@ function saveNickname(){
   localStorage.setItem(NICK_KEY, playerName);
   nickOverlay.classList.remove('open');
   updateNickUI();
-  showMessage('🌟 ' + nn() + ' 마음에 드는 인형을 뽑아봐!', 3000);
+  showMessage('🌟 ' + nn() + '님! 마음에 드는 인형을 뽑아봐요!', 3000);
 }
 
 // Show modal if no nickname
@@ -1623,6 +1623,25 @@ function insertCoin(){
   credits += 3;
   updateUI();
   showMessage('💰 '+nn()+'~ 코인 충전했어!', 1500);
+
+  // Coupang Banner logic
+  const adFooter = document.getElementById('gameAdFooter');
+  const bannerContainer = document.getElementById('bannerContainer');
+  if(adFooter && bannerContainer){
+    adFooter.classList.add('visible');
+    
+    // Shuffle banners
+    const banners = Array.from(bannerContainer.children);
+    for (let i = banners.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      bannerContainer.appendChild(banners[j]);
+    }
+
+    // Sparkle effect
+    adFooter.classList.remove('sparkle-active');
+    void adFooter.offsetWidth; // Force reflow
+    adFooter.classList.add('sparkle-active');
+  }
 }
 
 function startGame(){
@@ -1648,9 +1667,7 @@ function startGame(){
     if(state === State.MOVING){
       timer--;
       updateUI();
-      if(timer <= 0){
-        dropClaw();
-      }
+      if(timer <= 0) dropClaw();
     }
   }, 1000);
 }
@@ -1674,104 +1691,106 @@ window.addEventListener('keydown', e=>{
 });
 window.addEventListener('keyup', e=>{ keys[e.key.toLowerCase()] = false; });
 
-// Panel joystick click/touch
+// ─── Input & Controls ───
 const panelJoy = document.getElementById('panelJoystick');
-let panelJoyActive = false, panelJoyId = null;
+const touchJoyArea = document.getElementById('touchJoystickArea');
+const touchKnob = document.getElementById('touchKnob');
 
-function handlePanelJoy(cx, cy){
-  const rect = panelJoy.getBoundingClientRect();
-  const dx = (cx - rect.left - rect.width/2) / (rect.width/2);
-  const dy = (cy - rect.top - rect.height/2) / (rect.height/2);
-  const len = Math.sqrt(dx*dx+dy*dy);
-  if(len > 0.2){
-    inputDir.x = Math.max(-1, Math.min(1, dx / Math.max(len, 0.5)));
-    inputDir.z = Math.max(-1, Math.min(1, dy / Math.max(len, 0.5)));
+let panelJoyActive = false;
+let touchJoyActive = false;
+let touchJoyId = null;
+
+function resetInput(){
+  inputDir.x = 0; inputDir.z = 0;
+  if(joyStick) joyStick.style.transform = '';
+  if(touchKnob) touchKnob.style.transform = 'translate(-50%,-50%)';
+}
+
+function handleJoystickMove(cx, cy, areaEl, isTouch = false){
+  const rect = areaEl.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+  const dx = cx - centerX;
+  const dy = cy - centerY;
+  const maxR = rect.width / 2;
+  const dist = Math.sqrt(dx*dx + dy*dy);
+  
+  if(dist > 5){
+    const strength = Math.min(dist / maxR, 1.0);
+    const angle = Math.atan2(dy, dx);
+    inputDir.x = Math.cos(angle) * strength;
+    inputDir.z = Math.sin(angle) * strength;
+    
+    if(isTouch && touchKnob){
+      const tx = Math.cos(angle) * Math.min(dist, maxR - 10);
+      const ty = Math.sin(angle) * Math.min(dist, maxR - 10);
+      touchKnob.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px))`;
+    }
   } else {
     inputDir.x = 0; inputDir.z = 0;
   }
-  // Animate joystick tilt
-  joyStick.style.transform = `rotateX(${-inputDir.z*20}deg) rotateZ(${-inputDir.x*15}deg)`;
+  
+  if(joyStick){
+    const tiltX = -inputDir.z * 25;
+    const tiltZ = -inputDir.x * 20;
+    joyStick.style.transform = `rotateX(${tiltX}deg) rotateZ(${tiltZ}deg)`;
+  }
 }
 
-panelJoy.addEventListener('pointerdown', e=>{
-  panelJoyActive = true;
-  panelJoyId = e.pointerId;
-  panelJoy.setPointerCapture(e.pointerId);
-  handlePanelJoy(e.clientX, e.clientY);
-});
-panelJoy.addEventListener('pointermove', e=>{
-  if(panelJoyActive && e.pointerId === panelJoyId) handlePanelJoy(e.clientX, e.clientY);
-});
-panelJoy.addEventListener('pointerup', e=>{
-  if(e.pointerId === panelJoyId){
-    panelJoyActive = false;
-    inputDir.x = 0; inputDir.z = 0;
-    joyStick.style.transform = '';
-  }
-});
+// Panel Joystick Events
+if(panelJoy){
+  panelJoy.style.touchAction = 'none';
+  panelJoy.addEventListener('pointerdown', e => {
+    panelJoyActive = true;
+    panelJoy.setPointerCapture(e.pointerId);
+    handleJoystickMove(e.clientX, e.clientY, panelJoy);
+  });
+  panelJoy.addEventListener('pointermove', e => {
+    if(panelJoyActive) handleJoystickMove(e.clientX, e.clientY, panelJoy);
+  });
+  const endPanelJoy = () => { panelJoyActive = false; resetInput(); };
+  panelJoy.addEventListener('pointerup', endPanelJoy);
+  panelJoy.addEventListener('pointercancel', endPanelJoy);
+}
 
-// Start button
-document.getElementById('coinBtn').addEventListener('click', ()=>{
-  insertCoin();
-});
-document.getElementById('startBtn').addEventListener('click', ()=>{
+// Touch Joystick Events
+if(touchJoyArea){
+  touchJoyArea.style.touchAction = 'none';
+  touchJoyArea.addEventListener('touchstart', e => {
+    e.preventDefault();
+    touchJoyActive = true;
+    touchJoyId = e.changedTouches[0].identifier;
+    handleJoystickMove(e.changedTouches[0].clientX, e.changedTouches[0].clientY, touchJoyArea, true);
+  }, {passive:false});
+  touchJoyArea.addEventListener('touchmove', e => {
+    e.preventDefault();
+    for(let i=0; i<e.changedTouches.length; i++){
+      const t = e.changedTouches[i];
+      if(t.identifier === touchJoyId) handleJoystickMove(t.clientX, t.clientY, touchJoyArea, true);
+    }
+  }, {passive:false});
+  const endTouchJoy = e => {
+    for(let i=0; i<e.changedTouches.length; i++){
+      if(e.changedTouches[i].identifier === touchJoyId){
+        touchJoyActive = false; resetInput();
+      }
+    }
+  };
+  touchJoyArea.addEventListener('touchend', endTouchJoy);
+  touchJoyArea.addEventListener('touchcancel', endTouchJoy);
+}
+
+// Button Events
+const coinBtn = document.getElementById('coinBtn');
+const startBtn = document.getElementById('startBtn');
+const touchGrabBtn = document.getElementById('touchGrabBtn');
+
+if(coinBtn) coinBtn.addEventListener('click', insertCoin);
+if(startBtn) startBtn.addEventListener('click', () => {
   if(state === State.IDLE) startGame();
   else if(state === State.MOVING) dropClaw();
 });
-
-// Mobile touch joystick
-const touchJoyArea = document.getElementById('touchJoystickArea');
-const touchKnob = document.getElementById('touchKnob');
-let touchJoyActive = false, touchJoyId = null;
-
-function handleTouchJoy(cx, cy){
-  const rect = touchJoyArea.getBoundingClientRect();
-  const dx = cx - rect.left - rect.width/2;
-  const dy = cy - rect.top - rect.height/2;
-  const maxR = rect.width/2 - 24;
-  const dist = Math.sqrt(dx*dx+dy*dy);
-  const clampDist = Math.min(dist, maxR);
-  const angle = Math.atan2(dy, dx);
-  const nx = Math.cos(angle)*clampDist;
-  const ny = Math.sin(angle)*clampDist;
-  touchKnob.style.transform = `translate(calc(-50% + ${nx}px), calc(-50% + ${ny}px))`;
-
-  if(dist > 15){
-    inputDir.x = nx / maxR;
-    inputDir.z = ny / maxR;
-  } else {
-    inputDir.x = 0; inputDir.z = 0;
-  }
-  // Also tilt panel joystick
-  joyStick.style.transform = `rotateX(${-inputDir.z*20}deg) rotateZ(${-inputDir.x*15}deg)`;
-}
-
-touchJoyArea.addEventListener('touchstart', e=>{
-  e.preventDefault();
-  touchJoyActive = true;
-  touchJoyId = e.changedTouches[0].identifier;
-  const t = e.changedTouches[0];
-  handleTouchJoy(t.clientX, t.clientY);
-}, {passive:false});
-touchJoyArea.addEventListener('touchmove', e=>{
-  e.preventDefault();
-  for(const t of e.changedTouches){
-    if(t.identifier === touchJoyId) handleTouchJoy(t.clientX, t.clientY);
-  }
-}, {passive:false});
-touchJoyArea.addEventListener('touchend', e=>{
-  for(const t of e.changedTouches){
-    if(t.identifier === touchJoyId){
-      touchJoyActive = false;
-      inputDir.x = 0; inputDir.z = 0;
-      touchKnob.style.transform = 'translate(-50%,-50%)';
-      joyStick.style.transform = '';
-    }
-  }
-});
-
-// Mobile grab button
-document.getElementById('touchGrabBtn').addEventListener('click', ()=>{
+if(touchGrabBtn) touchGrabBtn.addEventListener('click', () => {
   if(state === State.IDLE) startGame();
   else if(state === State.MOVING) dropClaw();
 });
