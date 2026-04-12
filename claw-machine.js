@@ -1303,7 +1303,7 @@ function spawnPlushies(){
 
   // Helper: check if position overlaps the hole area
   function isInHole(x, z){
-    const margin = 0.15;
+    const margin = 0.45; // Increase margin to clear plushie radius (0.35)
     return Math.abs(x - HOLE_POS.x) < (holeW/2 + wallT + margin)
         && Math.abs(z - HOLE_POS.z) < (holeD/2 + wallT + margin);
   }
@@ -1326,11 +1326,13 @@ function spawnPlushies(){
     
     // If overlapping hole, find a safe spot
     let attempts = 0;
-    while(isInHole(x, z) && attempts < 10){
-      x = playMinX + Math.random() * playSpanX * 0.7;
-      z = (Math.random()-0.5) * BOX_D * 0.6;
+    while(isInHole(x, z) && attempts < 50){
+      x = playMinX + Math.random() * playSpanX * 0.6;
+      z = (Math.random()-0.5) * BOX_D * 0.5;
       attempts++;
     }
+    // Final failsafe: move to left far corner if still in hole
+    if(isInHole(x, z)){ x = -1.2; z = -1.0; }
 
     const clamped1 = clampInBox(x, z); x = clamped1.x; z = clamped1.z;
     const y = 0.28 + Math.random() * 0.05;
@@ -1352,11 +1354,12 @@ function spawnPlushies(){
     
     // If overlapping hole, find a safe spot
     let attempts = 0;
-    while(isInHole(x, z) && attempts < 10){
-      x = playMinX + Math.random() * playSpanX * 0.7;
-      z = (Math.random()-0.5) * BOX_D * 0.6;
+    while(isInHole(x, z) && attempts < 50){
+      x = playMinX + Math.random() * playSpanX * 0.6;
+      z = (Math.random()-0.5) * BOX_D * 0.5;
       attempts++;
     }
+    if(isInHole(x, z)){ x = -1.0; z = -0.8; }
 
     const clamped2 = clampInBox(x, z); x = clamped2.x; z = clamped2.z;
     const y = 0.55 + Math.random() * 0.15;
@@ -1378,11 +1381,12 @@ function spawnPlushies(){
       let z = (Math.random()-0.5) * BOX_D * 0.4;
       
       let attempts = 0;
-      while(isInHole(x, z) && attempts < 15){
-        x = (Math.random()-0.5) * playSpanX * 0.6;
-        z = (Math.random()-0.5) * BOX_D * 0.5;
+      while(isInHole(x, z) && attempts < 50){
+        x = (Math.random()-0.5) * playSpanX * 0.5;
+        z = (Math.random()-0.5) * BOX_D * 0.4;
         attempts++;
       }
+      if(isInHole(x, z)){ x = -0.5; z = -0.5; }
 
       const clamped3 = clampInBox(x, z); x = clamped3.x; z = clamped3.z;
       const y = 0.85 + Math.random() * 0.2; 
@@ -1398,11 +1402,12 @@ function spawnPlushies(){
       let z = (Math.random()-0.5) * BOX_D * 0.25;
       
       let attempts = 0;
-      while(isInHole(x, z) && attempts < 15){
-        x = (Math.random()-0.5) * playSpanX * 0.4;
-        z = (Math.random()-0.5) * BOX_D * 0.3;
+      while(isInHole(x, z) && attempts < 50){
+        x = (Math.random()-0.5) * playSpanX * 0.3;
+        z = (Math.random()-0.5) * BOX_D * 0.25;
         attempts++;
       }
+      if(isInHole(x, z)){ x = 0; z = 0; }
 
       const clamped4 = clampInBox(x, z); x = clamped4.x; z = clamped4.z;
       const y = 1.2 + Math.random() * 0.2; // 아주 높게 쌓음
@@ -1414,7 +1419,7 @@ function spawnPlushies(){
 
   // 2 plushies near the prize hole walls (outside, touchable by claw swing)
   // Hole is flush to right wall, so place: 1=left side, 2=front side only
-  const offset = isLargeMode ? 0.6 : 0.35;
+  const offset = isLargeMode ? 0.75 : 0.5; // Increase offset from wall (0.35 -> 0.5)
   const nearHolePositions = [
     { x: HOLE_POS.x - (holeW/2 + wallT + offset), z: HOLE_POS.z },                    // left of hole
     { x: HOLE_POS.x + (Math.random()-0.5)*0.3,   z: HOLE_POS.z - (holeD/2 + wallT + offset) }  // front of hole
