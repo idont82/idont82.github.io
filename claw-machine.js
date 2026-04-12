@@ -1323,11 +1323,15 @@ function spawnPlushies(){
     const col = i % cols, row = Math.floor(i / cols);
     let x = playMinX + 0.3 + col * (playSpanX / cols) + (Math.random()-0.5)*0.2;
     let z = -BOX_D*0.3 + row * (BOX_D*0.4) + (Math.random()-0.5)*0.2;
-    // If overlapping hole, shift away
-    if(isInHole(x, z)){
-      x = playMinX + Math.random() * playSpanX * 0.5;
-      z = -BOX_D*0.2 + Math.random() * BOX_D * 0.2;
+    
+    // If overlapping hole, find a safe spot
+    let attempts = 0;
+    while(isInHole(x, z) && attempts < 10){
+      x = playMinX + Math.random() * playSpanX * 0.7;
+      z = (Math.random()-0.5) * BOX_D * 0.6;
+      attempts++;
     }
+
     const clamped1 = clampInBox(x, z); x = clamped1.x; z = clamped1.z;
     const y = 0.28 + Math.random() * 0.05;
     const rx = (Math.random()-0.5) * 2.0;
@@ -1345,10 +1349,15 @@ function spawnPlushies(){
     const type = PLUSHIE_TYPES[typeIdx];
     let x = playCX + (Math.random()-0.5) * playSpanX * 0.8;
     let z = (Math.random()-0.5) * BOX_D * 0.6;
-    if(isInHole(x, z)){
-      x = playMinX + Math.random() * playSpanX * 0.5;
-      z = -BOX_D*0.3 + Math.random() * BOX_D * 0.3;
+    
+    // If overlapping hole, find a safe spot
+    let attempts = 0;
+    while(isInHole(x, z) && attempts < 10){
+      x = playMinX + Math.random() * playSpanX * 0.7;
+      z = (Math.random()-0.5) * BOX_D * 0.6;
+      attempts++;
     }
+
     const clamped2 = clampInBox(x, z); x = clamped2.x; z = clamped2.z;
     const y = 0.55 + Math.random() * 0.15;
     const rx = (Math.random()-0.5) * 2.2;
@@ -1367,6 +1376,14 @@ function spawnPlushies(){
       const type = PLUSHIE_TYPES[i % PLUSHIE_TYPES.length];
       let x = (Math.random()-0.5) * playSpanX * 0.5;
       let z = (Math.random()-0.5) * BOX_D * 0.4;
+      
+      let attempts = 0;
+      while(isInHole(x, z) && attempts < 15){
+        x = (Math.random()-0.5) * playSpanX * 0.6;
+        z = (Math.random()-0.5) * BOX_D * 0.5;
+        attempts++;
+      }
+
       const clamped3 = clampInBox(x, z); x = clamped3.x; z = clamped3.z;
       const y = 0.85 + Math.random() * 0.2; 
       const p = createPlushie(type, new THREE.Vector3(x, y, z), {x:Math.random(), y:Math.random()*Math.PI, z:Math.random()});
@@ -1379,6 +1396,14 @@ function spawnPlushies(){
       const type = PLUSHIE_TYPES[(i+2) % PLUSHIE_TYPES.length];
       let x = (Math.random()-0.5) * playSpanX * 0.3;
       let z = (Math.random()-0.5) * BOX_D * 0.25;
+      
+      let attempts = 0;
+      while(isInHole(x, z) && attempts < 15){
+        x = (Math.random()-0.5) * playSpanX * 0.4;
+        z = (Math.random()-0.5) * BOX_D * 0.3;
+        attempts++;
+      }
+
       const clamped4 = clampInBox(x, z); x = clamped4.x; z = clamped4.z;
       const y = 1.2 + Math.random() * 0.2; // 아주 높게 쌓음
       const p = createPlushie(type, new THREE.Vector3(x, y, z), {x:Math.random(), y:Math.random()*Math.PI, z:Math.random()});
