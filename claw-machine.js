@@ -1267,9 +1267,8 @@ function spawnPlushies(){
   plushieGroup.clear();
   plushies.length = 0;
 
-  // ─── Special Large Mode: 4 Dinosaurs in a neat grid ───
+  // ─── Special Large Mode: 4 large dolls from current theme in a neat grid ───
   if (isLargeMode) {
-    const dinoTypes = PLUSHIE_THEMES['dino'];
     const gridRows = 2;
     const gridCols = 2;
     const spacingX = 1.2;
@@ -1280,14 +1279,15 @@ function spawnPlushies(){
     for (let i = 0; i < 4; i++) {
       const col = i % gridCols;
       const row = Math.floor(i / gridCols);
-      const type = dinoTypes[i % dinoTypes.length];
+      // Use currently selected theme's types
+      const type = PLUSHIE_TYPES[i % PLUSHIE_TYPES.length];
       
       const x = startX + col * spacingX;
       const z = startZ + row * spacingZ;
       const y = 0.5; // Slightly above floor to settle
       
-      // Face forward (ry = 0 or Math.PI)
-      const p = createPlushie(type, new THREE.Vector3(x, y, z), {x: 0, y: Math.PI, z: 0});
+      // Face upward (sky-looking position)
+      const p = createPlushie(type, new THREE.Vector3(x, y, z), {x: Math.PI / 2, y: Math.PI, z: 0});
       plushies.push(p);
       plushieGroup.add(p);
     }
@@ -1985,7 +1985,6 @@ function animate(){
       // 딜레이 없이 바로 다음 게임 가능
       state = State.IDLE;
       craneX = DROP_ZONE.x; craneZ = DROP_ZONE.z;
-      if(plushies.length < 12) spawnPlushies();
     }
   }
 
