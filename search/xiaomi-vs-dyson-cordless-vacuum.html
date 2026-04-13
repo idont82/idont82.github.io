@@ -27,11 +27,48 @@
     margin: 30px 0;
   }
   .duel-card {
+    position: relative;
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 20px;
     background: #fff;
     box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .duel-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(20, 30, 60, 0.12);
+  }
+  .duel-card::before {
+    content: "";
+    position: absolute;
+    inset: -40% auto -40% -35%;
+    width: 40%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 215, 102, 0.55) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: translateX(-240%) rotate(18deg);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .duel-card.is-picked {
+    border-color: #d4a017;
+    box-shadow: 0 0 0 2px rgba(212, 160, 23, 0.16), 0 14px 30px rgba(166, 120, 16, 0.2);
+  }
+  .duel-card.is-picked::before {
+    opacity: 1;
+    animation: shine-sweep 1.6s ease-in-out infinite;
+  }
+  .duel-card.is-picked .product-link {
+    box-shadow: 0 0 0 2px rgba(212, 160, 23, 0.18);
+  }
+  @keyframes shine-sweep {
+    0% { transform: translateX(-240%) rotate(18deg); }
+    100% { transform: translateX(520%) rotate(18deg); }
+  }
+  .product-link {
+    display: block;
+    border-radius: 10px;
+    transition: box-shadow 0.25s ease;
   }
   .duel-card img {
     display: block;
@@ -54,6 +91,73 @@
     margin: 14px 0 0;
     padding-left: 18px;
     font-size: 14px;
+  }
+  .partner-copy {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .affiliate-picks {
+    margin: 24px 0 40px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .affiliate-card {
+    position: relative;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: var(--shadow);
+    text-align: center;
+    overflow: hidden;
+    transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  }
+  .affiliate-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(20, 30, 60, 0.12);
+  }
+  .affiliate-card::before {
+    content: "";
+    position: absolute;
+    inset: -40% auto -40% -35%;
+    width: 40%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 215, 102, 0.55) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: translateX(-240%) rotate(18deg);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .affiliate-card.is-picked {
+    border-color: #d4a017;
+    box-shadow: 0 0 0 2px rgba(212, 160, 23, 0.16), 0 14px 30px rgba(166, 120, 16, 0.2);
+  }
+  .affiliate-card.is-picked::before {
+    opacity: 1;
+    animation: shine-sweep 1.6s ease-in-out infinite;
+  }
+  .affiliate-card h3 {
+    margin: 0 0 14px;
+    font-size: 18px;
+  }
+  .affiliate-card a {
+    display: inline-block;
+  }
+  .affiliate-card img {
+    display: block;
+    width: 120px;
+    height: 240px;
+    object-fit: contain;
+    margin: 0 auto;
+  }
+  .affiliate-card p {
+    margin: 14px 0 0;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text-muted);
   }
   .recommender {
     margin: 40px 0;
@@ -105,6 +209,23 @@
     margin: 10px 0 0;
     padding-left: 18px;
   }
+  .result-media {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 16px;
+    align-items: center;
+  }
+  .result-media img {
+    display: block;
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto;
+  }
+  .result-copy span {
+    display: block;
+  }
   .result-box.is-xiaomi {
     border-color: #cfe2ff;
     background: #eff6ff;
@@ -126,11 +247,18 @@
     .duel-grid {
       grid-template-columns: 1fr;
     }
+    .affiliate-picks {
+      grid-template-columns: 1fr;
+    }
     .duel-card img {
       height: 220px;
     }
     .recommender {
       padding: 18px;
+    }
+    .result-media {
+      grid-template-columns: 1fr;
+      text-align: center;
     }
   }
 </style>
@@ -228,8 +356,10 @@
   </p>
 
   <section class="duel-grid" aria-label="대표 비교 모델">
-    <article class="duel-card">
-      <img src="/images/xiaomi-g20-product.png" alt="샤오미 G20 무선청소기 제품 단독 이미지">
+    <article class="duel-card" id="xiaomi-card">
+      <a class="product-link" href="https://link.coupang.com/a/eokwdD" target="_blank" rel="sponsored nofollow" referrerpolicy="unsafe-url">
+        <img src="/images/xiaomi-g20-product.png" alt="샤오미 G20 Lite 진공 청소기 제품 단독 이미지">
+      </a>
       <h2>샤오미 G20</h2>
       <p>실속형 최신 라인업에 가까운 대표 모델. 가격 접근성이 좋고 150AW, 최대 60분 사용 시간, 0.6L 먼지통 구성을 앞세운다.</p>
       <ul class="quick-points">
@@ -237,9 +367,12 @@
         <li>공식 사양상 실제 무게 3.7kg</li>
         <li>예산 효율과 기본기 중심</li>
       </ul>
+      <div class="partner-copy">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</div>
     </article>
-    <article class="duel-card">
-      <img src="/images/dyson-v12-detect-slim.png" alt="다이슨 V12 디텍트 슬림 실제 제품 이미지">
+    <article class="duel-card" id="dyson-card">
+      <a class="product-link" href="https://link.coupang.com/a/eokFKR" target="_blank" rel="sponsored nofollow" referrerpolicy="unsafe-url">
+        <img src="/images/dyson-v12-detect-slim.png" alt="다이슨 디지털 슬림 옵틱 제품 이미지">
+      </a>
       <h2>다이슨 V12 디텍트 슬림</h2>
       <p>다이슨 라인업 중 상대적으로 대중적인 프리미엄 대표 모델. 140AW 흡입력, 최대 60분 사용 시간, 2.2kg 경량감이 강점이다.</p>
       <ul class="quick-points">
@@ -247,6 +380,7 @@
         <li>공식 소개 기준 2.2kg</li>
         <li>가벼운 사용감과 체감 만족도 중심</li>
       </ul>
+      <div class="partner-copy">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</div>
     </article>
   </section>
 
@@ -266,6 +400,23 @@
       <span>중요한 항목을 체크하면 바로 내게 더 맞는 쪽을 추천합니다.</span>
     </div>
     <div class="source-note">기준 모델: Xiaomi Vacuum Cleaner G20, Dyson V12 Detect Slim 공식 페이지</div>
+  </section>
+
+  <section class="affiliate-picks" aria-label="쿠팡 상품 링크">
+    <article class="affiliate-card" id="xiaomi-affiliate-card">
+      <h3>샤오미 쿠팡 링크</h3>
+      <a href="https://link.coupang.com/a/eokwdD" target="_blank" rel="sponsored nofollow" referrerpolicy="unsafe-url">
+        <img src="https://img3a.coupangcdn.com/image/affiliate/banner/2b60e5323226893da5f0dd1575f0f766@2x.jpg" alt="샤오미 G20 Lite 진공 청소기, C203, 화이트" width="120" height="240">
+      </a>
+      <p>이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+    </article>
+    <article class="affiliate-card" id="dyson-affiliate-card">
+      <h3>다이슨 쿠팡 링크</h3>
+      <a href="https://link.coupang.com/a/eokFKR" target="_blank" rel="sponsored nofollow" referrerpolicy="unsafe-url">
+        <img src="https://image2.coupangcdn.com/image/affiliate/banner/7fb49383cd5e42f90ae8e8126fb21070@2x.jpg" alt="다이슨 디지털 슬림 옵틱, 퍼플 + 퍼플, 492734-01" width="120" height="240">
+      </a>
+      <p>이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+    </article>
   </section>
 
   <h2>샤오미 vs 다이슨 무선청소기 핵심 비교표</h2>
@@ -336,12 +487,34 @@
   (function () {
     const checkboxes = Array.from(document.querySelectorAll('.recommender input[type="checkbox"]'));
     const result = document.getElementById('recommendation-result');
+    const xiaomiCard = document.getElementById('xiaomi-card');
+    const dysonCard = document.getElementById('dyson-card');
+    const xiaomiAffiliateCard = document.getElementById('xiaomi-affiliate-card');
+    const dysonAffiliateCard = document.getElementById('dyson-affiliate-card');
 
-    function renderResult(title, description, reasons, className) {
+    function highlightCard(type) {
+      xiaomiCard.classList.remove('is-picked');
+      dysonCard.classList.remove('is-picked');
+      xiaomiAffiliateCard.classList.remove('is-picked');
+      dysonAffiliateCard.classList.remove('is-picked');
+
+      if (type === 'xiaomi') {
+        xiaomiCard.classList.add('is-picked');
+        xiaomiAffiliateCard.classList.add('is-picked');
+      } else if (type === 'dyson') {
+        dysonCard.classList.add('is-picked');
+        dysonAffiliateCard.classList.add('is-picked');
+      }
+    }
+
+    function renderResult(title, description, reasons, className, imageSrc, imageAlt) {
       result.className = 'result-box ' + className;
-      result.innerHTML = '<strong>' + title + '</strong><span>' + description + '</span><ul>' + reasons.map(function (reason) {
+      const hasImage = Boolean(imageSrc);
+      const wrapperClass = hasImage ? 'result-media' : 'result-copy';
+      const imageMarkup = hasImage ? '<img src="' + imageSrc + '" alt="' + imageAlt + '">' : '';
+      result.innerHTML = '<div class="' + wrapperClass + '">' + imageMarkup + '<div class="result-copy"><strong>' + title + '</strong><span>' + description + '</span><ul>' + reasons.map(function (reason) {
         return '<li>' + reason + '</li>';
-      }).join('') + '</ul>';
+      }).join('') + '</ul></div></div>';
     }
 
     function updateRecommendation() {
@@ -359,10 +532,12 @@
       if (!selected) {
         result.className = 'result-box';
         result.innerHTML = '<strong>아직 조건을 고르지 않았습니다.</strong><span>중요한 항목을 체크하면 바로 내게 더 맞는 쪽을 추천합니다.</span>';
+        highlightCard('');
         return;
       }
 
       if (xiaomi - dyson >= 2) {
+        highlightCard('xiaomi');
         renderResult(
           '추천: 샤오미 쪽이 더 잘 맞습니다.',
           '예산 효율과 실속을 우선하는 기준이 더 강하게 잡혔습니다.',
@@ -371,12 +546,15 @@
             '공식 기준 150AW와 최대 60분 사용 시간으로 기본기는 충분합니다.',
             '브랜드 프리미엄보다 실제 지출 대비 효율을 더 중시하는 선택에 가깝습니다.'
           ],
-          'is-xiaomi'
+          'is-xiaomi',
+          '/images/xiaomi-g20-product.png',
+          '추천 결과에 따른 샤오미 G20 제품 이미지'
         );
         return;
       }
 
       if (dyson - xiaomi >= 2) {
+        highlightCard('dyson');
         renderResult(
           '추천: 다이슨 쪽이 더 잘 맞습니다.',
           '가벼운 무게와 체감 사용감을 더 중시하는 기준이 우세합니다.',
@@ -385,11 +563,14 @@
             '매일 자주 꺼내 쓰는 상황에서 프리미엄 사용감이 강점입니다.',
             '가격보다 청소할 때 느껴지는 만족도를 더 중요하게 보는 선택에 가깝습니다.'
           ],
-          'is-dyson'
+          'is-dyson',
+          '/images/dyson-v12-detect-slim.png',
+          '추천 결과에 따른 다이슨 V12 디텍트 슬림 이미지'
         );
         return;
       }
 
+      highlightCard('');
       renderResult(
         '중립 결과: 우선순위가 섞여 있습니다.',
         '예산과 체감 사용감이 동시에 중요해서 한쪽으로 단정하기 어려운 상태입니다.',
@@ -398,7 +579,9 @@
           '가벼운 무게와 조작 체감이 더 중요하면 다이슨이 유리합니다.',
           '매장에서 무게감과 손목 부담을 직접 확인하면 판단이 훨씬 쉬워집니다.'
         ],
-        'is-neutral'
+        'is-neutral',
+        '',
+        ''
       );
     }
 
