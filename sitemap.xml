@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- 메인 쇼핑 큐레이션 -->
   <url>
@@ -83,4 +83,9 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-</urlset>
+  <url>
+    <loc>https://idont82.github.io/search/xiaomi-vs-dyson-cordless-vacuum.html</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url></urlset>
