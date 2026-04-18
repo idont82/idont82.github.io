@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>선풍기 추천제품 월드컵 | 기준별로 고르기</title>
+<meta name="description" content="선풍기 추천제품만 모아 월드컵처럼 비교해보세요. 바람성능, 가격, 방향조절, 사용편의, 활용성을 기준으로 상위권 BLDC·무선 선풍기를 정리했습니다.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://idont82.github.io/search/fan-worldcup.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌀</text></svg>">
+<meta property="og:type" content="article">
+<meta property="og:title" content="선풍기 추천제품 월드컵 | 기준별로 고르기">
+<meta property="og:description" content="상위권 선풍기 추천제품만 모아 월드컵처럼 비교하고, 바람성능·가격·방향조절·사용편의·활용성 기준으로 고르세요.">
+<meta property="og:url" content="https://idont82.github.io/search/fan-worldcup.html">
+<meta property="og:image" content="https://idont82.github.io/images/shopping-thumbnail.png">
+<meta property="og:site_name" content="스마트 쇼핑 큐레이션">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="선풍기 추천제품 월드컵 | 기준별로 고르기">
+<meta name="twitter:description" content="추천제품만 모아 선풍기 월드컵을 진행하고 상위권 BLDC·무선 선풍기를 비교해보세요.">
+<meta name="twitter:image" content="https://idont82.github.io/images/shopping-thumbnail.png">
+<link rel="stylesheet" href="/search/assets/style.css">
+<style>
+  .criteria-grid,
+  .candidate-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .criteria-card,
+  .candidate-card,
+  .winner-card {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: var(--shadow);
+  }
+  .criteria-card {
+    padding: 18px;
+  }
+  .criteria-card h3,
+  .candidate-card h3,
+  .winner-card h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+  }
+  .criteria-card p,
+  .candidate-card p,
+  .winner-card p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  .worldcup-shell {
+    position: relative;
+    margin: 36px 0 44px;
+    padding: 26px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, #f6fbff 0%, #fdf7ef 100%);
+    border: 1px solid #d8e6f4;
+  }
+  .round-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid #d8e6f4;
+    color: #36516e;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    transition: box-shadow 0.24s ease, transform 0.24s ease, background 0.24s ease;
+  }
+  .round-label.is-live {
+    background: linear-gradient(180deg, #fffdf8 0%, #fff3da 100%);
+    border-color: #f0c77c;
+    box-shadow: 0 0 0 1px rgba(240, 199, 124, 0.18), 0 0 18px rgba(240, 199, 124, 0.34);
+    animation: roundLabelPulse 1.2s ease-in-out infinite;
+  }
+  .worldcup-intro {
+    margin: 0 0 18px;
+    color: var(--text-muted);
+  }
+  .tourney-board {
+    margin-top: 22px;
+    padding: 20px 18px 22px;
+    border-radius: 18px;
+    border: 1px solid rgba(54, 81, 110, 0.14);
+    background:
+      radial-gradient(circle at 50% 50%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 38%),
+      linear-gradient(180deg, #1e6f3f 0%, #185d35 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+    overflow: hidden;
+  }
+  .tourney-board::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 22px 22px;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .tourney-stage-badge {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: rgba(255, 248, 235, 0.92);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .tourney-bracket {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 180px 1fr;
+    gap: 16px;
+    align-items: center;
+  }
+  .tourney-side {
+    display: grid;
+    gap: 12px;
+  }
+  .tourney-match {
+    position: relative;
+    display: grid;
+    gap: 8px;
+  }
+  .tourney-match::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 26px;
+    height: 44px;
+    border-top: 2px solid rgba(255, 255, 255, 0.52);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.52);
+    transform: translateY(-50%);
+  }
+  .tourney-side.left .tourney-match::after {
+    right: -18px;
+    border-right: 2px solid rgba(255, 255, 255, 0.52);
+    border-left: 0;
+  }
+  .tourney-side.right .tourney-match::after {
+    left: -18px;
+    border-left: 2px solid rgba(255, 255, 255, 0.52);
+    border-right: 0;
+  }
+  .tourney-slot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 34px;
+    padding: 0 12px;
+    border-radius: 8px;
+    background: rgba(17, 34, 24, 0.76);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: #f8fbf9;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 6px 14px rgba(10, 20, 13, 0.2);
+  }
+  .tourney-slot small {
+    font-size: 10px;
+    opacity: 0.74;
+  }
+  .tourney-center {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+    min-height: 186px;
+    align-content: center;
+  }
+  .tourney-center::before,
+  .tourney-center::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.55);
+  }
+  .tourney-center::before {
+    left: -22px;
+  }
+  .tourney-center::after {
+    right: -22px;
+  }
+  .tourney-trophy {
+    width: 74px;
+    height: 74px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: radial-gradient(circle at 30% 30%, #fff4bf 0%, #f3c756 38%, #c98911 100%);
+    color: #6f4300;
+    font-size: 34px;
+    box-shadow: 0 14px 28px rgba(16, 31, 20, 0.28);
+  }
+  .tourney-center-title {
+    margin: 0;
+    color: #fff5df;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 900;
+    line-height: 1.15;
+  }
+  .tourney-center-title strong {
+    display: block;
+    font-size: 42px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .tourney-center-sub {
+    margin: 0;
+    color: rgba(255,255,255,0.72);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .tourney-board[data-stage="8"] .tourney-center-title strong {
+    color: #fff5df;
+  }
+  .tourney-board[data-stage="8"] .label-8,
+  .tourney-board[data-stage="4"] .label-4,
+  .tourney-board[data-stage="2"] .label-2,
+  .tourney-board[data-stage="1"] .label-1 {
+    display: inline;
+  }
+  .tourney-center-title strong .stage-label {
+    display: none;
+  }
+  .tourney-board[data-stage="4"] .tourney-center-title strong,
+  .tourney-board[data-stage="2"] .tourney-center-title strong,
+  .tourney-board[data-stage="1"] .tourney-center-title strong {
+    color: #ffd56d;
+  }
+  .tourney-board[data-stage="4"] .stage-4,
+  .tourney-board[data-stage="2"] .stage-2,
+  .tourney-board[data-stage="1"] .stage-1 {
+    background: rgba(255, 239, 190, 0.22);
+    border-color: rgba(255, 232, 170, 0.56);
+    box-shadow: 0 0 0 1px rgba(255, 225, 135, 0.16), 0 10px 22px rgba(0, 0, 0, 0.2);
+    transform: translateX(0);
+  }
+  .tourney-board[data-stage="4"] .stage-4 small,
+  .tourney-board[data-stage="2"] .stage-2 small,
+  .tourney-board[data-stage="1"] .stage-1 small {
+    opacity: 0.92;
+  }
+  .tourney-board[data-stage="1"] .tourney-trophy {
+    animation: trophyPulse 1.3s ease-in-out infinite;
+  }
+  .tourney-slot.is-selected {
+    background: rgba(255, 240, 190, 0.22);
+    border-color: rgba(255, 232, 170, 0.64);
+    color: #fff7e4;
+    box-shadow: 0 0 0 1px rgba(255, 225, 135, 0.18), 0 12px 24px rgba(0,0,0,0.22);
+  }
+  .tourney-slot.is-selected small {
+    opacity: 0.95;
+  }
+  .tourney-slot.is-dimmed {
+    opacity: 0.32;
+    filter: saturate(0.55);
+  }
+  @keyframes trophyPulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 14px 28px rgba(16, 31, 20, 0.28);
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 18px 34px rgba(16, 31, 20, 0.34);
+    }
+  }
+  @keyframes roundLabelPulse {
+    0%, 100% {
+      transform: translateY(0);
+      box-shadow: 0 0 0 1px rgba(240, 199, 124, 0.18), 0 0 14px rgba(240, 199, 124, 0.26);
+    }
+    50% {
+      transform: translateY(-1px);
+      box-shadow: 0 0 0 1px rgba(240, 199, 124, 0.24), 0 0 24px rgba(240, 199, 124, 0.48);
+    }
+  }
+  .match-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .pick-pointer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 76px;
+    height: 76px;
+    pointer-events: none;
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  .pick-pointer[hidden] {
+    display: none;
+  }
+  .pick-pointer::before {
+    content: '☝';
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 52px;
+    line-height: 1;
+    color: #16324f;
+    text-shadow: 0 10px 22px rgba(22, 50, 79, 0.28);
+    animation: pickPointerBounce 1.9s ease-in-out infinite, pickPointerBlink 1.1s ease-in-out infinite;
+  }
+  .pick-pointer::after {
+    content: '선택';
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(22, 50, 79, 0.94);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    animation: pickPointerBlink 1.1s ease-in-out infinite;
+  }
+  .pick-pointer.is-active {
+    opacity: 1;
+  }
+  @keyframes pickPointerBounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+  @keyframes pickPointerBlink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.34;
+    }
+  }
+  .match-card {
+    position: relative;
+    padding: 18px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: #fff;
+    box-shadow: var(--shadow);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    cursor: pointer;
+  }
+  .match-card:hover {
+    transform: translateY(-4px);
+    border-color: #8db5dc;
+    box-shadow: 0 14px 28px rgba(31, 36, 48, 0.12);
+  }
+  .match-card .mini-label {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: #eef5ff;
+    color: #45617f;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .fan-art,
+  .candidate-art,
+  .winner-art {
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid rgba(44, 68, 95, 0.08);
+    background: linear-gradient(160deg, var(--tone-a, #edf6ff) 0%, var(--tone-b, #fff6ea) 100%);
+  }
+  .fan-art {
+    height: 190px;
+    margin-bottom: 14px;
+  }
+  .candidate-art {
+    height: 150px;
+    margin-bottom: 14px;
+  }
+  .winner-art {
+    height: 210px;
+    margin-bottom: 18px;
+  }
+  .fan-art span,
+  .candidate-art span,
+  .winner-art span {
+    font-size: 78px;
+    line-height: 1;
+    filter: drop-shadow(0 10px 18px rgba(31, 36, 48, 0.12));
+  }
+  .fan-art small,
+  .candidate-art small,
+  .winner-art small {
+    display: block;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #5b6e84;
+  }
+  .match-card h3 {
+    margin: 0 0 8px;
+    font-size: 22px;
+  }
+  .feature-list,
+  .winner-points,
+  .candidate-tags {
+    margin: 12px 0 0;
+    padding-left: 18px;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  .worldcup-actions {
+    margin-top: 18px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .action-button,
+  .shop-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .action-button {
+    border: 1px solid #b9c8d8;
+    background: #fff;
+    color: #37506c;
+    cursor: pointer;
+  }
+  .shop-link {
+    display: inline-block;
+    padding: 14px 24px;
+    background: var(--cta);
+    color: #fff !important;
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 10px;
+    min-height: auto;
+  }
+  .shop-link:hover {
+    background: var(--cta-dark);
+    text-decoration: none;
+  }
+  .winner-card {
+    margin-top: 22px;
+    padding: 22px;
+  }
+  .winner-card[hidden] {
+    display: none;
+  }
+  .winner-summary {
+    margin: 0 0 12px;
+  }
+  .candidate-card {
+    padding: 18px;
+  }
+  .fan-art img,
+  .candidate-art img,
+  .winner-art img {
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  .visual-stack {
+    display: grid;
+    gap: 10px;
+  }
+  .reference-shot {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 58px;
+    padding: 0;
+    border-radius: 14px;
+    border: 1px solid rgba(54, 81, 110, 0.18);
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 10px 18px rgba(31, 36, 48, 0.12);
+    backdrop-filter: blur(6px);
+  }
+  .reference-shot img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    display: block;
+  }
+  .reference-shot .reference-art {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: linear-gradient(160deg, var(--tone-a, #edf6ff) 0%, var(--tone-b, #fff6ea) 100%);
+    text-align: center;
+  }
+  .reference-shot .reference-art span {
+    font-size: 18px;
+    line-height: 1;
+  }
+  .reference-shot .reference-art small {
+    display: block;
+    margin-top: 2px;
+    font-size: 7px;
+    letter-spacing: 0.04em;
+    color: #5b6e84;
+    font-weight: 700;
+  }
+  .reference-copy,
+  .reference-label {
+    display: none;
+  }
+  .winner-visual {
+    display: grid;
+    gap: 14px;
+  }
+  .winner-affiliate-thumb {
+    display: grid;
+    place-items: center;
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(44, 68, 95, 0.08);
+    background: #fffaf0;
+  }
+  .winner-affiliate-thumb img {
+    max-height: 180px;
+  }
+  .candidate-meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 10px 0 0;
+  }
+  .candidate-meta span {
+    display: inline-flex;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #eef5ff;
+    color: #45617f;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .candidate-links {
+    margin-top: 14px;
+  }
+  .candidate-links a {
+    display: inline-block;
+    padding: 14px 24px;
+    background: var(--cta);
+    color: #fff !important;
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 10px;
+  }
+  .candidate-links a:hover {
+    background: var(--cta-dark);
+    text-decoration: none;
+  }
+  @media (max-width: 600px) {
+    .criteria-grid,
+    .match-grid,
+    .candidate-list {
+      grid-template-columns: 1fr;
+    }
+    .worldcup-shell {
+      padding: 18px;
+    }
+    .fan-art,
+    .winner-art {
+      height: 170px;
+    }
+    .fan-art span,
+    .winner-art span {
+      font-size: 64px;
+    }
+    .tourney-bracket {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    .tourney-center {
+      min-height: auto;
+      order: -1;
+    }
+    .tourney-center::before,
+    .tourney-center::after,
+    .tourney-match::after {
+      display: none;
+    }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "선풍기 추천제품 월드컵 | 기준별로 고르기",
+  "description": "선풍기 추천제품만 모아 월드컵처럼 비교하고 상위권 BLDC·무선 선풍기를 정리한 정보 페이지.",
+  "datePublished": "2026-04-14",
+  "dateModified": "2026-04-14",
+  "mainEntityOfPage": "https://idont82.github.io/search/fan-worldcup.html",
+  "image": [
+    "https://idont82.github.io/images/shopping-thumbnail.png"
+  ],
+  "author": {
+    "@type": "Organization",
+    "name": "idont82.github.io"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "스마트 쇼핑 큐레이션"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://idont82.github.io/" },
+    { "@type": "ListItem", "position": 2, "name": "구매 가이드", "item": "https://idont82.github.io/search/" },
+    { "@type": "ListItem", "position": 3, "name": "선풍기 추천제품 월드컵" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "선풍기 추천제품은 어떤 기준으로 보면 되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "가격만 보지 말고 바람성능, 방향조절, 사용편의, 활용성을 함께 보면 추천제품 간 차이를 더 정확하게 이해할 수 있습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "무선 선풍기 추천제품은 어떤 사람에게 잘 맞나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "침실, 캠핑, 책상 주변처럼 자주 옮겨 쓰는 환경에서는 무선 모델의 활용성과 배치 자유도가 크게 체감됩니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "유선 선풍기 추천제품이 더 나은 경우도 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "거실 메인용처럼 장시간 고정 설치해 쓸 경우에는 가격과 바람성능이 좋은 유선 BLDC 모델이 더 합리적인 선택일 수 있습니다."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="site-title">구매 가이드</div>
+    <nav class="site-nav">
+      <a href="/">홈</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <div class="disclosure">
+    이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+  </div>
+
+  <section class="article-header">
+    <h1>선풍기 추천제품 월드컵 | 기준별로 고르기</h1>
+    <div class="article-meta">게시일: 2026-04-14 · 최종 업데이트: 2026-04-14</div>
+  </section>
+
+  <p class="intro">
+    선풍기 추천제품을 고를 때는 단순히 브랜드보다 <strong>바람성능</strong>, <strong>가격</strong>, <strong>방향조절</strong>, <strong>사용편의</strong>, <strong>활용성</strong>을 함께 보는 편이 정확합니다.
+    이 페이지는 검색 유입용 정보 페이지이면서 동시에 2개 제품씩 고르는 <strong>선풍기 월드컵</strong>을 제공해, 상위권 제품 중 내 취향에 가까운 모델을 빠르게 좁힐 수 있게 구성했습니다.
+    아래 토너먼트에서는 상위권 8개 후보로 먼저 선택을 진행하고, 페이지 하단에서는 추천제품 12종을 한 번에 비교할 수 있습니다.
+  </p>
+
+  <section class="guide">
+    <h2>선풍기 고를 때 먼저 볼 항목</h2>
+    <div class="criteria-grid">
+      <article class="criteria-card">
+        <h3>가격</h3>
+        <p>예산이 정해져 있다면 가격 점수와 실제 시세대를 함께 보는 것이 좋습니다. 유선 BLDC는 8만~11만원대, 무선 상위권은 12만~20만원대에 많이 몰려 있습니다.</p>
+      </article>
+      <article class="criteria-card">
+        <h3>바람성능</h3>
+        <p>거실 메인용이라면 바람성능 점수가 높은 모델이 유리합니다. 유선 르젠 계열과 일부 무선 상위 모델은 이 항목 점수가 특히 강한 편입니다.</p>
+      </article>
+      <article class="criteria-card">
+        <h3>방향조절</h3>
+        <p>상하좌우 회전과 헤드 제어 범위는 체감 만족도에 크게 영향을 줍니다. 서큘레이터 성향 제품이나 활용성 높은 모델은 이 점수가 높게 나오는 편입니다.</p>
+      </article>
+      <article class="criteria-card">
+        <h3>사용편의·활용성</h3>
+        <p>리모컨, 스마트폰 제어, 높이조절, 무선 여부가 이 구간에 반영됩니다. 침실, 캠핑, 책상처럼 자주 옮겨 쓰는 환경일수록 활용성 비중이 커집니다.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="worldcup-shell" aria-labelledby="worldcup-title">
+    <div class="round-label" id="round-label">8강 시작</div>
+    <h2 id="worldcup-title">선풍기 추천제품 월드컵</h2>
+    <p class="worldcup-intro">두 제품 중 더 끌리는 쪽을 누르면 다음 라운드로 올라갑니다. 각 카드에는 상위권 제품의 핵심 강점 2가지만 노출했습니다.</p>
+    <div class="match-grid" id="match-grid"></div>
+    <div class="pick-pointer" id="pick-pointer" aria-hidden="true" hidden></div>
+    <article class="winner-card" id="winner-card" hidden></article>
+    <div class="tourney-board" id="tourney-board" aria-label="월드컵 진행 단계">
+      <div class="tourney-stage-badge">Fan Worldcup</div>
+      <div class="tourney-bracket">
+        <div class="tourney-side left">
+          <div class="tourney-match stage-8">
+            <div class="tourney-slot" data-candidate-id="lezen-cz770"><span>르젠</span><small>LZDF-CZ770</small></div>
+            <div class="tourney-slot" data-candidate-id="lihas-131b"><span>리하스</span><small>JFD-131B</small></div>
+          </div>
+          <div class="tourney-match stage-4">
+            <div class="tourney-slot" data-candidate-id="minutes-mit005"><span>미닛츠</span><small>MIT-005</small></div>
+            <div class="tourney-slot" data-candidate-id="oa-round-pro"><span>오아</span><small>OFN-045BG</small></div>
+          </div>
+        </div>
+        <div class="tourney-center">
+          <div class="tourney-trophy">🏆</div>
+          <p class="tourney-center-title">프리미엄 선풍기<strong><span class="stage-label label-8">8강 대진</span><span class="stage-label label-4">4강 대진</span><span class="stage-label label-2">결승 대진</span><span class="stage-label label-1">최종 우승</span></strong></p>
+          <p class="tourney-center-sub">Round Tracker</p>
+        </div>
+        <div class="tourney-side right">
+          <div class="tourney-match stage-2">
+            <div class="tourney-slot" data-candidate-id="inic-isc02"><span>아이닉</span><small>iSC02</small></div>
+            <div class="tourney-slot" data-candidate-id="airmade-1570c"><span>에어메이드</span><small>AMF-1570C</small></div>
+          </div>
+          <div class="tourney-match stage-1">
+            <div class="tourney-slot" data-candidate-id="xiaomi-bplds03dm"><span>샤오미</span><small>BPLDS03DM</small></div>
+            <div class="tourney-slot" data-candidate-id="kauf-stf03"><span>KAUF</span><small>KF-STF03</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="guide">
+    <h2>추천제품 12종 한눈에 보기</h2>
+    <p>아래 리스트는 사용자가 전달한 상위권 제품만 추려 정리한 것입니다. 무선, 유선, 캠핑용, 스마트 제어 여부까지 함께 비교할 수 있게 구성했습니다.</p>
+    <div class="candidate-list">
+      <article class="candidate-card">
+        <div class="visual-stack">
+          <div class="candidate-art" style="--tone-a:#eef7ff;--tone-b:#fff8ef;"><img src="https://ns-curation.s3.ap-northeast-2.amazonaws.com/watermark/선풍기_르젠_LZDF-CZ770.png" alt="르젠 LZDF-CZ770 실제 제품 이미지" width="240" height="240"><div class="reference-shot" style="--tone-a:#eef7ff;--tone-b:#fff8ef;"><div class="reference-art"><div><span>🥇</span><small>BEST</small></div></div></div></div>
+        </div>
+        <h3>르젠 LZDF-CZ770</h3>
+        <p>종합점수 86.4점으로 가장 높은 추천제품입니다. 무선 1위, BLDC 1위에 올라 있고 앱 제어와 24단 풍속까지 고르게 갖춘 상위권 모델입니다.</p>
+        <div class="candidate-meta"><span>종합 1위</span><span>무선 1위</span><span>스마트 제어</span></div>
+        <div class="candidate-links"><a href="https://link.coupang.com/a/eouF6G" target="_blank" rel="nofollow sponsored noopener" referrerpolicy="unsafe-url">쿠팡에서 보기</a></div>
+      </article>
+      <article class="candidate-card">
+        <div class="visual-stack">
+          <div class="candidate-art" style="--tone-a:#eefaff;--tone-b:#f7f0ff;"><img src="https://crawl-cdn.nosearch.com/image/withBgRemove/2024/500000_771_157_img_52157771_1_jpg" alt="리하스 JFD-131B 실제 제품 이미지" width="240" height="240"><div class="reference-shot" style="--tone-a:#eefaff;--tone-b:#f7f0ff;"><div class="reference-art"><div><span>🔋</span><small>WIRELESS</small></div></div></div></div>
+        </div>
+        <h3>리하스 JFD-131B</h3>
+        <p>종합 85.7점, 무선 2위 제품입니다. 가격대가 8만~10만원대로 상위권 무선 모델 중 부담이 비교적 적고, 바람성능도 91.1점으로 강한 편입니다.</p>
+        <div class="candidate-meta"><span>무선 2위</span><span>가성비</span><span>BLDC</span></div>
+        <div class="candidate-links"><a href="https://link.coupang.com/a/eouPNr" target="_blank" rel="nofollow sponsored noopener" referrerpolicy="unsafe-url">쿠팡에서 보기</a></div>
+      </article>
+      <article class="candidate-card">
+        <div class="visual-stack">
+          <div class="candidate-art" style="--tone-a:#eef6ff;--tone-b:#fff4e8;"><img src="https://ns-curation.s3.ap-northeast-2.amazonaws.com/watermark/선풍기_미닛츠_MIT-005.png" alt="미닛츠 MIT-005 실제 제품 이미지" width="240" height="240"><div class="reference-shot" style="--tone-a:#eef6ff;--tone-b:#fff4e8;"><div class="reference-art"><div><span>🧭</span><small>CONTROL</small></div></div></div></div>
+        </div>
+        <h3>미닛츠 MIT-005</h3>
+        <p>방향조절 94.7점, 활용성 87.2점으로 움직임과 활용 범위가 강점인 모델입니다. 높이조절 폴대 구조를 선호한다면 비교 우선순위가 높습니다.</p>
+        <div class="candidate-meta"><span>방향조절 강점</span><span>활용성</span><span>무선 3위</span></div>
+        <div class="candidate-links"><a href="https://link.coupang.com/a/eouReM" target="_blank" rel="nofollow sponsored noopener" referrerpolicy="unsafe-url">쿠팡에서 보기</a></div>
+      </article>
+      <article class="candidate-card">
+        <div class="visual-stack">
+          <div class="candidate-art" style="--tone-a:#eefaff;--tone-b:#f3f2ff;"><img src="https://ns-curation.s3.ap-northeast-2.amazonaws.com/watermark/선풍기_오아_OFN-045BG.png" alt="오아 라운드 PRO OFN-045BG 실제 제품 이미지" width="240" height="240"><div class="reference-shot" style="--tone-a:#eefaff;--tone-b:#f3f2ff;"><div class="reference-art"><div><span>🏕️</span><small>CAMPING</small></div></div></div></div>
+        </div>
+        <h3>오아 라운드 PRO OFN-045BG</h3>
+        <p>삼각대형 구조와 무선 설계가 강점인 제품으로, 캠핑용 6위에도 들어갑니다. 실내 메인보다는 이동성과 배치 자유도를 중시할 때 어울립니다.</p>
+        <div class="candidate-meta"><span>캠핑 겸용</span><span>삼각대형</span><span>무선 4위</span></div>
+        <div class="candidate-links"><a href="https://link.coupang.com/a/epa2Td" target="_blank" rel="nofollow sponsored noopener" referrerpolicy="unsafe-url">쿠팡에서 보기</a></div>
+      </article>
+      <article class="candidate-card">
+        <div class="visual-stack">
+          <div class="candidate-art" style="--tone-a:#eef5ff;--tone-b:#fff5eb;"><img src="https://crawl-cdn.nosearch.com/image/withBgRemove/2025/500000_128_236_img_88236128_1_7o.jpg" alt="아이닉 iSC02 실제 제품 이미지" width="240" height="240"><div class="reference-shot" style="--tone-a:#eef5ff;--tone-b:#fff5eb;"><div class="reference-art"><div><span>📱</span><small>SMART</small></div></div></div></div>
+        </div>
+        <h3>아이닉 iSC02</h3>
+        <p>방향조절 95.7점, 사용편의 91.2점으로 조작 편의가 강합니다. 스마트폰 제어와 자동 회전을 모두 챙기고 싶을 때 추천제품 후보로 보기 좋습니다.</p>
+        <div class="candidate-meta"><span>사용편의</span><span>스마트 제어</span><span>무선 5위</span></div>
+        <div class="candidate-links"><a href="https://link.coupang.com/a/epa4Ua" target="_blank" rel="nofollow sponsored noopener" referrerpolicy="unsafe-url">쿠팡에서 보기</a></div>
+      </article>
+      <article class="candidate-card">
+        <div class="visual-stack">
+          <div class="candidate-art" style="--tone-a:#f1f8ff;--tone-b:#fff7ef;"><img src="https://ns-curation.s3.ap-northeast-2.amazonaws.com/watermark/선풍기_샤오미_접이식무선선풍기.png" alt="SmartFrog 접이식 무선 선풍기 실제 제품 이미지" width="240" height="240"><div class="reference-shot" style="--tone-a:#f1f8ff;--tone-b:#fff7ef;"><div class="reference-art"><div><span>💸</span><small>BUDGET</small></div></div></div></div>
+        </div>
+        <h3>SmartFrog 접이식 무선 선풍기</h3>
+        <p>5만~6만원대 가격으로 상위권에 든 무선 모델입니다. 절대 성능보다 가격과 휴대성을 먼저 보는 사용자에게 잘 맞는 추천제품입니다.</p>
+        <div class="candidate-meta"><span>저가 무선</span><span>캠핑용</span><span>접이식</span></div>
+        <div class="candidate-links"><a href="https://link.coupang.com/a/epa5mn" target="_blank" rel="nofollow sponsored noopener" referrerpolicy="unsafe-url">쿠팡에서 보기</a></div>
+      </article>
+      <article class="candidate-card">
+        <div class="visual-stack">
+          <div class="candidate-art" style="--tone-a:#eef8ff;--tone-b:#fff4f0;"><img src="https://crawl-cdn.nosearch.com/image/withBgRemove/2025/500000_478_465_img_55465478_1_ry.jpg" alt="에어메이드 위대한 선풍기 AMF-1570C 실제 제품 이미지" width="240" height="240"><div class="reference-shot" style="--tone-a:#eef8ff;--tone-b:#fff4f0;"><div class="reference-art"><div><span>⚙️</span><small>100 STEP</small></div></div></div></div>
+        </div>
+        <h3>에어메이드 위대한 선풍기 AMF-1570C</h3>
+        <p>100단 풍속과 사용편의 94.4점이 강점인 무선 상위권 모델입니다. 세밀한 풍속 조절과 앱 제어를 원하는 사용자에게 어울립니다.</p>
+        <div class="candidate-meta"><span>100단</span><span>사용편의 강점</span><span>무선 6위</span></div>
+        <div class="candidate-links"><a href="https://link.coupang.com/a/epa5G7" target="_blank" rel="nofollow sponsored noopener" referrerpolicy="unsafe-url">쿠팡에서 보기</a></div>
+      </article>
+      <article class="candidate-card">
+        <div class="visual-stack">
+          <div class="candidate-art" style="--tone-a:#eef6ff;--tone-b:#fff4e8;"><img src="https://ns-curation.s3.ap-northeast-2.amazonaws.com/watermark/선풍기_샤오미_BPLDS03DM.png" alt="샤오미 미지아 스마트 스탠드 선풍기2 Pro BPLDS03DM 실제 제품 이미지" width="240" height="240"><div class="reference-shot" style="--tone-a:#eef6ff;--tone-b:#fff4e8;"><div class="reference-art"><div><span>📡</span><small>XIAOMI</small></div></div></div></div>
+        </div>
+        <h3>샤오미 미지아 스마트 스탠드 선풍기2 Pro BPLDS03DM</h3>
+        <p>샤오미 계열 중 상위권에 든 대표 모델입니다. 100단 풍속과 스마트폰 제어가 강점이며, 무선 7위에 올라 있습니다.</p>
+        <div class="candidate-meta"><span>샤오미</span><span>무선 7위</span><span>스마트 제어</span></div>
+        <div class="candidate-links"><a href="https://link.coupang.com/a/epa53h" target="_blank" rel="nofollow sponsored noopener" referrerpolicy="unsafe-url">쿠팡에서 보기</a></div>
+      </article>
+      <article class="candidate-card">
+        <div class="visual-stack">
+          <div class="candidate-art" style="--tone-a:#eefaff;--tone-b:#f5f2ff;"><img src="https://ns-curation.s3.ap-northeast-2.amazonaws.com/watermark/선풍기_KAUF_KF-STF03.png" alt="KAUF KF-STF03 실제 제품 이미지" width="240" height="240"><div class="reference-shot" style="--tone-a:#eefaff;--tone-b:#f5f2ff;"><div class="reference-art"><div><span>🌿</span><small>CAMP BEST</small></div></div></div></div>
+        </div>
+        <h3>KAUF KF-STF03</h3>
+        <p>캠핑용 1위이면서 가격 5만~6만원대로 접근성이 좋습니다. 휴대성과 활용성 위주로 고를 때 재확인할 만한 모델입니다.</p>
+        <div class="candidate-meta"><span>캠핑용 1위</span><span>저가</span><span>무선</span></div>
+        <div class="candidate-links"><a href="https://link.coupang.com/a/epa6lS" target="_blank" rel="nofollow sponsored noopener" referrerpolicy="unsafe-url">쿠팡에서 보기</a></div>
+      </article>
+      <article class="candidate-card">
+        <div class="visual-stack">
+          <div class="candidate-art" style="--tone-a:#eef7ff;--tone-b:#fff5ef;"><img src="https://ns-curation.s3.ap-northeast-2.amazonaws.com/watermark/선풍기_르젠_LZDF-TV8.png" alt="르젠 LZDF-TV8 실제 제품 이미지" width="240" height="240"><div class="reference-shot" style="--tone-a:#eef7ff;--tone-b:#fff5ef;"><div class="reference-art"><div><span>🌬️</span><small>WIRED BEST</small></div></div></div></div>
+        </div>
+        <h3>르젠 LZDF-TV8</h3>
+        <p>유선 1위, 바람성능 94.3점으로 거실 메인용에 강한 모델입니다. 무선이 꼭 필요하지 않다면 가격과 성능 균형이 좋습니다.</p>
+        <div class="candidate-meta"><span>유선 1위</span><span>바람성능</span><span>스마트 제어</span></div>
+        <div class="candidate-links"><a href="https://link.coupang.com/a/epa6CZ" target="_blank" rel="nofollow sponsored noopener" referrerpolicy="unsafe-url">쿠팡에서 보기</a></div>
+      </article>
+      <article class="candidate-card">
+        <div class="visual-stack">
+          <div class="candidate-art" style="--tone-a:#f0f8ff;--tone-b:#fef4ef;"><img src="https://crawl-cdn.nosearch.com/image/withBgRemove/2025/500000_830_839_img_82839830_1_yh.jpg" alt="쿠쿠전자 인스퓨어 CF-JNL1420UG 실제 제품 이미지" width="240" height="240"><div class="reference-shot" style="--tone-a:#f0f8ff;--tone-b:#fef4ef;"><div class="reference-art"><div><span>💨</span><small>WIRED VALUE</small></div></div></div></div>
+        </div>
+        <h3>쿠쿠전자 인스퓨어 CF-JNL1420UG</h3>
+        <p>유선 2위 제품으로 가격, 바람성능, 방향조절 점수가 모두 안정적입니다. 무선보다 메인용 성능 우선이라면 체크할 만한 추천제품입니다.</p>
+        <div class="candidate-meta"><span>유선 2위</span><span>성능 균형</span><span>BLDC</span></div>
+        <div class="candidate-links"><a href="https://link.coupang.com/a/epa7aO" target="_blank" rel="nofollow sponsored noopener" referrerpolicy="unsafe-url">쿠팡에서 보기</a></div>
+      </article>
+      <article class="candidate-card">
+        <div class="visual-stack">
+          <div class="candidate-art" style="--tone-a:#eefaff;--tone-b:#fff4ee;"><img src="https://ns-curation.s3.ap-northeast-2.amazonaws.com/watermark/선풍기_르젠_LZCO-8000.png" alt="르젠 LZCO-8000 실제 제품 이미지" width="240" height="240"><div class="reference-shot" style="--tone-a:#eefaff;--tone-b:#fff4ee;"><div class="reference-art"><div><span>🔌</span><small>WIRED PICK</small></div></div></div></div>
+        </div>
+        <h3>르젠 LZCO-8000</h3>
+        <p>유선 3위 모델로 바람성능 94.3점, 사용편의 91점이 강점입니다. 가격대도 10만~12만원대로 무난해 유선 BLDC 추천제품군에서 경쟁력이 있습니다.</p>
+        <div class="candidate-meta"><span>유선 3위</span><span>바람성능 강점</span><span>스마트 제어</span></div>
+        <div class="candidate-links"><a href="https://link.coupang.com/a/epa7Dv" target="_blank" rel="nofollow sponsored noopener" referrerpolicy="unsafe-url">쿠팡에서 보기</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="guide">
+    <h2>월드컵 결과를 어떻게 해석하면 좋을까?</h2>
+    <p><strong>무선 상위권</strong> 제품이 계속 올라왔다면 침실, 서재, 캠핑처럼 이동성과 활용성이 중요한 사용자일 가능성이 큽니다. 이 경우 르젠 LZDF-CZ770, 리하스 JFD-131B, 샤오미 BPLDS03DM 같은 모델을 우선 비교하면 됩니다.</p>
+    <p><strong>유선 상위권</strong> 제품이 더 끌렸다면 거실 메인용처럼 고정 설치 환경일 가능성이 큽니다. 르젠 LZDF-TV8, 쿠쿠 CF-JNL1420UG, 르젠 LZCO-8000처럼 바람성능이 강한 유선 BLDC 모델이 더 합리적일 수 있습니다.</p>
+    <p><strong>방향조절과 사용편의</strong>가 강조된 제품을 자주 골랐다면 자동회전 범위, 리모컨, 앱 제어, 높이조절 같은 요소가 중요한 성향입니다. 이 경우 아이닉 iSC02, 에어메이드 AMF-1570C, 미닛츠 MIT-005를 다시 확인하는 편이 좋습니다.</p>
+    <p><strong>가격과 캠핑 활용</strong> 쪽으로 기울었다면 SmartFrog 접이식 무선 선풍기나 KAUF KF-STF03처럼 5만~6만원대 무선 모델이 더 만족스러울 수 있습니다.</p>
+  </section>
+
+  <section class="faq">
+    <h2>자주 묻는 질문</h2>
+    <details>
+      <summary>선풍기 추천제품은 어떤 기준으로 보면 되나요?</summary>
+      <p>가격만 보지 말고 바람성능, 방향조절, 사용편의, 활용성을 함께 보는 편이 좋습니다. 같은 무선 선풍기여도 강점이 완전히 다를 수 있습니다.</p>
+    </details>
+    <details>
+      <summary>무선 선풍기 추천제품은 어떤 사람에게 잘 맞나요?</summary>
+      <p>침실, 캠핑, 서재처럼 콘센트 제약이 있거나 위치를 자주 바꾸는 사용자에게 잘 맞습니다. 대신 같은 가격이면 유선보다 바람성능이 조금 약할 수도 있습니다.</p>
+    </details>
+    <details>
+      <summary>유선 선풍기 추천제품이 더 나은 경우도 있나요?</summary>
+      <p>거실 메인용처럼 장시간 고정해 쓸 경우에는 유선 BLDC 모델이 가격 대비 바람성능이 더 좋을 때가 많습니다. 무선이 꼭 필요하지 않다면 유선 1~3위권도 충분히 강합니다.</p>
+    </details>
+  </section>
+
+  <div class="disclosure">
+    이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    © idont82.github.io · 구매 가이드
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const allCandidates = [
+      {
+        id: 'lezen-cz770',
+        name: '르젠 LZDF-CZ770',
+        badge: '종합 1위',
+        features: ['무선 1위', '앱 제어 + 24단 풍속'],
+        summary: '종합점수 86.4점으로 가장 높은 추천제품입니다. 무선, BLDC, 사용편의까지 균형 있게 강한 상위권 모델입니다.',
+        tags: ['종합 1위', '무선', '스마트 제어'],
+        buyUrl: 'https://link.coupang.com/a/eouF6G',
+        buyLabel: '쿠팡에서 보기',
+        actualImageUrl: 'https://ns-curation.s3.ap-northeast-2.amazonaws.com/watermark/선풍기_르젠_LZDF-CZ770.png',
+        actualImageAlt: '르젠 LZDF-CZ770 실제 제품 이미지',
+        toneA: '#eef7ff',
+        toneB: '#fff8ef',
+        emoji: '🥇',
+        artLabel: 'BEST'
+      },
+      {
+        id: 'lihas-131b',
+        name: '리하스 JFD-131B',
+        badge: '무선 2위',
+        features: ['8~10만원대', '바람성능 91.1'],
+        summary: '가격 부담을 조금 낮추면서도 무선 상위권 성능을 원하는 사용자에게 잘 맞는 추천제품입니다.',
+        tags: ['무선 2위', '가성비', 'BLDC'],
+        buyUrl: 'https://link.coupang.com/a/eouPNr',
+        buyLabel: '쿠팡에서 보기',
+        actualImageUrl: 'https://crawl-cdn.nosearch.com/image/withBgRemove/2024/500000_771_157_img_52157771_1_jpg',
+        actualImageAlt: '리하스 JFD-131B 실제 제품 이미지',
+        toneA: '#eefaff',
+        toneB: '#f7f0ff',
+        emoji: '🔋',
+        artLabel: 'WIRELESS'
+      },
+      {
+        id: 'minutes-mit005',
+        name: '미닛츠 MIT-005',
+        badge: '무선 3위',
+        features: ['방향조절 94.7', '활용성 87.2'],
+        summary: '방향조절 범위와 활용성이 좋아 다양한 공간에서 쓰기 편한 상위권 무선 모델입니다.',
+        tags: ['무선 3위', '방향조절', '활용성'],
+        buyUrl: 'https://link.coupang.com/a/eouReM',
+        buyLabel: '쿠팡에서 보기',
+        actualImageUrl: 'https://ns-curation.s3.ap-northeast-2.amazonaws.com/watermark/선풍기_미닛츠_MIT-005.png',
+        actualImageAlt: '미닛츠 MIT-005 실제 제품 이미지',
+        toneA: '#eef6ff',
+        toneB: '#fff4e8',
+        emoji: '🧭',
+        artLabel: 'CONTROL'
+      },
+      {
+        id: 'oa-round-pro',
+        name: '오아 라운드 PRO OFN-045BG',
+        badge: '무선 4위',
+        features: ['삼각대형', '캠핑용 6위'],
+        summary: '실내 고정용보다 이동성과 배치 자유도가 중요한 사용자에게 더 잘 맞는 무선 추천제품입니다.',
+        tags: ['무선 4위', '캠핑', '삼각대형'],
+        buyUrl: 'https://link.coupang.com/a/epa2Td',
+        buyLabel: '쿠팡에서 보기',
+        actualImageUrl: 'https://ns-curation.s3.ap-northeast-2.amazonaws.com/watermark/선풍기_오아_OFN-045BG.png',
+        actualImageAlt: '오아 라운드 PRO OFN-045BG 실제 제품 이미지',
+        toneA: '#eefaff',
+        toneB: '#f3f2ff',
+        emoji: '🏕️',
+        artLabel: 'CAMPING'
+      },
+      {
+        id: 'inic-isc02',
+        name: '아이닉 iSC02',
+        badge: '무선 5위',
+        features: ['방향조절 95.7', '스마트폰 제어'],
+        summary: '방향조절과 사용편의가 특히 강해 조작 편한 선풍기를 원하는 사용자에게 잘 맞습니다.',
+        tags: ['무선 5위', '사용편의', '스마트 제어'],
+        buyUrl: 'https://link.coupang.com/a/epa4Ua',
+        buyLabel: '쿠팡에서 보기',
+        actualImageUrl: 'https://crawl-cdn.nosearch.com/image/withBgRemove/2025/500000_128_236_img_88236128_1_7o.jpg',
+        actualImageAlt: '아이닉 iSC02 실제 제품 이미지',
+        toneA: '#eef5ff',
+        toneB: '#fff5eb',
+        emoji: '📱',
+        artLabel: 'SMART'
+      },
+      {
+        id: 'smartfrog-fold',
+        name: 'SmartFrog 접이식 무선 선풍기',
+        badge: '가성비 무선',
+        features: ['5~6만원대', '접이식 + 무선'],
+        summary: '절대 성능보다 가격과 휴대성을 먼저 보는 경우 가장 먼저 비교할 만한 추천제품입니다.',
+        tags: ['가성비', '무선', '캠핑'],
+        buyUrl: 'https://link.coupang.com/a/epa5mn',
+        buyLabel: '쿠팡에서 보기',
+        actualImageUrl: 'https://ns-curation.s3.ap-northeast-2.amazonaws.com/watermark/선풍기_샤오미_접이식무선선풍기.png',
+        actualImageAlt: 'SmartFrog 접이식 무선 선풍기 실제 제품 이미지',
+        toneA: '#f1f8ff',
+        toneB: '#fff7ef',
+        emoji: '💸',
+        artLabel: 'BUDGET'
+      },
+      {
+        id: 'airmade-1570c',
+        name: '에어메이드 AMF-1570C',
+        badge: '사용편의 강점',
+        features: ['100단 풍속', '사용편의 94.4'],
+        summary: '풍속을 세밀하게 조절하고 앱 제어까지 챙기고 싶은 사용자에게 매력적인 무선 상위권 모델입니다.',
+        tags: ['무선 6위', '100단', '스마트 제어'],
+        buyUrl: 'https://link.coupang.com/a/epa5G7',
+        buyLabel: '쿠팡에서 보기',
+        actualImageUrl: 'https://crawl-cdn.nosearch.com/image/withBgRemove/2025/500000_478_465_img_55465478_1_ry.jpg',
+        actualImageAlt: '에어메이드 AMF-1570C 실제 제품 이미지',
+        toneA: '#eef8ff',
+        toneB: '#fff4f0',
+        emoji: '⚙️',
+        artLabel: '100 STEP'
+      },
+      {
+        id: 'xiaomi-bplds03dm',
+        name: '샤오미 BPLDS03DM',
+        badge: '샤오미 상위권',
+        features: ['100단 풍속', '무선 7위'],
+        summary: '샤오미 계열 중에서는 상위권에 든 대표 무선 모델로, 앱 제어와 스마트 사용성에 강점이 있습니다.',
+        tags: ['샤오미', '무선 7위', '스마트 제어'],
+        buyUrl: 'https://link.coupang.com/a/epa53h',
+        buyLabel: '쿠팡에서 보기',
+        actualImageUrl: 'https://ns-curation.s3.ap-northeast-2.amazonaws.com/watermark/선풍기_샤오미_BPLDS03DM.png',
+        actualImageAlt: '샤오미 미지아 스마트 스탠드 선풍기2 Pro BPLDS03DM 실제 제품 이미지',
+        toneA: '#eef6ff',
+        toneB: '#fff4e8',
+        emoji: '📡',
+        artLabel: 'XIAOMI'
+      },
+      {
+        id: 'kauf-stf03',
+        name: 'KAUF KF-STF03',
+        badge: '캠핑용 1위',
+        features: ['5~6만원대', '활용성 86.0'],
+        summary: '캠핑용 선풍기를 먼저 찾는다면 가격과 휴대성 면에서 강하게 비교되는 모델입니다.',
+        tags: ['캠핑용 1위', '저가', '무선'],
+        buyUrl: 'https://link.coupang.com/a/epa6lS',
+        buyLabel: '쿠팡에서 보기',
+        actualImageUrl: 'https://ns-curation.s3.ap-northeast-2.amazonaws.com/watermark/선풍기_KAUF_KF-STF03.png',
+        actualImageAlt: 'KAUF KF-STF03 실제 제품 이미지',
+        toneA: '#eefaff',
+        toneB: '#f5f2ff',
+        emoji: '🌿',
+        artLabel: 'CAMP BEST'
+      },
+      {
+        id: 'shinil-12wl',
+        name: '신일전자 SIF-12WL',
+        badge: '무선 11위',
+        features: ['바람성능 89.1', '방향조절 94.9'],
+        summary: '브랜드 선호도가 신일 쪽으로 기울고, 무선형 기본기를 중시한다면 재비교할 만한 모델입니다.',
+        tags: ['신일', '무선', '방향조절'],
+        buyUrl: 'https://search.shopping.naver.com/search/all?query=%EC%8B%A0%EC%9D%BC%EC%A0%84%EC%9E%90%20SIF-12WL',
+        buyLabel: '쇼핑 검색으로 보기',
+        toneA: '#eef7ff',
+        toneB: '#fff5ef',
+        emoji: '🌬️',
+        artLabel: 'SHINIL'
+      },
+      {
+        id: 'lezen-tv8',
+        name: '르젠 LZDF-TV8',
+        badge: '유선 1위',
+        features: ['바람성능 94.3', '스마트폰 제어'],
+        summary: '무선이 꼭 필요하지 않다면 가격 대비 성능이 매우 좋은 유선 BLDC 추천제품입니다.',
+        tags: ['유선 1위', '바람성능', '스마트 제어'],
+        buyUrl: 'https://link.coupang.com/a/epa6CZ',
+        buyLabel: '쿠팡에서 보기',
+        actualImageUrl: 'https://ns-curation.s3.ap-northeast-2.amazonaws.com/watermark/선풍기_르젠_LZDF-TV8.png',
+        actualImageAlt: '르젠 LZDF-TV8 실제 제품 이미지',
+        toneA: '#f0f8ff',
+        toneB: '#fef4ef',
+        emoji: '🔌',
+        artLabel: 'WIRED BEST'
+      },
+      {
+        id: 'cuckoo-jnl1420ug',
+        name: '쿠쿠전자 CF-JNL1420UG',
+        badge: '유선 2위',
+        features: ['바람성능 91.7', '방향조절 92.0'],
+        summary: '거실 메인용처럼 고정 설치할 유선 선풍기를 찾는다면 밸런스 좋게 비교할 수 있는 모델입니다.',
+        tags: ['유선 2위', '성능 균형', 'BLDC'],
+        buyUrl: 'https://link.coupang.com/a/epa7aO',
+        buyLabel: '쿠팡에서 보기',
+        actualImageUrl: 'https://crawl-cdn.nosearch.com/image/withBgRemove/2025/500000_830_839_img_82839830_1_yh.jpg',
+        actualImageAlt: '쿠쿠전자 CF-JNL1420UG 실제 제품 이미지',
+        toneA: '#eefaff',
+        toneB: '#fff4ee',
+        emoji: '💨',
+        artLabel: 'WIRED VALUE'
+      },
+      {
+        id: 'lezen-8000',
+        name: '르젠 LZCO-8000',
+        badge: '유선 3위',
+        features: ['바람성능 94.3', '사용편의 91.0'],
+        summary: '유선 BLDC 중에서도 바람성능과 사용편의 점수가 모두 높아 메인용 추천제품 후보로 강합니다.',
+        tags: ['유선 3위', '바람성능', '사용편의'],
+        buyUrl: 'https://link.coupang.com/a/epa7Dv',
+        buyLabel: '쿠팡에서 보기',
+        actualImageUrl: 'https://ns-curation.s3.ap-northeast-2.amazonaws.com/watermark/선풍기_르젠_LZCO-8000.png',
+        actualImageAlt: '르젠 LZCO-8000 실제 제품 이미지',
+        toneA: '#eef5ff',
+        toneB: '#fff4ee',
+        emoji: '🌀',
+        artLabel: 'WIRED PICK'
+      }
+    ];
+
+    const bracketSeeds = allCandidates.slice(0, 8);
+    const worldcupShell = document.querySelector('.worldcup-shell');
+    const matchGrid = document.getElementById('match-grid');
+    const roundLabel = document.getElementById('round-label');
+    const winnerCard = document.getElementById('winner-card');
+    const pickPointer = document.getElementById('pick-pointer');
+    const tourneyBoard = document.getElementById('tourney-board');
+
+    let roundQueue = [];
+    let nextRound = [];
+    let roundName = '';
+    let pointerAnimation = null;
+    let selectedHistory = [];
+    let eliminatedIds = new Set();
+
+    function setBracketStage(stage) {
+      roundLabel.classList.toggle('is-live', stage !== 1);
+      if (!tourneyBoard) {
+        return;
+      }
+      tourneyBoard.dataset.stage = String(stage);
+    }
+
+    function syncBracketSelections() {
+      if (!tourneyBoard) {
+        return;
+      }
+      Array.from(tourneyBoard.querySelectorAll('.tourney-slot')).forEach(function (slot) {
+        const id = slot.dataset.candidateId;
+        slot.classList.toggle('is-selected', selectedHistory.includes(id));
+        slot.classList.toggle('is-dimmed', eliminatedIds.has(id));
+      });
+    }
+
+    function setPointerActive(active) {
+      if (!pickPointer) {
+        return;
+      }
+      if (!active && pointerAnimation) {
+        cancelAnimationFrame(pointerAnimation);
+        pointerAnimation = null;
+      }
+      pickPointer.hidden = !active;
+      pickPointer.classList.toggle('is-active', active);
+    }
+
+    function animatePointerBetweenCards() {
+      if (!pickPointer || pickPointer.hidden) {
+        return;
+      }
+      const cards = matchGrid.querySelectorAll('.match-card');
+      if (cards.length < 2) {
+        setPointerActive(false);
+        return;
+      }
+
+      const shellRect = worldcupShell ? worldcupShell.getBoundingClientRect() : matchGrid.getBoundingClientRect();
+      const leftRect = cards[0].getBoundingClientRect();
+      const rightRect = cards[1].getBoundingClientRect();
+      const pointerSize = 76;
+      const startX = leftRect.left + leftRect.width * 0.72 - shellRect.left - pointerSize / 2;
+      const endX = rightRect.left + rightRect.width * 0.28 - shellRect.left - pointerSize / 2;
+      const centerY = Math.min(leftRect.top, rightRect.top) - shellRect.top + Math.min(leftRect.height, rightRect.height) * 0.34 - pointerSize / 2;
+      const duration = 2800;
+      const startedAt = performance.now();
+
+      function frame(now) {
+        if (!pickPointer || pickPointer.hidden) {
+          return;
+        }
+        const elapsed = (now - startedAt) % duration;
+        const progress = elapsed / duration;
+        const eased = 0.5 - 0.5 * Math.cos(progress * Math.PI * 2);
+        const currentX = startX + (endX - startX) * eased;
+        pickPointer.style.transform = 'translate3d(' + currentX + 'px, ' + centerY + 'px, 0)';
+        pointerAnimation = requestAnimationFrame(frame);
+      }
+
+      if (pointerAnimation) {
+        cancelAnimationFrame(pointerAnimation);
+      }
+      pointerAnimation = requestAnimationFrame(frame);
+    }
+
+    function renderReferenceVisual(candidate) {
+      if (candidate.imageUrl) {
+        return '<img src="' + candidate.imageUrl + '" alt="' + (candidate.imageAlt || candidate.name) + '" width="120" height="240">';
+      }
+      return '<div class="reference-art" style="--tone-a:' + candidate.toneA + ';--tone-b:' + candidate.toneB + ';"><div><span>' + candidate.emoji + '</span><small>' + candidate.artLabel + '</small></div></div>';
+    }
+
+    function renderReferenceShot(candidate) {
+      if (!candidate.imageUrl && !candidate.emoji) {
+        return '';
+      }
+      return '<div class="reference-shot" style="--tone-a:' + candidate.toneA + ';--tone-b:' + candidate.toneB + ';">' +
+        renderReferenceVisual(candidate) +
+      '</div>';
+    }
+
+    function renderPrimaryVisual(candidate, className) {
+      if (candidate.actualImageUrl) {
+        return '<div class="' + className + '" style="--tone-a:' + candidate.toneA + ';--tone-b:' + candidate.toneB + ';"><img src="' + candidate.actualImageUrl + '" alt="' + (candidate.actualImageAlt || candidate.name) + '" width="240" height="240">' + renderReferenceShot(candidate) + '</div>';
+      }
+      return '<div class="' + className + '" style="--tone-a:' + candidate.toneA + ';--tone-b:' + candidate.toneB + ';"><div><span>' + candidate.emoji + '</span><small>' + candidate.artLabel + '</small></div>' + renderReferenceShot(candidate) + '</div>';
+    }
+
+    function renderWinnerVisual(candidate) {
+      return '<div class="winner-visual">' +
+        renderPrimaryVisual(candidate, 'winner-art') +
+      '</div>';
+    }
+
+    function roundText(size) {
+      if (size === 8) return '8강 진행 중';
+      if (size === 4) return '4강 진행 중';
+      if (size === 2) return '결승 진행 중';
+      return '결과 확인';
+    }
+
+    function pairForRound(candidates) {
+      roundQueue = candidates.slice();
+      nextRound = [];
+      roundName = roundText(candidates.length);
+      roundLabel.textContent = roundName;
+      setBracketStage(candidates.length);
+      winnerCard.hidden = true;
+      setPointerActive(false);
+      renderMatch();
+    }
+
+    function renderMatch() {
+      if (roundQueue.length === 1 && nextRound.length === 0) {
+        renderWinner(roundQueue[0]);
+        return;
+      }
+
+      if (roundQueue.length === 0 && nextRound.length > 0) {
+        pairForRound(nextRound);
+        return;
+      }
+
+      const left = roundQueue.shift();
+      const right = roundQueue.shift();
+
+      matchGrid.innerHTML = [left, right].map(function (candidate) {
+        return '<article class="match-card" data-id="' + candidate.id + '">' +
+          '<div class="mini-label">' + candidate.badge + '</div>' +
+          renderPrimaryVisual(candidate, 'fan-art') +
+          '<h3>' + candidate.name + '</h3>' +
+          '<ul class="feature-list"><li>' + candidate.features[0] + '</li><li>' + candidate.features[1] + '</li></ul>' +
+        '</article>';
+      }).join('');
+
+      Array.from(matchGrid.querySelectorAll('.match-card')).forEach(function (card) {
+        card.addEventListener('click', function () {
+          const picked = [left, right].find(function (candidate) {
+            return candidate.id === card.dataset.id;
+          });
+          const notPicked = [left, right].find(function (candidate) {
+            return candidate.id !== card.dataset.id;
+          });
+          if (picked && !selectedHistory.includes(picked.id)) {
+            selectedHistory.push(picked.id);
+          }
+          if (notPicked) {
+            eliminatedIds.add(notPicked.id);
+          }
+          syncBracketSelections();
+          nextRound.push(picked);
+          renderMatch();
+        });
+      });
+      setPointerActive(true);
+      animatePointerBetweenCards();
+    }
+
+    function renderWinner(candidate) {
+      roundLabel.textContent = '우승 결과';
+      setBracketStage(1);
+      matchGrid.innerHTML = '';
+      winnerCard.hidden = false;
+      setPointerActive(false);
+      winnerCard.innerHTML =
+        '<h3>최종 우승: ' + candidate.name + '</h3>' +
+        renderWinnerVisual(candidate) +
+        '<p class="winner-summary">' + candidate.summary + '</p>' +
+        '<ul class="winner-points"><li>' + candidate.features[0] + '</li><li>' + candidate.features[1] + '</li><li>' + candidate.tags.join(' / ') + ' 기준에서 자주 선택된 성향과 맞는 후보입니다.</li></ul>' +
+        '<div class="worldcup-actions">' +
+          '<a class="shop-link" href="' + candidate.buyUrl + '" target="_blank" rel="nofollow sponsored noopener" referrerpolicy="unsafe-url">' + (candidate.buyLabel || '쇼핑 검색으로 보기') + '</a>' +
+          '<button class="action-button" id="restart-worldcup" type="button">다시 하기</button>' +
+        '</div>';
+
+      document.getElementById('restart-worldcup').addEventListener('click', function () {
+        startWorldCup();
+      });
+    }
+
+    function startWorldCup() {
+      selectedHistory = [];
+      eliminatedIds = new Set();
+      syncBracketSelections();
+      pairForRound(bracketSeeds);
+    }
+
+    window.addEventListener('resize', function () {
+      if (!pickPointer || pickPointer.hidden) {
+        return;
+      }
+      animatePointerBetweenCards();
+    });
+
+    startWorldCup();
+  }());
+</script>
+
+</body>
+</html>
