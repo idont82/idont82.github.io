@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한자 객관식 1단원</title>
+</head>
+<body>
+<style>
+.qw{padding:1.5rem 0;font-family:var(--font-sans);max-width:680px}
+.pb-bg{height:6px;background:var(--color-border-tertiary);border-radius:99px;margin-bottom:1.5rem}
+.pb-fill{height:6px;background:#185FA5;border-radius:99px;transition:width 0.4s}
+.meta{display:flex;justify-content:space-between;font-size:13px;color:var(--color-text-secondary);margin-bottom:.75rem}
+.qcard{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.5rem;margin-bottom:1rem}
+.badge{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:var(--border-radius-md);margin-bottom:.75rem;background:#E6F1FB;color:#185FA5}
+.qt{font-size:15px;color:var(--color-text-primary);line-height:1.7;margin-bottom:1.25rem;white-space:pre-wrap}
+.qctx{font-size:14px;color:var(--color-text-secondary);background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem 1rem;margin-bottom:1.25rem;line-height:1.7}
+.opts{display:flex;flex-direction:column;gap:8px}
+.ob{text-align:left;background:var(--color-background-primary);border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:.75rem 1rem;font-size:14px;color:var(--color-text-primary);cursor:pointer;transition:background .15s;line-height:1.5}
+.ob:hover:not(:disabled){background:var(--color-background-secondary)}
+.ob.correct{background:#EAF3DE;border-color:#639922;color:#27500A}
+.ob.wrong{background:#FCEBEB;border-color:#A32D2D;color:#501313}
+.ob.reveal{background:#EAF3DE;border-color:#639922;color:#27500A}
+.fb{margin-top:1rem;padding:1rem;border-radius:var(--border-radius-md);font-size:13px;line-height:1.7;display:none;white-space:pre-wrap}
+.fb.correct{background:#EAF3DE;color:#27500A;border:.5px solid #639922}
+.fb.wrong{background:#FCEBEB;color:#501313;border:.5px solid #A32D2D}
+.nb{background:var(--color-background-primary);border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:.6rem 1.25rem;font-size:14px;color:var(--color-text-primary);cursor:pointer;display:none;margin-top:.5rem}
+.nb:hover{background:var(--color-background-secondary)}
+.sc{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:2rem;text-align:center}
+.sb{font-size:48px;font-weight:500;color:var(--color-text-primary);margin:1rem 0}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:1.5rem 0}
+.si{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:1rem}
+.sn{font-size:22px;font-weight:500}
+.sd{font-size:12px;color:var(--color-text-secondary);margin-top:4px}
+.rb{background:var(--color-background-primary);border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:.75rem 2rem;font-size:15px;cursor:pointer;color:var(--color-text-primary);margin-top:1rem}
+.rb:hover{background:var(--color-background-secondary)}
+</style>
+<div class="qw">
+<div class="pb-bg"><div class="pb-fill" id="prog" style="width:0%"></div></div>
+<div class="meta"><span id="qc">문제 1 / 30</span><span id="qs">점수: 0</span></div>
+<div id="qa"></div>
+</div>
+<script>
+const qs=[
+{u:'01과',q:'\'安寧\'의 뜻으로 알맞은 것은?',o:['남에게 마음이 편치 못하고 부끄러움','말할 필요도 없음','편안하고 강녕함, 또는 만나거나 헤어질 때 정답게 하는 인사말','과거의 잘못을 뉘우침','바로 이때'],a:2,e:'安寧(안녕): 편안하고 강녕함. 만나거나 헤어질 때 정답게 하는 인사말로도 쓰임.'},
+{u:'01과',q:'\'後悔\'의 \'悔\'에 들어 있는 부수는?',o:['亻(인변)','忄(심방변)','氵(삼수변)','口(입구)','木(나무목)'],a:1,e:'悔의 부수는 忄(심방변). 忄은 心(마음 심)의 변형으로, 마음·생각과 관련된 뜻을 나타냄.'},
+{u:'01과',q:'\'勿論\'의 뜻과 유의어로 바르게 연결된 것은?',o:['뜻: 물론 당연히 / 유의어: 자연(自然)히','뜻: 말할 필요도 없음 / 유의어: 당연(當然)히, 마땅히','뜻: 말할 필요도 없음 / 유의어: 반드시, 꼭','뜻: 논하지 않음 / 유의어: 필연(必然)히','뜻: 따질 필요 없음 / 유의어: 당연(當然)히'],a:1,e:'勿論(물론): 말할[論] 필요도 없음[勿]. 유의어: 당연(當然)히, 마땅히.'},
+{u:'01과',q:'\'只今\'에서 \'只\'의 뜻으로 알맞은 것은?',o:['없을','다만, 이것','바로','곧','오직'],a:1,e:'只(지): 다만, 이것. 只今(지금): 말하는 바로 이때.'},
+{u:'01과',q:'\'無盡藏\'의 뜻으로 알맞은 것은?',o:['아주 짧은 순간','바로 지금 이 순간','끝이 없을 정도로 많이 간직하고 있음','서양에서 들어온 버선','온도 단위의 하나'],a:2,e:'無盡藏(무진장): 없을 무+다할 진+감출 장. 끝이 없을 정도로 많이 간직하고 있음.'},
+{u:'01과',q:'\'瞬息間\'의 유의어로 교과서에서 제시된 것은?',o:['無盡藏','순간(瞬間)·일순간(一瞬間)','只今','後悔','勿論'],a:1,e:'瞬息間(순식간)의 유의어: 순간(瞬間), 일순간(一瞬間).'},
+{u:'01과',q:'혼종어(混種語)의 개념으로 알맞은 것은?',o:['한자어와 고유어가 결합한 어휘만','서로 다른 언어에서 유래한 요소가 합쳐져서 만들어진 어휘','동음이의어와 같은 개념','순수 한자어로만 이루어진 어휘','외래어와 외래어가 결합한 어휘'],a:1,e:'혼종어(混種語): 서로 다른 언어에서 유래한 요소가 합쳐져서 만들어진 어휘. 예) 靑바지, 螢光pen, 알藥'},
+{u:'01과',q:'\'청바지\'를 혼종어로 분석할 때 한자 부분의 음훈은?',o:['淡(맑을 담)','靑(푸를 청)','晴(맑을 청)','請(청할 청)','聽(들을 청)'],a:1,e:'청바지 = 靑(푸를 청) + 바지(고유어). 靑은 파랑·초록 등 푸른 색을 뜻함.'},
+{u:'01과',q:'교과서에서 제시한 혼종어 \'알약\'의 분석으로 알맞은 것은?',o:['卵(알)+藥(약)','알(고유어)+藥(약)','粒(알)+藥(약)','丸(알)+藥(약)','實(알)+藥(약)'],a:1,e:'알약 = 알(고유어) + 藥(한자어). 알은 순우리말, 藥은 한자어.'},
+{u:'01과',q:'\'摄氏\'에 대한 설명으로 옳은 것은?',o:['서양에서 들어온 버선을 뜻한다','온도 단위로 스웨덴의 셀시우스(Celsius)의 중국 음역에서 유래했다','눈을 한 번 깜짝이는 짧은 순간을 뜻한다','끝없이 간직하고 있음을 뜻한다','바로 지금을 뜻한다'],a:1,e:'摄氏(섭씨): 온도 단위. 스웨덴 셀시우스(Celsius, A)의 중국 음역 \'섭이사(攝爾思)\'에서 유래. 참고: 화씨(華氏).'},
+{u:'02과',q:'동음이의어(同音異義語)에 대한 설명으로 옳은 것은?',o:['뜻은 같지만 소리가 다른 어휘','소리는 같으나 뜻이 다른 어휘','모양이 같고 뜻도 같은 어휘','한자로만 이루어진 어휘','서로 다른 언어가 합쳐진 어휘'],a:1,e:'동음이의어(同音異義語): 소리[音]는 같으나[同] 뜻[義]이 다른[異] 어휘[語].'},
+{u:'02과',q:'다음 중 \'시의 행정을 맡고 있는 우두머리\'를 뜻하는 것은?',o:['市場','市長','身長','伸張','新裝'],a:1,e:'市長(시장): 시(市)의 행정을 맡고 있는 우두머리[長].'},
+{u:'02과',q:'\'身長\'에서 \'長\'의 뜻으로 알맞은 것은?',o:['우두머리','자라다','길다, 자라다','넓다','높다'],a:2,e:'身長(신장)에서 長은 \'길다, 자라다\'의 뜻. 회장(會長)에서는 \'우두머리\', 성장(成長)에서는 \'자라다\'의 뜻.'},
+{u:'02과',q:'\'錄音\'과 \'綠陰\'의 관계로 알맞은 것은?',o:['유의어 관계','반의어 관계','동음이의어 관계','상하 관계','혼종어 관계'],a:2,e:'錄音(녹음)과 綠陰(녹음): 소리는 \'녹음\'으로 같으나 뜻이 다른 동음이의어.'},
+{u:'02과',q:'\'綠陰\'의 뜻으로 알맞은 것은?',o:['실제 소리를 기계에 기록함','사과나무의 열매','잘못에 대해 용서를 빎','푸르게 우거진 나무 수풀 또는 그 그늘','세력이나 권리를 늘림'],a:3,e:'綠陰(녹음): 푸른[綠] 그늘[陰]. 푸르게 우거진 나무 수풀, 또는 그 나무의 그늘.'},
+{u:'02과',q:'\'點心(점심)\'의 유래로 옳은 것은?',o:['순우리말에서 비롯되었다','불가(佛家)에서 수도 중 마음[心]에 점[點]을 찍듯 조금 먹는 간식에서 유래','중국 황실에서 유래한 귀족 음식이었다','조선 시대에 새롭게 만들어진 말이다','고려 시대 불교 문화에서 유래했다'],a:1,e:'點心(점심): 불가(佛家)에서 승려들이 시장기가 들 때 마음[心]에 점[點]을 찍듯 조금 먹는 간식에서 유래. 16세기 초 문헌 「어씩향약언해」에서 \'덤심\'으로 확인됨.'},
+{u:'02과',q:'\'市場\'의 \'場\'에 대한 한자 이미지 설명으로 옳은 것은?',o:['土(흙 토)와 昜(볕 양)을 합한 한자로 넓은 마당을 뜻했다','人(사람 인)과 易(바꿀 역)을 합한 한자이다','日(날 일)과 方(방향 방)을 합한 한자이다','人(사람 인)과 口(입 구)를 합한 한자이다','木(나무 목)과 易(바꿀 역)을 합한 한자이다'],a:0,e:'場: 土(흙 토)와 昜(볕 양)을 합한 한자. 햇살이 비치 신에게 제사 지내기 좋은 넓은 마당을 뜻했음.'},
+{u:'02과',q:'\'伸張\'과 관련된 한자성어 \'허장성세(虛張聲勢)\'의 뜻은?',o:['실속 있으면서 겸손하게 행동함','실속 없으면서 큰소리치거나 허세를 부림','큰 소리로 적을 위협하는 전술','허공에 대고 목소리를 높임','헛된 꿈을 키워 나감'],a:1,e:'虛張聲勢(허장성세): 실속[虛] 없으면서 목소리[聲]와 기세[勢]를 늘리며[張] 허세를 부림.'},
+{u:'02과',q:'한자 문화권 비교에서 \'명절\'에 해당하는 한국·중국·일본 어휘가 바르게 나열된 것은?',o:['名節 – 節日 – 祝日','親舊 – 朋友 – 友','名節 – 祝日 – 節日','節日 – 名節 – 祝日','名節 – 節日 – 記念日'],a:0,e:'명절: 한국 名節(명절), 중국 節日(절일), 일본 祝日(축일).'},
+{u:'02과',q:'한자 문화권 비교에서 \'가깝게 오래 사귄 사람\'에 해당하는 한국·중국·일본 어휘가 바르게 나열된 것은?',o:['親舊 – 朋友 – 友','朋友 – 親舊 – 友','親舊 – 友 – 朋友','節日 – 名節 – 祝日','朋友 – 友 – 親舊'],a:0,e:'친구: 한국 親舊(친구), 중국 朋友(붕우), 일본 友(우).'},
+{u:'03과',q:'\'最愛\'의 뜻으로 알맞은 것은?',o:['마시는 것과 먹는 것','가장 사랑함','지나치게 많이 먹음','에너지 함유량이 적은 것','산과 바다의 온갖 진귀한 재료로 차린 음식'],a:1,e:'最愛(최애): 가장[最] 사랑함[愛].'},
+{u:'03과',q:'\'飮食\'에서 \'飮\'의 뜻으로 알맞은 것은?',o:['먹을','마실','쌀','밥','음식'],a:1,e:'飮食(음식): 飮(마실 음) + 食(먹을 식). 마시는 것과 먹는 것.'},
+{u:'03과',q:'\'山海珍味\'의 뜻으로 알맞은 것은?',o:['산속 약초를 달인 음식','닭의 내장을 빼고 인삼 등을 넣어 끓인 보양 음식','산과 바다에서 나는 온갖 진귀한 재료로 차린, 맛이 좋은 음식','다섯 가지 맛이 나는 열매','에너지 함유량이 적은 음식'],a:2,e:'山海珍味(산해진미): 산[山]과 바다[海]에서 나는 온갖 진귀한[珍] 재료로 차린, 맛[味]이 좋은 음식.'},
+{u:'03과',q:'\'鷄卵有骨(계란유골)\'의 의미로 알맞은 것은?',o:['계란에도 뼈가 있다는 뜻 그대로','운수가 나쁜 사람은 모처럼 좋은 기회를 만나도 역시 일이 잘 안됨','좋은 음식을 먹으면 건강해진다','닭고기와 계란은 함께 먹으면 안 된다','가난해도 귀한 음식을 먹을 권리가 있다'],a:1,e:'鷄卵有骨(계란유골): 운수가 나쁜 사람은 모처럼 좋은 기회를 만나도 역시 일이 잘 안됨을 이르는 말.'},
+{u:'03과',q:'\'過食\'의 \'過\'와 같은 뜻으로 쓰인 것은?',o:['過去(과거)','過失(과실)','通過(통과)','過食(과식)','위의 모두'],a:4,e:'過의 뜻: 지나다, 지나치다, 잘못. 過去(지나다), 通過(지나다), 過失(잘못) 모두 \'過\'를 포함함.'},
+{u:'03과',q:'\'五味子\'에 대한 설명으로 옳은 것은?',o:['다섯 가지 재료를 넣어 만든 음식','다섯 가지 맛이 나는 열매로, 주로 약재나 술·차를 만드는 데 씀','다섯 가지 색깔을 가진 과일','다섯 번 삶아야 먹을 수 있는 나물','오미(五味)는 단·짠·쓴·매운·신맛만을 뜻한다'],a:1,e:'五味子(오미자): 다섯[五] 가지 맛[味]이 나는 열매[子]. 주로 약재로 쓰거나 술이나 차를 만드는 데 씀.'},
+{u:'03과',q:'동음이의어(同音異義語) 예로 교과서 03과에서 제시된 것은?',o:['定食(정식)/正式(정식)/韓食(한식)/寒食(한식)/洋食(양식)/樣式(양식)','最愛(최애)/飮食(음식)','山海珍味(산해진미)/低칼로리','참鷄湯(삼계탕)/橘(귤)','過食(과식)/適當量(적당량)'],a:0,e:'03과 생생한 언어: 정식/定食·正式, 한식/韓食·寒食, 양식/洋食·樣式 등 동음이의어 예시 제시.'},
+{u:'대단원',q:'I단원 대단원 마무리에서 \'주요 한자\'로 제시된 \'長\'의 뜻으로 교과서에 나오지 않는 것은?',o:['길다','자라다','우두머리','넓다','길다와 우두머리 모두'],a:3,e:'교과서 제시 長의 뜻: 길다, 자라다, 우두머리. \'넓다\'는 교과서에 없는 뜻.'},
+{u:'대단원',q:'I단원 대단원 마무리에서 \'주요 한자\'로 제시된 \'過\'의 뜻이 아닌 것은?',o:['지나다','지나치다','잘못','넘다','이 중 없는 것'],a:3,e:'교과서 제시 過의 뜻: 지나다, 지나치다, 잘못. \'넘다\'는 교과서에 제시된 뜻이 아님.'},
+{u:'대단원',q:'\'재미\'의 유래가 된 한자 어휘로 교과서에서 제시된 것은?',o:['趣味(취미)','滋味(자미)','風味(풍미)','美味(미미)','旨味(지미)'],a:1,e:'재미는 滋味(자미: 자맛 좋고 맛도 좋음, 또는 그런 음식)에서 유래. 현재는 \'세상을 살아가는 다양한 맛\'으로 의미 확장.'},
+{u:'대단원',q:'I단원에서 배운 혼종어 중 \'靑+바지\' 형태를 참고할 때, \'형광펜\'의 혼종어 분석으로 알맞은 것은?',o:['螢光(형광·한자어)+pen(영어)','螢(형·한자)+光pen(영어)','형(고유어)+광펜(혼합)','螢光pen 전체가 한자어','형광(고유어)+펜(외래어)'],a:0,e:'형광펜 = 螢光(한자어) + pen(영어). 서로 다른 언어 요소가 합쳐진 혼종어.'}
+];
+let cur=0,sc=0,cor=0,wr=0;
+function render(){
+  if(cur>=qs.length){done();return;}
+  const q=qs[cur];
+  document.getElementById('prog').style.width=Math.round(cur/qs.length*100)+'%';
+  document.getElementById('qc').textContent='문제 '+(cur+1)+' / '+qs.length;
+  document.getElementById('qs').textContent='점수: '+sc;
+  const opts=q.o.map((o,i)=>`<button class="ob" onclick="chk(${i})" id="o${i}"><span style="color:var(--color-text-secondary);margin-right:8px;">${['①','②','③','④','⑤'][i]}</span>${o}</button>`).join('');
+  document.getElementById('qa').innerHTML=`<div class="qcard"><span class="badge">객관식 · ${q.u}</span><div class="qt">${q.q}</div><div class="opts">${opts}</div><div class="fb" id="fb"></div></div><button class="nb" id="nb" onclick="nxt()">다음 문제 →</button>`;
+}
+function chk(i){
+  const q=qs[cur];
+  document.querySelectorAll('.ob').forEach(b=>b.disabled=true);
+  const fb=document.getElementById('fb');
+  if(i===q.a){document.getElementById('o'+i).classList.add('correct');fb.className='fb correct';fb.textContent='정답! '+q.e;sc++;cor++;}
+  else{document.getElementById('o'+i).classList.add('wrong');document.getElementById('o'+q.a).classList.add('reveal');fb.className='fb wrong';fb.textContent='오답. 정답은 '+['①','②','③','④','⑤'][q.a]+'번.\n'+q.e;wr++;}
+  fb.style.display='block';document.getElementById('nb').style.display='inline-block';
+}
+function nxt(){cur++;render();}
+function done(){
+  document.getElementById('prog').style.width='100%';
+  document.getElementById('qc').textContent='완료!';
+  document.getElementById('qs').textContent='최종: '+sc+'/'+qs.length;
+  const pct=Math.round(sc/qs.length*100);
+  const msg=pct>=90?'완벽해요! 시험 자신감 UP!':pct>=70?'잘 했어요! 조금만 더 복습!':'틀린 문제 위주로 다시 복습해요!';
+  document.getElementById('qa').innerHTML=`<div class="sc"><div style="font-size:14px;color:var(--color-text-secondary);">I단원 객관식 30문제</div><div class="sb">${sc} / ${qs.length}</div><div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:1rem;">${msg}</div><div class="sg"><div class="si"><div class="sn" style="color:#185FA5;">${cor}</div><div class="sd">정답</div></div><div class="si"><div class="sn" style="color:#A32D2D;">${wr}</div><div class="sd">오답</div></div></div><button class="rb" onclick="restart()">다시 풀기</button></div>`;
+}
+function restart(){cur=0;sc=0;cor=0;wr=0;render();}
+render();
+</script>
+</body>
+</html>
