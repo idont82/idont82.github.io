@@ -1,0 +1,225 @@
+
+<style>
+  .quiz-wrap { padding: 1.5rem 0; font-family: var(--font-sans); max-width: 680px; }
+  .progress-bar-bg { height: 6px; background: var(--color-border-tertiary); border-radius: 99px; margin-bottom: 1.5rem; }
+  .progress-bar-fill { height: 6px; background: var(--color-text-info); border-radius: 99px; transition: width 0.4s; }
+  .meta { display: flex; justify-content: space-between; font-size: 13px; color: var(--color-text-secondary); margin-bottom: 0.75rem; }
+  .q-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.5rem; margin-bottom: 1rem; }
+  .q-type-badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: var(--border-radius-md); margin-bottom: 0.75rem; }
+  .badge-obj { background: #E6F1FB; color: #185FA5; }
+  .badge-short { background: #E1F5EE; color: #0F6E56; }
+  .badge-essay { background: #FAEEDA; color: #854F0B; }
+  .q-text { font-size: 16px; color: var(--color-text-primary); line-height: 1.7; margin-bottom: 1.25rem; white-space: pre-wrap; }
+  .q-context { font-size: 14px; color: var(--color-text-secondary); background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.75rem 1rem; margin-bottom: 1.25rem; line-height: 1.7; white-space: pre-wrap; }
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .opt-btn { text-align: left; background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 0.75rem 1rem; font-size: 15px; color: var(--color-text-primary); cursor: pointer; transition: background 0.15s; line-height: 1.5; }
+  .opt-btn:hover:not(:disabled) { background: var(--color-background-secondary); }
+  .opt-btn.correct { background: #EAF3DE; border-color: #639922; color: #27500A; }
+  .opt-btn.wrong { background: #FCEBEB; border-color: #A32D2D; color: #501313; }
+  .opt-btn.reveal { background: #EAF3DE; border-color: #639922; color: #27500A; }
+  .short-input { width: 100%; box-sizing: border-box; padding: 0.75rem 1rem; font-size: 15px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-primary); margin-bottom: 0.75rem; }
+  .essay-input { width: 100%; box-sizing: border-box; padding: 0.75rem 1rem; font-size: 15px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-primary); margin-bottom: 0.75rem; min-height: 120px; resize: vertical; }
+  .action-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 0.5rem; }
+  .btn-primary { background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 0.6rem 1.25rem; font-size: 14px; color: var(--color-text-primary); cursor: pointer; }
+  .btn-primary:hover { background: var(--color-background-secondary); }
+  .btn-next { background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 0.6rem 1.25rem; font-size: 14px; color: var(--color-text-primary); cursor: pointer; display: none; }
+  .btn-next:hover { background: var(--color-background-secondary); }
+  .feedback { margin-top: 1rem; padding: 1rem; border-radius: var(--border-radius-md); font-size: 14px; line-height: 1.7; display: none; white-space: pre-wrap; }
+  .feedback.correct { background: #EAF3DE; color: #27500A; border: 0.5px solid #639922; }
+  .feedback.wrong { background: #FCEBEB; color: #501313; border: 0.5px solid #A32D2D; }
+  .feedback.info { background: var(--color-background-secondary); color: var(--color-text-primary); border: 0.5px solid var(--color-border-secondary); }
+  .score-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 2rem; text-align: center; }
+  .score-big { font-size: 48px; font-weight: 500; color: var(--color-text-primary); margin: 1rem 0; }
+  .score-label { font-size: 14px; color: var(--color-text-secondary); }
+  .score-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 1.5rem 0; }
+  .score-item { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem; }
+  .score-num { font-size: 22px; font-weight: 500; }
+  .score-desc { font-size: 12px; color: var(--color-text-secondary); margin-top: 4px; }
+  .restart-btn { background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 0.75rem 2rem; font-size: 15px; cursor: pointer; color: var(--color-text-primary); }
+  .restart-btn:hover { background: var(--color-background-secondary); }
+</style>
+
+<div class="quiz-wrap">
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="prog" style="width:0%"></div></div>
+  <div class="meta"><span id="q-counter">문제 1 / 25</span><span id="q-score">점수: 0</span></div>
+  <div id="quiz-area"></div>
+</div>
+
+<script>
+const questions = [
+  {type:'obj', unit:'I단원 01과', q:'\'安寧\'의 뜻으로 알맞은 것은?', opts:['남에게 마음이 편치 못하고 부끄러움','말할 필요도 없음','편안하고 강녕함, 또는 만나거나 헤어질 때 정답게 하는 인사말','과거의 잘못을 뉘우침','바로 이때'], ans:2, exp:'安寧(안녕): 편안하고 강녕함. 만나거나 헤어질 때 정답게 하는 인사말로도 쓰임.'},
+  {type:'obj', unit:'I단원 01과', q:'\'勿論\'의 뜻과 유의어로 바르게 연결된 것은?', opts:['뜻: 물론 당연히 / 유의어: 자연(自然)히','뜻: 말할 필요도 없음 / 유의어: 당연(當然)히, 마땅히','뜻: 말할 필요도 없음 / 유의어: 반드시, 꼭','뜻: 논하지 않음 / 유의어: 필연(必然)히','뜻: 따질 필요 없음 / 유의어: 당연(當然)히'], ans:1, exp:'勿論(물론): 말할[論] 필요도 없음[勿]. 유의어는 당연(當然)히, 마땅히.'},
+  {type:'obj', unit:'I단원 01과', q:'\'無盡藏\'의 뜻으로 알맞은 것은?', opts:['아주 짧은 순간','바로 지금 이 순간','끝이 없을 정도로 많이 간직하고 있음','서양에서 들어온 버선','온도 단위의 하나'], ans:2, exp:'無盡藏(무진장): 없을 무 + 다할 진 + 감출·간직할 장. 끝[盡]이 없음[無]을 정도로 많이 간직하고[藏] 있음.'},
+  {type:'obj', unit:'I단원 01과', q:'혼종어(混種語)의 개념으로 알맞은 것은?', opts:['한자어와 고유어가 결합한 어휘만을 가리킨다','서로 다른 언어에서 유래한 요소가 합쳐져서 만들어진 어휘이다','동음이의어와 같은 개념이다','순수 한자어로만 이루어진 어휘이다','외래어와 외래어가 결합한 어휘이다'], ans:1, exp:'혼종어(混種語): 서로 다른 언어에서 유래한 요소가 합쳐져서 만들어진 어휘. 예) 靑바지, 螢光pen, 알藥'},
+  {type:'obj', unit:'I단원 01과', q:'\'청바지\'를 혼종어로 분석할 때 한자 부분의 음훈으로 알맞은 것은?', opts:['淸(맑을 청)','靑(푸를 청)','晴(맑을 청)','請(청할 청)','聽(들을 청)'], ans:1, exp:'청바지 = 靑(푸를 청) + 바지(고유어). 靑은 파랑·초록 등 푸른색을 뜻하는 한자.'},
+  {type:'obj', unit:'I단원 02과', q:'동음이의어(同音異義語)에 대한 설명으로 옳은 것은?', opts:['뜻은 같지만 소리가 다른 어휘','소리는 같으나 뜻이 다른 어휘','모양이 같고 뜻도 같은 어휘','한자로만 이루어진 어휘','서로 다른 언어가 합쳐진 어휘'], ans:1, exp:'동음이의어(同音異義語): 소리[音]는 같으나[同] 뜻[義]이 다른[異] 어휘[語]. 예) 시장 → 市場·市長·身長·伸張·新裝'},
+  {type:'obj', unit:'I단원 02과', q:'다음 중 \'시의 행정을 맡고 있는 우두머리\'를 뜻하는 것은?', opts:['市場','市長','身長','伸張','新裝'], ans:1, exp:'市長(시장): 시(市)의 행정을 맡고 있는 우두머리[長].'},
+  {type:'obj', unit:'I단원 02과', q:'\'點心(점심)\'의 유래로 옳은 것은?', opts:['순우리말에서 비롯되었다','불가(佛家)에서 수도 중 시장기가 들 때 마음[心]에 점[點]을 찍듯 조금 먹는 간식에서 유래','중국 황실에서 유래한 귀족 음식이었다','조선 시대에 새롭게 만들어진 말이다','고려 시대 불교 문화에서 유래했다'], ans:1, exp:'點心(점심): 불가(佛家)에서 승려들이 시장기가 들 때 마음[心]에 점[點]을 찍듯 조금 먹는 간식에서 유래. 16세기 문헌에서 \'덤심\'으로 확인됨.'},
+  {type:'obj', unit:'I단원 02과', q:'한자 문화권 어휘 비교에서 \'명절\'에 해당하는 한국·중국·일본 어휘가 바르게 나열된 것은?', opts:['名節 – 節日 – 祝日','親舊 – 朋友 – 友','名節 – 祝日 – 節日','節日 – 名節 – 祝日','名節 – 節日 – 記念日'], ans:0, exp:'명절: 한국 名節(명절), 중국 節日(절일), 일본 祝日(축일).'},
+  {type:'obj', unit:'I단원 03과', q:'\'山海珍味\'의 뜻으로 알맞은 것은?', opts:['산속에서 나는 약초를 달인 음식','닭의 내장을 빼고 인삼 등을 넣어 끓인 보양 음식','산과 바다에서 나는 온갖 진귀한 재료로 차린, 맛이 좋은 음식','다섯 가지 맛이 나는 열매','에너지 함유량이 적은 음식'], ans:2, exp:'山海珍味(산해진미): 산[山]과 바다[海]에서 나는 온갖 진귀한[珍] 재료로 차린, 맛[味]이 좋은 음식.'},
+  {type:'obj', unit:'I단원 03과', q:'\'鷄卵有骨(계란유골)\'의 의미로 알맞은 것은?', opts:['계란에도 뼈가 있다는 뜻 그대로의 말','운수가 나쁜 사람은 모처럼 좋은 기회를 만나도 역시 일이 잘 안됨','좋은 음식을 먹으면 건강해진다는 말','닭고기와 계란은 함께 먹으면 안 된다는 말','가난해도 귀한 음식을 먹을 권리가 있다는 말'], ans:1, exp:'鷄卵有骨(계란유골): 계란에도 뼈가 있다는 뜻으로, 운수가 나쁜 사람은 모처럼 좋은 기회를 만나도 역시 일이 잘 안됨을 이르는 말.'},
+  {type:'obj', unit:'II단원 04과', q:'\'百年偕老\'의 뜻으로 알맞은 것은?', opts:['백 년을 함께 공부함','백 년 동안 변함없이 사랑함','백 년을 함께하며 늙음, 부부가 되어 한평생 사이좋게 지내고 즐겁게 함께 늙음','백 년 동안 서로 돕는 친구 관계','백 번 만나 오래된 사이'], ans:2, exp:'百年偕老(백년해로): 백[百] 년[年]을 함께[偕]하며 늙음[老]. 부부가 되어 한평생을 사이좋게 지내고 즐겁게 함께 늙음.'},
+  {type:'obj', unit:'II단원 04과', q:'\'金枝玉葉(금지옥엽)\'의 의미로 알맞은 것은?', opts:['금과 옥으로 만든 나뭇잎','귀한 자손을 이르거나, 매우 사랑하고 소중히 여기는 모양','황금처럼 귀중한 재물','부모에 대한 감사를 나타내는 말','가족 간의 화목과 사랑'], ans:1, exp:'金枝玉葉(금지옥엽): 금[金]으로 된 가지[枝]와 옥[玉]으로 된 잎[葉]. 귀한 자손을 이르거나 매우 사랑하고 소중히 여기는 모양.'},
+  {type:'obj', unit:'II단원 05과', q:'\'不戰勝\'에서 \'不\'을 \'부\'로 읽는 이유는?', opts:['\'ㄱ\' 앞에서 \'부\'로 읽기 때문','\'ㄷ\'이나 \'ㅈ\' 앞에서 \'부\'로 읽기도 하기 때문','모음 앞에서만 \'부\'로 읽기 때문','받침 뒤에서 \'부\'로 읽기 때문','항상 \'부\'로 읽기 때문'], ans:1, exp:'\'不\'은 \'ㄷ\'이나 \'ㅈ\' 앞에서 \'부\'로 읽기도 함. 不戰(부전)에서 戰이 \'ㅈ\'으로 시작하므로 \'부전승\'.'},
+  {type:'obj', unit:'II단원 05과', q:'\'教學相長(교학상장)\'의 뜻으로 알맞은 것은?', opts:['선생님이 학생보다 항상 더 많이 배운다','가르치고 배우면서 서로 성장함','학교에서 가르치는 일이 가장 중요하다','배움에는 끝이 없다','스승의 은혜는 하늘보다 높다'], ans:1, exp:'教學相長(교학상장): 가르치고[教] 배우면서[學] 서로[相] 성장함[長]. \'예기(禮記)\'에서 유래.'},
+  {type:'obj', unit:'II단원 06과', q:'완곡어(婉曲語)에 대한 설명으로 옳은 것은?', opts:['상대를 높이는 경어(敬語)와 같은 개념이다','단어의 성격이나 상황에 따라 그 단어를 돌려서 부드럽게 표현한 어휘이다','서로 다른 언어가 합쳐진 혼종어와 같은 개념이다','소리는 같고 뜻이 다른 동음이의어와 같은 개념이다','뜻을 강하게 표현하기 위한 어휘이다'], ans:1, exp:'완곡어(婉曲語): 단어의 성격이나 상황에 따라, 그 단어를 돌려서 부드럽게 표현한 어휘. 예) 오줌→小便, 별세→他界·別世'},
+  {type:'obj', unit:'II단원 06과', q:'\'正鵠(정곡)\'의 의미로 알맞은 것은?', opts:['과녁에서 가장 쏘기 어려운 부분','활쏘기에서 올바른 자세','가장 중요한 요점 또는 핵심','균형 잡힌 마음을 뜻하는 말','화살이 과녁을 뚫고 나가는 것'], ans:2, exp:'正鵠(정곡): 과녁의 한가운데가 되는 점에서 유래하여, 현재는 \'가장 중요한 요점 또는 핵심\'을 뜻함. 중용(中庸)에서 유래.'},
+  {type:'short', unit:'I단원 01과', q:'다음 설명에 해당하는 한자 어휘를 한자로 쓰시오.\n\n눈을 한 번 깜짝이거나 숨을 한 번 쉴 만한 아주 짧은 동안을 뜻하며, 유의어로는 순간(瞬間), 일순간(一瞬間)이 있다.', ans:'瞬息間', alt:['순식간'], exp:'瞬息間(순식간): 눈 깜짝일 순 + 숨 쉴 식 + 사이 간. 아주 짧은 순간을 뜻함.'},
+  {type:'short', unit:'I단원 02과', q:'다음 밑줄 친 어휘의 한자 표기를 쓰시오.\n\n어머니께서 음식을 너무 많이 준비하셔서 온 가족이 과식을 하고 말았다.', ans:'過食', alt:['과식'], exp:'過食(과식): 지나칠 과 + 먹을 식. 지나치게[過] 많이 먹음[食].'},
+  {type:'short', unit:'I단원 03과', q:'\'재미\'라는 말의 유래가 된 한자 어휘를 한자로 쓰시오.\n\n이 어휘는 \'자맛 좋고 맛도 좋음, 또는 그런 음식\'을 뜻한다.', ans:'滋味', alt:['자미'], exp:'滋味(자미): 불을 자 + 맛 미. \'자맛 좋고 맛도 좋음\'을 뜻하며, \'재미\'는 여기서 유래해 의미가 확장됨.'},
+  {type:'short', unit:'II단원 04과', q:'다음 설명에 해당하는 성어를 한자로 쓰시오.\n\n금으로 된 가지와 옥으로 된 잎이라는 뜻으로, 귀한 자손을 이르거나 매우 사랑하고 소중히 여기는 모양.', ans:'金枝玉葉', alt:['금지옥엽'], exp:'金枝玉葉(금지옥엽): 쇠·금 금 + 가지 지 + 구슬·옥 옥 + 잎 엽.'},
+  {type:'short', unit:'II단원 05과', q:'다음 밑줄 친 어휘의 한자 표기를 쓰시오.\n\n우리 반이 줄다리기에서 부전승으로 결승에 진출했다.', ans:'不戰勝', alt:['부전승'], exp:'不戰勝(부전승): 아닐 부 + 싸울 전 + 이길 승. 싸우지[戰] 않고[不] 이기는[勝] 일.'},
+  {type:'essay', unit:'I단원 02과', q:'다음 다섯 가지 \'신장\'의 한자 표기를 보고, 각각의 뜻을 서술하시오.\n\n① 新裝  ② 身長  ③ 市場  ④ 市長  ⑤ 伸張', ans:'① 新裝: 새롭게 단장하여 영업을 시작함\n② 身長: 발바닥에서 머리끝에 이르는 몸의 길이\n③ 市場: 여러 가지 상품을 사고파는 일정한 장소\n④ 市長: 시(市)의 행정을 맡고 있는 우두머리\n⑤ 伸張: 세력이나 권리 등을 펴서 늘리게 함'},
+  {type:'essay', unit:'II단원 04과', q:'\'教學相長(교학상장)\'의 뜻과 유래를 서술하고, 이 성어가 학교생활에서 어떻게 적용될 수 있는지 구체적인 예를 들어 서술하시오.', ans:'뜻: 가르치고[教] 배우면서[學] 서로[相] 성장함[長].\n유래: \'예기(禮記)\'에서 유래. 가르치는 사람과 배우는 사람 모두에게 좋은 영향을 미침.\n적용 예) 모둠 활동에서 내가 아는 내용을 친구에게 설명하면 더 깊이 이해하게 되고, 친구의 질문을 통해 미처 몰랐던 부분을 깨닫게 됨.'},
+  {type:'essay', unit:'II단원 공통', q:'혼종어(混種語), 경어(敬語), 완곡어(婉曲語)의 개념을 각각 한 문장으로 서술하고, 교과서에서 제시한 예시를 하나씩 쓰시오.', ans:'혼종어: 서로 다른 언어에서 유래한 요소가 합쳐져서 만들어진 어휘. 예) 螢光pen\n경어: 상대방을 공경하는 뜻을 담아 쓰는 어휘. 예) 宅(댁), 生辰(생신), 年歲(연세)\n완곡어: 단어의 성격이나 상황에 따라 돌려서 부드럽게 표현한 어휘. 예) 오줌→小便, 별세→他界'}
+];
+
+let current = 0;
+let score = 0;
+let answered = 0;
+let stats = {correct:0, wrong:0, essay:0};
+
+function render() {
+  if (current >= questions.length) { showResult(); return; }
+  const q = questions[current];
+  const pct = Math.round((current / questions.length) * 100);
+  document.getElementById('prog').style.width = pct + '%';
+  document.getElementById('q-counter').textContent = '문제 ' + (current+1) + ' / ' + questions.length;
+  document.getElementById('q-score').textContent = '점수: ' + score;
+
+  const badgeClass = q.type === 'obj' ? 'badge-obj' : q.type === 'short' ? 'badge-short' : 'badge-essay';
+  const badgeText = q.type === 'obj' ? '객관식' : q.type === 'short' ? '단답형' : '서논술형';
+
+  let inner = '';
+  if (q.type === 'obj') {
+    const opts = q.opts.map((o,i) =>
+      `<button class="opt-btn" onclick="checkObj(${i})" id="opt-${i}">
+        <span style="color:var(--color-text-secondary);margin-right:8px;">` + ['①','②','③','④','⑤'][i] + `</span>${o}
+      </button>`
+    ).join('');
+    inner = `<div class="options">${opts}</div>`;
+  } else if (q.type === 'short') {
+    inner = `<input class="short-input" type="text" id="short-ans" placeholder="답을 입력하세요" onkeydown="if(event.key==='Enter')checkShort()" />
+      <div class="action-row">
+        <button class="btn-primary" onclick="checkShort()">확인</button>
+        <button class="btn-primary" onclick="showShortAns()">정답 보기</button>
+      </div>`;
+  } else {
+    inner = `<textarea class="essay-input" id="essay-ans" placeholder="답을 작성하세요..."></textarea>
+      <div class="action-row">
+        <button class="btn-primary" onclick="checkEssay()">모범 답안 확인</button>
+      </div>`;
+  }
+
+  document.getElementById('quiz-area').innerHTML = `
+    <div class="q-card">
+      <span class="q-type-badge ${badgeClass}">${badgeText} · ${q.unit}</span>
+      <div class="q-text">${q.q}</div>
+      ${inner}
+      <div class="feedback" id="feedback"></div>
+    </div>
+    <button class="btn-next" id="btn-next" onclick="nextQ()">다음 문제 →</button>
+  `;
+  if (q.type === 'short') {
+    setTimeout(() => { const el = document.getElementById('short-ans'); if(el) el.focus(); }, 50);
+  }
+}
+
+function checkObj(i) {
+  const q = questions[current];
+  const btns = document.querySelectorAll('.opt-btn');
+  btns.forEach(b => b.disabled = true);
+  const fb = document.getElementById('feedback');
+  if (i === q.ans) {
+    btns[i].classList.add('correct');
+    fb.className = 'feedback correct';
+    fb.textContent = '정답! ' + q.exp;
+    score += 1; stats.correct++;
+  } else {
+    btns[i].classList.add('wrong');
+    btns[q.ans].classList.add('reveal');
+    fb.className = 'feedback wrong';
+    fb.textContent = '오답. 정답은 ' + ['①','②','③','④','⑤'][q.ans] + '번.\n' + q.exp;
+    stats.wrong++;
+  }
+  fb.style.display = 'block';
+  document.getElementById('btn-next').style.display = 'inline-block';
+}
+
+function checkShort() {
+  const q = questions[current];
+  const val = (document.getElementById('short-ans').value || '').trim();
+  if (!val) return;
+  document.getElementById('short-ans').disabled = true;
+  const fb = document.getElementById('feedback');
+  const correct = val === q.ans || (q.alt && q.alt.some(a => a === val));
+  if (correct) {
+    fb.className = 'feedback correct';
+    fb.textContent = '정답! ' + q.exp;
+    score += 1; stats.correct++;
+  } else {
+    fb.className = 'feedback wrong';
+    fb.textContent = '오답. 정답: ' + q.ans + '\n' + q.exp;
+    stats.wrong++;
+  }
+  fb.style.display = 'block';
+  document.getElementById('btn-next').style.display = 'inline-block';
+}
+
+function showShortAns() {
+  const q = questions[current];
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback info';
+  fb.textContent = '정답: ' + q.ans + '\n' + q.exp;
+  fb.style.display = 'block';
+  document.getElementById('short-ans').disabled = true;
+  document.getElementById('btn-next').style.display = 'inline-block';
+  stats.wrong++;
+}
+
+function checkEssay() {
+  const q = questions[current];
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback info';
+  fb.textContent = '모범 답안:\n\n' + q.ans + '\n\n자신의 답과 비교해 보세요!';
+  fb.style.display = 'block';
+  document.getElementById('essay-ans').disabled = true;
+  document.getElementById('btn-next').style.display = 'inline-block';
+  stats.essay++;
+}
+
+function nextQ() {
+  current++;
+  render();
+}
+
+function showResult() {
+  document.getElementById('prog').style.width = '100%';
+  document.getElementById('q-counter').textContent = '완료!';
+  document.getElementById('q-score').textContent = '최종 점수: ' + score;
+  const obj_total = questions.filter(q=>q.type==='obj').length;
+  const short_total = questions.filter(q=>q.type==='short').length;
+  const pct = Math.round((score / (obj_total + short_total)) * 100);
+  let msg = pct >= 90 ? '완벽해요! 시험 준비 끝!' : pct >= 70 ? '잘 했어요! 조금만 더 복습하면 완벽!' : '더 열심히 복습해 봐요!';
+  document.getElementById('quiz-area').innerHTML = `
+    <div class="score-card">
+      <div class="score-label">객관식 + 단답형 점수</div>
+      <div class="score-big">${score} / ${obj_total + short_total}</div>
+      <div style="font-size:14px;color:var(--color-text-secondary);margin-bottom:1rem;">${msg}</div>
+      <div class="score-grid">
+        <div class="score-item"><div class="score-num" style="color:#185FA5;">${stats.correct}</div><div class="score-desc">정답</div></div>
+        <div class="score-item"><div class="score-num" style="color:#A32D2D;">${stats.wrong}</div><div class="score-desc">오답</div></div>
+        <div class="score-item"><div class="score-num" style="color:#854F0B;">${stats.essay}</div><div class="score-desc">서논술 확인</div></div>
+      </div>
+      <button class="restart-btn" onclick="restart()">다시 풀기</button>
+    </div>
+  `;
+}
+
+function restart() {
+  current = 0; score = 0; stats = {correct:0, wrong:0, essay:0};
+  render();
+}
+
+render();
+</script>

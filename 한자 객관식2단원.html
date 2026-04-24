@@ -1,0 +1,99 @@
+
+<style>
+.qw{padding:1.5rem 0;font-family:var(--font-sans);max-width:680px}
+.pb-bg{height:6px;background:var(--color-border-tertiary);border-radius:99px;margin-bottom:1.5rem}
+.pb-fill{height:6px;background:#0F6E56;border-radius:99px;transition:width 0.4s}
+.meta{display:flex;justify-content:space-between;font-size:13px;color:var(--color-text-secondary);margin-bottom:.75rem}
+.qcard{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.5rem;margin-bottom:1rem}
+.badge{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:var(--border-radius-md);margin-bottom:.75rem;background:#E1F5EE;color:#0F6E56}
+.qt{font-size:15px;color:var(--color-text-primary);line-height:1.7;margin-bottom:1.25rem;white-space:pre-wrap}
+.opts{display:flex;flex-direction:column;gap:8px}
+.ob{text-align:left;background:var(--color-background-primary);border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:.75rem 1rem;font-size:14px;color:var(--color-text-primary);cursor:pointer;transition:background .15s;line-height:1.5}
+.ob:hover:not(:disabled){background:var(--color-background-secondary)}
+.ob.correct{background:#EAF3DE;border-color:#639922;color:#27500A}
+.ob.wrong{background:#FCEBEB;border-color:#A32D2D;color:#501313}
+.ob.reveal{background:#EAF3DE;border-color:#639922;color:#27500A}
+.fb{margin-top:1rem;padding:1rem;border-radius:var(--border-radius-md);font-size:13px;line-height:1.7;display:none;white-space:pre-wrap}
+.fb.correct{background:#EAF3DE;color:#27500A;border:.5px solid #639922}
+.fb.wrong{background:#FCEBEB;color:#501313;border:.5px solid #A32D2D}
+.nb{background:var(--color-background-primary);border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:.6rem 1.25rem;font-size:14px;color:var(--color-text-primary);cursor:pointer;display:none;margin-top:.5rem}
+.nb:hover{background:var(--color-background-secondary)}
+.sc{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:2rem;text-align:center}
+.sb{font-size:48px;font-weight:500;color:var(--color-text-primary);margin:1rem 0}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:1.5rem 0}
+.si{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:1rem}
+.sn{font-size:22px;font-weight:500}
+.sd{font-size:12px;color:var(--color-text-secondary);margin-top:4px}
+.rb{background:var(--color-background-primary);border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:.75rem 2rem;font-size:15px;cursor:pointer;color:var(--color-text-primary);margin-top:1rem}
+.rb:hover{background:var(--color-background-secondary)}
+</style>
+<div class="qw">
+<div class="pb-bg"><div class="pb-fill" id="prog" style="width:0%"></div></div>
+<div class="meta"><span id="qc">문제 1 / 30</span><span id="qs">점수: 0</span></div>
+<div id="qa"></div>
+</div>
+<script>
+const qs=[
+{u:'04과',q:'\'配偶者\'의 한자 풀이로 알맞은 것은?',o:['나눌 배 + 벗 우 + 놈 자','짝 배 + 짝 우 + 사람 자','배울 배 + 짝 우 + 자 자','나눌 배 + 만날 우 + 놈 자','짝 배 + 짝 우 + 놈 자'],a:1,e:'配偶者(배우자): 配(짝 배) + 偶(짝 우) + 者(사람·놈 자). 부부로서 짝이 되는 사람.'},
+{u:'04과',q:'\'百年偕老\'의 뜻으로 알맞은 것은?',o:['백 년을 함께 공부함','백 년 동안 변함없이 사랑함','백 년을 함께하며 늙음, 부부가 되어 한평생 사이좋게 지내고 즐겁게 함께 늙음','백 년 동안 서로 돕는 친구 관계','백 번 만나 오래된 사이'],a:2,e:'百年偕老(백년해로): 백[百] 년[年]을 함께[偕]하며 늙음[老]. 부부가 한평생 사이좋게 지내고 즐겁게 함께 늙음.'},
+{u:'04과',q:'\'主禮\'에서 \'禮\'의 표기에 관한 교과서 설명으로 옳은 것은?',o:['항상 \'예\'로만 적는다','단어의 첫머리에 놓이면 \'예\'로 적고, 그 외에는 \'례\'로 적는다','항상 \'례\'로만 적는다','받침 뒤에서는 \'례\'로, 모음 뒤에서는 \'예\'로 적는다','단어의 뒤에 놓이면 항상 \'예\'로 적는다'],a:1,e:'禮: 단어의 첫머리에 놓이면 \'예\'로 적고(예의, 예절), 그 외에는 \'례\'로 적음(실례, 주례).'},
+{u:'04과',q:'\'花燭\'의 뜻으로 알맞은 것은?',o:['꽃으로 만든 화환','빛깔이 든 밀초로, 혼례 의식에 씀','축하하러 온 손님','결혼식 예식을 맡아 진행하는 사람','꽃과 촛불로 장식한 결혼 무대'],a:1,e:'花燭(화촉): 빛깔[花]이 든 밀초[燭]. 혼례 의식에 씀. 화촉을 밝히다 = 혼례식을 올리다.'},
+{u:'04과',q:'\'花環\'의 관련 성어 \'금상첨화(錦上添花)\'의 뜻으로 옳은 것은?',o:['비단 위에 꽃을 더한다는 뜻으로, 좋은 일 위에 또 좋은 일이 더하여짐','꽃을 비단으로 감싸 소중한 것을 보호함','화려한 겉모습과 달리 속이 비어 있음','아름다운 것은 오래가지 않음','좋은 일에는 항상 어려움이 따름'],a:0,e:'錦上添花(금상첨화): 비단[錦] 위[上]에 꽃[花]을 더함[添]. 좋은 일 위에 또 좋은 일이 더하여짐을 비유.'},
+{u:'04과',q:'\'賀客\'에서 \'賀\'의 뜻으로 알맞은 것은?',o:['손님','기쁠','축하할','오를','모일'],a:2,e:'賀客(하객): 賀(축하할 하) + 客(손님 객). 축하하러 온 손님.'},
+{u:'04과',q:'\'결초보은(結草報恩)\'의 의미로 옳은 것은?',o:['풀을 묶어 은혜를 갚음, 죽은 뒤에도 은혜를 잊지 않고 갚음','풀밭에서 만난 은인에게 감사함','은혜로운 사람에게 꽃을 드림','죽기 전에 반드시 은혜를 갚겠다는 다짐','풀처럼 무성하게 은혜를 베품'],a:0,e:'結草報恩(결초보은): 풀[草]을 묶어[結] 은혜[恩]를 갚음[報]. 죽은 뒤에도 은혜를 잊지 않고 갚음.'},
+{u:'04과',q:'\'金枝玉葉\'과 \'愛之重之\'가 공통으로 나타내는 것은?',o:['부모에 대한 자식의 효심','자식이나 소중한 존재를 매우 아끼고 귀하게 여기는 마음','황금과 옥처럼 귀중한 재물','부모님이 물려주는 유산','가족 간의 화목과 사랑'],a:1,e:'금지옥엽(귀한 자손, 소중히 여기는 모양)과 애지중지(매우 사랑하고 소중히 여기는 모양) 모두 귀하게 여기는 마음을 나타냄.'},
+{u:'04과',q:'교과서 04과 \'生生한 언어\'에서 제시된 경어(敬語)가 아닌 것은?',o:['宅(댁)','生辰(생신)','年歲(연세)','感動(감동)','이 중 경어가 아닌 것'],a:3,e:'感動(감동)은 일반 어휘. 경어 예시: 宅(댁), 生辰(생신), 年歲(연세).'},
+{u:'04과',q:'\'便紙\'의 뜻과 관련 어휘로 바르게 연결된 것은?',o:['편한 종이 / 전보(電報), 속달(速達)','소식·안부·용무 등을 적어 보내는 글 / 추신(追伸), 귀하(貴下), 인편(人使)','빠르게 전하는 소식 / 전보(電報)','일기와 같은 개인 기록 / 일지(日誌)','공식 문서 / 공문(公文)'],a:1,e:'便紙(편지): 소식[便]을 적어 보내는 종이[紙]. 관련: 추신(追伸), 귀하(貴下), 인편(人使).'},
+{u:'05과',q:'\'遲刻\'의 동음이의어로 교과서에서 제시된 것은?',o:['地覺(지각)','知覺(지각)','地角(지각)','持角(지각)','없음'],a:1,e:'遲刻(지각: 늦게 등교함)의 동음이의어 → 知覺(지각: 알아차림). 교과서에서 동음이의어로 제시.'},
+{u:'05과',q:'\'擔任\'에서 \'擔\'의 뜻으로 알맞은 것은?',o:['가르칠','멜·맡길','책임질','이끌','돌볼'],a:1,e:'擔任(담임): 擔(멜·맡길 담) + 任(맡길 임). 어떤 학급이나 학년 등을 책임지고 맡아보는 사람.'},
+{u:'05과',q:'\'遂行評價\'의 뜻으로 알맞은 것은?',o:['학생이 배운 지식·기능·태도 등을 평가한 결과','학생의 학습 과제 수행 과정 및 결과를 직접 관찰하여 전문적으로 판단하는 일','수업 중 선생님이 학생을 칭찬하는 것','학기 말에 보는 필기시험','학생이 스스로 자신을 평가하는 것'],a:1,e:'遂行評價(수행평가): 학생의 학습 과제 수행[遂行] 과정 및 결과를 직접 관찰하여 전문적으로 판단[評價]하는 일.'},
+{u:'05과',q:'\'給食\'의 유의어로 교과서에서 제시된 것은?',o:['食事(식사)','配食(배식)','飮食(음식)','定食(정식)','外食(외식)'],a:1,e:'給食(급식): 식사[食]를 공급함[給]. 유의어: 배식(配食).'},
+{u:'05과',q:'\'二人三脚\'에서 \'脚\'의 부수가 \'肉\'인 이유로 교과서에서 설명한 것은?',o:['다리가 고기처럼 부드러워서','肉이 신체 부위의 명칭이나 그 상태와 관련된 뜻을 나타내며, 부수로 쓰이면 月로 모양이 변하기도 하기 때문','다리는 근육(肉)으로 이루어져 있어서','脚자가 원래 고기 요리와 관련이 있어서','신체 부위는 모두 肉을 부수로 쓰기 때문'],a:1,e:'肉(육): 신체 부위의 명칭이나 그 상태와 관련된 뜻을 나타냄. 부수로 쓰일 때 月로 모양이 변하기도 함. 骨, 腸, 肺 등도 같은 원리.'},
+{u:'05과',q:'\'不戰勝\'에서 \'不\'의 독음으로 알맞은 것은?',o:['불전승','부전승','불전승과 부전승 모두 가능','불전','비전승'],a:1,e:'不: \'ㄷ\'이나 \'ㅈ\' 앞에서 \'부\'로 읽음. 不戰(부전)에서 戰이 \'ㅈ\'으로 시작하므로 \'부전승\'. 참고: 부족(不足), 부동산(不動産).'},
+{u:'05과',q:'\'級訓\'의 뜻과 유의어로 바르게 연결된 것은?',o:['학급에서 교육 목표로 정한 덕목 / 교훈(校訓), 가훈(家訓), 사훈(社訓)','학급에서 정한 규칙 / 교칙(校則), 규정(規定)','급장이 정하는 목표 / 반훈(班訓)','학교 전체의 교육 목표 / 교훈(校訓)','학년마다 달라지는 훈화 / 훈화(訓話)'],a:0,e:'級訓(급훈): 학급[級]에서 교육[訓] 목표로 정한 덕목. 유의어: 교훈(校訓), 가훈(家訓), 사훈(社訓).'},
+{u:'05과',q:'\'교학상장(教學相長)\'의 유래로 옳은 것은?',o:['논어(論語)에서 유래','예기(禮記)에서 유래. 가르쳐 본 이후에야 비로소 어려움을 알게 된다는 내용','맹자(孟子)에서 유래','중용(中庸)에서 유래','대학(大學)에서 유래'],a:1,e:'教學相長(교학상장): 예기(禮記)에서 유래. \'배워 본 이후에 자기의 부족함을 알 수 있으며, 가르쳐 본 이후에야 비로소 어려움을 알게 된다.\''},
+{u:'05과',q:'교과서 05과 \'生生한 언어\'에서 제시된 혼종어가 아닌 것은?',o:['형광펜(螢光+pen)','샤프심(sharp+心)','수정테이프(修訂+tape)','불전승(不戰勝)','①②③ 모두 혼종어'],a:3,e:'不戰勝(부전승)은 순한자어. 혼종어는 서로 다른 언어 요소가 합쳐진 것. 螢光pen, 샤프心, 修訂tape가 혼종어.'},
+{u:'05과',q:'\'繼走\'와 관련된 성어 \'走馬看山\'의 뜻으로 옳은 것은?',o:['말을 타고 달리며 산천을 구경함, 자세히 살피지 않고 대충 보고 지나감을 이름','말처럼 빠르게 달리는 경기','말을 보고 산을 달리는 경기','산에서 말을 타고 뛰어내리는 것','말을 타고 산을 넘는 것'],a:0,e:'走馬看山(주마간산): 말[馬]을 타고[走] 달리며 산[山]을 봄[看]. 자세히 살피지 않고 대충 보고 지나감을 이름.'},
+{u:'05과',q:'\'成績\'에서 \'績\'의 뜻으로 알맞은 것은?',o:['이룰','성취할','이름·이룰','열매','보람'],a:2,e:'成績(성적): 成(이룰 성) + 績(이름·이룰 적). ①해 온 일의 결과로 얻은 실적, ②학생이 배운 지식·기능·태도 등을 평가한 결과.'},
+{u:'06과',q:'\'雨天\'에서 \'天\'과 모양이 비슷한 한자로 교과서에서 제시된 것은?',o:['夫(사내 부), 矢(화살 시)','天(하늘 천), 大(클 대)','犬(개 견), 太(클 태)','大, 夫, 犬, 矢 모두','天, 犬, 夫, 矢'],a:0,e:'교과서: 天과 모양이 비슷한 한자 → 夫(사내 부), 矢(화살 시). 획 하나 차이로 뜻이 완전히 달라짐.'},
+{u:'06과',q:'\'延期\'의 동음이의어로 교과서에서 제시된 것은?',o:['연기(煙氣)·연기(演技)','연기(年期)·연기(緣起)','연기(延氣)·연기(聯技)','연기(延記)·연기(緣記)','동음이의어 없음'],a:0,e:'延期(연기: 기한을 늦춤)의 동음이의어: 煙氣(연기: 불 때는 연기), 演技(연기: 배우의 연기).'},
+{u:'06과',q:'\'耳目\'의 두 가지 뜻이 바르게 연결된 것은?',o:['귀와 눈 / 주위나 관심','귀와 코 / 시각과 청각','눈과 입 / 감각 기관','귀와 눈 / 코와 입','청각과 시각 / 뇌와 감각'],a:0,e:'耳目(이목): ①귀[耳]와 눈[目], ②주위나 관심. 유의어: 관심(關心), 시선(視線), 눈길.'},
+{u:'06과',q:'\'豫買\'의 뜻으로 알맞은 것은?',o:['정하여진 때가 되기 전에 미리 삶, 유의어: 주문(注文)','정하여진 때가 되기 전에 미리[豫] 삼[買], 유의어: 예약(豫約)','미래를 위해 물건을 사두는 것, 유의어: 저축(貯蓄)','할인된 가격으로 미리 삼, 유의어: 할인구매','필요한 물건을 주문함, 유의어: 주문(注文)'],a:1,e:'豫買(예매): 정하여진 때가 되기 전에 미리[豫] 삼[買]. 유의어: 예약(豫約).'},
+{u:'06과',q:'\'宅配\'에서 \'착불(着拂)\'의 뜻으로 교과서에서 설명된 것은?',o:['배송비를 미리 내는 것','택배로 물건을 받은 후에 돈을 치름','물건을 받지 않고 반품하는 것','물건 값과 배송비를 한꺼번에 미리 내는 것','집에서 직접 물건을 수령하는 방식'],a:1,e:'착불(着拂): 택배로 물건을 받은[着] 후에 돈을 치름[拂]. 반대: 선불(先拂).'},
+{u:'06과',q:'\'正鵠(정곡)\'의 유래로 옳은 것은?',o:['논어(論語)에서 활쏘기와 관련된 내용에서 유래','과녁의 한가운데가 되는 점에서 유래, 중용(中庸)에서 \'활 쏘는 것은 군자의 태도와 같은 점이 있다\'는 내용과 관련됨','맹자(孟子)에서 정확한 목표를 향해 나아가는 내용에서 유래','손자병법(孫子兵法)에서 적의 약점을 찌르는 전술에서 유래','예기(禮記)에서 예절의 핵심을 가리키는 말로 유래'],a:1,e:'正鵠(정곡): 과녁의 한가운데가 되는 점에서 유래. 중용(中庸)에서 \'활 쏘는 것은 군자의 태도와 같은 점이 있다\'는 내용과 관련됨.'},
+{u:'06과',q:'완곡어(婉曲語)에 대한 설명으로 옳은 것은?',o:['상대를 높이는 경어(敬語)와 같은 개념','단어의 성격이나 상황에 따라 그 단어를 돌려서 부드럽게 표현한 어휘','서로 다른 언어가 합쳐진 혼종어와 같은 개념','소리는 같고 뜻이 다른 동음이의어와 같은 개념','뜻을 강하게 표현하기 위한 어휘'],a:1,e:'완곡어(婉曲語): 단어의 성격이나 상황에 따라, 그 단어를 돌려서 부드럽게 표현한 어휘. 예) 오줌→小便, 별세→他界·別世.'},
+{u:'06과',q:'교과서에서 제시된 완곡어의 예가 바르게 연결된 것은?',o:['오줌→小便(소변) / 별세→他界(타계)·別世(별세)','오줌→大便(대변) / 죽음→永眠(영면)','오줌→化粧室(화장실) / 죽음→他界(타계)','화장실→小便(소변) / 죽음→別世(별세)','오줌→便所(변소) / 죽음→長眠(장면)'],a:0,e:'완곡어 예시: 오줌→小便(소변)/변소(便所), 별세→他界(타계)/別世(별세).'},
+{u:'대단원',q:'II단원 대단원 마무리 \'어휘 깊이 보기\'에서 제시된 성어가 아닌 것은?',o:['金枝玉葉(금지옥엽)','愛之重之(애지중지)','教學相長(교학상장)','正鵠(정곡)','鷄卵有骨(계란유골)'],a:4,e:'鷄卵有骨(계란유골)은 I단원 03과 내용. II단원 어휘 깊이 보기: 金枝玉葉, 愛之重之, 教學相長, 正鵠.'},
+{u:'대단원',q:'II단원 대단원 마무리에서 설명이 잘못된 것은?',o:['禮: 단어의 첫머리에 놓이면 \'예\'로 적고, 그 외에는 \'례\'로 적는다','不: \'ㄷ\'이나 \'ㅈ\' 앞에서 \'부\'로 읽기도 한다','宅(댁)·生辰(생신)·年歲(연세)는 경어(敬語)의 예이다','螢光펜·샤프心·修訂테이프는 완곡어의 예이다','오줌→小便, 별세→他界·別世는 완곡어의 예이다'],a:3,e:'螢光펜·샤프心·修訂테이프는 혼종어의 예. 완곡어가 아님.'},
+{u:'대단원',q:'\'在庫\'의 동의어로 교과서에서 제시된 것은?',o:['配送(배송)','宅配(택배)','再考(재고)','中古(중고)','便宜店(편의점)'],a:2,e:'在庫(재고): 창고[庫]에 있음[在]. 동의어: 再考(재고). 참고: 提高(제고: 수준을 높임)와 혼동 주의.'}
+];
+let cur=0,sc=0,cor=0,wr=0;
+function render(){
+  if(cur>=qs.length){done();return;}
+  const q=qs[cur];
+  document.getElementById('prog').style.width=Math.round(cur/qs.length*100)+'%';
+  document.getElementById('qc').textContent='문제 '+(cur+1)+' / '+qs.length;
+  document.getElementById('qs').textContent='점수: '+sc;
+  const opts=q.o.map((o,i)=>`<button class="ob" onclick="chk(${i})" id="o${i}"><span style="color:var(--color-text-secondary);margin-right:8px;">${['①','②','③','④','⑤'][i]}</span>${o}</button>`).join('');
+  document.getElementById('qa').innerHTML=`<div class="qcard"><span class="badge">객관식 · ${q.u}</span><div class="qt">${q.q}</div><div class="opts">${opts}</div><div class="fb" id="fb"></div></div><button class="nb" id="nb" onclick="nxt()">다음 문제 →</button>`;
+}
+function chk(i){
+  const q=qs[cur];
+  document.querySelectorAll('.ob').forEach(b=>b.disabled=true);
+  const fb=document.getElementById('fb');
+  if(i===q.a){document.getElementById('o'+i).classList.add('correct');fb.className='fb correct';fb.textContent='정답! '+q.e;sc++;cor++;}
+  else{document.getElementById('o'+i).classList.add('wrong');document.getElementById('o'+q.a).classList.add('reveal');fb.className='fb wrong';fb.textContent='오답. 정답은 '+['①','②','③','④','⑤'][q.a]+'번.\n'+q.e;wr++;}
+  fb.style.display='block';document.getElementById('nb').style.display='inline-block';
+}
+function nxt(){cur++;render();}
+function done(){
+  document.getElementById('prog').style.width='100%';
+  document.getElementById('qc').textContent='완료!';
+  document.getElementById('qs').textContent='최종: '+sc+'/'+qs.length;
+  const pct=Math.round(sc/qs.length*100);
+  const msg=pct>=90?'완벽해요! 시험 자신감 UP!':pct>=70?'잘 했어요! 조금만 더 복습!':'틀린 문제 위주로 다시 복습해요!';
+  document.getElementById('qa').innerHTML=`<div class="sc"><div style="font-size:14px;color:var(--color-text-secondary);">II단원 객관식 30문제</div><div class="sb">${sc} / ${qs.length}</div><div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:1rem;">${msg}</div><div class="sg"><div class="si"><div class="sn" style="color:#0F6E56;">${cor}</div><div class="sd">정답</div></div><div class="si"><div class="sn" style="color:#A32D2D;">${wr}</div><div class="sd">오답</div></div></div><button class="rb" onclick="restart()">다시 풀기</button></div>`;
+}
+function restart(){cur=0;sc=0;cor=0;wr=0;render();}
+render();
+</script>
