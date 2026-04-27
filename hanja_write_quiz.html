@@ -1,0 +1,470 @@
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한자</title>
+</head>
+<style>
+  .wrap { padding: 1.5rem 0; font-family: var(--font-sans); max-width: 700px; }
+  .tab-row { display: flex; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .tab-btn { padding: 0.5rem 1.1rem; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); font-size: 13px; cursor: pointer; background: var(--color-background-primary); color: var(--color-text-secondary); }
+  .tab-btn.active { background: var(--color-background-secondary); color: var(--color-text-primary); font-weight: 600; border-color: var(--color-border-primary); }
+  .prog-bg { height: 6px; background: var(--color-border-tertiary); border-radius: 99px; margin-bottom: 1.25rem; }
+  .prog-fill { height: 6px; border-radius: 99px; transition: width 0.4s; background: #185FA5; }
+  .meta { display: flex; justify-content: space-between; font-size: 13px; color: var(--color-text-secondary); margin-bottom: 0.75rem; }
+  .q-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.5rem; margin-bottom: 1rem; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: var(--border-radius-md); margin-bottom: 0.75rem; }
+  .badge-dan { background: #E1F5EE; color: #0F6E56; }
+  .badge-essay { background: #FAEEDA; color: #854F0B; }
+  .page-tag { font-size: 11px; color: var(--color-text-tertiary); margin-left: 6px; }
+  .pts-tag { font-size: 12px; color: var(--color-text-secondary); margin-left: 6px; }
+  .q-text { font-size: 15px; color: var(--color-text-primary); line-height: 1.75; margin-bottom: 1rem; white-space: pre-wrap; }
+  .q-box { font-size: 14px; color: var(--color-text-secondary); background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.85rem 1rem; margin-bottom: 1.1rem; line-height: 1.85; white-space: pre-wrap; }
+  .bogi { font-size: 13px; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 0.6rem 1rem; margin-bottom: 1rem; color: var(--color-text-primary); }
+  .bogi span { font-weight: 600; margin-right: 6px; color: var(--color-text-secondary); font-size: 12px; }
+  .sub-qs { display: flex; flex-direction: column; gap: 10px; margin-bottom: 0.75rem; }
+  .sub-q { display: flex; align-items: flex-start; gap: 8px; }
+  .sub-label { font-size: 13px; color: var(--color-text-secondary); min-width: 28px; padding-top: 10px; }
+  .han-input { padding: 0.6rem 0.9rem; font-size: 16px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-primary); width: 120px; text-align: center; letter-spacing: 2px; }
+  .han-input.wide { width: 200px; }
+  .han-input.correct { border-color: #639922; background: #EAF3DE; }
+  .han-input.wrong { border-color: #A32D2D; background: #FCEBEB; }
+  .essay-input { width: 100%; box-sizing: border-box; padding: 0.75rem 1rem; font-size: 14px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-primary); min-height: 130px; resize: vertical; line-height: 1.75; }
+  .action-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 0.75rem; }
+  .btn { background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 0.55rem 1.1rem; font-size: 13px; color: var(--color-text-primary); cursor: pointer; }
+  .btn:hover { background: var(--color-background-secondary); }
+  .btn-next { display: none; }
+  .feedback { margin-top: 0.85rem; padding: 0.9rem 1.1rem; border-radius: var(--border-radius-md); font-size: 13px; line-height: 1.8; display: none; white-space: pre-wrap; }
+  .fb-correct { background: #EAF3DE; color: #27500A; border: 0.5px solid #639922; }
+  .fb-wrong { background: #FCEBEB; color: #501313; border: 0.5px solid #A32D2D; }
+  .fb-info { background: var(--color-background-secondary); color: var(--color-text-primary); border: 0.5px solid var(--color-border-secondary); }
+  .self-check { display: flex; gap: 10px; margin-top: 0.75rem; }
+  .self-btn { flex: 1; padding: 0.55rem; border-radius: var(--border-radius-md); font-size: 13px; cursor: pointer; border: 0.5px solid var(--color-border-secondary); }
+  .self-ok { background: #EAF3DE; color: #27500A; border-color: #639922; }
+  .self-no { background: #FCEBEB; color: #501313; border-color: #A32D2D; }
+  .score-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 2rem; text-align: center; }
+  .score-big { font-size: 52px; font-weight: 500; margin: 0.75rem 0; }
+  .score-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin: 1.25rem 0; }
+  .score-item { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.85rem; }
+  .score-num { font-size: 20px; font-weight: 500; }
+  .score-desc { font-size: 11px; color: var(--color-text-secondary); margin-top: 4px; }
+  .restart-btn { background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 0.7rem 2rem; font-size: 14px; cursor: pointer; color: var(--color-text-primary); margin-top: 0.5rem; }
+  .restart-btn:hover { background: var(--color-background-secondary); }
+</style>
+
+<div class="wrap">
+  <div class="tab-row">
+    <button class="tab-btn active" id="tab-dan1" onclick="switchTab('dan1')">✏️ I단원 단답형</button>
+    <button class="tab-btn" id="tab-essay1" onclick="switchTab('essay1')">📝 I단원 서논술형</button>
+    <button class="tab-btn" id="tab-dan2" onclick="switchTab('dan2')">✏️ II단원 단답형</button>
+    <button class="tab-btn" id="tab-essay2" onclick="switchTab('essay2')">📝 II단원 서논술형</button>
+  </div>
+  <div class="prog-bg"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+  <div class="meta"><span id="q-counter"></span><span id="q-score"></span></div>
+  <div id="quiz-area"></div>
+</div>
+
+<script>
+// ── 데이터 ──────────────────────────────────────────────
+
+const dan1 = [
+  {
+    page:'20쪽', pts:2, type:'dan',
+    q:'다음 빈칸에 알맞은 한자 어휘를 보기에서 골라 한자로 쓰시오.',
+    bogi:['新裝','身長','市場','市長','伸張'],
+    subs:[
+      {label:'(1)', hint:'수출을 늘려 경제를 발전시키고 국력을 ( )하였다.', ans:'伸張', alt:['신장']},
+      {label:'(2)', hint:'이것은 ( )을 측정하는 기계입니다.', ans:'身長', alt:['신장']}
+    ],
+    exp:'伸張(신장): 세력·권리 등을 펴서 늘리게 함\n身長(신장): 발바닥에서 머리끝까지 몸의 길이'
+  },
+  {
+    page:'20쪽', pts:3, type:'dan',
+    q:'다음 어휘에 알맞은 풀이를 한자로 연결하시오. 빈칸에 한자 어휘를 쓰시오.',
+    bogi:[],
+    subs:[
+      {label:'(1)', hint:'시의 행정을 맡고 있는 우두머리 →', ans:'市長', alt:['시장']},
+      {label:'(2)', hint:'잘못에 대하여 용서를 빎 →', ans:'謝過', alt:['사과']},
+      {label:'(3)', hint:'실제의 소리를 기계 장치에 기록함 →', ans:'錄音', alt:['녹음']}
+    ],
+    exp:'市長: 시 시 + 우두머리 장\n謝過: 사과할 사 + 지날 과\n錄音: 기록할 록 + 소리 음'
+  },
+  {
+    page:'23쪽', pts:2, type:'dan',
+    q:'다음 빈칸에 들어갈 알맞은 한자 어휘를 쓰시오.',
+    bogi:['伸張','身長','新裝'],
+    subs:[
+      {label:'(1)', hint:'이것은 ( )을 측정하는 기계입니다.', ans:'身長', alt:['신장']},
+      {label:'(2)', hint:'수출을 늘려 경제를 발전시키고 국력을 ( )하였다.', ans:'伸張', alt:['신장']}
+    ],
+    exp:'身長: 몸 신 + 길 장\n伸張: 펼 신 + 늘어날 장'
+  },
+  {
+    page:'26~27쪽', pts:3, type:'dan',
+    q:'다음 빈칸에 알맞은 한자 어휘를 쓰시오.',
+    bogi:['最愛','飮食','過食','適當量','山海珍味','低칼로리','參鷄湯','五味子','鷄卵','橘'],
+    subs:[
+      {label:'(1)', hint:'아버지의 최애 음식은 ( )이다. (삼계탕)', ans:'參鷄湯', alt:['삼계탕']},
+      {label:'(2)', hint:'어머니의 최애 음료는 ( ) 차이다. (오미자)', ans:'五味子', alt:['오미자']},
+      {label:'(3)', hint:'나의 최애 과일은 ( )이다. (귤)', ans:'橘', alt:['귤']}
+    ],
+    exp:'參鷄湯: 인삼 삼 + 닭 계 + 끓일 탕\n五味子: 다섯 오 + 맛 미 + 아들 자\n橘: 귤 귤'
+  },
+  {
+    page:'29쪽', pts:2, type:'dan',
+    q:'다음 보기의 한자를 조합하여 빈칸에 알맞은 한자 어휘를 쓰시오.',
+    bogi:['蔘','湯','鷄','食','過'],
+    subs:[
+      {label:'(1)', hint:'신선한 닭과 인삼을 넣은 보양 음식 →', ans:'參鷄湯', alt:['삼계탕']},
+      {label:'(2)', hint:'지나치게 많이 먹음 →', ans:'過食', alt:['과식']}
+    ],
+    exp:'參鷄湯: 蔘(인삼 삼)+鷄(닭 계)+湯(끓일 탕)\n過食: 過(지나칠 과)+食(먹을 식)'
+  }
+];
+
+const essay1 = [
+  {
+    page:'20·23쪽', pts:5, type:'essay',
+    q:'다음 물음 (1)과 (2)에 답하시오.',
+    sub:`(1) 아래 어휘의 한자 표기와 뜻을 각각 서술하시오.
+    ① 시장(상품을 사고파는 장소)  ② 시장(시의 행정을 맡은 우두머리)
+    ③ 시장(몸의 길이)  ④ 시장(세력·권리를 늘림)  ⑤ 시장(새롭게 단장함)
+
+(2) 위 다섯 어휘가 모두 '시장·신장'으로 읽히는 이유를 한자 개념어를 사용하여 서술하시오.`,
+    ans:`(1)
+① 市場: 여러 가지 상품을 사고파는 일정한 장소
+② 市長: 시(市)의 행정을 맡고 있는 우두머리
+③ 身長: 발바닥에서 머리끝에 이르는 몸의 길이
+④ 伸張: 세력이나 권리 등을 펴서 늘리게 함
+⑤ 新裝: 새롭게 단장하여 영업을 시작함
+
+(2) 소리[音]는 같으나[同] 뜻[義]이 다른[異] 동음이의어(同音異義語)이기 때문이다. 한자로 표기하면 각각 뜻이 다름을 정확히 알 수 있다.`,
+    check:['① 市場 한자·뜻 정확히 서술','② 市長 한자·뜻 정확히 서술','③ 身長 한자·뜻 정확히 서술','④ 伸張 한자·뜻 정확히 서술','⑤ 新裝 한자·뜻 정확히 서술','(2) 동음이의어(同音異義語) 개념 포함']
+  },
+  {
+    page:'20쪽', pts:6, type:'essay',
+    q:'다음 물음 (1)~(3)에 답하시오.',
+    sub:`(1) 아래 어휘의 한자 표기를 각각 쓰시오.
+    ① 녹음  ② 녹음  ③ 사과  ④ 사과
+
+(2) (1)의 어휘들이 생기는 현상의 이름을 한자로 쓰고, 개념을 서술하시오.
+
+(3) 일상생활에서 이 현상으로 인한 혼란을 줄이기 위해 한자 어휘를 알아야 하는 이유를 서술하시오.`,
+    ans:`(1)
+① 錄音(기계에 소리를 기록함)
+② 綠陰(푸르게 우거진 나무의 그늘)
+③ 謝過(잘못에 대해 용서를 빎)
+④ 沙果(사과나무의 열매)
+
+(2) 同音異義語(동음이의어): 소리[音]는 같으나[同] 뜻[義]이 다른[異] 어휘[語].
+
+(3) 동음이의어는 소리가 같아도 한자에 따라 뜻이 전혀 다르기 때문에, 문맥에 맞지 않는 어휘를 사용하면 의사소통에 혼란이 생길 수 있다. 따라서 한자를 통해 어휘의 의미를 정확히 파악하고 상황에 맞게 활용해야 한다.`,
+    check:['(1) 錄音·綠陰 한자 정확히 서술','(1) 謝過·沙果 한자 정확히 서술','(2) 同音異義語 한자 표기 포함','(2) 개념(소리 같고 뜻 다름) 서술','(3) 혼란 방지·맥락 활용 이유 서술']
+  },
+  {
+    page:'26~27·29쪽', pts:7, type:'essay',
+    q:'다음 물음 (1)~(3)에 답하시오.',
+    sub:`(1) 아래 어휘의 한자 표기와 뜻을 각각 서술하시오.
+    ① 최애  ② 과식  ③ 적당량  ④ 산해진미
+
+(2) '鷄卵有骨(계란유골)'의 뜻과 유래를 서술하시오.
+
+(3) 아래 동음이의어 표에서 한국·중국·일본의 어휘를 비교하여, 한자 문화권에서 같은 개념을 다른 어휘로 표현하는 예를 한 가지 들고 그 의미를 서술하시오.
+    (예: 가깝게 오래 사귄 사람 → 한국: 親舊, 중국: 朋友, 일본: 友)`,
+    ans:`(1)
+① 最愛(최애): 가장[最] 사랑함[愛]
+② 過食(과식): 지나치게[過] 많이 먹음[食]
+③ 適當量(적당량): 쓰임에 알맞은[適當] 양[量]
+④ 山海珍味(산해진미): 산과 바다의 온갖 진귀한 재료로 차린 맛 좋은 음식
+
+(2) 鷄卵有骨(계란유골): 계란에도 뼈가 있다는 뜻으로, 운수가 나쁜 사람은 모처럼 좋은 기회를 만나도 역시 일이 잘 안됨을 이르는 말. 조선 세종 때 황희의 고사에서 유래함.
+
+(3) 예) '명절'을 뜻하는 어휘
+한국: 名節(명절), 중국: 節日(절일), 일본: 祝日(축일)
+→ 같은 개념이지만 한자 문화권 나라마다 서로 다른 어휘로 표현함.`,
+    check:['(1) 最愛·過食 한자 표기 정확','(1) 適當量·山海珍味 한자 표기 정확','(2) 鷄卵有骨 뜻 서술','(2) 조선 세종·황희 유래 언급','(3) 한자 문화권 비교 어휘 예시 포함','(3) 어휘 의미 서술']
+  }
+];
+
+const dan2 = [
+  {
+    page:'44쪽', pts:2, type:'dan',
+    q:'다음 빈칸에 알맞은 한자 어휘를 쓰시오.',
+    bogi:['繼走','遲刻','球技'],
+    subs:[
+      {label:'(1)', hint:'내일 ( )하지 않도록 알람을 맞추고 자야지.', ans:'遲刻', alt:['지각']},
+      {label:'(2)', hint:'다양한 ( ) 운동.', ans:'球技', alt:['구기']},
+      {label:'(3)', hint:'( ) 경기가 시작될 예정이다.', ans:'繼走', alt:['계주']}
+    ],
+    exp:'遲刻: 더딜 지 + 시각 각\n球技: 공 구 + 재주 기\n繼走: 이을 계 + 달릴 주'
+  },
+  {
+    page:'44쪽', pts:3, type:'dan',
+    q:'다음 어휘에 알맞은 풀이를 연결하고 한자로 쓰시오.',
+    bogi:[],
+    subs:[
+      {label:'(1)', hint:'학급에서 교육 목표로 정한 덕목 →', ans:'級訓', alt:['급훈']},
+      {label:'(2)', hint:'식사를 공급함, 또는 그 식사 →', ans:'給食', alt:['급식']},
+      {label:'(3)', hint:'추첨·기권 등으로 경기를 치르지 않고 이기는 일 →', ans:'不戰勝', alt:['부전승']}
+    ],
+    exp:'級訓: 등급 급 + 가르칠 훈\n給食: 줄 급 + 먹을 식\n不戰勝: 아닐 부 + 싸움 전 + 이길 승'
+  },
+  {
+    page:'47쪽', pts:2, type:'dan',
+    q:'다음 빈칸에 알맞은 한자 어휘를 보기에서 찾아 쓰시오.',
+    bogi:['繼走','遲刻','球技'],
+    subs:[
+      {label:'(1)', hint:'내일 ( )하지 않도록 알람을 맞추고 자야지.', ans:'遲刻', alt:['지각']},
+      {label:'(2)', hint:'다양한 ( ) 운동.', ans:'球技', alt:['구기']},
+      {label:'(3)', hint:'( ) 경기가 시작될 예정이다.', ans:'繼走', alt:['계주']}
+    ],
+    exp:'遲刻(지각): 더딜 지 + 시각 각\n球技(구기): 공 구 + 재주 기\n繼走(계주): 이을 계 + 달릴 주'
+  },
+  {
+    page:'47쪽', pts:3, type:'dan',
+    q:'다음 어휘에 알맞은 풀이를 연결하시오. 한자로 쓰시오.',
+    bogi:[],
+    subs:[
+      {label:'(1)', hint:'학급에서 교육 목표로 정한 덕목 →', ans:'級訓', alt:['급훈']},
+      {label:'(2)', hint:'식사를 공급함, 또는 그 식사 →', ans:'給食', alt:['급식']},
+      {label:'(3)', hint:'추첨·기권 등으로 경기를 치르지 않고 이기는 일 →', ans:'不戰勝', alt:['부전승']}
+    ],
+    exp:'級訓: 등급 급 + 가르칠 훈\n給食: 줄 급 + 먹을 식\n不戰勝: 아닐 부 + 싸움 전 + 이길 승'
+  },
+  {
+    page:'44쪽', pts:2, type:'dan',
+    q:'다음 설명에 해당하는 한자 어휘를 쓰시오.',
+    bogi:[],
+    subs:[
+      {label:'(1)', hint:'두 사람이 서로 발목을 묶어 세 발처럼 함께 뛰는 경기 →', ans:'二人三脚', alt:['이인삼각']},
+      {label:'(2)', hint:'가르치고 배우면서 서로 성장함 (예기禮記 유래) →', ans:'教學相長', alt:['교학상장']}
+    ],
+    exp:'二人三脚: 두 이 + 사람 인 + 석 삼 + 다리 각\n教學相長: 가르칠 교 + 배울 학 + 서로 상 + 자랄 장'
+  }
+];
+
+const essay2 = [
+  {
+    page:'44쪽', pts:5, type:'essay',
+    q:'다음 물음 (1)과 (2)에 답하시오.',
+    sub:`(1) 아래 어휘의 한자 표기와 뜻을 각각 서술하시오.
+    ① 지각  ② 담임  ③ 성적  ④ 급식
+
+(2) '遲刻'과 소리가 같은 동음이의어를 한자로 쓰고 뜻을 서술하시오.`,
+    ans:`(1)
+① 遲刻(지각): 정해진 시각보다 늦게 출근하거나 등교함
+② 擔任(담임): 어떤 학급이나 학년을 책임지고 맡아보는 일, 또는 그런 사람
+③ 成績(성적): 해 온 일의 결과로 얻은 실적 / 배운 지식·기능·태도 등을 평가한 결과
+④ 給食(급식): 식사[食]를 공급함[給], 또는 그 식사
+
+(2) 知覺(지각): 깨달아 아는 것, 사물을 분별하는 능력`,
+    check:['(1) 遲刻 한자·뜻 정확히 서술','(1) 擔任 한자·뜻 정확히 서술','(1) 成績 한자·뜻 정확히 서술','(1) 給食 한자·뜻 정확히 서술','(2) 知覺 한자 표기 + 뜻 포함']
+  },
+  {
+    page:'44·47쪽', pts:7, type:'essay',
+    q:'다음 물음 (1)~(3)에 답하시오.',
+    sub:`(1) 아래 어휘의 한자 표기와 뜻을 각각 서술하시오.
+    ① 구기  ② 이인삼각  ③ 부전승  ④ 계주  ⑤ 급훈
+
+(2) '不戰勝'에서 '不'을 '부'로 읽는 이유를 한자 표기를 포함하여 서술하시오.
+
+(3) '二人三脚'에서 '脚'의 부수가 '肉'인 이유를 서술하시오.`,
+    ans:`(1)
+① 球技(구기): 공[球]을 사용하는 운동 경기[技]
+② 二人三脚(이인삼각): 두[二] 사람[人]이 서로 발목을 묶어 세[三] 발[脚]처럼 하여 함께 뛰는 경기
+③ 不戰勝(부전승): 추첨이나 기권 등으로 경기를 치르지 않고[不戰] 이기는[勝] 일
+④ 繼走(계주): 일정한 구간을 나누어 차례로 배턴을 주고받으며 이어[繼] 달리는[走] 육상 경기
+⑤ 級訓(급훈): 학급[級]에서 교육 목표로 정한 덕목[訓]
+
+(2) '不'은 'ㄷ'이나 'ㅈ' 앞에서 '부'로 읽기도 한다. 不戰勝에서 '戰'이 'ㅈ'으로 시작하므로 '부전승'이 된다.
+
+(3) '肉(육)'은 신체 부위의 명칭이나 그 상태와 관련된 뜻을 나타내며, 부수로 쓰이면 '月'로 모양이 변하기도 한다. '脚'은 신체 부위인 다리를 뜻하므로 '肉'이 부수로 쓰였다.`,
+    check:['(1) 球技·二人三脚 한자 표기 정확','(1) 不戰勝·繼走 한자 표기 정확','(1) 級訓 한자 표기 정확','(2) \'ㅈ\' 앞에서 \'부\'로 읽는 규칙 서술','(3) 肉 부수 – 신체 부위 관련 설명 포함']
+  },
+  {
+    page:'44쪽', pts:8, type:'essay',
+    q:'다음 물음 (1)~(3)에 답하시오.',
+    sub:`(1) '教學相長'을 구성하는 네 한자의 음훈(音訓)을 각각 쓰시오.
+
+(2) '教學相長'의 유래(출전)와 의미를 서술하시오.
+
+(3) '교학상장'의 의미가 자신의 학교생활에서 어떻게 적용될 수 있는지 구체적인 예를 들어 서술하시오.`,
+    ans:`(1)
+教: 가르칠 교
+學: 배울 학
+相: 서로 상
+長: 자랄 장
+
+(2) '예기(禮記)'에 나오는 말로, '배워 본 이후에 자기의 부족함을 알 수 있으며, 가르쳐 본 이후에야 비로소 어려움을 알게 된다'는 글에서 유래했다. 가르치는 일과 배우는 일이 가르치는 사람과 배우는 사람 양쪽 모두에게 좋은 영향을 미침을 뜻한다.
+
+(3) 예) 모둠 활동에서 내가 잘 아는 내용을 친구에게 설명하면 더욱 깊이 이해하게 되고, 친구의 질문을 통해 미처 몰랐던 부분을 깨닫게 된다. 이처럼 가르치고 배우는 과정이 서로에게 성장의 기회가 되는 것이 교학상장의 실천이다.`,
+    check:['(1) 네 한자 음훈 모두 정확','(2) 예기(禮記) 출전 언급','(2) 뜻 정확히 서술','(3) 구체적 사례 포함']
+  }
+];
+
+const allData = { dan1, essay1, dan2, essay2 };
+let currentTab = 'dan1';
+let current = 0;
+let score = 0;
+let stats = { correct:0, wrong:0, essay:0 };
+let data = dan1;
+
+function switchTab(tab) {
+  currentTab = tab;
+  data = allData[tab];
+  current = 0; score = 0; stats = {correct:0,wrong:0,essay:0};
+  ['dan1','essay1','dan2','essay2'].forEach(t => {
+    document.getElementById('tab-'+t).className = 'tab-btn' + (t===tab?' active':'');
+  });
+  render();
+}
+
+function render() {
+  if (current >= data.length) { showResult(); return; }
+  const q = data[current];
+  const pct = Math.round((current/data.length)*100);
+  document.getElementById('prog').style.width = pct+'%';
+  document.getElementById('q-counter').textContent = '문제 '+(current+1)+' / '+data.length;
+  document.getElementById('q-score').textContent = q.type==='dan' ? '점수: '+score : '서논술형 진행 중';
+  if (q.type==='dan') renderDan(q);
+  else renderEssay(q);
+}
+
+function renderDan(q) {
+  const bogiHtml = q.bogi.length
+    ? `<div class="bogi"><span>보기</span>${q.bogi.join('　　')}</div>` : '';
+  const subsHtml = q.subs.map((s,i) =>
+    `<div class="sub-q">
+      <div class="sub-label">${s.label}</div>
+      <div style="flex:1">
+        <div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:6px;line-height:1.6;">${s.hint}</div>
+        <input class="han-input wide" type="text" id="inp-${i}" placeholder="한자로 입력" onkeydown="if(event.key==='Enter')checkDan()" />
+      </div>
+    </div>`
+  ).join('');
+  document.getElementById('quiz-area').innerHTML = `
+    <div class="q-card">
+      <span class="badge badge-dan">단답형</span>
+      <span class="page-tag">${q.page}</span>
+      <span class="pts-tag">[${q.pts}점]</span>
+      <div class="q-text">${q.q}</div>
+      ${bogiHtml}
+      <div class="sub-qs">${subsHtml}</div>
+      <div class="action-row">
+        <button class="btn" onclick="checkDan()">확인</button>
+        <button class="btn" onclick="showDanAns()">정답 보기</button>
+      </div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+    <button class="btn btn-next" id="btn-next" onclick="nextQ()">다음 문제 →</button>
+  `;
+  setTimeout(()=>{ const e=document.getElementById('inp-0'); if(e)e.focus(); },50);
+}
+
+function checkDan() {
+  const q = data[current];
+  let allCorrect = true;
+  let fb = '';
+  q.subs.forEach((s,i) => {
+    const el = document.getElementById('inp-'+i);
+    if (!el || el.disabled) return;
+    const val = el.value.trim();
+    const ok = val===s.ans || (s.alt && s.alt.includes(val));
+    el.disabled = true;
+    el.classList.add(ok ? 'correct' : 'wrong');
+    if (!ok) { allCorrect = false; fb += `${s.label} 정답: ${s.ans}\n`; }
+  });
+  const fbEl = document.getElementById('feedback');
+  if (allCorrect) {
+    fbEl.className='feedback fb-correct';
+    fbEl.textContent='정답! +'+q.pts+'점\n\n'+q.exp;
+    score+=q.pts; stats.correct++;
+  } else {
+    fbEl.className='feedback fb-wrong';
+    fbEl.textContent='일부 오답.\n'+fb+'\n'+q.exp;
+    stats.wrong++;
+  }
+  fbEl.style.display='block';
+  document.getElementById('btn-next').style.display='inline-block';
+  document.getElementById('q-score').textContent='점수: '+score;
+}
+
+function showDanAns() {
+  const q = data[current];
+  q.subs.forEach((s,i)=>{ const e=document.getElementById('inp-'+i); if(e)e.disabled=true; });
+  const fbEl = document.getElementById('feedback');
+  fbEl.className='feedback fb-info';
+  fbEl.textContent='정답:\n'+q.subs.map(s=>s.label+' '+s.ans).join('\n')+'\n\n'+q.exp;
+  fbEl.style.display='block';
+  document.getElementById('btn-next').style.display='inline-block';
+  stats.wrong++;
+}
+
+function renderEssay(q) {
+  document.getElementById('quiz-area').innerHTML = `
+    <div class="q-card">
+      <span class="badge badge-essay">서논술형</span>
+      <span class="page-tag">${q.page}</span>
+      <span class="pts-tag">[${q.pts}점]</span>
+      <div class="q-text">${q.q}</div>
+      ${q.sub ? '<div class="q-box">'+q.sub+'</div>' : ''}
+      <textarea class="essay-input" id="essay-ans" placeholder="한자 표기와 뜻을 포함하여 작성하세요..."></textarea>
+      <div class="action-row">
+        <button class="btn" onclick="showEssayAns()">모범 답안 확인</button>
+      </div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+    <button class="btn btn-next" id="btn-next" onclick="nextQ()">다음 문제 →</button>
+  `;
+}
+
+function showEssayAns() {
+  const q = data[current];
+  const fbEl = document.getElementById('feedback');
+  fbEl.className='feedback fb-info';
+  const checkTxt = q.check ? '\n\n📋 채점 포인트:\n'+q.check.map((c,i)=>'  '+(i+1)+'. '+c).join('\n') : '';
+  fbEl.textContent='모범 답안:\n\n'+q.ans+checkTxt+'\n\n자신의 답과 비교해 채점해 보세요!';
+  fbEl.style.display='block';
+  document.getElementById('essay-ans').disabled=true;
+  const selfDiv=document.createElement('div');
+  selfDiv.className='self-check';
+  selfDiv.innerHTML=`
+    <button class="self-btn self-ok" onclick="selfScore(true,${q.pts})">잘 썼어요 (+${q.pts}점)</button>
+    <button class="self-btn self-no" onclick="selfScore(false,0)">더 공부해야 해요</button>`;
+  fbEl.after(selfDiv);
+  stats.essay++;
+}
+
+function selfScore(ok, pts) {
+  if(ok){score+=pts; stats.correct++;} else stats.wrong++;
+  document.querySelectorAll('.self-btn').forEach(b=>b.disabled=true);
+  document.getElementById('btn-next').style.display='inline-block';
+  document.getElementById('q-score').textContent='점수: '+score;
+}
+
+function nextQ() { current++; render(); }
+
+function showResult() {
+  document.getElementById('prog').style.width='100%';
+  const total = data.reduce((s,q)=>s+q.pts,0);
+  const pct = Math.round((score/total)*100);
+  const msg = pct>=90?'완벽해요! 시험 준비 완료! 🎉':pct>=70?'잘 했어요! 조금만 더 복습해요! 💪':'틀린 문제를 다시 복습해 봐요! 📚';
+  document.getElementById('q-counter').textContent='완료!';
+  document.getElementById('q-score').textContent='';
+  document.getElementById('quiz-area').innerHTML=`
+    <div class="score-card">
+      <div style="font-size:14px;color:var(--color-text-secondary);">최종 점수</div>
+      <div class="score-big">${score}<span style="font-size:24px;color:var(--color-text-secondary);"> / ${total}</span></div>
+      <div style="font-size:14px;color:var(--color-text-secondary);margin-bottom:1rem;">${msg}</div>
+      <div class="score-grid">
+        <div class="score-item"><div class="score-num" style="color:#185FA5;">${pct}%</div><div class="score-desc">정답률</div></div>
+        <div class="score-item"><div class="score-num" style="color:#27500A;">${stats.correct}</div><div class="score-desc">정답</div></div>
+        <div class="score-item"><div class="score-num" style="color:#A32D2D;">${stats.wrong}</div><div class="score-desc">오답</div></div>
+      </div>
+      <button class="restart-btn" onclick="restart()">다시 풀기</button>
+    </div>`;
+}
+
+function restart() { current=0; score=0; stats={correct:0,wrong:0,essay:0}; render(); }
+
+render();
+</script>
