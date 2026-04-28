@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한자</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans,sans-serif);background:transparent;padding:1rem;}
+.exam-wrap{max-width:720px;}
+/* header */
+.exam-header{padding:1.25rem 1.5rem;border:0.5px solid var(--color-border-tertiary,#ddd);border-radius:12px;margin-bottom:1.25rem;background:var(--color-background-primary,#fff);}
+.exam-title{font-size:18px;font-weight:600;color:var(--color-text-primary,#111);margin-bottom:6px;}
+.exam-sub{font-size:13px;color:var(--color-text-secondary,#666);}
+.exam-info{display:flex;gap:16px;margin-top:10px;flex-wrap:wrap;}
+.info-chip{font-size:12px;padding:3px 10px;border-radius:20px;border:0.5px solid var(--color-border-secondary,#ccc);color:var(--color-text-secondary,#555);}
+/* progress */
+.prog-wrap{margin-bottom:1rem;}
+.prog-bar{height:5px;background:var(--color-border-tertiary,#eee);border-radius:99px;}
+.prog-fill{height:5px;border-radius:99px;background:#3B82F6;transition:width .4s;}
+.prog-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--color-text-secondary,#888);margin-top:4px;}
+/* card */
+.q-card{background:var(--color-background-primary,#fff);border:0.5px solid var(--color-border-tertiary,#ddd);border-radius:12px;padding:1.4rem 1.5rem;margin-bottom:1rem;}
+.q-top{display:flex;align-items:center;gap:8px;margin-bottom:0.85rem;flex-wrap:wrap;}
+.badge{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;}
+.b-obj{background:#EBF3FC;color:#1D5FA4;}
+.b-dan{background:#E1F5EE;color:#0B6648;}
+.b-essay{background:#FEF3E2;color:#8A4A0A;}
+.q-num{font-size:13px;color:var(--color-text-secondary,#888);}
+.q-pts{font-size:12px;color:var(--color-text-tertiary,#aaa);margin-left:auto;}
+.q-text{font-size:15px;color:var(--color-text-primary,#111);line-height:1.75;margin-bottom:1rem;white-space:pre-wrap;}
+.q-box{font-size:13.5px;background:var(--color-background-secondary,#f5f5f5);border-radius:8px;padding:.75rem 1rem;margin-bottom:1rem;line-height:1.85;color:var(--color-text-primary,#111);white-space:pre-wrap;border-left:3px solid var(--color-border-secondary,#ccc);}
+.bogi-box{font-size:13px;border:0.5px dashed var(--color-border-secondary,#ccc);border-radius:8px;padding:.6rem 1rem;margin-bottom:1rem;color:var(--color-text-primary,#111);}
+.bogi-box strong{color:var(--color-text-secondary,#888);font-size:11px;margin-right:6px;}
+/* options */
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:var(--color-background-primary,#fff);border:0.5px solid var(--color-border-secondary,#ccc);border-radius:8px;padding:.65rem 1rem;font-size:14px;color:var(--color-text-primary,#111);cursor:pointer;line-height:1.5;transition:background .15s;}
+.opt:hover:not(:disabled){background:var(--color-background-secondary,#f5f5f5);}
+.opt.correct{background:#EAF3DE;border-color:#5A9020;color:#244010;}
+.opt.wrong{background:#FDEAEA;border-color:#B03030;color:#4A1010;}
+.opt.reveal{background:#EAF3DE;border-color:#5A9020;color:#244010;}
+/* inputs */
+.sub-rows{display:flex;flex-direction:column;gap:10px;margin-bottom:.75rem;}
+.sub-row{display:flex;align-items:flex-start;gap:10px;}
+.sub-label{font-size:13px;color:var(--color-text-secondary,#888);min-width:28px;padding-top:9px;}
+.sub-desc{font-size:13px;color:var(--color-text-secondary,#666);margin-bottom:5px;line-height:1.6;}
+.han-inp{padding:.55rem .85rem;font-size:15px;border:0.5px solid var(--color-border-secondary,#ccc);border-radius:8px;background:var(--color-background-primary,#fff);color:var(--color-text-primary,#111);width:180px;text-align:center;letter-spacing:2px;}
+.han-inp.wide{width:100%;}
+.han-inp.ok{border-color:#5A9020;background:#EAF3DE;}
+.han-inp.ng{border-color:#B03030;background:#FDEAEA;}
+.essay-ta{width:100%;padding:.7rem 1rem;font-size:13.5px;border:0.5px solid var(--color-border-secondary,#ccc);border-radius:8px;background:var(--color-background-primary,#fff);color:var(--color-text-primary,#111);min-height:130px;resize:vertical;line-height:1.75;}
+/* actions */
+.act-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:.75rem;}
+.btn{background:var(--color-background-primary,#fff);border:0.5px solid var(--color-border-secondary,#ccc);border-radius:8px;padding:.5rem 1.1rem;font-size:13px;color:var(--color-text-primary,#111);cursor:pointer;}
+.btn:hover{background:var(--color-background-secondary,#f5f5f5);}
+.btn-next{display:none;}
+/* feedback */
+.fb{margin-top:.85rem;padding:.85rem 1rem;border-radius:8px;font-size:13px;line-height:1.8;display:none;white-space:pre-wrap;}
+.fb-ok{background:#EAF3DE;color:#244010;border:0.5px solid #5A9020;}
+.fb-ng{background:#FDEAEA;color:#4A1010;border:0.5px solid #B03030;}
+.fb-info{background:var(--color-background-secondary,#f5f5f5);color:var(--color-text-primary,#111);border:0.5px solid var(--color-border-secondary,#ccc);}
+.self-row{display:flex;gap:8px;margin-top:.75rem;}
+.self-btn{flex:1;padding:.5rem;border-radius:8px;font-size:13px;cursor:pointer;border:0.5px solid;}
+.s-ok{background:#EAF3DE;color:#244010;border-color:#5A9020;}
+.s-ng{background:#FDEAEA;color:#4A1010;border-color:#B03030;}
+/* result */
+.result-card{background:var(--color-background-primary,#fff);border:0.5px solid var(--color-border-tertiary,#ddd);border-radius:12px;padding:2rem;text-align:center;}
+.r-score{font-size:52px;font-weight:600;margin:.5rem 0;}
+.r-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:1.25rem 0;}
+.r-item{background:var(--color-background-secondary,#f5f5f5);border-radius:8px;padding:.85rem;}
+.r-num{font-size:20px;font-weight:600;}
+.r-desc{font-size:11px;color:var(--color-text-secondary,#888);margin-top:3px;}
+.restart{background:var(--color-background-primary,#fff);border:0.5px solid var(--color-border-secondary,#ccc);border-radius:8px;padding:.65rem 2rem;font-size:14px;cursor:pointer;color:var(--color-text-primary,#111);margin-top:.5rem;}
+.restart:hover{background:var(--color-background-secondary,#f5f5f5);}
+</style>
+</head>
+<body>
+<div class="exam-wrap">
+  <div class="exam-header">
+    <div class="exam-title">📄 한문 중간고사 최종 모의고사</div>
+    <div class="exam-sub">YBM 김용재 고등 한문 · 1~57쪽 전 범위</div>
+    <div class="exam-info">
+      <span class="info-chip">객관식 17문제</span>
+      <span class="info-chip">단답형 5문제</span>
+      <span class="info-chip">서논술형 3문제</span>
+      <span class="info-chip">총 25문제</span>
+    </div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-bar"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+    <div class="prog-meta"><span id="pcnt">0%</span><span id="pscore">점수: 0</span></div>
+  </div>
+  <div id="qa"></div>
+</div>
+
+<script>
+const Q=[
+// ── 객관식 1~17 ──────────────────────────────
+{t:'obj',u:'I단원 01과',pg:'14쪽',pts:1,
+ q:'\'洋襪\'의 뜻으로 알맞은 것은?',
+ opts:['과거의 잘못을 뉘우침','서양[洋]에서 발명되어 전해 온 버선[襪], 발에 신도록 실이나 섬유로 짠 것','끝이 없을 정도로 많이 간직함','눈 깜짝일 만한 아주 짧은 동안','온도 단위의 하나'],
+ ans:1,exp:'洋襪(양말): 서양[洋]에서 발명되어 전해 온 버선[襪]. 유의어: 양(洋)동이, 양(洋)파.'},
+
+{t:'obj',u:'I단원 01과',pg:'14쪽',pts:1,
+ q:'\'正말\'에서 한자 부분 \'正\'의 뜻으로 알맞은 것은?',
+ opts:['바를','클','옳을','참','곧을'],
+ ans:0,exp:'正말: 거짓이 없이[正] 말 그대로임. \'바를 정\'이 들어간 혼종어.'},
+
+{t:'obj',u:'I단원 01과',pg:'15쪽',pts:1,
+ q:'혼종어 \'청바지\'를 분석할 때, \'靑\'의 한자 이미지 설명으로 옳은 것은?',
+ opts:['맑을 청 – 물이 맑고 깨끗함을 나타냄','푸를 청 – 풀과 나무의 푸른빛을 나타냄','어릴 청 – 나이가 어리고 젊음을 나타냄','청할 청 – 부탁하거나 요청함을 나타냄','들을 청 – 귀로 소리를 들음을 나타냄'],
+ ans:1,exp:'靑(청): 푸를 청. 풀과 나무의 색깔에서 비롯된 한자로 파랑·초록 등 푸른빛을 나타냄.'},
+
+{t:'obj',u:'I단원 02과',pg:'20쪽',pts:1,
+ q:'\'綠陰\'과 관련된 한자성어 \'녹음방초(綠陰芳草)\'의 뜻으로 알맞은 것은?',
+ opts:['푸르게 우거진 나무와 향기로운 풀이라는 뜻으로, 여름철의 자연 경관을 이르는 말','푸른 바다와 향기로운 꽃을 이르는 말','맑은 하늘과 푸른 초원을 이르는 말','새들이 지저귀고 꽃이 만발한 봄 경치','눈 덮인 산과 향기로운 숲을 이르는 말'],
+ ans:0,exp:'綠陰芳草(녹음방초): 푸르게[綠] 우거진 나무[陰]와 향기로운[芳] 풀[草]. 여름철의 자연 경관을 이르는 말.'},
+
+{t:'obj',u:'I단원 02과',pg:'21쪽',pts:1,
+ q:'한자 문화권 어휘 비교에서 \'가깝게 오래 사귄 사람\'을 뜻하는 중국 어휘는?',
+ opts:['友','親舊','朋友','知己','同伴'],
+ ans:2,exp:'가깝게 오래 사귄 사람: 한국 親舊(친구), 중국 朋友(붕우), 일본 友(우).'},
+
+{t:'obj',u:'I단원 02과',pg:'20쪽',pts:1,
+ q:'\'伸張\'에서 \'伸\'의 뜻으로 알맞은 것은?',
+ opts:['늘어날','펼','자랄','세울','뻗을'],
+ ans:1,exp:'伸張(신장): 伸(펼 신) + 張(늘어날 장). 세력이나 권리 등을 펴서 늘리게 함.'},
+
+{t:'obj',u:'I단원 03과',pg:'26쪽',pts:1,
+ q:'\'適當量\'에서 \'量\'을 올바르게 표기한 것을 고르시오.',
+ opts:['적당양','적당량','적당냥','적당낭','모두 가능'],
+ ans:1,exp:'두음 법칙: \'量\'이 고유어·외래어와 결합하면 \'양\'으로 적지만, \'적당량\'처럼 한자어와 결합할 때는 \'량\'으로 그대로 적는다.'},
+
+{t:'obj',u:'I단원 03과',pg:'27쪽',pts:1,
+ q:'\'동음이의어(同音異義語)\'의 예로 교과서 03과 生生한 언어에서 제시된 것은?',
+ opts:['定食/正式, 韓食/寒食, 洋食/樣式','最愛/飮食','山海珍味/低칼로리','過食/適當量','參鷄湯/五味子'],
+ ans:0,exp:'동음이의어 예: 定食(정식)·正式(정식) / 韓食(한식)·寒食(한식) / 洋食(양식)·樣式(양식)'},
+
+{t:'obj',u:'I단원 03과',pg:'26쪽',pts:1,
+ q:'\'五味子\'에 대한 설명으로 틀린 것은?',
+ opts:['다섯 가지 맛이 나는 열매이다','8~9월에 붉은색으로 익는다','주로 약재로 쓰거나 술이나 차를 만드는 데 쓴다','유의어로 포도(葡萄)가 있다','단맛·짠맛·신맛·매운맛·떫은맛의 다섯 가지로 난다'],
+ ans:3,exp:'五味子(오미자)의 유의어는 교과서에서 제시되지 않았으며, 포도(葡萄)는 유의어가 아님.'},
+
+{t:'obj',u:'II단원 04과',pg:'38쪽',pts:1,
+ q:'\'主禮\'에서 \'禮\'를 \'례\'가 아닌 \'예\'로 적는 경우는?',
+ opts:['단어 끝에 올 때','단어 첫머리에 놓일 때','모음 뒤에 올 때','받침 뒤에 올 때','항상 \'례\'로 적는다'],
+ ans:1,exp:'예(禮): 단어의 첫머리에 놓이면 \'예\'로 적고, 그 외에는 \'례\'로 적는다. 예) 예의(禮儀), 실례(失禮).'},
+
+{t:'obj',u:'II단원 04과',pg:'39쪽',pts:1,
+ q:'\'愛之重之(애지중지)\'에서 \'之\'의 역할로 알맞은 것은?',
+ opts:['주어를 나타내는 조사','어조사로 문장 안에서 어조를 고르는 역할','목적어를 나타내는 조사','서술어를 강조하는 역할','부사어를 만드는 역할'],
+ ans:1,exp:'之: 어조사로 문법적 관계를 나타내거나 어조를 고르는 역할을 함.'},
+
+{t:'obj',u:'II단원 04과',pg:'38쪽',pts:1,
+ q:'\'便紙\'의 관련 어휘로 교과서에서 제시된 것이 아닌 것은?',
+ opts:['추신(追伸)','귀하(貴下)','인편(人使)','택배(宅配)','모두 제시됨'],
+ ans:3,exp:'便紙(편지) 관련 어휘: 추신(追伸), 귀하(貴下), 인편(人使). 택배(宅配)는 06과 어휘.'},
+
+{t:'obj',u:'II단원 05과',pg:'44쪽',pts:1,
+ q:'\'遂行評價\'에서 \'遂\'의 뜻으로 알맞은 것은?',
+ opts:['할','따를','이룰','평가할','나아갈'],
+ ans:1,exp:'遂行評價(수행평가): 따를[遂] 행[行] + 평가[評價]. 학생의 학습 과제 수행 과정 및 결과를 직접 관찰해 판단하는 일.'},
+
+{t:'obj',u:'II단원 05과',pg:'45쪽',pts:1,
+ q:'\'走馬看山(주마간산)\'의 뜻으로 알맞은 것은?',
+ opts:['말을 타고 산을 넘음','말을 타고 달리며 산천을 구경한다는 뜻으로, 자세히 살피지 않고 대충 보고 지나감','산에서 말을 자유롭게 달리게 함','말처럼 빠르게 산을 오름','산길을 말처럼 힘차게 달림'],
+ ans:1,exp:'走馬看山(주마간산): 말[馬]을 타고[走] 달리며 산[山]을 봄[看]. 자세히 살피지 않고 대충 보고 지나감.'},
+
+{t:'obj',u:'II단원 06과',pg:'50쪽',pts:1,
+ q:'\'耳目\'의 두 번째 뜻으로 알맞은 것은?',
+ opts:['귀와 눈','오감 전체','주위나 관심','시각과 청각','얼굴 전체'],
+ ans:2,exp:'耳目(이목): ①귀[耳]와 눈[目], ②주위나 관심. 유의어: 관심(關心), 시선(視線), 눈길.'},
+
+{t:'obj',u:'II단원 06과',pg:'50쪽',pts:1,
+ q:'\'便宜店\'의 한자 풀이가 바르게 된 것은?',
+ opts:['편할 편 + 마땅할 의 + 가게 점','편할 편 + 옳을 의 + 집 점','편지 편 + 마땅할 의 + 가게 점','편할 편 + 의견 의 + 점포 점','클 편 + 마땅할 의 + 가게 점'],
+ ans:0,exp:'便宜店(편의점): 便(편할 편)+宜(마땅할 의)+店(가게 점). 고객의 편의[便宜]를 위해 24시간 운영하는 가게[店].'},
+
+{t:'obj',u:'II단원 06과',pg:'51쪽',pts:1,
+ q:'완곡어(婉曲語) \'小便\'의 원래 표현과 교과서에서 제시된 또 다른 완곡어가 바르게 짝지어진 것은?',
+ opts:['오줌 / 화장실(化粧室)','소변 / 대변','오줌 / 타계(他界)','변소 / 화장실','소변 / 화장실'],
+ ans:0,exp:'완곡어: 오줌→小便(소변)·化粧室(화장실), 별세→他界(타계)·別世(별세)'},
+
+// ── 단답형 1~5 ──────────────────────────────
+{t:'dan',u:'I단원 02과',pg:'20쪽 (한자 쓰기)',pts:2,
+ q:'다음 빈칸에 알맞은 한자 어휘를 보기에서 골라 한자로 쓰시오.',
+ bogi:['新裝','身長','市場','市長','伸張'],
+ subs:[
+   {lbl:'(1)',desc:'여러 가지 상품을 사고파는 일정한 장소 →',ans:'市場',alt:['시장']},
+   {lbl:'(2)',desc:'새롭게 단장하여 영업을 시작함 →',ans:'新裝',alt:['신장']}
+ ],
+ exp:'市場: 시 시 + 마당 장\n新裝: 새 신 + 꾸밀 장'},
+
+{t:'dan',u:'I단원 03과',pg:'29쪽 (한자 쓰기)',pts:2,
+ q:'다음 보기의 한자를 조합하여 빈칸에 알맞은 한자 어휘를 쓰시오.',
+ bogi:['蔘','湯','鷄','食','過'],
+ subs:[
+   {lbl:'(1)',desc:'닭의 내장을 빼고 인삼·대추 등을 넣어 끓인 보양 음식 →',ans:'參鷄湯',alt:['삼계탕']},
+   {lbl:'(2)',desc:'지나치게 많이 먹음 →',ans:'過食',alt:['과식']}
+ ],
+ exp:'參鷄湯: 蔘(인삼 삼)+鷄(닭 계)+湯(끓일 탕)\n過食: 過(지나칠 과)+食(먹을 식)'},
+
+{t:'dan',u:'I단원 02과',pg:'20쪽 음·뜻 쓰기',pts:2,
+ q:'다음 한자 어휘의 음(音)과 뜻을 쓰시오.',
+ bogi:[],
+ subs:[
+   {lbl:'謝過',desc:'음: (        )　　뜻: (                    )',ans:'사과 / 잘못에 대하여 용서를 빎',alt:['사과/잘못에 대해 용서를 빎','사과, 잘못에 대하여 용서를 빎']},
+   {lbl:'錄音',desc:'음: (        )　　뜻: (                    )',ans:'녹음 / 실제 소리를 기계 장치에 기록함',alt:['녹음/소리를 기계에 기록함','녹음, 실제의 소리를 나중에 그대로 다시 들을 수 있도록 기록함']}
+ ],
+ exp:'謝過(사과): 사과할 사 + 지날 과\n錄音(녹음): 기록할 록 + 소리 음'},
+
+{t:'dan',u:'II단원 04과',pg:'38쪽 음·뜻 쓰기',pts:2,
+ q:'다음 한자 어휘의 음(音)과 뜻을 쓰시오.',
+ bogi:[],
+ subs:[
+   {lbl:'配偶者',desc:'음: (        )　　뜻: (                    )',ans:'배우자 / 부부로서 짝이 되는 사람',alt:['배우자/짝이 되는 사람','배우자, 부부로서 짝이 되는 사람']},
+   {lbl:'花環',desc:'음: (        )　　뜻: (                    )',ans:'화환 / 꽃을 모아 고리 모양으로 만든 물건',alt:['화환/꽃을 고리 모양으로 만든 것','화환, 꽃으로 만든 고리 모양의 물건']}
+ ],
+ exp:'配偶者(배우자): 짝 배+짝 우+사람 자\n花環(화환): 꽃 화+고리 환'},
+
+{t:'dan',u:'II단원 05과',pg:'47쪽 (한자 쓰기)',pts:2,
+ q:'다음 빈칸에 알맞은 한자 어휘를 보기에서 찾아 한자로 쓰시오.',
+ bogi:['繼走','遲刻','球技'],
+ subs:[
+   {lbl:'(1)',desc:'학급[級]에서 교육 목표로 정한 덕목[訓] →',ans:'級訓',alt:['급훈']},
+   {lbl:'(2)',desc:'두[二] 사람[人]이 발목을 묶어 세[三] 발[脚]처럼 함께 뛰는 경기 →',ans:'二人三脚',alt:['이인삼각']}
+ ],
+ exp:'級訓: 등급 급 + 가르칠 훈\n二人三脚: 두 이+사람 인+석 삼+다리 각'},
+
+// ── 서논술형 1~3 ──────────────────────────────
+{t:'essay',u:'I단원 01·02과',pg:'14·20쪽',pts:6,
+ q:'다음 물음 (1)~(3)에 답하시오.',
+ sub:`(1) '瞬息間'과 '無盡藏'의 음(音)과 뜻을 각각 쓰시오.
+
+(2) '洋襪'과 '청바지'는 모두 혼종어(混種語)이다.
+    혼종어의 개념을 쓰고, 두 어휘의 한자 부분 음훈(音訓)을 각각 쓰시오.
+
+(3) 교과서에서 배운 동음이의어(同音異義語) 중 '녹음'에 해당하는 것을
+    한자 표기와 뜻을 포함하여 2가지 서술하시오.`,
+ ans:`(1)
+瞬息間(순식간): 눈 깜짝일 순+숨 쉴 식+사이 간. 눈을 한 번 깜짝이거나 숨을 한 번 쉴 만한 아주 짧은 동안.
+無盡藏(무진장): 없을 무+다할 진+간직할 장. 끝이 없을 정도로 많이 간직하고 있음.
+
+(2) 혼종어: 서로 다른 언어에서 유래한 요소가 합쳐져서 만들어진 어휘.
+洋襪: 洋(서양 양) — 서양에서 전해 온 버선
+청바지: 靑(푸를 청) — 푸른 바지
+
+(3)
+錄音(녹음): 실제의 소리를 나중에 그대로 다시 들을 수 있도록 기계 장치에 기록함.
+綠陰(녹음): 푸르게 우거진 나무 수풀, 또는 그 나무의 그늘.`,
+ check:['(1) 瞬息間 음·뜻 정확','(1) 無盡藏 음·뜻 정확','(2) 혼종어 개념 서술','(2) 洋襪·청바지 한자 음훈 서술','(3) 錄音 한자+뜻 포함','(3) 綠陰 한자+뜻 포함']},
+
+{t:'essay',u:'I단원 03과',pg:'26~27·29쪽',pts:7,
+ q:'다음 물음 (1)~(3)에 답하시오.',
+ sub:`(1) 아래 어휘의 한자 표기와 뜻을 각각 쓰시오.
+    ① 최애　② 음식　③ 산해진미　④ 오미자
+
+(2) '鷄卵有骨(계란유골)'의 뜻을 쓰고, 이 성어가 일상에서
+    어떤 상황에 사용되는지 예를 들어 서술하시오.
+
+(3) '適當量'에서 '量'을 '적당량'으로 쓰는 이유를 두음 법칙과
+    관련하여 서술하시오.`,
+ ans:`(1)
+① 最愛(최애): 가장[最] 사랑함[愛]
+② 飮食(음식): 마시는[飮] 것과 먹는[食] 것
+③ 山海珍味(산해진미): 산과 바다의 온갖 진귀한 재료로 차린 맛 좋은 음식
+④ 五味子(오미자): 다섯[五] 가지 맛[味]이 나는 열매[子]
+
+(2) 鷄卵有骨(계란유골): 계란에도 뼈가 있다는 뜻으로, 운수가 나쁜 사람은 모처럼 좋은 기회를 만나도 역시 일이 잘 안됨을 이르는 말.
+예) 드디어 좋은 기회가 생겼는데 또 일이 잘 안 풀릴 때 '정말 계란유골이네'라고 쓸 수 있다.
+
+(3) '量'이 한자어(適當)와 결합할 때는 두음 법칙을 적용하지 않고 '량'으로 그대로 적는다. 반면 '먹이량'처럼 고유어나 외래어와 결합할 때는 두음 법칙을 적용하여 '양'으로 적는다.`,
+ check:['(1) 最愛·飮食 한자 표기+뜻 정확','(1) 山海珍味·五味子 한자 표기+뜻 정확','(2) 鷄卵有骨 뜻 서술','(2) 사용 예시 포함','(3) 한자어+두음법칙 미적용 = 량 설명','(3) 고유어·외래어 결합시 \'양\' 대비 설명']},
+
+{t:'essay',u:'II단원 04·05과',pg:'38·44쪽',pts:7,
+ q:'다음 물음 (1)~(3)에 답하시오.',
+ sub:`(1) 아래 어휘의 한자 표기와 음·뜻을 각각 쓰시오.
+    ① 배우자　② 화환　③ 감동　④ 편지
+
+(2) '金枝玉葉(금지옥엽)'과 '愛之重之(애지중지)'의 뜻을 각각 쓰고,
+    두 성어의 공통된 의미를 한 문장으로 정리하시오.
+
+(3) '教學相長'의 뜻·유래를 쓰고, '不戰勝'에서
+    '不'을 '부'로 읽는 이유를 서술하시오.`,
+ ans:`(1)
+① 配偶者(배우자): 짝 배+짝 우+사람 자. 부부로서 짝이 되는 사람.
+② 花環(화환): 꽃 화+고리 환. 꽃을 모아 고리 모양으로 만든 물건.
+③ 感動(감동): 느낄 감+움직일 동. 크게 느껴 마음이 움직임.
+④ 便紙(편지): 편할 편+종이 지. 소식·안부·용무 등을 적어 보내는 글.
+
+(2)
+金枝玉葉(금지옥엽): 금으로 된 가지와 옥으로 된 잎이라는 뜻으로, 귀한 자손을 이르는 말.
+愛之重之(애지중지): 매우 사랑하고 소중히 여기는 모양.
+공통 의미: 소중한 존재를 매우 아끼고 귀하게 여기는 마음을 나타낸다.
+
+(3)
+教學相長(교학상장): 가르치고[教] 배우면서[學] 서로[相] 성장함[長]. '예기(禮記)'에서 유래.
+不戰勝(부전승)에서 '不'을 '부'로 읽는 이유: '不'은 'ㄷ'이나 'ㅈ' 앞에서 '부'로 읽기도 한다. '不戰勝'에서 '戰'이 'ㅈ'으로 시작하므로 '부전승'으로 읽는다.`,
+ check:['(1) 배우자·화환 한자 표기+뜻 정확','(1) 감동·편지 한자 표기+뜻 정확','(2) 금지옥엽·애지중지 뜻 각각 서술','(2) 공통 의미 한 문장 정리','(3) 교학상장 뜻+예기(禮記) 유래','(3) 不의 \'부\' 발음 이유 서술']}
+];
+
+let cur=0,score=0,stats={c:0,w:0,e:0};
+const total=Q.reduce((s,q)=>s+q.pts,0);
+
+function render(){
+  if(cur>=Q.length){showResult();return;}
+  const q=Q[cur];
+  const pct=Math.round(cur/Q.length*100);
+  document.getElementById('prog').style.width=pct+'%';
+  document.getElementById('pcnt').textContent=pct+'%';
+  document.getElementById('pscore').textContent='점수: '+score+' / '+total;
+  if(q.t==='obj') renderObj(q);
+  else if(q.t==='dan') renderDan(q);
+  else renderEssay(q);
+}
+
+function qNum(){return cur+1;}
+function totalQ(){return Q.length;}
+
+function renderObj(q){
+  const opts=q.opts.map((o,i)=>`<button class="opt" onclick="chkObj(${i})" id="op${i}"><span style="color:var(--color-text-secondary);margin-right:7px;">${['①','②','③','④','⑤'][i]}</span>${o}</button>`).join('');
+  doc(`<div class="q-card">
+    <div class="q-top"><span class="badge b-obj">객관식</span><span class="q-num">${qNum()} / ${totalQ()}</span><span class="q-pts">[${q.pts}점] ${q.u} · ${q.pg}</span></div>
+    <div class="q-text">${q.q}</div>
+    <div class="opts">${opts}</div>
+    <div class="fb" id="fb"></div>
+  </div><button class="btn btn-next" id="nxt" onclick="next()">다음 문제 →</button>`);
+}
+function chkObj(i){
+  const q=Q[cur];
+  document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+  const fb=document.getElementById('fb');
+  if(i===q.ans){
+    document.getElementById('op'+i).classList.add('correct');
+    fb.className='fb fb-ok'; fb.textContent='✓ 정답! +'+q.pts+'점\n\n'+q.exp;
+    score+=q.pts; stats.c++;
+  } else {
+    document.getElementById('op'+i).classList.add('wrong');
+    document.getElementById('op'+q.ans).classList.add('reveal');
+    fb.className='fb fb-ng'; fb.textContent='✗ 오답. 정답: '+['①','②','③','④','⑤'][q.ans]+'\n\n'+q.exp;
+    stats.w++;
+  }
+  fb.style.display='block';
+  show('nxt');
+  document.getElementById('pscore').textContent='점수: '+score+' / '+total;
+}
+
+function renderDan(q){
+  const bo=q.bogi.length?`<div class="bogi-box"><strong>보기</strong>${q.bogi.join('　')}</div>`:'';
+  const rows=q.subs.map((s,i)=>`<div class="sub-row">
+    <div class="sub-label">${s.lbl}</div>
+    <div style="flex:1">
+      <div class="sub-desc">${s.desc}</div>
+      <input class="han-inp wide" type="text" id="di${i}" placeholder="답 입력" onkeydown="if(event.key==='Enter')chkDan()"/>
+    </div></div>`).join('');
+  doc(`<div class="q-card">
+    <div class="q-top"><span class="badge b-dan">단답형</span><span class="q-num">${qNum()} / ${totalQ()}</span><span class="q-pts">[${q.pts}점] ${q.u} · ${q.pg}</span></div>
+    <div class="q-text">${q.q}</div>
+    ${bo}
+    <div class="sub-rows">${rows}</div>
+    <div class="act-row">
+      <button class="btn" onclick="chkDan()">확인</button>
+      <button class="btn" onclick="showDanAns()">정답 보기</button>
+    </div>
+    <div class="fb" id="fb"></div>
+  </div><button class="btn btn-next" id="nxt" onclick="next()">다음 문제 →</button>`);
+  setTimeout(()=>{const e=document.getElementById('di0');if(e)e.focus();},50);
+}
+function chkDan(){
+  const q=Q[cur];
+  let allOk=true; let wrongTxt='';
+  q.subs.forEach((s,i)=>{
+    const el=document.getElementById('di'+i);
+    if(!el||el.disabled)return;
+    const v=el.value.trim();
+    const ok=v===s.ans||(s.alt&&s.alt.some(a=>a===v));
+    el.disabled=true; el.classList.add(ok?'ok':'ng');
+    if(!ok){allOk=false; wrongTxt+=s.lbl+' 정답: '+s.ans+'\n';}
+  });
+  const fb=document.getElementById('fb');
+  if(allOk){fb.className='fb fb-ok';fb.textContent='✓ 정답! +'+q.pts+'점\n\n'+q.exp;score+=q.pts;stats.c++;}
+  else{fb.className='fb fb-ng';fb.textContent='✗ 일부 오답.\n'+wrongTxt+'\n'+q.exp;stats.w++;}
+  fb.style.display='block'; show('nxt');
+  document.getElementById('pscore').textContent='점수: '+score+' / '+total;
+}
+function showDanAns(){
+  const q=Q[cur];
+  q.subs.forEach((_,i)=>{const e=document.getElementById('di'+i);if(e)e.disabled=true;});
+  const fb=document.getElementById('fb');
+  fb.className='fb fb-info';
+  fb.textContent='정답:\n'+q.subs.map(s=>s.lbl+' → '+s.ans).join('\n')+'\n\n'+q.exp;
+  fb.style.display='block'; show('nxt'); stats.w++;
+}
+
+function renderEssay(q){
+  doc(`<div class="q-card">
+    <div class="q-top"><span class="badge b-essay">서논술형</span><span class="q-num">${qNum()} / ${totalQ()}</span><span class="q-pts">[${q.pts}점] ${q.u} · ${q.pg}</span></div>
+    <div class="q-text">${q.q}</div>
+    <div class="q-box">${q.sub}</div>
+    <textarea class="essay-ta" id="eta" placeholder="한자 표기·음·뜻을 포함하여 서술하세요..."></textarea>
+    <div class="act-row"><button class="btn" onclick="showEssay()">모범 답안 확인</button></div>
+    <div class="fb" id="fb"></div>
+  </div><button class="btn btn-next" id="nxt" onclick="next()">다음 문제 →</button>`);
+}
+function showEssay(){
+  const q=Q[cur];
+  const el=document.getElementById('eta'); if(el)el.disabled=true;
+  const fb=document.getElementById('fb');
+  const ck=q.check?'\n\n📋 채점 포인트:\n'+q.check.map((c,i)=>'  '+(i+1)+'. '+c).join('\n'):'';
+  fb.className='fb fb-info';
+  fb.textContent='모범 답안:\n\n'+q.ans+ck+'\n\n자신의 답과 비교해 채점하세요!';
+  fb.style.display='block';
+  const sd=document.createElement('div');
+  sd.className='self-row';
+  sd.innerHTML=`<button class="self-btn s-ok" onclick="selfS(true,${q.pts})">잘 썼어요 (+${q.pts}점)</button>
+    <button class="self-btn s-ng" onclick="selfS(false,0)">더 공부해야 해요</button>`;
+  fb.after(sd); stats.e++;
+}
+function selfS(ok,pts){
+  if(ok){score+=pts;stats.c++;}else stats.w++;
+  document.querySelectorAll('.self-btn').forEach(b=>b.disabled=true);
+  show('nxt');
+  document.getElementById('pscore').textContent='점수: '+score+' / '+total;
+}
+
+function next(){cur++;render();}
+function doc(h){document.getElementById('qa').innerHTML=h;}
+function show(id){const e=document.getElementById(id);if(e)e.style.display='inline-block';}
+
+function showResult(){
+  document.getElementById('prog').style.width='100%';
+  document.getElementById('pcnt').textContent='100%';
+  const pct=Math.round(score/total*100);
+  const msg=pct>=90?'🎉 완벽해요! 시험 준비 완료!':pct>=70?'💪 잘 했어요! 조금만 더 복습하면 완벽!':'📚 틀린 문제 중심으로 다시 복습해 봐요!';
+  document.getElementById('qa').innerHTML=`<div class="result-card">
+    <div style="font-size:14px;color:var(--color-text-secondary)">한문 중간고사 최종 모의고사 결과</div>
+    <div class="r-score">${score}<span style="font-size:24px;color:var(--color-text-secondary)"> / ${total}</span></div>
+    <div style="font-size:15px;margin-bottom:.5rem;">${msg}</div>
+    <div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:1rem;">정답률 ${pct}%</div>
+    <div class="r-grid">
+      <div class="r-item"><div class="r-num" style="color:#1D5FA4">${Q.filter(q=>q.t==='obj').length}</div><div class="r-desc">객관식</div></div>
+      <div class="r-item"><div class="r-num" style="color:#0B6648">${Q.filter(q=>q.t==='dan').length}</div><div class="r-desc">단답형</div></div>
+      <div class="r-item"><div class="r-num" style="color:#8A4A0A">${Q.filter(q=>q.t==='essay').length}</div><div class="r-desc">서논술형</div></div>
+    </div>
+    <button class="restart" onclick="restart()">다시 풀기 🔄</button>
+  </div>`;
+}
+function restart(){cur=0;score=0;stats={c:0,w:0,e:0};render();}
+render();
+</script>
+</body>
+</html>
