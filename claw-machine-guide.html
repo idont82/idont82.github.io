@@ -180,12 +180,31 @@ header p{
   background:linear-gradient(135deg,#e94560,#ff6b81);
   color:#fff;text-decoration:none;font-weight:bold;
   font-size:clamp(13px,2.8vw,17px);
-  box-shadow:0 4px 20px rgba(233,69,96,0.4);
-  transition:transform 0.2s,box-shadow 0.2s;
+  box-shadow:
+    0 0 0 1px rgba(255, 168, 196, 0.28),
+    0 8px 24px rgba(233,69,96,0.34),
+    0 0 24px rgba(255,105,180,0.22);
+  transition:transform 0.2s,box-shadow 0.2s,filter 0.2s;
+  position:relative;
+  overflow:hidden;
+  animation:play-banner-pink-pulse 1.45s ease-in-out infinite;
+}
+.play-banner a::after{
+  content:'';
+  position:absolute;
+  inset:-28%;
+  background:linear-gradient(115deg,transparent 34%,rgba(255,255,255,0.55) 50%,transparent 66%);
+  transform:translateX(-135%) rotate(10deg);
+  animation:play-banner-pink-sheen 2.1s linear infinite;
+  pointer-events:none;
 }
 .play-banner a:hover{
   transform:translateY(-2px);
-  box-shadow:0 6px 28px rgba(233,69,96,0.5);
+  box-shadow:
+    0 0 0 1px rgba(255, 196, 221, 0.36),
+    0 10px 30px rgba(233,69,96,0.42),
+    0 0 34px rgba(255,105,180,0.34);
+  filter:brightness(1.04);
 }
 
 /* ── Footer / Ad ── */
@@ -471,6 +490,27 @@ footer{
   animation:spin 0.8s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
+@keyframes play-banner-pink-pulse{
+  0%,100%{
+    box-shadow:
+      0 0 0 1px rgba(255, 168, 196, 0.28),
+      0 8px 24px rgba(233,69,96,0.34),
+      0 0 24px rgba(255,105,180,0.22);
+  }
+  50%{
+    box-shadow:
+      0 0 0 1px rgba(255, 208, 229, 0.42),
+      0 10px 30px rgba(233,69,96,0.44),
+      0 0 40px rgba(255,105,180,0.38);
+  }
+}
+@keyframes play-banner-pink-sheen{
+  0%{transform:translateX(-135%) rotate(10deg);opacity:0}
+  18%{opacity:0}
+  34%{opacity:0.95}
+  48%{transform:translateX(135%) rotate(10deg);opacity:0}
+  100%{transform:translateX(135%) rotate(10deg);opacity:0}
+}
 @keyframes coupang-neon-pulse{
   0%,100%{
     box-shadow:
@@ -611,6 +651,17 @@ function renderListView(areas){
   areas.forEach(a => {
     const isEmpty = a.spotCount === 0;
     if(a.id === 'geondae'){
+      html += `
+        <div class="area-card coupang-card" style="cursor:default; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px;">
+          <a href="https://link.coupang.com/a/ek4gDo" target="_blank" referrerpolicy="unsafe-url" style="display:block; transform:scale(0.85); margin:-15px 0;">
+            <img src="https://image1.coupangcdn.com/image/affiliate/banner/e862e13c7284f83115bf1e796a0c81f8@2x.jpg" alt="업소용 미니 인형뽑기 기계" width="120" height="240" style="border-radius:8px;">
+          </a>
+          <div style="font-size:10px; color:#667799; text-align:center; margin-top:5px; font-weight:500; line-height:1.2;">
+            쿠팡 파트너스 활동의 일환으로<br>일정액의 수수료를 제공받을 수 있습니다
+          </div>
+        </div>`;
+    }
+    if(false && a.id === 'geondae'){
       html += `
         <div class="area-card coupang-card" style="cursor:default; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px;">
           <a href="https://link.coupang.com/a/ek4gDo" target="_blank" referrerpolicy="unsafe-url" style="display:block; transform:scale(0.85); margin:-15px 0;">
