@@ -14,7 +14,7 @@
 <meta property="og:title" content="서울 인형뽑기 성지 가이드">
 <meta property="og:description" content="서울 인형뽑기 성지 총정리! 홍대, 강남, 건대, 연신내, 종로, 신림 지역별 매장 위치·가격·꿀팁 한눈에.">
 <meta property="og:url" content="https://idont82.github.io/claw-machine-guide.html">
-<meta property="og:image" content="https://idont82.github.io/images/main-thumbnail.png">
+<meta property="og:image" content="https://idont82.github.io/images/main-thumbnail2.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ko_KR">
@@ -22,7 +22,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="서울 인형뽑기 성지 가이드">
 <meta name="twitter:description" content="서울 인형뽑기 성지 총정리! 홍대, 강남, 건대, 연신내, 종로, 신림 지역별 매장 위치·가격·꿀팁.">
-<meta name="twitter:image" content="https://idont82.github.io/images/main-thumbnail.png">
+<meta name="twitter:image" content="https://idont82.github.io/images/main-thumbnail2.png">
 <meta name="robots" content="index, follow">
 <meta name="googlebot" content="index, follow">
 <meta name="naver-site-verification" content="naver7151b1a0bf41ea39a21f8d07bb84a3b7">
@@ -33,7 +33,7 @@
   "name": "서울 인형뽑기 성지 가이드",
   "url": "https://idont82.github.io/claw-machine-guide.html",
   "description": "서울 인형뽑기 성지 총정리. 홍대, 강남, 건대, 연신내, 종로, 신림 지역별 인형뽑기 매장 정보.",
-  "image": "https://idont82.github.io/images/main-thumbnail.png",
+  "image": "https://idont82.github.io/images/main-thumbnail2.png",
   "inLanguage": "ko",
   "isPartOf": {
     "@type": "WebSite",
@@ -42,20 +42,80 @@
   }
 }
 </script>
+<script>
+try {
+  const savedTheme = localStorage.getItem('clawGuideTheme');
+  if (savedTheme) {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+} catch (e) {}
+</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a18;
+  --text:#e0e0f0;
+  --muted:#8899bb;
+  --muted-2:#99aacc;
+  --muted-3:#667799;
+  --surface:#151530;
+  --surface-2:#1a1a40;
+  --surface-soft:rgba(255,255,255,0.03);
+  --surface-soft-2:rgba(255,255,255,0.06);
+  --border:#2a2a55;
+  --border-2:#333366;
+  --border-soft:#1a1a33;
+  --header-bg:linear-gradient(135deg,#1a1040 0%,#2a1860 40%,#4a2080 100%);
+  --header-border:#6a40cc;
+  --topbar-bg:#1a1a33;
+  --topbar-link:#00d1ff;
+  --banner-bg:linear-gradient(180deg,rgba(80,40,160,0.3),transparent);
+  --route-bg:rgba(40,60,120,0.2);
+  --comment-bg:rgba(40,40,80,0.3);
+  --footer:#444466;
+  --empty:#556677;
+  --loading:#667788;
+  --hover-shadow:0 6px 24px rgba(80,60,180,0.2);
+}
+html[data-theme="light"]{
+  --bg:#f6f1ea;
+  --text:#261d18;
+  --muted:#6e6158;
+  --muted-2:#806f64;
+  --muted-3:#918176;
+  --surface:#fffaf4;
+  --surface-2:#fff;
+  --surface-soft:rgba(160,114,70,0.06);
+  --surface-soft-2:rgba(160,114,70,0.1);
+  --border:#e6d8ca;
+  --border-2:#d8c4b2;
+  --border-soft:#ebdfd4;
+  --header-bg:linear-gradient(135deg,#fff6ea 0%,#ffe8d3 46%,#ffd6bd 100%);
+  --header-border:#e7b48b;
+  --topbar-bg:#fff8f0;
+  --topbar-link:#c35b22;
+  --banner-bg:linear-gradient(180deg,rgba(255,205,165,0.34),transparent);
+  --route-bg:rgba(255,185,120,0.18);
+  --comment-bg:rgba(255,242,229,0.96);
+  --footer:#8d7565;
+  --empty:#968276;
+  --loading:#7d7067;
+  --hover-shadow:0 10px 28px rgba(137,95,58,0.12);
+}
 body{
   font-family:'Segoe UI','Malgun Gothic',sans-serif;
-  background:#0a0a18;color:#e0e0f0;
+  background:var(--bg);color:var(--text);
   min-height:100vh;
 }
 
 /* ── Header ── */
 header{
-  background:linear-gradient(135deg,#1a1040 0%,#2a1860 40%,#4a2080 100%);
+  background:var(--header-bg);
   padding:clamp(24px,5vw,48px) 20px;text-align:center;
   position:relative;overflow:hidden;
-  border-bottom:3px solid #6a40cc;
+  border-bottom:3px solid var(--header-border);
 }
 header::before{
   content:'';position:absolute;inset:0;
@@ -70,14 +130,49 @@ header h1{
   margin-bottom:8px;position:relative;
 }
 header p{
-  color:#bbaadd;font-size:clamp(13px,2.5vw,18px);
+  color:var(--muted);font-size:clamp(13px,2.5vw,18px);
   position:relative;
 }
+
+.utility-header{
+  background:var(--topbar-bg);
+  border-bottom:1px solid var(--border);
+  padding:15px 0;
+}
+.utility-header-inner{
+  max-width:900px;margin:0 auto;padding:0 16px;
+  display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
+  text-align:center;
+}
+.utility-text{
+  color:var(--muted);font-size:0.9rem;
+}
+.utility-link{
+  display:inline-block;color:var(--topbar-link);
+  font-weight:700;text-decoration:none;font-size:0.9rem;
+}
+.utility-header span{color:var(--muted)!important}
+.utility-header a{color:var(--topbar-link)!important}
+.theme-toggle{
+  border:1px solid var(--border-2);
+  background:var(--surface);
+  color:var(--text);
+  border-radius:999px;
+  padding:8px 14px;
+  font:inherit;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;
+  box-shadow:0 4px 14px rgba(0,0,0,0.08);
+  transition:transform 0.2s, border-color 0.2s, background 0.2s;
+}
+.theme-toggle:hover{transform:translateY(-1px)}
 
 /* ── Play banner ── */
 .play-banner{
   text-align:center;padding:16px;
-  background:linear-gradient(180deg,rgba(80,40,160,0.3),transparent);
+  background:var(--banner-bg);
 }
 .play-banner a{
   display:inline-flex;align-items:center;gap:10px;
@@ -108,14 +203,14 @@ header p{
 /* ── Coupang Banner In Detail ── */
 .detail-ad-banner{
   margin:20px 0;text-align:center;
-  background:rgba(255,255,255,0.03);padding:16px;
-  border-radius:14px;border:1px solid rgba(255,255,255,0.05);
+  background:var(--surface-soft);padding:16px;
+  border-radius:14px;border:1px solid var(--border);
 }
 .detail-ad-banner a{display:inline-block;transition:transform 0.2s}
 .detail-ad-banner a:hover{transform:scale(1.02)}
 .detail-ad-banner img{border-radius:8px;box-shadow:0 4px 15px rgba(0,0,0,0.3)}
 .detail-ad-label{
-  font-size:11px;color:#7788aa;margin-top:10px;font-weight:500;
+  font-size:11px;color:var(--muted-3);margin-top:10px;font-weight:500;
 }
 
 /* ── Main ── */
@@ -128,34 +223,63 @@ main{max-width:900px;margin:0 auto;padding:16px}
   gap:14px;
 }
 .area-card{
-  background:linear-gradient(145deg,#151530,#1a1a40);
-  border:1px solid #2a2a55;border-radius:16px;
+  background:linear-gradient(145deg,var(--surface),var(--surface-2));
+  border:1px solid var(--border);border-radius:16px;
   padding:18px;cursor:pointer;
   transition:transform 0.2s,border-color 0.2s,box-shadow 0.2s;
 }
 .area-card:hover{
   transform:translateY(-3px);border-color:#5544aa;
-  box-shadow:0 6px 24px rgba(80,60,180,0.2);
+  box-shadow:var(--hover-shadow);
 }
 .area-card.empty{opacity:0.45;cursor:default}
-.area-card.empty:hover{transform:none;border-color:#2a2a55;box-shadow:none}
+.area-card.empty:hover{transform:none;border-color:var(--border);box-shadow:none}
+.area-card.coupang-card{
+  position:relative;
+  overflow:hidden;
+  border-color:rgba(255,204,68,0.55)!important;
+  background:linear-gradient(145deg,rgba(255,212,92,0.08),rgba(255,255,255,0.03))!important;
+  box-shadow:
+    0 0 0 1px rgba(255,215,102,0.24),
+    0 0 14px rgba(255,204,68,0.18),
+    0 0 28px rgba(255,170,40,0.12);
+  animation:coupang-neon-pulse 1.35s ease-in-out infinite;
+}
+.area-card.coupang-card::after{
+  content:'';
+  position:absolute;
+  inset:-30%;
+  background:linear-gradient(115deg,transparent 34%,rgba(255,234,164,0.32) 50%,transparent 66%);
+  transform:translateX(-135%) rotate(10deg);
+  animation:coupang-neon-sheen 2.2s linear infinite;
+  pointer-events:none;
+}
+.area-card.coupang-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(255,226,122,0.82)!important;
+  box-shadow:
+    0 0 0 1px rgba(255,236,166,0.38),
+    0 0 18px rgba(255,215,102,0.34),
+    0 0 38px rgba(255,170,40,0.24);
+}
+.area-card.coupang-card > *{position:relative;z-index:1}
 .area-card .card-top{
   display:flex;align-items:center;gap:10px;margin-bottom:10px;
 }
 .area-card .card-emoji{font-size:clamp(28px,7vw,36px)}
 .area-card .card-title{
-  font-size:clamp(17px,3.5vw,22px);font-weight:700;color:#fff;
+  font-size:clamp(17px,3.5vw,22px);font-weight:700;color:var(--text);
 }
 .area-card .card-station{
-  color:#8899bb;font-size:clamp(11px,2.5vw,13px);
+  color:var(--muted);font-size:clamp(11px,2.5vw,13px);
 }
 .area-card .card-summary{
-  color:#9999bb;font-size:clamp(12px,2.5vw,14px);
+  color:var(--muted-2);font-size:clamp(12px,2.5vw,14px);
   margin-bottom:10px;line-height:1.5;
 }
 .area-card .card-stats{
   display:flex;flex-wrap:wrap;gap:6px 12px;
-  font-size:clamp(11px,2.3vw,13px);color:#8899bb;
+  font-size:clamp(11px,2.3vw,13px);color:var(--muted);
   margin-bottom:10px;
 }
 .area-card .card-stats span{display:flex;align-items:center;gap:4px}
@@ -164,8 +288,8 @@ main{max-width:900px;margin:0 auto;padding:16px}
 }
 .env-tag{
   padding:2px 8px;border-radius:8px;font-size:11px;
-  background:rgba(100,100,200,0.12);color:#99aacc;
-  border:1px solid #2a2a55;
+  background:var(--surface-soft);color:var(--muted-2);
+  border:1px solid var(--border);
 }
 .area-card .card-tags{display:flex;gap:4px;flex-wrap:wrap}
 .spot-tag{
@@ -181,21 +305,21 @@ main{max-width:900px;margin:0 auto;padding:16px}
 .detail-back{
   display:inline-flex;align-items:center;gap:6px;
   padding:8px 16px;border-radius:10px;
-  background:rgba(40,40,80,0.5);border:1px solid #333366;
-  color:#99aacc;cursor:pointer;font-size:14px;
+  background:var(--surface-soft);border:1px solid var(--border-2);
+  color:var(--muted-2);cursor:pointer;font-size:14px;
   font-family:inherit;margin-bottom:16px;
   transition:all 0.2s;
 }
-.detail-back:hover{background:rgba(60,60,120,0.5);color:#ccddff}
+.detail-back:hover{background:var(--surface-soft-2);color:var(--text)}
 .detail-header{
   margin-bottom:20px;
 }
 .detail-header h2{
-  font-size:clamp(22px,5vw,32px);color:#fff;
+  font-size:clamp(22px,5vw,32px);color:var(--text);
   display:flex;align-items:center;gap:10px;
 }
 .detail-header .sub{
-  color:#8899bb;font-size:clamp(13px,2.8vw,16px);
+  color:var(--muted);font-size:clamp(13px,2.8vw,16px);
   margin-top:4px;
 }
 
@@ -203,7 +327,7 @@ main{max-width:900px;margin:0 auto;padding:16px}
 .section-title{
   font-size:clamp(15px,3vw,18px);font-weight:700;color:#ccddff;
   margin:24px 0 12px;padding-bottom:8px;
-  border-bottom:1px solid #222244;
+  border-bottom:1px solid var(--border-soft);
   display:flex;align-items:center;gap:8px;
 }
 .route-steps{
@@ -214,8 +338,8 @@ main{max-width:900px;margin:0 auto;padding:16px}
   counter-increment:step;
   padding:10px 12px 10px 42px;
   position:relative;
-  font-size:clamp(13px,2.8vw,15px);color:#aabbcc;
-  border-left:2px solid #333366;
+  font-size:clamp(13px,2.8vw,15px);color:var(--muted-2);
+  border-left:2px solid var(--border-2);
   margin-left:14px;
 }
 .route-steps li:last-child{border-left-color:transparent}
@@ -228,13 +352,13 @@ main{max-width:900px;margin:0 auto;padding:16px}
   display:flex;align-items:center;justify-content:center;
 }
 .route-distance{
-  color:#88aacc;font-size:14px;margin:10px 0;
-  padding:8px 14px;background:rgba(40,60,120,0.2);
+  color:var(--muted-2);font-size:14px;margin:10px 0;
+  padding:8px 14px;background:var(--route-bg);
   border-radius:10px;display:inline-block;
 }
 .map-container{
   margin:14px 0;border-radius:12px;overflow:hidden;
-  border:1px solid #2a2a55;
+  border:1px solid var(--border);
 }
 .map-container iframe{
   width:100%;height:300px;border:none;
@@ -245,7 +369,7 @@ main{max-width:900px;margin:0 auto;padding:16px}
 }
 .shorts-container iframe{
   width:min(100%, 360px);height:640px;border:none;
-  border-radius:12px;border:1px solid #2a2a55;
+  border-radius:12px;border:1px solid var(--border);
 }
 .map-actions{
   display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;
@@ -264,8 +388,8 @@ main{max-width:900px;margin:0 auto;padding:16px}
 /* Spot cards */
 .spot-list{display:flex;flex-direction:column;gap:12px}
 .spot-card{
-  background:linear-gradient(145deg,#151530,#1a1a40);
-  border:1px solid #2a2a55;border-radius:14px;
+  background:linear-gradient(145deg,var(--surface),var(--surface-2));
+  border:1px solid var(--border);border-radius:14px;
   padding:16px;transition:border-color 0.2s;
 }
 .spot-card:hover{border-color:#4a4a88}
@@ -278,7 +402,7 @@ main{max-width:900px;margin:0 auto;padding:16px}
   gap:8px;margin-bottom:8px;
 }
 .spot-name{
-  font-size:clamp(15px,3vw,18px);font-weight:700;color:#fff;
+  font-size:clamp(15px,3vw,18px);font-weight:700;color:var(--text);
 }
 .spot-rec-badge{
   padding:3px 10px;border-radius:8px;font-size:11px;font-weight:700;
@@ -288,20 +412,20 @@ main{max-width:900px;margin:0 auto;padding:16px}
 }
 .spot-info{
   display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;
-  font-size:clamp(12px,2.5vw,14px);color:#8899bb;
+  font-size:clamp(12px,2.5vw,14px);color:var(--muted);
   margin-bottom:8px;
 }
-.spot-info .label{color:#667799;font-weight:600}
+.spot-info .label{color:var(--muted-3);font-weight:600}
 .spot-rating{
   display:flex;align-items:center;gap:6px;
   margin-bottom:8px;
 }
 .spot-stars{color:#ffcc44;font-size:16px;letter-spacing:2px}
-.spot-rating-num{color:#99aacc;font-size:13px}
+.spot-rating-num{color:var(--muted-2);font-size:13px}
 .spot-comment{
-  color:#aabbcc;font-size:clamp(12px,2.5vw,14px);
+  color:var(--muted-2);font-size:clamp(12px,2.5vw,14px);
   line-height:1.6;padding:10px 12px;
-  background:rgba(40,40,80,0.3);border-radius:10px;
+  background:var(--comment-bg);border-radius:10px;
   border-left:3px solid #4a2080;
   margin-bottom:8px;
 }
@@ -310,7 +434,7 @@ main{max-width:900px;margin:0 auto;padding:16px}
 /* Empty state */
 .empty-state{
   text-align:center;padding:48px 20px;
-  color:#556677;font-size:clamp(14px,3vw,17px);
+  color:var(--empty);font-size:clamp(14px,3vw,17px);
   line-height:2;
 }
 .map-container img{
@@ -320,7 +444,7 @@ main{max-width:900px;margin:0 auto;padding:16px}
 .size-tag{
   display:inline-flex;align-items:center;gap:4px;
   padding:4px 10px;border-radius:8px;
-  background:rgba(255,255,255,0.05);font-size:13px;font-weight:600;
+  background:var(--surface-soft);font-size:13px;font-weight:600;
 }
 .size-대형{color:#ffcc44;border:1px solid rgba(255,204,68,0.3)}
 .size-중형{color:#88ccff;border:1px solid rgba(136,204,255,0.3)}
@@ -331,13 +455,13 @@ main{max-width:900px;margin:0 auto;padding:16px}
 /* ── Footer ── */
 footer{
   text-align:center;padding:24px;
-  color:#444466;font-size:12px;
-  border-top:1px solid #1a1a33;margin-top:32px;
+  color:var(--footer);font-size:12px;
+  border-top:1px solid var(--border-soft);margin-top:32px;
 }
 
 /* ── Loading ── */
 .loading{
-  text-align:center;padding:40px;color:#667788;
+  text-align:center;padding:40px;color:var(--loading);
   font-size:14px;
 }
 .loading::after{
@@ -347,14 +471,72 @@ footer{
   animation:spin 0.8s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
+@keyframes coupang-neon-pulse{
+  0%,100%{
+    box-shadow:
+      0 0 0 1px rgba(255,215,102,0.22),
+      0 0 12px rgba(255,204,68,0.16),
+      0 0 24px rgba(255,170,40,0.1);
+  }
+  50%{
+    box-shadow:
+      0 0 0 1px rgba(255,240,176,0.42),
+      0 0 24px rgba(255,215,102,0.4),
+      0 0 44px rgba(255,170,40,0.24);
+  }
+}
+@keyframes coupang-neon-sheen{
+  0%{transform:translateX(-135%) rotate(10deg);opacity:0}
+  18%{opacity:0}
+  32%{opacity:0.95}
+  48%{transform:translateX(135%) rotate(10deg);opacity:0}
+  100%{transform:translateX(135%) rotate(10deg);opacity:0}
+}
+html[data-theme="light"] header h1{
+  background:linear-gradient(90deg,#c85d1e,#de8c2f,#8e52ef);
+  -webkit-background-clip:text;
+  background-clip:text;
+}
+html[data-theme="light"] .section-title{color:#6f4ee2}
+html[data-theme="light"] .map-btn.secondary{
+  background:linear-gradient(135deg,#c9b8aa,#a88f80);
+  color:#fff;
+}
+html[data-theme="light"] .area-card.coupang-card{
+  border-color:rgba(217,145,44,0.9)!important;
+  background:linear-gradient(145deg,rgba(255,241,214,0.96),rgba(255,232,190,0.92))!important;
+  box-shadow:
+    0 0 0 1px rgba(237,176,76,0.5),
+    0 0 22px rgba(255,187,73,0.34),
+    0 0 42px rgba(224,148,39,0.2);
+}
+html[data-theme="light"] .area-card.coupang-card::after{
+  background:linear-gradient(115deg,transparent 34%,rgba(255,255,255,0.7) 50%,transparent 66%);
+}
+html[data-theme="light"] .area-card.coupang-card:hover{
+  border-color:rgba(202,118,19,1)!important;
+  box-shadow:
+    0 0 0 1px rgba(214,139,31,0.66),
+    0 0 28px rgba(255,184,65,0.48),
+    0 0 54px rgba(214,139,31,0.28);
+}
+html[data-theme="light"] .area-card:hover,
+html[data-theme="light"] .spot-card:hover{
+  border-color:#d6996d;
+}
+html[data-theme="light"] .loading::after{
+  border:3px solid #e3d5ca;
+  border-top-color:#c66d31;
+}
 </style>
 </head>
 <body>
 
-<header style="background: #1a1a33; border-bottom: 1px solid #2a2a55; padding: 15px 0;">
-  <div style="max-width: 900px; margin: 0 auto; padding: 0 16px; text-align: center;">
+<header class="utility-header">
+  <div class="utility-header-inner">
     <span style="color: #8899bb; font-size: 0.9rem;">황금 가성비 골드픽에서 쇼핑 정보를 확인하세요!</span>
     <a href="/" style="display: inline-block; margin-left: 10px; color: #00d1ff; font-weight: bold; text-decoration: none; font-size: 0.9rem;">가성비 TOP 3 구매 가이드 보러가기 →</a>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false">☀️ 라이트 테마</button>
   </div>
 </header>
 
@@ -383,6 +565,30 @@ footer{
 let areasData = null;
 const detailCache = {};
 
+function applyTheme(theme){
+  document.documentElement.setAttribute('data-theme', theme);
+  const themeToggle = document.getElementById('themeToggle');
+  if(themeToggle){
+    const isLight = theme === 'light';
+    themeToggle.textContent = isLight ? '🌙 다크 테마' : '☀️ 라이트 테마';
+    themeToggle.setAttribute('aria-pressed', String(isLight));
+  }
+}
+
+function initThemeToggle(){
+  const themeToggle = document.getElementById('themeToggle');
+  if(!themeToggle) return;
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+  applyTheme(currentTheme);
+  themeToggle.addEventListener('click', () => {
+    const nextTheme = (document.documentElement.getAttribute('data-theme') || 'dark') === 'light' ? 'dark' : 'light';
+    applyTheme(nextTheme);
+    try {
+      localStorage.setItem('clawGuideTheme', nextTheme);
+    } catch (e) {}
+  });
+}
+
 async function loadAreas(){
   if(areasData) return areasData;
   const res = await fetch('data/areas.json');
@@ -404,6 +610,17 @@ function renderListView(areas){
   
   areas.forEach(a => {
     const isEmpty = a.spotCount === 0;
+    if(a.id === 'geondae'){
+      html += `
+        <div class="area-card coupang-card" style="cursor:default; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px;">
+          <a href="https://link.coupang.com/a/ek4gDo" target="_blank" referrerpolicy="unsafe-url" style="display:block; transform:scale(0.85); margin:-15px 0;">
+            <img src="https://image1.coupangcdn.com/image/affiliate/banner/e862e13c7284f83115bf1e796a0c81f8@2x.jpg" alt="?낆냼??誘몃땲 ?명삎戮묎린 湲곌퀎" width="120" height="240" style="border-radius:8px;">
+          </a>
+          <div style="font-size:10px; color:#667799; text-align:center; margin-top:5px; font-weight:500; line-height:1.2;">
+            ???ъ뒪?낆? 荑좏뙜 ?뚰듃?덉뒪 ?쒕룞???쇳솚?쇰줈<br>?쇱젙?≪쓽 ?섏닔猷뚮? ?쒓났諛쏆뒿?덈떎
+          </div>
+        </div>`;
+    }
     html += `
       <div class="area-card${isEmpty?' empty':''}" ${isEmpty?'':`onclick="location.hash='${a.id}'"`}>
         <div class="card-top">
@@ -432,9 +649,9 @@ function renderListView(areas){
       </div>`;
     
     // 건대(geondae) 다음에 첫 번째 쿠팡 배너 삽입
-    if(a.id === 'geondae'){
+    if(false && a.id === 'geondae'){
       html += `
-        <div class="area-card" style="cursor:default; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px; border-color:rgba(255,204,68,0.3); background:rgba(255,255,255,0.02);">
+        <div class="area-card coupang-card" style="cursor:default; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px;">
           <a href="https://link.coupang.com/a/ek4gDo" target="_blank" referrerpolicy="unsafe-url" style="display:block; transform:scale(0.85); margin:-15px 0;">
             <img src="https://image1.coupangcdn.com/image/affiliate/banner/e862e13c7284f83115bf1e796a0c81f8@2x.jpg" alt="업소용 미니 인형뽑기 기계" width="120" height="240" style="border-radius:8px;">
           </a>
@@ -447,7 +664,7 @@ function renderListView(areas){
     // 신림(sinlim) 다음에 두 번째 쿠팡 배너 삽입
     if(a.id === 'sinlim'){
       html += `
-        <div class="area-card" style="cursor:default; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px; border-color:rgba(255,204,68,0.3); background:rgba(255,255,255,0.02);">
+        <div class="area-card coupang-card" style="cursor:default; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px;">
           <a href="https://link.coupang.com/a/ek4rgW" target="_blank" referrerpolicy="unsafe-url" style="display:block; transform:scale(0.85); margin:-15px 0;">
             <img src="https://image13.coupangcdn.com/image/affiliate/banner/a5ea46c9cfa6c620061e5de6d74733cf@2x.jpg" alt="캐치핑 미니 인형뽑기 기계" width="120" height="240" style="border-radius:8px;">
           </a>
@@ -621,7 +838,10 @@ async function router(){
 }
 
 window.addEventListener('hashchange', router);
-window.addEventListener('DOMContentLoaded', router);
+window.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
+  router();
+});
 </script>
 
 <!-- 쿠팡 파트너스 배너 -->
