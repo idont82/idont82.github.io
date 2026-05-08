@@ -129,6 +129,9 @@ a:hover { text-decoration: underline; }
   box-shadow: var(--shadow);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
+.ingredient-card {
+  overflow: hidden;
+}
 .recipe-card:hover,
 .ingredient-card:hover {
   transform: translateY(-4px);
@@ -147,6 +150,16 @@ a:hover { text-decoration: underline; }
   color: var(--muted);
   line-height: 1.6;
   font-size: 14px;
+}
+.ingredient-thumb {
+  margin: -22px -22px 16px;
+}
+.ingredient-thumb img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-bottom: 1px solid var(--line);
 }
 .recipe-badge {
   display: inline-block;
@@ -215,14 +228,47 @@ a:hover { text-decoration: underline; }
 .ingredient-card .cta {
   display: inline-flex;
   margin-top: 14px;
-  padding: 10px 14px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 16px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #ffd98a 0%, #efaf47 100%);
+  background: linear-gradient(135deg, #ffe9a9 0%, #f4bf4f 48%, #f8d97a 100%);
   color: #4b2d0b;
   font-size: 13px;
   font-weight: 800;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(153, 102, 14, 0.18) inset,
+    0 10px 24px rgba(239, 175, 71, 0.26),
+    0 0 26px rgba(255, 206, 88, 0.38);
+  animation: recipeCtaPulse 1.8s ease-in-out infinite;
 }
 .ingredient-card .cta:hover { text-decoration: none; }
+.ingredient-card .cta::before {
+  content: "";
+  position: absolute;
+  top: -140%;
+  left: -35%;
+  width: 44%;
+  height: 320%;
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.88) 45%, transparent 100%);
+  transform: rotate(24deg);
+  animation: recipeCtaShine 2.1s linear infinite;
+}
+
+.affiliate-note {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: #fff5e8;
+  border: 1px solid #f1dcc2;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
 
 .disclosure {
   margin: 26px 0 50px;
@@ -258,12 +304,37 @@ a:hover { text-decoration: underline; }
   text-align: center;
 }
 
+@keyframes recipeCtaPulse {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow:
+      0 0 0 1px rgba(153, 102, 14, 0.18) inset,
+      0 10px 24px rgba(239, 175, 71, 0.26),
+      0 0 26px rgba(255, 206, 88, 0.38);
+  }
+  50% {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow:
+      0 0 0 1px rgba(153, 102, 14, 0.2) inset,
+      0 14px 28px rgba(239, 175, 71, 0.34),
+      0 0 38px rgba(255, 216, 111, 0.62);
+  }
+}
+
+@keyframes recipeCtaShine {
+  0% { left: -35%; }
+  100% { left: 120%; }
+}
+
 @media (max-width: 720px) {
   .hero-box,
   .article-box,
   .section {
     padding: 22px 18px;
     border-radius: 22px;
+  }
+  .ingredient-thumb {
+    margin: -18px -18px 14px;
   }
   .site-header .container {
     align-items: flex-start;
