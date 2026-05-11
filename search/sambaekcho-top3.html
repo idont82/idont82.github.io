@@ -21,6 +21,133 @@
 <meta name="twitter:image" content="https://idont82.github.io/images/sambaekcho-top3-thumbnail.png">
 <meta property="og:site_name" content="황금 가성비 골드픽">
 <link rel="stylesheet" href="/search/assets/style.css">
+<style>
+  .price-specs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin: 20px 0 18px;
+  }
+
+  .price-spec {
+    padding: 14px 12px;
+    border-radius: 14px;
+    background: #f7f8fb;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    text-align: center;
+  }
+
+  .price-spec .label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 700;
+  }
+
+  .price-spec .value {
+    display: block;
+    font-size: 18px;
+    font-weight: 800;
+    color: #111827;
+    letter-spacing: -0.02em;
+  }
+
+  .affiliate-note {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #6b7280;
+  }
+
+  #product-2 {
+    position: relative;
+    border: 1px solid rgba(188, 154, 37, 0.38);
+    box-shadow: 0 14px 32px rgba(188, 154, 37, 0.14);
+    overflow: hidden;
+  }
+
+  #product-2::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    background: linear-gradient(120deg, transparent 30%, rgba(255, 236, 158, 0.6) 50%, transparent 70%);
+    transform: translateX(-135%) rotate(8deg);
+    animation: lowest-price-sheen 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  #product-2 .rank-badge {
+    background: linear-gradient(135deg, #ffe7a3 0%, #d6ad35 50%, #9a7a16 100%);
+    color: #4c3500;
+    box-shadow: 0 0 0 1px rgba(255, 245, 210, 0.7), 0 8px 18px rgba(177, 139, 28, 0.28);
+  }
+
+  #product-2 .one-liner::before {
+    content: "최저가";
+    display: inline-block;
+    margin-right: 8px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #fff1b9 0%, #e1bf54 55%, #b18811 100%);
+    color: #503800;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    vertical-align: middle;
+    box-shadow: 0 8px 18px rgba(177, 139, 28, 0.22);
+  }
+
+  #product-2 .cta {
+    position: relative;
+    background: linear-gradient(135deg, #fff3bf 0%, #e3bf54 48%, #ad830b 100%);
+    color: #453000 !important;
+    box-shadow: 0 12px 24px rgba(177, 139, 28, 0.26);
+    overflow: hidden;
+  }
+
+  #product-2 .cta::after {
+    content: "";
+    position: absolute;
+    inset: -30%;
+    background: linear-gradient(120deg, transparent 32%, rgba(255, 255, 255, 0.78) 50%, transparent 68%);
+    transform: translateX(-135%) rotate(10deg);
+    animation: lowest-price-sheen 2.4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  #product-2 img {
+    border: 2px solid rgba(217, 183, 67, 0.45);
+    box-shadow: 0 16px 28px rgba(188, 154, 37, 0.18);
+  }
+
+  @keyframes lowest-price-sheen {
+    0%, 18% {
+      transform: translateX(-135%) rotate(10deg);
+      opacity: 0;
+    }
+
+    28% {
+      opacity: 0.95;
+    }
+
+    46% {
+      transform: translateX(135%) rotate(10deg);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateX(135%) rotate(10deg);
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .price-specs {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -37,9 +164,9 @@
   "@context": "https://schema.org",
   "@type": "ItemList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "닥터파이토 파이토블락 코엔삼백초 60정" },
-    { "@type": "ListItem", "position": 2, "name": "국내산 100% 삼백초 알약 HACCP 60정" },
-    { "@type": "ListItem", "position": 3, "name": "삼백초 100% 추출물 알약 120정 2병 구성" }
+    { "@type": "ListItem", "position": 1, "name": "닥터파이토 파이토블락 코엔삼백초 LHF618 60정 1개" },
+    { "@type": "ListItem", "position": 2, "name": "이너띵스 삼백초 추출물 맥문동 파이토 골드 HACCP 인증 2개 60정" },
+    { "@type": "ListItem", "position": 3, "name": "삼백초 100% 추출물 삼백초추출물 알약 식약청인증 삼백초영양제 1개 60회분" }
   ]
 }
 </script>
@@ -93,8 +220,6 @@
 </header>
 
 <main class="container">
-  <div class="disclosure">이 페이지에는 쿠팡 링크가 포함되어 있을 수 있으며, 링크를 통해 구매가 발생하면 일정액의 수수료를 제공받을 수 있습니다.</div>
-
   <section class="article-header">
     <h1>삼백초 추천 TOP 3 - 코엔삼백초와 가성비 좋은 제품 비교</h1>
     <div class="article-meta">게시일: 2026-05-11 · 최종 업데이트: 2026-05-11</div>
@@ -108,147 +233,144 @@
       <tr>
         <th>순위</th>
         <th>제품</th>
-        <th>포맷</th>
-        <th>1정당 가격</th>
-        <th>30일 체감가격</th>
+        <th>가격 비교</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><span class="table-rank rank-1">1</span></td>
-        <td>닥터파이토 파이토블락 코엔삼백초 60정</td>
-        <td>정/알약형</td>
-        <td>약 642원</td>
-        <td>약 38,500원</td>
+        <td>코엔삼백초 60정</td>
+        <td><strong>1정당 가격: 약 667원</strong><br><strong>한달분: 약 20,010원</strong></td>
       </tr>
       <tr>
         <td><span class="table-rank rank-2">2</span></td>
-        <td>국내산 100% 삼백초 알약 HACCP 60정</td>
-        <td>정/알약형</td>
-        <td>약 258원</td>
-        <td>약 7,740원</td>
+        <td>이너띵스 삼백초 60정</td>
+        <td><strong>1정당 가격: 약 145원</strong><br><strong>한달분: 약 4,350원</strong></td>
       </tr>
       <tr>
         <td><span class="table-rank rank-3">3</span></td>
-        <td>삼백초 100% 추출물 알약 120정 2병 구성</td>
-        <td>정/알약형</td>
-        <td>약 249원</td>
-        <td>약 14,960원</td>
+        <td>삼백초 추출물 알약 60회분</td>
+        <td><strong>1정당 가격: 약 258원</strong><br><strong>한달분: 약 7,740원</strong></td>
       </tr>
     </tbody>
   </table>
 
   <article class="product" id="product-1">
-    <a href="https://www.coupang.com/np/search?q=%EC%BD%94%EC%97%94%EC%82%BC%EB%B0%B1%EC%B4%88" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url"><img src="/images/sambaekcho-top3-thumbnail.png" alt="닥터파이토 파이토블락 코엔삼백초 60정 대표 이미지"></a>
-    <div class="product-header"><span class="rank-badge rank-1">1</span><h2>닥터파이토 파이토블락 코엔삼백초 60정</h2></div>
-    <p class="one-liner">방송 보고 바로 찾는 기준 상품입니다. 코엔삼백초를 그대로 찾는 분께는 가장 직관적이지만, 이번 비교에서는 가격 기준으로 보면 프리미엄 포지션에 가깝습니다.</p>
+    <a href="https://link.coupang.com/a/eGZ0ZY" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url"><img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/image_audit/stage/manual/b40d27c742b463837f81e8ddf18c7c1cdbd82fd0fce6cf8f77d0a5f2266d_1776658667415.jpg" alt="닥터파이토 파이토블락 코엔삼백초 LHF618 60정 1개 대표 이미지"></a>
+    <div class="product-header"><span class="rank-badge rank-1">1</span><h2><strong>코엔삼백초 60정</strong> · 닥터파이토 파이토블락 LHF618 1개</h2></div>
+    <p class="one-liner">홈쇼핑에서 봤던 코엔삼백초를 그대로 다시 확인하고 싶을 때 가장 익숙한 선택지입니다. 다만 이번 비교에서는 가격대가 가장 높은 편입니다.</p>
     <div class="pros-cons">
       <div class="pros">
         <h3>장점</h3>
         <ul>
-          <li>코엔삼백초 검색 의도와 가장 직접적으로 맞습니다.</li>
-          <li>60정 1박스 기준으로 제품 포맷이 분명합니다.</li>
-          <li>현재 검색량과 구매 접근성이 가장 높습니다.</li>
+          <li>코엔삼백초를 그대로 다시 찾기 쉽다</li>
+          <li>제품명이 익숙해 비교 기준으로 잡기 좋다</li>
+          <li>리뷰가 많아 참고하기 편하다</li>
         </ul>
       </div>
       <div class="cons">
         <h3>단점</h3>
         <ul>
-          <li>1정당 가격이 다른 삼백초 알약형보다 높은 편입니다.</li>
-          <li>가성비 비교 관점에서는 기준점 역할에 더 가깝습니다.</li>
+          <li>가격 부담이 가장 크다</li>
+          <li>가성비는 가장 약하다</li>
         </ul>
       </div>
     </div>
-    <div class="specs">
-      <div class="spec-item"><label>1정당 가격</label><div class="spec-bar"><div class="bar-fill" style="width: 30%;"></div></div></div>
-      <div class="spec-item"><label>30일 체감가격</label><div class="spec-bar"><div class="bar-fill" style="width: 34%;"></div></div></div>
-      <div class="spec-item"><label>검색 일치도</label><div class="spec-bar"><div class="bar-fill" style="width: 96%;"></div></div></div>
+    <div class="price-specs">
+      <div class="price-spec"><span class="label">총가격</span><span class="value">40,000원</span></div>
+      <div class="price-spec"><span class="label">1정당 가격</span><span class="value">667원</span></div>
+      <div class="price-spec"><span class="label">30일 체감가격</span><span class="value">20,010원</span></div>
+      <div class="price-spec"><span class="label">리뷰수</span><span class="value">1,254개</span></div>
     </div>
-    <p class="recommend-target">이런 분께 추천해요: 홈쇼핑에서 본 바로 그 상품을 다시 찾고 싶고, 가성비 비교보다 기준 상품 자체를 먼저 확인하고 싶은 분.</p>
-    <p class="intro">검색어로는 <code>코엔삼백초</code>, <code>코엔삼백초 60정</code>, <code>닥터파이토 코엔삼백초</code> 쪽에 가장 가깝습니다.</p>
-    <a class="cta" href="https://www.coupang.com/np/search?q=%EC%BD%94%EC%97%94%EC%82%BC%EB%B0%B1%EC%B4%88" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">쿠팡에서 보기</a>
+    <p class="recommend-target">이런 분께 추천해요: 홈쇼핑에서 본 코엔삼백초를 다시 찾고 있고, 가격보다 제품명을 먼저 확인하고 싶은 분.</p>
+    <a class="cta" href="https://link.coupang.com/a/eGZ0ZY" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">쿠팡에서 구매</a>
+    <p class="affiliate-note">이 페이지에는 쿠팡 링크가 포함되어 있으며, 링크를 통해 구매가 발생하면 일정액의 수수료를 제공받을 수 있습니다.</p>
   </article>
 
   <article class="product" id="product-2">
-    <a href="https://www.coupang.com/np/search?q=%EC%82%BC%EB%B0%B1%EC%B4%88%20%EC%95%8C%EC%95%BD" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url"><img src="/images/sambaekcho-top3-thumbnail.png" alt="국내산 100% 삼백초 알약 HACCP 60정 대표 이미지"></a>
-    <div class="product-header"><span class="rank-badge rank-2">2</span><h2>국내산 100% 삼백초 알약 HACCP 60정</h2></div>
-    <p class="one-liner">코엔삼백초를 찾다가 가격대가 부담될 때 가장 먼저 같이 보게 되는 가성비형입니다. 총 정 수가 단순하고 1정당 가격이 낮아 비교가 깔끔합니다.</p>
+    <a href="https://link.coupang.com/a/eGZ3zh" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url"><img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/0819/2ce970a9cffba8a93a117241e1912f9885f9b9f419a8e820d5e2a73c1337.png" alt="이너띵스 삼백초 추출물 맥문동 파이토 골드 HACCP 인증 2개 60정 대표 이미지"></a>
+    <div class="product-header"><span class="rank-badge rank-2">2</span><h2><strong>이너띵스 삼백초 60정</strong> · 맥문동 파이토 골드 HACCP 인증 2개</h2></div>
+    <p class="one-liner">코엔삼백초를 찾다가 가격대가 부담될 때 가장 먼저 같이 보게 되는 가성비형입니다. 이번 비교에서는 3개 중 <strong>가장 저렴한 1정당 가격</strong>이라 기준이 가장 분명합니다.</p>
     <div class="pros-cons">
       <div class="pros">
         <h3>장점</h3>
         <ul>
-          <li>1정당 가격이 낮아 가성비 비교가 명확합니다.</li>
-          <li>60정 단일 포맷이라 코엔삼백초와 나란히 보기 쉽습니다.</li>
-          <li>삼백초 알약형 검색에서 직관적으로 연결됩니다.</li>
+          <li>1정당 가격이 가장 저렴하다</li>
+          <li>부담 없이 꾸준히 챙기기 좋다</li>
+          <li>리뷰가 많아 비교가 쉽다</li>
         </ul>
       </div>
       <div class="cons">
         <h3>단점</h3>
         <ul>
-          <li>브랜드 인지도는 코엔삼백초보다 약할 수 있습니다.</li>
-          <li>검색 유입보다는 가격 비교용으로 읽히는 성격이 강합니다.</li>
+          <li>코엔삼백초처럼 이름이 익숙하지는 않다</li>
+          <li>2개 구성이라 처음엔 조금 헷갈릴 수 있다</li>
         </ul>
       </div>
     </div>
-    <div class="specs">
-      <div class="spec-item"><label>1정당 가격</label><div class="spec-bar"><div class="bar-fill" style="width: 74%;"></div></div></div>
-      <div class="spec-item"><label>30일 체감가격</label><div class="spec-bar"><div class="bar-fill" style="width: 94%;"></div></div></div>
-      <div class="spec-item"><label>가성비 체감</label><div class="spec-bar"><div class="bar-fill" style="width: 90%;"></div></div></div>
+    <div class="price-specs">
+      <div class="price-spec"><span class="label">총가격</span><span class="value">17,400원</span></div>
+      <div class="price-spec"><span class="label">1정당 가격</span><span class="value">145원</span></div>
+      <div class="price-spec"><span class="label">30일 체감가격</span><span class="value">4,350원</span></div>
+      <div class="price-spec"><span class="label">리뷰수</span><span class="value">3,250개</span></div>
     </div>
-    <p class="recommend-target">이런 분께 추천해요: 코엔삼백초와 비슷한 포맷이면 충분하고, 먼저 가격 부담이 낮은 삼백초 정 제품을 비교하고 싶은 분.</p>
-    <p class="intro">검색어로는 <code>삼백초 정</code>, <code>삼백초 알약</code>, <code>삼백초 추출물 정</code> 쪽 유입과 잘 맞습니다.</p>
-    <a class="cta" href="https://www.coupang.com/np/search?q=%EC%82%BC%EB%B0%B1%EC%B4%88%20%EC%95%8C%EC%95%BD" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">쿠팡에서 보기</a>
+    <p class="recommend-target">이런 분께 추천해요: 코엔삼백초를 찾다가 같은 계열이면 충분하고, 가장 저렴한 제품부터 보고 싶은 분.</p>
+    <a class="cta" href="https://link.coupang.com/a/eGZ3zh" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">쿠팡에서 저렴하게 구매하기</a>
+    <p class="affiliate-note">이 페이지에는 쿠팡 링크가 포함되어 있으며, 링크를 통해 구매가 발생하면 일정액의 수수료를 제공받을 수 있습니다.</p>
   </article>
 
   <article class="product" id="product-3">
-    <a href="https://www.coupang.com/np/search?q=%EC%82%BC%EB%B0%B1%EC%B4%88%20%EC%B6%94%EC%B6%9C%EB%AC%BC%20%EC%95%8C%EC%95%BD%20120%EC%A0%95" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url"><img src="/images/sambaekcho-top3-thumbnail.png" alt="삼백초 100% 추출물 알약 120정 2병 구성 대표 이미지"></a>
-    <div class="product-header"><span class="rank-badge rank-3">3</span><h2>삼백초 100% 추출물 알약 120정 2병 구성</h2></div>
-    <p class="one-liner">한 번에 묶음으로 사고 싶을 때 보는 실속형입니다. 2병 구성이라 1정당 가격은 가장 낮은 축에 들어오지만, 처음 결제 금액은 단품보다 높게 보일 수 있습니다.</p>
+    <a href="https://link.coupang.com/a/eGZ5Zm" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url"><img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/de37/451e8b4950fb268d2c507199be0f31930f470157f7c3a377ef5d3e6aef6e.png" alt="삼백초 100% 추출물 삼백초추출물 알약 식약청인증 삼백초영양제 1개 60회분 대표 이미지"></a>
+    <div class="product-header"><span class="rank-badge rank-3">3</span><h2><strong>삼백초 추출물 알약 60회분</strong> · 식약청인증 삼백초영양제 1개</h2></div>
+    <p class="one-liner">단품 기준으로 비교하기 쉬운 실속형입니다. 1정당 258원으로 코엔삼백초보다는 낮고, 최저가 제품보다는 약간 높은 중간 포지션입니다.</p>
     <div class="pros-cons">
       <div class="pros">
         <h3>장점</h3>
         <ul>
-          <li>1정당 가격 기준으로 매우 낮은 편입니다.</li>
-          <li>120정 구성이라 길게 두고 보는 실속형 비교에 맞습니다.</li>
-          <li>정/알약형 기준을 유지하면서 묶음 효율을 볼 수 있습니다.</li>
+          <li>가격대가 무난한 중간 선택지다</li>
+          <li>단품 기준이라 비교가 단순하다</li>
+          <li>삼백초 추출물 알약으로 보기 쉽다</li>
         </ul>
       </div>
       <div class="cons">
         <h3>단점</h3>
         <ul>
-          <li>첫 결제 금액은 60정 단품보다 높아 보일 수 있습니다.</li>
-          <li>묶음 옵션이라 즉시 비교할 때는 단품보다 직관성이 떨어질 수 있습니다.</li>
+          <li>최저가 대비 가격 메리트는 약하다</li>
+          <li>리뷰가 적어 참고 정보가 부족하다</li>
         </ul>
       </div>
     </div>
-    <div class="specs">
-      <div class="spec-item"><label>1정당 가격</label><div class="spec-bar"><div class="bar-fill" style="width: 78%;"></div></div></div>
-      <div class="spec-item"><label>30일 체감가격</label><div class="spec-bar"><div class="bar-fill" style="width: 76%;"></div></div></div>
-      <div class="spec-item"><label>묶음 실속성</label><div class="spec-bar"><div class="bar-fill" style="width: 88%;"></div></div></div>
+    <div class="price-specs">
+      <div class="price-spec"><span class="label">총가격</span><span class="value">15,480원</span></div>
+      <div class="price-spec"><span class="label">1정당 가격</span><span class="value">258원</span></div>
+      <div class="price-spec"><span class="label">30일 체감가격</span><span class="value">7,740원</span></div>
+      <div class="price-spec"><span class="label">리뷰수</span><span class="value">11개</span></div>
     </div>
-    <p class="recommend-target">이런 분께 추천해요: 코엔삼백초를 찾다가 같은 삼백초 알약형 안에서 묶음 구성과 장기적인 단가 절약까지 같이 보고 싶은 분.</p>
-    <p class="intro">검색어로는 <code>삼백초 알약 대용량</code>, <code>삼백초 추출물 알약</code>, <code>삼백초 120정</code> 쪽에 가깝습니다.</p>
-    <a class="cta" href="https://www.coupang.com/np/search?q=%EC%82%BC%EB%B0%B1%EC%B4%88%20%EC%B6%94%EC%B6%9C%EB%AC%BC%20%EC%95%8C%EC%95%BD%20120%EC%A0%95" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">쿠팡에서 보기</a>
+    <p class="recommend-target">이런 분께 추천해요: 코엔삼백초보다 부담이 덜한 가격대를 원하지만, 최저가보다는 무난한 단품을 보고 싶은 분.</p>
+    <a class="cta" href="https://link.coupang.com/a/eGZ5Zm" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">쿠팡에서 구매</a>
+    <p class="affiliate-note">이 페이지에는 쿠팡 링크가 포함되어 있으며, 링크를 통해 구매가 발생하면 일정액의 수수료를 제공받을 수 있습니다.</p>
   </article>
 
   <section class="faq">
     <h2>자주 묻는 질문</h2>
-    <details><summary>코엔삼백초와 일반 삼백초 정 제품은 어떻게 비교하면 되나요?</summary><p>가장 쉬운 방법은 같은 알약형끼리 비교하는 것입니다. 이 페이지는 제품 기능을 단정하기보다, 같은 삼백초 계열 정 제품을 <strong>1정당 가격</strong>과 <strong>30일 체감가격</strong> 기준으로 정리했습니다.</p></details>
-    <details><summary>삼백초는 차보다 알약형이 더 편한가요?</summary><p>검색해서 바로 사려는 분들 입장에서는 알약형이 보관과 복용이 더 단순합니다. 특히 코엔삼백초처럼 방송에서 보이는 제품도 정 형태라 비교축을 맞추기 쉽습니다.</p></details>
-    <details><summary>1정당 가격은 어떻게 계산했나요?</summary><p>현재 노출된 가격을 총 정 수로 나눈 값입니다. 묶음 상품은 선택된 대표 옵션 기준으로 계산했고, 30일 체감가격은 회분 표기를 기준으로 월 단위로 환산했습니다.</p></details>
-    <details><summary>가성비 제품을 고를 때 무엇을 먼저 보면 좋나요?</summary><p>먼저 1정당 가격을 보고, 그다음 총 정 수와 30일 체감가격을 같이 보는 편이 좋습니다. 단순히 총액만 보면 묶음형이 비싸 보일 수 있기 때문입니다.</p></details>
+    <details><summary>코엔삼백초를 보고 찾았다면 다른 삼백초 제품도 같이 봐도 괜찮나요?</summary><p>괜찮습니다. 삼백초 효능을 기대하고 찾는 분이라면 제품 이름만 보기보다 알약형인지, 얼마나 꾸준히 챙겨 먹기 쉬운 가격대인지 같이 보는 편이 더 현실적입니다.</p></details>
+    <details><summary>삼백초는 차보다 알약형이 더 낫나요?</summary><p>매일 챙겨 먹는 편의성만 보면 알약형이 더 단순합니다. 물만 있으면 바로 먹을 수 있고, 가격도 1정당 기준으로 비교하기 쉬워서 여러 제품을 같이 볼 때 편합니다.</p></details>
+    <details><summary>가격 비교는 무엇을 기준으로 보면 가장 쉬운가요?</summary><p>총가격만 보면 묶음 제품이 비싸 보일 수 있어서 <strong>1정당 가격</strong>과 <strong>30일 체감가격</strong>을 같이 보는 편이 좋습니다. 이렇게 보면 꾸준히 챙겨 먹을 때 실제 부담이 어느 정도인지 더 잘 보입니다.</p></details>
+    <details><summary>리뷰 수가 적은 제품은 피하는 게 좋을까요?</summary><p>무조건 피할 필요는 없지만, 처음 고를 때는 리뷰가 많은 제품이 더 편합니다. 삼백초 효능을 기대하고 오래 먹어볼 생각이라면 가격뿐 아니라 후기를 얼마나 참고할 수 있는지도 같이 보는 편이 좋습니다.</p></details>
   </section>
 
   <section class="cluster-nav">
-    <h2>건강식품 비교 시리즈로 확장하기 좋은 주제</h2>
-    <p>홈쇼핑에서 보고 검색하는 건강식품은 보통 상품명과 원료명이 함께 움직입니다. 같은 방식으로 시리즈를 늘리면 검색 유입 구조를 맞추기 쉽습니다.</p>
+    <h2>함께 보면 좋은 비교 가이드</h2>
+    <p>삼백초처럼 한 번에 결정하기 어려운 제품들은 다른 비교 가이드도 같이 보면 기준을 잡기 더 쉽습니다.</p>
     <div class="cluster-grid">
-      <a href="/search/multivitamin-budget-top3.html" class="cluster-card"><strong>9번 멀티비타민 TOP 3</strong><span>브랜드보다 함량과 가격 기준으로 비교</span></a>
-      <a href="/search/sambaekcho-top3.html" class="cluster-card is-current"><strong>30번 삼백초 TOP 3</strong><span>코엔삼백초와 가성비 좋은 제품 비교</span></a>
-      <a href="/search/scalp-shampoo-top3.html" class="cluster-card"><strong>20번 두피 샴푸 TOP 3</strong><span>목적형 검색을 비교 페이지로 전환하는 예시</span></a>
-      <a href="/search/waterpark-essentials-top7.html" class="cluster-card"><strong>28번 워터파크 준비물 TOP 7</strong><span>검색 문장형 유입을 잡는 최근 패턴</span></a>
+      <a href="/search/multivitamin-budget-top3.html" class="cluster-card"><strong>9번 멀티비타민 TOP 3</strong><span>함량과 가격을 같이 보며 고르기 좋은 비교 가이드</span></a>
+      <a href="/search/sambaekcho-top3.html" class="cluster-card is-current"><strong>30번 삼백초 TOP 3</strong><span>코엔삼백초와 함께 보기 좋은 가격 비교 정리</span></a>
+      <a href="/search/scalp-shampoo-top3.html" class="cluster-card"><strong>20번 두피 샴푸 TOP 3</strong><span>목적에 따라 어떤 제품을 볼지 빠르게 정리</span></a>
+      <a href="/search/waterpark-essentials-top7.html" class="cluster-card"><strong>28번 워터파크 준비물 TOP 7</strong><span>필요한 준비물을 한 번에 체크하기 좋은 가이드</span></a>
     </div>
   </section>
+
+  <div class="disclosure">이 페이지에는 쿠팡 링크가 포함되어 있으며, 링크를 통해 구매가 발생하면 일정액의 수수료를 제공받을 수 있습니다.</div>
 </main>
 
 <footer class="site-footer"><div class="container">&copy; idont82.github.io · 구매 가이드</div></footer>
