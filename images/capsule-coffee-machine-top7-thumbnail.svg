@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">내 머신에 맞는 호환 캡슐 추천 TOP 7</title>
+  <desc id="desc">커피머신과 여러 캡슐을 함께 보여주는 검색용 썸네일</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fbf6ee"/>
+      <stop offset="100%" stop-color="#efe3cf"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fffdf9"/>
+      <stop offset="100%" stop-color="#f7efe0"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffeab0"/>
+      <stop offset="50%" stop-color="#d7ab3d"/>
+      <stop offset="100%" stop-color="#8e6415"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#8f7132" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1040" cy="88" r="112" fill="#f7ead2" opacity="0.8"/>
+  <circle cx="90" cy="520" r="140" fill="#f3e4c4" opacity="0.75"/>
+
+  <rect x="54" y="42" width="1092" height="546" rx="34" fill="url(#panel)" stroke="#e3d3b3" filter="url(#shadow)"/>
+
+  <text x="86" y="122" font-family="Pretendard, Noto Sans KR, sans-serif" font-size="54" font-weight="800" fill="#1d2430">내 머신에 맞는</text>
+  <text x="86" y="186" font-family="Pretendard, Noto Sans KR, sans-serif" font-size="54" font-weight="800" fill="#1d2430">호환 캡슐 추천 TOP 7</text>
+
+  <g transform="translate(86 238)">
+    <rect x="0" y="0" width="420" height="270" rx="28" fill="#2d333d"/>
+    <rect x="42" y="36" width="128" height="180" rx="22" fill="#11161f"/>
+    <rect x="56" y="50" width="100" height="92" rx="14" fill="#dce5ef"/>
+    <rect x="188" y="58" width="88" height="20" rx="10" fill="#0f141d"/>
+    <rect x="232" y="78" width="20" height="82" rx="10" fill="#0f141d"/>
+    <ellipse cx="242" cy="176" rx="40" ry="18" fill="#4a3825"/>
+    <ellipse cx="242" cy="170" rx="34" ry="12" fill="#8f6234"/>
+    <rect x="62" y="162" width="88" height="10" rx="5" fill="#b3873e"/>
+    <rect x="72" y="188" width="70" height="18" rx="8" fill="#232a34"/>
+    <path d="M312 58h28a20 20 0 0 1 20 20v132" fill="none" stroke="#0f141d" stroke-width="16" stroke-linecap="round"/>
+    <path d="M360 210c0 18-14 32-32 32h-78" fill="none" stroke="#0f141d" stroke-width="16" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(560 236)">
+    <rect x="0" y="0" width="540" height="286" rx="28" fill="#fffaf2" stroke="#ead9b9"/>
+    <text x="34" y="52" font-family="Pretendard, Noto Sans KR, sans-serif" font-size="27" font-weight="800" fill="#7a6334">머신별로 바로 찾기</text>
+
+    <g font-family="Pretendard, Noto Sans KR, sans-serif" font-size="20" font-weight="700" fill="#344153">
+      <g transform="translate(34 86)">
+        <rect width="146" height="44" rx="22" fill="#eef3f9"/>
+        <text x="73" y="29" text-anchor="middle">네스프레소 오리지널</text>
+      </g>
+      <g transform="translate(194 86)">
+        <rect width="118" height="44" rx="22" fill="#eef3f9"/>
+        <text x="59" y="29" text-anchor="middle">버츄오</text>
+      </g>
+      <g transform="translate(326 86)">
+        <rect width="126" height="44" rx="22" fill="#eef3f9"/>
+        <text x="63" y="29" text-anchor="middle">돌체구스토</text>
+      </g>
+      <g transform="translate(466 86)">
+        <rect width="60" height="44" rx="22" fill="#eef3f9"/>
+        <text x="30" y="29" text-anchor="middle">일리</text>
+      </g>
+    </g>
+
+    <g transform="translate(40 162)">
+      <g transform="translate(0 0)">
+        <ellipse cx="38" cy="54" rx="38" ry="52" fill="#bb7e2c"/>
+        <ellipse cx="38" cy="34" rx="26" ry="18" fill="#e5b15f"/>
+      </g>
+      <g transform="translate(90 18)">
+        <ellipse cx="34" cy="48" rx="34" ry="48" fill="#7d512f"/>
+        <ellipse cx="34" cy="32" rx="24" ry="16" fill="#bd8a62"/>
+      </g>
+      <g transform="translate(172 8)">
+        <ellipse cx="42" cy="54" rx="42" ry="54" fill="#ab1623"/>
+        <ellipse cx="42" cy="34" rx="28" ry="18" fill="#e46372"/>
+      </g>
+      <g transform="translate(268 14)">
+        <ellipse cx="38" cy="52" rx="38" ry="52" fill="#274a7e"/>
+        <ellipse cx="38" cy="34" rx="26" ry="16" fill="#6a8fc9"/>
+      </g>
+      <g transform="translate(356 0)">
+        <ellipse cx="42" cy="56" rx="42" ry="56" fill="#0e1117"/>
+        <ellipse cx="42" cy="36" rx="28" ry="18" fill="#555b67"/>
+      </g>
+      <g transform="translate(452 20)">
+        <ellipse cx="34" cy="48" rx="34" ry="48" fill="#557a2f"/>
+        <ellipse cx="34" cy="30" rx="24" ry="14" fill="#9ec46e"/>
+      </g>
+    </g>
+
+    <rect x="34" y="232" width="492" height="1" fill="#efe2c8"/>
+    <text x="34" y="265" font-family="Pretendard, Noto Sans KR, sans-serif" font-size="24" font-weight="800" fill="#8b6b28">호환 먼저 확인하고, 맛과 가격은 그다음</text>
+  </g>
+
+  <g transform="translate(88 520)">
+    <rect x="0" y="0" width="174" height="44" rx="22" fill="url(#gold)"/>
+    <text x="87" y="29" text-anchor="middle" font-family="Pretendard, Noto Sans KR, sans-serif" font-size="22" font-weight="800" fill="#4d3604">머신별 비교</text>
+  </g>
+</svg>
