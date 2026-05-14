@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">가성비 기저귀 추천 TOP 3</title>
+  <desc id="desc">기저귀 박스와 비교 포인트가 보이는 검색용 썸네일</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff8f0"/>
+      <stop offset="100%" stop-color="#f3ead9"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fffefb"/>
+      <stop offset="100%" stop-color="#f8f1e3"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffe9b0"/>
+      <stop offset="50%" stop-color="#daa83f"/>
+      <stop offset="100%" stop-color="#956813"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#8f7132" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1040" cy="94" r="110" fill="#f7ecd5" opacity="0.72"/>
+  <circle cx="112" cy="520" r="150" fill="#f5e7ca" opacity="0.75"/>
+
+  <rect x="54" y="42" width="1092" height="546" rx="34" fill="url(#panel)" stroke="#e7d8bb" filter="url(#shadow)"/>
+
+  <text x="86" y="122" font-family="Pretendard, Noto Sans KR, sans-serif" font-size="56" font-weight="800" fill="#1d2430">가성비 기저귀 추천 TOP 3</text>
+  <text x="88" y="176" font-family="Pretendard, Noto Sans KR, sans-serif" font-size="26" font-weight="700" fill="#7a6334">많이 쓰는 3종 비교</text>
+
+  <g transform="translate(84 228)">
+    <rect x="0" y="0" width="438" height="286" rx="30" fill="#fffaf3" stroke="#eadbc0"/>
+    <rect x="30" y="52" width="110" height="150" rx="16" fill="#f0d9b8"/>
+    <rect x="160" y="40" width="120" height="168" rx="18" fill="#d8ecf7"/>
+    <rect x="304" y="56" width="106" height="146" rx="16" fill="#f7d7dd"/>
+    <rect x="46" y="70" width="78" height="96" rx="10" fill="#fff"/>
+    <rect x="178" y="60" width="84" height="108" rx="12" fill="#fff"/>
+    <rect x="320" y="72" width="74" height="92" rx="10" fill="#fff"/>
+    <circle cx="85" cy="118" r="18" fill="#f2c77d"/>
+    <circle cx="220" cy="114" r="18" fill="#8bc3d8"/>
+    <circle cx="357" cy="116" r="18" fill="#eba0ae"/>
+    <path d="M92 230c22 0 42 16 42 34H50c0-18 20-34 42-34z" fill="#f1dcbc"/>
+    <path d="M220 228c22 0 42 16 42 34h-84c0-18 20-34 42-34z" fill="#d4ebf5"/>
+    <path d="M357 230c22 0 42 16 42 34h-84c0-18 20-34 42-34z" fill="#f6d5dc"/>
+  </g>
+
+  <g transform="translate(568 228)">
+    <rect x="0" y="0" width="540" height="286" rx="30" fill="#fffaf3" stroke="#eadbc0"/>
+    <text x="34" y="54" font-family="Pretendard, Noto Sans KR, sans-serif" font-size="28" font-weight="800" fill="#7b6330">비교 포인트</text>
+
+    <g transform="translate(34 88)">
+      <rect width="146" height="48" rx="24" fill="#eef5fb"/>
+      <text x="73" y="31" text-anchor="middle" font-family="Pretendard, Noto Sans KR, sans-serif" font-size="22" font-weight="700" fill="#314052">흡수력</text>
+    </g>
+    <g transform="translate(198 88)">
+      <rect width="146" height="48" rx="24" fill="#eef5fb"/>
+      <text x="73" y="31" text-anchor="middle" font-family="Pretendard, Noto Sans KR, sans-serif" font-size="22" font-weight="700" fill="#314052">통기성</text>
+    </g>
+    <g transform="translate(362 88)">
+      <rect width="146" height="48" rx="24" fill="#eef5fb"/>
+      <text x="73" y="31" text-anchor="middle" font-family="Pretendard, Noto Sans KR, sans-serif" font-size="22" font-weight="700" fill="#314052">박스 가격</text>
+    </g>
+
+    <text x="34" y="190" font-family="Pretendard, Noto Sans KR, sans-serif" font-size="34" font-weight="800" fill="#202936">처음 고를 때는</text>
+    <text x="34" y="236" font-family="Pretendard, Noto Sans KR, sans-serif" font-size="34" font-weight="800" fill="#202936">많이 쓰는 제품부터 비교</text>
+
+    <g transform="translate(34 248)">
+      <rect x="0" y="0" width="188" height="44" rx="22" fill="url(#gold)"/>
+      <text x="94" y="29" text-anchor="middle" font-family="Pretendard, Noto Sans KR, sans-serif" font-size="22" font-weight="800" fill="#4c3500">기저귀 TOP3</text>
+    </g>
+  </g>
+</svg>
