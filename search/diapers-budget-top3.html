@@ -14,14 +14,94 @@
 <meta property="og:title" content="가성비 기저귀 추천 TOP 3 (2026)">
 <meta property="og:description" content="많이 쓰는 기저귀 3종을 흡수력, 통기성, 박스 가격 기준으로 비교한 가이드입니다.">
 <meta property="og:url" content="https://idont82.github.io/search/diapers-budget-top3.html">
-<meta property="og:image" content="https://idont82.github.io/images/diapers-budget-top3-thumbnail.svg">
+<meta property="og:image" content="https://idont82.github.io/images/diapers-budget-top3-thumbnail.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://idont82.github.io/images/diapers-budget-top3-thumbnail.svg">
+<meta name="twitter:image" content="https://idont82.github.io/images/diapers-budget-top3-thumbnail.png">
 <meta property="og:site_name" content="황금 가성비 골드픽">
 
 <link rel="stylesheet" href="/search/assets/style.css">
+<style>
+.thumbnail-preview-button {
+  display: inline-block;
+  float: left;
+  margin: 2px 16px 8px 0;
+  padding: 8px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  cursor: pointer;
+}
+
+.thumbnail-preview-button img {
+  display: block;
+  width: min(170px, 30vw);
+  border-radius: 10px;
+}
+
+.intro::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.thumbnail-lightbox {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.82);
+  z-index: 9999;
+}
+
+.thumbnail-lightbox.is-open {
+  display: flex;
+}
+
+.thumbnail-lightbox-dialog {
+  position: relative;
+  max-width: min(1100px, 100%);
+}
+
+.thumbnail-lightbox-dialog img {
+  display: block;
+  max-width: min(1100px, calc(100vw - 48px));
+  max-height: calc(100vh - 72px);
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.38);
+}
+
+.thumbnail-lightbox-close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: #111827;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.2);
+}
+
+@media (max-width: 640px) {
+  .thumbnail-preview-button {
+    float: none;
+    margin: 8px 0 14px;
+  }
+
+  .thumbnail-preview-button img {
+    width: min(170px, 48vw);
+  }
+}
+</style>
 
 <!-- BreadcrumbList structured data -->
 <script type="application/ld+json">
@@ -95,6 +175,9 @@
   </section>
 
   <p class="intro">
+    <button type="button" class="thumbnail-preview-button" id="thumbnailPreviewButton" aria-haspopup="dialog" aria-controls="thumbnailLightbox">
+      <img src="/images/diapers-budget-top3-thumbnail.png" alt="&#44032;&#49457;&#48708; &#44592;&#51200;&#44480; &#44160;&#49353;&#50857; &#50028;&#45348;&#51068; &#48120;&#47532;&#48372;&#44592;">
+    </button>
     기저귀는 매일 쓰는 소모품이라 <strong>장당 단가 차이가 1년 단위로 큰 금액</strong>이 됩니다.
     이 글에서는 흡수력·통기성·아이 피부 트러블 빈도가 모두 만족스럽다는 평가를 받으면서도 박스 단위 구매 시 단가가 합리적인 국내 인기 브랜드 3개를 비교했습니다.
     아이 피부 반응은 개인차가 크므로 처음 사는 브랜드는 소포장으로 테스트한 뒤 박스 구매를 권합니다.
@@ -250,6 +333,52 @@
   </div>
 
 </main>
+
+<div class="thumbnail-lightbox" id="thumbnailLightbox" aria-hidden="true">
+  <div class="thumbnail-lightbox-dialog" role="dialog" aria-modal="true" aria-label="&#44592;&#51200;&#44480; &#50028;&#45348;&#51068; &#53360;&#44172; &#48372;&#44592;">
+    <button type="button" class="thumbnail-lightbox-close" id="thumbnailLightboxClose" aria-label="&#45803;&#44592;">&times;</button>
+    <img src="/images/diapers-budget-top3-thumbnail.png" alt="&#44032;&#49457;&#48708; &#44592;&#51200;&#44480; &#44160;&#49353;&#50857; &#50028;&#45348;&#51068; &#53360;&#44172; &#48372;&#44592;">
+  </div>
+</div>
+
+<script>
+  (function () {
+    var openButton = document.getElementById('thumbnailPreviewButton');
+    var lightbox = document.getElementById('thumbnailLightbox');
+    var closeButton = document.getElementById('thumbnailLightboxClose');
+
+    if (!openButton || !lightbox || !closeButton) {
+      return;
+    }
+
+    function openLightbox() {
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      closeButton.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      openButton.focus();
+    }
+
+    openButton.addEventListener('click', openLightbox);
+    closeButton.addEventListener('click', closeLightbox);
+
+    lightbox.addEventListener('click', function (event) {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && lightbox.classList.contains('is-open')) {
+        closeLightbox();
+      }
+    });
+  }());
+</script>
 
 <footer class="site-footer">
   <div class="container">
