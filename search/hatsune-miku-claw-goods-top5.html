@@ -3,21 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>하츠네 미쿠 인형뽑기 굿즈 추천 TOP 5</title>
-<meta name="description" content="하츠네 미쿠 굿즈를 찾는 분들을 위해 인형뽑기 경품 감성과 잘 맞는 봉제 인형, 피규어, 키링, 누들스토퍼, 데스크 굿즈를 한 번에 정리했습니다.">
+<title>하츠네 미쿠 굿즈 모아보기 | 피규어·누들스토퍼·키링 한눈에</title>
+<meta name="description" content="하츠네 미쿠 피규어, 누들스토퍼, 키링, 봉제 인형, 데스크 굿즈를 한눈에 모아봤습니다. 마음에 드는 타입을 바로 눌러서 이어서 볼 수 있게 정리한 페이지입니다.">
+<meta name="keywords" content="하츠네 미쿠 굿즈, 하츠네 미쿠 피규어, 하츠네 미쿠 누들스토퍼, 하츠네 미쿠 키링, 하츠네 미쿠 봉제 인형">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://idont82.github.io/search/hatsune-miku-claw-goods-top5.html">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/images/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/images/favicon.png">
 <meta property="og:type" content="article">
-<meta property="og:title" content="하츠네 미쿠 인형뽑기 굿즈 추천 TOP 5">
-<meta property="og:description" content="오타쿠 굿즈 매거진 감성으로 정리한 하츠네 미쿠 인형뽑기 굿즈 가이드. 봉제 인형부터 데스크 굿즈까지 구매 포인트를 빠르게 확인하세요.">
+<meta property="og:title" content="하츠네 미쿠 굿즈 모아보기 | 피규어·누들스토퍼·키링 한눈에">
+<meta property="og:description" content="하츠네 미쿠 피규어, 누들스토퍼, 키링, 봉제 인형, 데스크 굿즈를 한눈에 모아봤습니다.">
 <meta property="og:url" content="https://idont82.github.io/search/hatsune-miku-claw-goods-top5.html">
 <meta property="og:image" content="https://idont82.github.io/images/hatsune-miku-claw-goods-top5-thumbnail.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="하츠네 미쿠 굿즈 모아보기 | 피규어·누들스토퍼·키링 한눈에">
+<meta name="twitter:description" content="하츠네 미쿠 피규어, 누들스토퍼, 키링, 봉제 인형, 데스크 굿즈를 한눈에 모아봤습니다.">
 <meta name="twitter:image" content="https://idont82.github.io/images/hatsune-miku-claw-goods-top5-thumbnail.png">
 <link rel="stylesheet" href="/search/assets/style.css">
 <style>
@@ -44,94 +47,109 @@
     margin: 0 8px;
   }
 
-  .hero-note {
-    margin: 22px 0 0;
-    padding: 22px 24px;
-    border-radius: 22px;
-    background:
-      radial-gradient(circle at top right, rgba(255, 111, 174, 0.18), transparent 24%),
-      linear-gradient(135deg, #f5ffff 0%, #f4fbff 48%, #fff8fc 100%);
-    border: 1px solid var(--miku-line);
-    box-shadow: 0 18px 36px rgba(18, 72, 90, 0.08);
+  .goods-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 26px;
   }
 
-  .hero-note p {
-    margin: 0;
-  }
-
-  .mood-tags {
+  .article-header {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 16px 0 0;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
   }
 
-  .mood-tags span {
-    display: inline-flex;
+  .article-header-copy {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .thumb-inline {
+    width: 118px;
+    flex: 0 0 auto;
+  }
+
+  .thumb-inline button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .thumb-inline img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .thumb-lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
     align-items: center;
-    padding: 7px 12px;
-    border-radius: 999px;
-    background: rgba(57, 197, 187, 0.1);
-    color: var(--miku-deep);
-    font-size: 13px;
-    font-weight: 700;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(10, 18, 24, 0.72);
+    z-index: 9999;
   }
 
-  .category-strip {
-    margin: 28px 0 34px;
-    padding: 18px 20px;
+  .thumb-lightbox.is-open {
+    display: flex;
+  }
+
+  .thumb-lightbox button {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .thumb-lightbox img {
+    display: block;
+    max-width: min(1100px, 94vw);
+    max-height: 90vh;
     border-radius: 18px;
-    background: #ffffff;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-  }
-
-  .category-strip h2 {
-    margin: 0 0 12px;
-    font-size: 20px;
-  }
-
-  .category-strip ul {
-    margin: 0;
-    padding-left: 18px;
-  }
-
-  .category-strip li {
-    margin: 0 0 8px;
-  }
-
-  .compare-table td strong {
-    color: var(--miku-ink);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
   }
 
   .product-card {
-    margin: 32px 0;
-    padding: 24px;
-    border-radius: 22px;
+    padding: 16px;
+    border-radius: 20px;
     border: 1px solid var(--miku-line);
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(243, 252, 252, 0.96) 100%);
-    box-shadow: 0 16px 34px rgba(18, 72, 90, 0.08);
+    box-shadow: 0 12px 24px rgba(18, 72, 90, 0.08);
   }
 
   .product-image-link {
     display: block;
-    margin-bottom: 18px;
-    border-radius: 18px;
+    margin-bottom: 14px;
+    border-radius: 16px;
     overflow: hidden;
     border: 1px solid rgba(57, 197, 187, 0.22);
     background: linear-gradient(135deg, #dff9f7 0%, #eaf6ff 100%);
   }
 
   .product-image-link img {
-    display: none;
+    display: block;
+    width: 100%;
+    height: 240px;
+    object-fit: contain;
+    background: linear-gradient(180deg, #ffffff 0%, #f7fbfb 100%);
   }
 
   .product-poster {
     display: flex;
     align-items: flex-end;
-    min-height: 280px;
-    padding: 22px;
+    min-height: 220px;
+    padding: 18px;
     background:
       radial-gradient(circle at top right, rgba(255, 255, 255, 0.82), transparent 24%),
       linear-gradient(135deg, rgba(57, 197, 187, 0.28), rgba(255, 111, 174, 0.18));
@@ -148,131 +166,62 @@
     font-weight: 800;
   }
 
-  .product-rank {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 12px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, var(--miku-cyan) 0%, var(--miku-deep) 100%);
-    color: #fff;
-    font-size: 13px;
-    font-weight: 800;
+  .product-meta {
+    margin: 0 0 14px;
   }
 
-  .product-rank::before {
-    content: "M";
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.22);
-    font-size: 11px;
+  .product-name {
+    margin: 0 0 6px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--miku-ink);
+    font-weight: 700;
+  }
+
+  .product-price {
+    margin: 0;
+    font-size: 22px;
+    line-height: 1.2;
+    color: #d12f2f;
+    font-weight: 800;
   }
 
   .product-card h2 {
-    margin: 16px 0 10px;
-    font-size: 28px;
-    line-height: 1.25;
+    margin: 0 0 8px;
+    font-size: 22px;
+    line-height: 1.35;
     color: var(--miku-ink);
   }
 
-  .card-hook {
+  .card-copy {
     margin: 0 0 14px;
-    font-size: 16px;
-    color: #425466;
-  }
-
-  .tag-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 0 0 18px;
-  }
-
-  .tag {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 10px;
-    border-radius: 999px;
-    background: rgba(255, 111, 174, 0.1);
-    color: #8d2f5d;
-    font-size: 12px;
-    font-weight: 700;
-  }
-
-  .pros-cons {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-    margin: 0 0 18px;
-  }
-
-  .pros-cons > div {
-    padding: 16px 16px 14px;
-    border-radius: 16px;
-    background: #fff;
-    border: 1px solid rgba(18, 72, 90, 0.1);
-    line-height: 1.65;
-  }
-
-  .pros-cons strong {
-    display: inline-block;
-    margin-bottom: 8px;
     font-size: 14px;
-    color: var(--miku-deep);
-  }
-
-  .card-specs {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-    margin: 0 0 18px;
-  }
-
-  .card-spec {
-    padding: 14px 12px;
-    border-radius: 14px;
-    background: var(--miku-soft);
-    border: 1px solid rgba(57, 197, 187, 0.18);
-    text-align: center;
-  }
-
-  .card-spec .label {
-    display: block;
-    margin-bottom: 6px;
-    font-size: 12px;
-    color: #5c7084;
-    font-weight: 700;
-  }
-
-  .card-spec .value {
-    display: block;
-    font-size: 15px;
-    font-weight: 800;
-    color: var(--miku-ink);
+    color: #425466;
+    line-height: 1.6;
   }
 
   .buy-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 200px;
-    padding: 14px 24px;
+    width: auto;
+    min-width: 148px;
+    padding: 10px 16px;
     border-radius: 999px;
-    background: linear-gradient(135deg, #16a34a 0%, #0f8a3d 100%);
-    color: #fff !important;
-    font-size: 16px;
-    font-weight: 800;
+    border: 1px solid rgba(184, 148, 82, 0.35);
+    background: linear-gradient(180deg, #fffaf0 0%, #f8efd8 100%);
+    color: #6b4f1f !important;
+    font-size: 14px;
+    font-weight: 700;
     text-decoration: none;
-    box-shadow: 0 12px 24px rgba(15, 138, 61, 0.2);
+    box-shadow: 0 6px 16px rgba(122, 92, 38, 0.1);
   }
 
   .buy-button:hover {
     text-decoration: none;
     transform: translateY(-1px);
+    border-color: rgba(184, 148, 82, 0.48);
+    background: linear-gradient(180deg, #fff8e7 0%, #f3e2b3 100%);
   }
 
   .affiliate-note {
@@ -280,6 +229,7 @@
     font-size: 12px;
     line-height: 1.6;
     color: #667085;
+    text-align: center;
   }
 
   .faq-section,
@@ -335,27 +285,28 @@
   }
 
   @media (max-width: 600px) {
-    .hero-note,
+    .thumb-inline {
+      width: 120px;
+      margin: 0;
+    }
+
+    .article-header {
+      align-items: center;
+    }
+
     .product-card,
     .faq-section,
-    .related-box,
-    .category-strip {
+    .related-box {
       padding: 18px 16px;
       border-radius: 18px;
     }
 
     .product-card h2 {
-      font-size: 24px;
+      font-size: 20px;
     }
 
-    .pros-cons,
-    .card-specs,
     .related-links {
       grid-template-columns: 1fr;
-    }
-
-    .buy-button {
-      width: 100%;
     }
   }
 </style>
@@ -379,7 +330,7 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "하츠네 미쿠 인형뽑기 굿즈 추천 TOP 5",
+      "name": "하츠네 미쿠 굿즈 모아보기",
       "item": "https://idont82.github.io/search/hatsune-miku-claw-goods-top5.html"
     }
   ]
@@ -393,27 +344,27 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "봉제 인형"
+      "name": "하츠네 미쿠 누들스토퍼"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "피규어"
+      "name": "하츠네 미쿠 피규어"
     },
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "키링"
+      "name": "하츠네 미쿠 키링"
     },
     {
       "@type": "ListItem",
       "position": 4,
-      "name": "누들스토퍼"
+      "name": "하츠네 미쿠 봉제 인형"
     },
     {
       "@type": "ListItem",
       "position": 5,
-      "name": "데스크 굿즈"
+      "name": "하츠네 미쿠 데스크 굿즈"
     }
   ]
 }
@@ -471,229 +422,245 @@
   <nav class="breadcrumb"><a href="/">홈</a><span>/</span><a href="/search/">구매 가이드</a></nav>
 
   <section class="article-header">
-    <h1>하츠네 미쿠 인형뽑기 굿즈 추천 TOP 5</h1>
-    <div class="article-meta">게시일: 2026-05-14 · 최종 업데이트: 2026-05-14</div>
+    <div class="article-header-copy">
+      <h1>하츠네 미쿠 굿즈 모아보기</h1>
+      <div class="article-meta">게시일: 2026-05-14 · 최종 업데이트: 2026-05-15</div>
+    </div>
+    <span class="thumb-inline">
+      <button type="button" id="thumbPreviewButton" aria-label="하츠네 미쿠 굿즈 썸네일 크게 보기">
+        <img src="/images/hatsune-miku-claw-goods-top5-thumbnail.png" alt="하츠네 미쿠 굿즈 모아보기 썸네일 미리보기">
+      </button>
+    </span>
   </section>
 
   <p class="intro">
-    하츠네 미쿠는 인형뽑기 경품으로도 강하지만 <strong>책상 위에 오래 두고 보기 좋고, 가방에 달고 다니기 좋고, 촬영 소품으로도 존재감이 확실한 오타쿠 굿즈 축</strong>이 분명한 캐릭터입니다.
-    이 페이지에서는 실제로 많이 찾는 굿즈 타입을 기준으로 입문용부터 전시 만족도가 높은 타입까지 다섯 갈래로 나눠 정리했습니다.
+    하츠네 미쿠 피규어, 누들스토퍼, 키링, 봉제 인형, 데스크 굿즈처럼 많이 찾는 타입만 짧게 모았습니다. 마음에 드는 타입이 있으면 바로 눌러서 이어서 보면 됩니다.
   </p>
 
-  <section class="hero-note">
-    <p>미쿠 굿즈를 고를 때는 “얼마나 크게 전시할지”, “밖으로 들고 나갈지”, “경품 감성을 원하는지” 세 가지를 먼저 정하면 실패가 적습니다. 같은 캐릭터라도 봉제, 스케일, 미니 굿즈의 만족 포인트가 완전히 다르기 때문입니다.</p>
-    <div class="mood-tags">
-      <span>경품 감성</span>
-      <span>전시 존재감</span>
-      <span>가방 덕질</span>
-      <span>책상 꾸미기</span>
+  <section class="goods-grid" aria-label="하츠네 미쿠 굿즈 카드">
+  <article class="product-card">
+    <a class="product-image-link" href="https://link.coupang.com/a/dK6RZ4LDOK" rel="sponsored nofollow" target="_blank">
+      <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/ea7c/c3ae86260b78c9d5382c9084c206332712be5f66630edb05b10c79e5ec04.jpg" alt="후류 하츠네 미쿠 빈티지 누들 스토퍼">
+    </a>
+    <h2>하츠네 미쿠 누들스토퍼 빈티지</h2>
+    <div class="product-meta">
+      <p class="product-name">후류 FuRyu 하츠네 미쿠 빈티지 누들 스토퍼</p>
+      <p class="product-price">약 5만 7천원</p>
     </div>
+    <p class="card-copy">후류 계열 특유의 경품 감성을 좋아하고, 존재감 있는 누들스토퍼를 찾을 때 보기 좋은 타입입니다.</p>
+    <p><a class="buy-button" href="https://link.coupang.com/a/dK6RZ4LDOK" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+  </article>
+
+  <article class="product-card">
+    <a class="product-image-link" href="https://link.coupang.com/a/dK6RZ4LDOK" rel="sponsored nofollow" target="_blank">
+      <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/73f0/59ad3b2efbbb1dbd49201c6a1203e8d9c97e79ea351dff070629a4f92933.jpg" alt="하츠네미쿠 나팔꽃 요정 누들 스토퍼">
+    </a>
+    <h2>하츠네 미쿠 누들스토퍼 나팔꽃 요정</h2>
+    <div class="product-meta">
+      <p class="product-name">하츠네미쿠 Flower Fairy 누들 스토퍼</p>
+      <p class="product-price">약 9천 3백원</p>
+    </div>
+    <p class="card-copy">가격 부담이 적어서 누들스토퍼를 가볍게 시작해 보고 싶을 때 먼저 눌러보기 좋은 쪽입니다.</p>
+    <p><a class="buy-button" href="https://link.coupang.com/a/dK6RZ4LDOK" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+  </article>
+
+  <article class="product-card">
+    <a class="product-image-link" href="https://link.coupang.com/a/dK6RZ4LDOK" rel="sponsored nofollow" target="_blank">
+      <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/e914/d4c0aba0f414ce639ff9c4265ef750881345f4c5564b3e5c955add9f4d82.jpg" alt="사쿠라 미쿠 누들 스토퍼 피규어 2025">
+    </a>
+    <h2>사쿠라 미쿠 누들스토퍼 2025</h2>
+    <div class="product-meta">
+      <p class="product-name">후류 하츠네 미쿠 사쿠라 미쿠 누들 스토퍼 피규어 2025</p>
+      <p class="product-price">약 3만 1천원</p>
+    </div>
+    <p class="card-copy">사쿠라 미쿠 쪽 특유의 색감과 분위기를 좋아하고, 전시용 느낌도 함께 보고 싶을 때 잘 맞습니다.</p>
+    <p><a class="buy-button" href="https://link.coupang.com/a/dK6RZ4LDOK" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+  </article>
+
+  <article class="product-card">
+    <a class="product-image-link" href="https://link.coupang.com/a/dJ5eva4uRM" rel="sponsored nofollow" target="_blank">
+      <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/50dd/71139d5955018e581caf30c4904ae71166b97a7d0af0d837cad1ef9f28ad.png" alt="하츠네 미쿠 봉제 인형 32cm 애니 캐릭터 굿즈">
+    </a>
+    <h2>하츠네 미쿠 봉제 인형</h2>
+    <div class="product-meta">
+      <p class="product-name">하츠네미쿠 봉제 인형 32cm 애니 캐릭터 굿즈 미쿠 plush</p>
+      <p class="product-price">약 2만 7천원</p>
+    </div>
+    <p class="card-copy">폭신한 느낌이 강해서 경품 감성으로 보기 좋고, 방 안에 툭 두기 편한 타입입니다.</p>
+    <p><a class="buy-button" href="https://link.coupang.com/a/dJ5eva4uRM" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+  </article>
+
+  <article class="product-card">
+    <a class="product-image-link" href="https://link.coupang.com/a/dJ5IUCtikn" rel="sponsored nofollow" target="_blank">
+      <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/31fd/3fb5da69f63f9b0245588abed700271a9b2e3498573567dfba216a8d8063.jpg" alt="극장판 하츠네 미쿠 피규어">
+    </a>
+    <h2>극장판 하츠네 미쿠 피규어</h2>
+    <div class="product-meta">
+      <p class="product-name">극장판 하츠네 미쿠 피규어</p>
+      <p class="product-price">약 1만 7천원</p>
+    </div>
+    <p class="card-copy">깔끔한 전시용으로 보기 좋고, 가격 부담이 비교적 낮은 피규어 쪽을 보고 싶을 때 고르기 편합니다.</p>
+    <p><a class="buy-button" href="https://link.coupang.com/a/dJ5IUCtikn" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+  </article>
+
+  <article class="product-card">
+    <a class="product-image-link" href="https://link.coupang.com/a/dJ5IUCtikn" rel="sponsored nofollow" target="_blank">
+      <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/dff8/ac494e5752870eae11d898b023898b0400fb4af092e27f2ff2a1006e166d.png" alt="컨트리 스타일 하츠네 미쿠 피규어">
+    </a>
+    <h2>컨트리 스타일 하츠네 미쿠 피규어</h2>
+    <div class="product-meta">
+      <p class="product-name">컨트리 스타일 하츠네 미쿠 피규어</p>
+      <p class="product-price">약 1만 9천원</p>
+    </div>
+    <p class="card-copy">의상 디테일이 잘 살아 있는 쪽을 보고 싶을 때 보기 좋고, 책상 위 포인트용으로 무난합니다.</p>
+    <p><a class="buy-button" href="https://link.coupang.com/a/dJ5IUCtikn" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+  </article>
+
+  <article class="product-card">
+    <a class="product-image-link" href="https://link.coupang.com/a/dJ5IUCtikn" rel="sponsored nofollow" target="_blank">
+      <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/c5e1/fef4be5e31fb9bbbf99bc1190f0eaa02921608221a59d66f24be9d1ab25f.jpg" alt="스테츄 미쿠 피규어 19cm">
+    </a>
+    <h2>스테츄 미쿠 피규어 19cm</h2>
+    <div class="product-meta">
+      <p class="product-name">스테츄 미쿠 피규어 19cm 하츠네 미쿠</p>
+      <p class="product-price">약 1만 3천원</p>
+    </div>
+    <p class="card-copy">좀 더 가볍게 피규어를 시작해 보고 싶을 때 보기 좋고, 가격대도 부담이 덜한 편입니다.</p>
+    <p><a class="buy-button" href="https://link.coupang.com/a/dJ5IUCtikn" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+  </article>
+
+  <article class="product-card">
+    <a class="product-image-link" href="https://link.coupang.com/a/dJ6vY3udvo" rel="sponsored nofollow" target="_blank">
+      <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/9a3c/e0058608452feb7349f6e16a4cce6411e0cb78b1b46fa94950614c2e0a04.jpg" alt="하츠네 미쿠 키링 피규어 미니 키홀더 파돌리기 미쿠">
+    </a>
+    <h2>하츠네 미쿠 키링 파돌리기 미쿠</h2>
+    <div class="product-meta">
+      <p class="product-name">하츠네 미쿠 키링 피규어 미니 키홀더 인형 파돌리기 미쿠</p>
+      <p class="product-price">약 7천 6백원</p>
+    </div>
+    <p class="card-copy">가방이나 파우치에 가볍게 달기 좋고, 작은 굿즈부터 시작하고 싶을 때 무난한 타입입니다.</p>
+    <p><a class="buy-button" href="https://link.coupang.com/a/dJ6vY3udvo" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+  </article>
+
+  <article class="product-card">
+    <a class="product-image-link" href="https://link.coupang.com/a/dJ6vY3udvo" rel="sponsored nofollow" target="_blank">
+      <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/image_audit/stage/manual/7f68e6f3c836cce8915b9d3a8a509e571e4de840969b5039a26c5d976539_1775442384351.jpg" alt="하츠네 미쿠 키링 피규어 미니 키홀더 스마일미쿠">
+    </a>
+    <h2>하츠네 미쿠 키링 스마일미쿠</h2>
+    <div class="product-meta">
+      <p class="product-name">하츠네 미쿠 키링 피규어 미니 키홀더 인형 스마일미쿠</p>
+      <p class="product-price">약 6천 7백원</p>
+    </div>
+    <p class="card-copy">같은 키링 안에서도 표정 차이를 보고 고르고 싶을 때 보기 좋고, 가장 가볍게 사기 편한 편입니다.</p>
+    <p><a class="buy-button" href="https://link.coupang.com/a/dJ6vY3udvo" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+  </article>
+
+  <article class="product-card">
+    <a class="product-image-link" href="https://link.coupang.com/a/dK645uRnae" rel="sponsored nofollow" target="_blank">
+      <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/3905/5c0bd49cb0309dd75e9d11ad27e0a990e430c349b5a43ef6e6f7651b3d32.jpg" alt="하츠네 미쿠 바우히니아 데스크 굿즈">
+    </a>
+    <h2>하츠네 미쿠 데스크 굿즈 바우히니아</h2>
+    <div class="product-meta">
+      <p class="product-name">하츠네 미쿠 바우히니아 인테리어 장식 소품</p>
+      <p class="product-price">약 4만 3천원</p>
+    </div>
+    <p class="card-copy">책상이나 선반 위에 장식용으로 두기 좋고, 소품 느낌보다 전시물 쪽에 가까운 데스크 굿즈입니다.</p>
+    <p><a class="buy-button" href="https://link.coupang.com/a/dK645uRnae" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+  </article>
+
+  <article class="product-card">
+    <a class="product-image-link" href="https://link.coupang.com/a/dK645uRnae" rel="sponsored nofollow" target="_blank">
+      <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/9998/d34442e6f0bac141cd64758847e373bc416fc87cf607fa206cb5980a21ff.jpg" alt="잠옷 하츠네 미쿠 피규어">
+    </a>
+    <h2>잠옷 하츠네 미쿠 데스크 굿즈</h2>
+    <div class="product-meta">
+      <p class="product-name">잠옷 하츠네 미쿠 피규어</p>
+      <p class="product-price">약 1만 6천원</p>
+    </div>
+    <p class="card-copy">부담 없는 가격대로 책상 한쪽에 두기 좋고, 가볍게 미쿠 소품을 하나 올려두고 싶을 때 잘 맞습니다.</p>
+    <p><a class="buy-button" href="https://link.coupang.com/a/dK645uRnae" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+  </article>
+
+  <article class="product-card">
+    <a class="product-image-link" href="https://link.coupang.com/a/dK645uRnae" rel="sponsored nofollow" target="_blank">
+      <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/c10b/c7d8f7f278db5c902d10fbb933d86cc48f3b925c251cb5a4f195df0ef32a.jpeg" alt="하츠네 미쿠 요네야마 마이 스타일 데스크 장식">
+    </a>
+    <h2>하츠네 미쿠 데스크 장식 박스 세트</h2>
+    <div class="product-meta">
+      <p class="product-name">하츠네 미쿠 요네야마 마이 스타일 데스크 장식 박스 세트</p>
+      <p class="product-price">약 3만원</p>
+    </div>
+    <p class="card-copy">조금 더 화려한 책상 장식용을 보고 싶을 때 보기 좋고, 선물용 느낌으로도 고르기 쉬운 편입니다.</p>
+    <p><a class="buy-button" href="https://link.coupang.com/a/dK645uRnae" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+  </article>
   </section>
-
-  <section class="category-strip">
-    <h2>먼저 취향 축부터 고르기</h2>
-    <ul>
-      <li><strong>봉제 인형</strong>: 인형뽑기 경품 감성을 가장 쉽게 느끼기 좋은 정석 루트입니다.</li>
-      <li><strong>피규어</strong>: 조형과 도색 비중이 커서 책상 위 존재감이 가장 강합니다.</li>
-      <li><strong>키링과 키캡</strong>: 일상에서 가장 자주 보게 되는 타입이라 체감 만족도가 높습니다.</li>
-      <li><strong>누들스토퍼와 데스크 굿즈</strong>: 전시와 실사용을 겸하고 싶은 분에게 특히 잘 맞습니다.</li>
-    </ul>
-  </section>
-
-  <table class="compare-table">
-    <thead>
-      <tr>
-        <th>순위</th>
-        <th>굿즈 타입</th>
-        <th>이런 분께 추천</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="table-rank rank-1">1</span></td>
-        <td><strong>봉제 인형</strong></td>
-        <td>경품 감성을 가장 먼저 느끼고 싶은 입문자</td>
-      </tr>
-      <tr>
-        <td><span class="table-rank rank-2">2</span></td>
-        <td><strong>피규어</strong></td>
-        <td>조형 퀄리티와 전시 만족도를 우선하는 수집형 팬</td>
-      </tr>
-      <tr>
-        <td><span class="table-rank rank-3">3</span></td>
-        <td><strong>키링</strong></td>
-        <td>가방, 파우치, 차키에 바로 붙여 일상 덕질을 하고 싶은 분</td>
-      </tr>
-      <tr>
-        <td><span class="table-rank rank-2">4</span></td>
-        <td><strong>누들스토퍼</strong></td>
-        <td>작은 공간에서도 캐릭터성을 세게 내고 싶은 책상파</td>
-      </tr>
-      <tr>
-        <td><span class="table-rank rank-3">5</span></td>
-        <td><strong>데스크 굿즈</strong></td>
-        <td>실사용 가능한 소품으로 조용하게 취향을 깔고 싶은 직장인</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <article class="product-card">
-    <a class="product-image-link" href="https://www.coupang.com/np/search?component=&q=%ED%95%98%EC%B8%A0%EB%84%A4+%EB%AF%B8%EC%BF%A0+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95" rel="sponsored nofollow" target="_blank">
-      <div class="product-poster" aria-hidden="true"><span>폭신한 경품 감성 · 봉제 인형</span></div>
-    </a>
-    <div class="product-rank">TOP 1</div>
-    <h2>봉제 인형</h2>
-    <p class="card-hook">미쿠 경품 입문에서 가장 실패 확률이 낮은 축입니다. 캐릭터 실루엣이 직관적이고, 방 한쪽에 툭 올려놔도 귀엽고, 사진을 찍을 때도 부담이 적습니다.</p>
-    <div class="tag-row">
-      <span class="tag">경품 감성</span>
-      <span class="tag">입문 추천</span>
-      <span class="tag">촬영 소품</span>
-    </div>
-    <div class="pros-cons">
-      <div><strong>장점</strong><br>가격대가 비교적 무난하고 경품형 제품이 많아 “인형뽑기 굿즈 같다”는 감각을 가장 쉽게 살릴 수 있습니다.</div>
-      <div><strong>단점</strong><br>조형 디테일이나 의상 표현은 피규어보다 단순할 수 있어 전시 퀄리티만 보면 아쉬울 수 있습니다.</div>
-    </div>
-    <div class="card-specs">
-      <div class="card-spec"><span class="label">체감 난이도</span><span class="value">입문용</span></div>
-      <div class="card-spec"><span class="label">전시 포인트</span><span class="value">볼륨감</span></div>
-      <div class="card-spec"><span class="label">추천 상황</span><span class="value">침대·소파 주변</span></div>
-    </div>
-    <p><a class="buy-button" href="https://www.coupang.com/np/search?component=&q=%ED%95%98%EC%B8%A0%EB%84%A4+%EB%AF%B8%EC%BF%A0+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95" rel="sponsored nofollow" target="_blank">쿠팡 검색 결과 보기</a></p>
-    <p class="affiliate-note">이 페이지에는 쿠팡 파트너스 링크가 포함되어 있으며, 링크를 통해 구매가 발생하면 일정액의 수수료를 제공받을 수 있습니다.</p>
-  </article>
-
-  <article class="product-card">
-    <a class="product-image-link" href="https://www.coupang.com/np/search?component=&q=%ED%95%98%EC%B8%A0%EB%84%A4+%EB%AF%B8%EC%BF%A0+%ED%94%BC%EA%B7%9C%EC%96%B4" rel="sponsored nofollow" target="_blank">
-      <div class="product-poster" aria-hidden="true"><span>전시 존재감 · 피규어</span></div>
-    </a>
-    <div class="product-rank">TOP 2</div>
-    <h2>피규어</h2>
-    <p class="card-hook">“내 책상에 한 점만 둬도 미쿠 존이 완성됐으면 좋겠다”는 사람에게는 결국 피규어가 정답입니다. 헤어 파츠와 의상 도색이 만족도를 크게 좌우합니다.</p>
-    <div class="tag-row">
-      <span class="tag">전시 특화</span>
-      <span class="tag">조형 감상</span>
-      <span class="tag">수집형</span>
-    </div>
-    <div class="pros-cons">
-      <div><strong>장점</strong><br>머리카락 흐름, 의상 포즈, 표정의 차이가 확실해 전시 존재감이 강하고 만족도도 오래 갑니다.</div>
-      <div><strong>단점</strong><br>가격 폭이 넓고 공간을 조금 더 차지해서 가볍게 시작하기에는 진입장벽이 있을 수 있습니다.</div>
-    </div>
-    <div class="card-specs">
-      <div class="card-spec"><span class="label">체감 난이도</span><span class="value">중급</span></div>
-      <div class="card-spec"><span class="label">전시 포인트</span><span class="value">조형·도색</span></div>
-      <div class="card-spec"><span class="label">추천 상황</span><span class="value">책상 메인 존</span></div>
-    </div>
-    <p><a class="buy-button" href="https://www.coupang.com/np/search?component=&q=%ED%95%98%EC%B8%A0%EB%84%A4+%EB%AF%B8%EC%BF%A0+%ED%94%BC%EA%B7%9C%EC%96%B4" rel="sponsored nofollow" target="_blank">쿠팡 검색 결과 보기</a></p>
-    <p class="affiliate-note">이 페이지에는 쿠팡 파트너스 링크가 포함되어 있으며, 링크를 통해 구매가 발생하면 일정액의 수수료를 제공받을 수 있습니다.</p>
-  </article>
-
-  <article class="product-card">
-    <a class="product-image-link" href="https://www.coupang.com/np/search?component=&q=%ED%95%98%EC%B8%A0%EB%84%A4+%EB%AF%B8%EC%BF%A0+%ED%82%A4%EB%A7%81" rel="sponsored nofollow" target="_blank">
-      <div class="product-poster" aria-hidden="true"><span>가방 포인트 · 키링</span></div>
-    </a>
-    <div class="product-rank">TOP 3</div>
-    <h2>키링</h2>
-    <p class="card-hook">밖에서 가장 자주 보게 되는 건 키링입니다. 파우치, 카드지갑, 에코백 어디에 달아도 티가 나고, 덕질이 일상에 자연스럽게 스며드는 타입입니다.</p>
-    <div class="tag-row">
-      <span class="tag">휴대성</span>
-      <span class="tag">일상 덕질</span>
-      <span class="tag">가벼운 선물</span>
-    </div>
-    <div class="pros-cons">
-      <div><strong>장점</strong><br>부피 부담이 적고 교체가 쉬워 여러 버전을 모아도 부담이 크지 않습니다. 키링과 키캡을 함께 보면 연출 폭도 넓어집니다.</div>
-      <div><strong>단점</strong><br>크기가 작아서 캐릭터 디테일을 크게 즐기고 싶은 분에게는 임팩트가 약할 수 있습니다.</div>
-    </div>
-    <div class="card-specs">
-      <div class="card-spec"><span class="label">체감 난이도</span><span class="value">가벼움</span></div>
-      <div class="card-spec"><span class="label">전시 포인트</span><span class="value">휴대 연출</span></div>
-      <div class="card-spec"><span class="label">추천 상황</span><span class="value">가방·차키</span></div>
-    </div>
-    <p><a class="buy-button" href="https://www.coupang.com/np/search?component=&q=%ED%95%98%EC%B8%A0%EB%84%A4+%EB%AF%B8%EC%BF%A0+%ED%82%A4%EB%A7%81" rel="sponsored nofollow" target="_blank">쿠팡 검색 결과 보기</a></p>
-    <p class="affiliate-note">이 페이지에는 쿠팡 파트너스 링크가 포함되어 있으며, 링크를 통해 구매가 발생하면 일정액의 수수료를 제공받을 수 있습니다.</p>
-  </article>
-
-  <article class="product-card">
-    <a class="product-image-link" href="https://www.coupang.com/np/search?component=&q=%ED%95%98%EC%B8%A0%EB%84%A4+%EB%AF%B8%EC%BF%A0+%EB%88%84%EB%93%A4%EC%8A%A4%ED%86%A0%ED%8D%BC" rel="sponsored nofollow" target="_blank">
-      <div class="product-poster" aria-hidden="true"><span>앉은 포즈 · 누들스토퍼</span></div>
-    </a>
-    <div class="product-rank">TOP 4</div>
-    <h2>누들스토퍼</h2>
-    <p class="card-hook">경품 라인업 특유의 감성과 실용성을 동시에 챙기고 싶다면 누들스토퍼가 의외의 강자입니다. 작은 공간에도 잘 놓이고, 책상 코너 연출이 예쁩니다.</p>
-    <div class="tag-row">
-      <span class="tag">경품 라인업</span>
-      <span class="tag">책상 연출</span>
-      <span class="tag">작은 공간</span>
-    </div>
-    <div class="pros-cons">
-      <div><strong>장점</strong><br>경품 계열에서 자주 보이는 포맷이라 인형뽑기 무드를 살리기 좋고, 앉은 포즈 특유의 귀여움이 확실합니다.</div>
-      <div><strong>단점</strong><br>실사용보다 전시 비중이 더 큰 편이라 활용성을 최우선으로 보는 분에게는 우선순위가 낮을 수 있습니다.</div>
-    </div>
-    <div class="card-specs">
-      <div class="card-spec"><span class="label">체감 난이도</span><span class="value">무난</span></div>
-      <div class="card-spec"><span class="label">전시 포인트</span><span class="value">앉은 포즈</span></div>
-      <div class="card-spec"><span class="label">추천 상황</span><span class="value">모니터 옆</span></div>
-    </div>
-    <p><a class="buy-button" href="https://www.coupang.com/np/search?component=&q=%ED%95%98%EC%B8%A0%EB%84%A4+%EB%AF%B8%EC%BF%A0+%EB%88%84%EB%93%A4%EC%8A%A4%ED%86%A0%ED%8D%BC" rel="sponsored nofollow" target="_blank">쿠팡 검색 결과 보기</a></p>
-    <p class="affiliate-note">이 페이지에는 쿠팡 파트너스 링크가 포함되어 있으며, 링크를 통해 구매가 발생하면 일정액의 수수료를 제공받을 수 있습니다.</p>
-  </article>
-
-  <article class="product-card">
-    <a class="product-image-link" href="https://www.coupang.com/np/search?component=&q=%ED%95%98%EC%B8%A0%EB%84%A4+%EB%AF%B8%EC%BF%A0+%EB%8D%B0%EC%8A%A4%ED%81%AC+%EA%B5%BF%EC%A6%88" rel="sponsored nofollow" target="_blank">
-      <div class="product-poster" aria-hidden="true"><span>책상 꾸미기 · 데스크 굿즈</span></div>
-    </a>
-    <div class="product-rank">TOP 5</div>
-    <h2>데스크 굿즈</h2>
-    <p class="card-hook">아크릴 스탠드, 마우스패드, 펜꽂이형 소품처럼 실사용 가능한 데스크 굿즈는 조용하지만 오래 갑니다. 책상 생활 동선에 캐릭터를 자연스럽게 심는 타입입니다.</p>
-    <div class="tag-row">
-      <span class="tag">실사용</span>
-      <span class="tag">책상 꾸미기</span>
-      <span class="tag">직장인 취향</span>
-    </div>
-    <div class="pros-cons">
-      <div><strong>장점</strong><br>매일 손이 닿는 공간에서 자주 보게 되어 체감 만족도가 높고, 과하게 부피를 차지하지 않습니다.</div>
-      <div><strong>단점</strong><br>경품 특유의 “획득했다”는 느낌은 봉제나 누들스토퍼보다 덜할 수 있습니다.</div>
-    </div>
-    <div class="card-specs">
-      <div class="card-spec"><span class="label">체감 난이도</span><span class="value">실용형</span></div>
-      <div class="card-spec"><span class="label">전시 포인트</span><span class="value">생활 동선</span></div>
-      <div class="card-spec"><span class="label">추천 상황</span><span class="value">업무 책상</span></div>
-    </div>
-    <p><a class="buy-button" href="https://www.coupang.com/np/search?component=&q=%ED%95%98%EC%B8%A0%EB%84%A4+%EB%AF%B8%EC%BF%A0+%EB%8D%B0%EC%8A%A4%ED%81%AC+%EA%B5%BF%EC%A6%88" rel="sponsored nofollow" target="_blank">쿠팡 검색 결과 보기</a></p>
-    <p class="affiliate-note">이 페이지에는 쿠팡 파트너스 링크가 포함되어 있으며, 링크를 통해 구매가 발생하면 일정액의 수수료를 제공받을 수 있습니다.</p>
-  </article>
 
   <section class="faq-section">
     <h2>자주 묻는 질문</h2>
     <details>
       <summary>하츠네 미쿠 굿즈는 처음이면 어떤 타입부터 사는 게 무난한가요?</summary>
-      <p>처음이라면 봉제 인형이나 키링처럼 가격 부담이 비교적 낮고 실패 체감이 적은 타입부터 시작하는 편이 무난합니다. “경품 감성”을 느끼고 싶은 분이라면 봉제 인형 쪽이 더 만족도가 높습니다.</p>
+      <p>처음이면 봉제 인형이나 키링처럼 가격 부담이 낮은 쪽부터 보는 편이 무난합니다.</p>
     </details>
     <details>
       <summary>책상 위 전시용으로 가장 추천하는 건 무엇인가요?</summary>
-      <p>책상 위 전시 만족도만 놓고 보면 피규어와 누들스토퍼가 가장 강합니다. 피규어는 조형 완성도, 누들스토퍼는 작은 공간에서도 살아나는 분위기가 장점입니다.</p>
-    </details>
-    <details>
-      <summary>밖에 들고 다니기 좋은 굿즈는 어떤 쪽인가요?</summary>
-      <p>가방이나 파우치에 바로 달 수 있는 키링 계열이 가장 편합니다. 키링과 키캡을 함께 보면 실사용 감성과 소소한 커스텀 재미를 동시에 챙길 수 있습니다.</p>
-    </details>
-    <details>
-      <summary>인형뽑기 경품 감성과 가장 가까운 타입은 무엇인가요?</summary>
-      <p>봉제 인형과 누들스토퍼가 가장 가깝습니다. 일본 경품 라인업에서 자주 보이는 포맷이라 “클레인 게임에서 막 뽑아온 느낌”을 살리기 좋습니다.</p>
+      <p>피규어와 누들스토퍼가 가장 무난합니다. 책상 위에 두었을 때 존재감이 확실한 편입니다.</p>
     </details>
   </section>
 
   <section class="related-box">
     <h2>같이 보면 좋은 캐릭터 가이드</h2>
-    <p>다음 캐릭터도 같은 흐름으로 이어볼 수 있게 내부 가이드 중심으로 묶었습니다. 하츠네 미쿠를 보고 취향이 맞았다면 허브에서 다른 캐릭터 카드도 같이 보는 편이 빠릅니다.</p>
+    <p>하츠네 미쿠 다음으로 많이 보는 캐릭터 카드도 이어서 볼 수 있게 묶었습니다.</p>
     <div class="related-links">
       <a href="/search/adult-claw-characters-top5.html">어른들이 인형뽑기에서 많이 찾는 캐릭터 TOP 5</a>
       <a href="/search/adult-claw-characters-top5.html#coming-soon">다음 캐릭터 카드 더 보기</a>
     </div>
   </section>
+
+  <p class="affiliate-note">이 페이지에는 쿠팡 파트너스 링크가 포함되어 있으며, 링크를 통해 구매가 발생하면 일정액의 수수료를 제공받을 수 있습니다.</p>
 </main>
+
+<div class="thumb-lightbox" id="thumbLightbox" aria-hidden="true">
+  <button type="button" id="thumbLightboxClose" aria-label="썸네일 크게 보기 닫기">
+    <img src="/images/hatsune-miku-claw-goods-top5-thumbnail.png" alt="하츠네 미쿠 굿즈 모아보기 썸네일 크게 보기">
+  </button>
+</div>
 
 <footer class="site-footer">
   <div class="container">가격과 상품 구성은 판매처 사정에 따라 달라질 수 있습니다. 실제 구매 전 최신 옵션과 배송 조건을 다시 확인하세요.</div>
 </footer>
+<script>
+  (function () {
+    var previewButton = document.getElementById('thumbPreviewButton');
+    var lightbox = document.getElementById('thumbLightbox');
+    var closeButton = document.getElementById('thumbLightboxClose');
+
+    if (!previewButton || !lightbox || !closeButton) {
+      return;
+    }
+
+    function openLightbox() {
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+    }
+
+    previewButton.addEventListener('click', openLightbox);
+    closeButton.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function (event) {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+  }());
+</script>
 </body>
 </html>
