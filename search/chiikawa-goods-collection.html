@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>치이카와 굿즈 모아보기 | 키링·인형·데스크 굿즈 한눈에</title>
+<meta name="description" content="치이카와, 하치와레, 우사기, 랏코까지 많이 찾는 굿즈만 모았습니다. 키링, 작은인형, 파우치, 데스크 굿즈를 카드형으로 가볍게 둘러볼 수 있습니다.">
+<meta name="keywords" content="치이카와 굿즈, 치이카와 키링, 치이카와 인형, 치이카와 데스크 굿즈, 하치와레 굿즈, 우사기 굿즈">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://idont82.github.io/search/chiikawa-goods-collection.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/images/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/images/favicon.png">
+<meta property="og:type" content="article">
+<meta property="og:title" content="치이카와 굿즈 모아보기 | 키링·인형·데스크 굿즈 한눈에">
+<meta property="og:description" content="치이카와, 하치와레, 우사기 쪽으로 많이 보는 굿즈를 카드형으로 정리했습니다. 가방에 달기 좋은 키링부터 작은인형, 데스크 굿즈까지 한 번에 보기 쉽게 묶었습니다.">
+<meta property="og:url" content="https://idont82.github.io/search/chiikawa-goods-collection.html">
+<meta property="og:image" content="https://idont82.github.io/images/chiikawa-goods-collection-thumbnail.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="치이카와 굿즈 모아보기 | 키링·인형·데스크 굿즈 한눈에">
+<meta name="twitter:description" content="치이카와, 하치와레, 우사기 쪽으로 많이 보는 굿즈를 카드형으로 정리했습니다.">
+<meta name="twitter:image" content="https://idont82.github.io/images/chiikawa-goods-collection-thumbnail.png">
+<link rel="stylesheet" href="/search/assets/style.css">
+<style>
+  :root {
+    --chii-cream: #fff7ea;
+    --chii-yellow: #ffe4a8;
+    --chii-sky: #dff1ff;
+    --chii-mint: #e3f8ef;
+    --chii-peach: #ffe7d9;
+    --chii-ink: #334155;
+    --chii-line: rgba(51, 65, 85, 0.12);
+  }
+
+  .breadcrumb {
+    margin: 24px 0 0;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .breadcrumb a {
+    color: var(--text-muted);
+  }
+
+  .breadcrumb span {
+    margin: 0 8px;
+  }
+
+  .article-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .article-header-copy {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .thumb-inline {
+    width: 118px;
+    flex: 0 0 auto;
+  }
+
+  .thumb-inline button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .thumb-inline img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .thumb-lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(10, 18, 24, 0.72);
+    z-index: 9999;
+  }
+
+  .thumb-lightbox.is-open {
+    display: flex;
+  }
+
+  .thumb-lightbox button {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .thumb-lightbox img {
+    display: block;
+    max-width: min(1100px, 94vw);
+    max-height: 90vh;
+    border-radius: 18px;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
+  }
+
+  .goods-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 26px;
+  }
+
+  .product-card {
+    padding: 16px;
+    border-radius: 20px;
+    border: 1px solid var(--chii-line);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 251, 245, 0.96) 100%);
+    box-shadow: 0 12px 24px rgba(51, 65, 85, 0.08);
+  }
+
+  .product-image-link {
+    display: block;
+    margin-bottom: 14px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 224, 168, 0.4);
+    text-decoration: none;
+    background: linear-gradient(180deg, #ffffff 0%, #fffaf4 100%);
+  }
+
+  .product-image-link img {
+    display: block;
+    width: 100%;
+    height: 240px;
+    object-fit: contain;
+    object-position: center center;
+    background: linear-gradient(180deg, #ffffff 0%, #fffaf4 100%);
+  }
+
+  .product-meta {
+    margin: 0 0 14px;
+  }
+
+  .product-name {
+    margin: 0 0 6px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--chii-ink);
+    font-weight: 700;
+  }
+
+  .product-price {
+    margin: 0;
+    font-size: 22px;
+    line-height: 1.2;
+    color: #d12f2f;
+    font-weight: 800;
+  }
+
+  .product-card h2 {
+    margin: 0 0 8px;
+    font-size: 22px;
+    line-height: 1.35;
+    color: var(--chii-ink);
+  }
+
+  .card-copy {
+    margin: 0 0 14px;
+    font-size: 14px;
+    color: #425466;
+    line-height: 1.6;
+  }
+
+  .buy-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 148px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(184, 148, 82, 0.35);
+    background: linear-gradient(180deg, #fffaf0 0%, #f8efd8 100%);
+    color: #6b4f1f !important;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 6px 16px rgba(122, 92, 38, 0.1);
+  }
+
+  .buy-button:hover {
+    text-decoration: none;
+    transform: translateY(-1px);
+    border-color: rgba(184, 148, 82, 0.48);
+    background: linear-gradient(180deg, #fff8e7 0%, #f3e2b3 100%);
+  }
+
+  .faq-section,
+  .related-box {
+    margin: 40px 0 0;
+    padding: 24px;
+    border-radius: 20px;
+    background: #fff;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+
+  .faq-section h2,
+  .related-box h2 {
+    margin: 0 0 14px;
+    font-size: 22px;
+  }
+
+  .faq-section details {
+    margin: 12px 0;
+    padding: 14px 16px;
+    border: 1px solid rgba(51, 65, 85, 0.1);
+    border-radius: 14px;
+    background: linear-gradient(180deg, #fffdf8 0%, #ffffff 100%);
+  }
+
+  .faq-section summary {
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .faq-section p {
+    margin: 10px 0 0;
+    color: var(--text-muted);
+  }
+
+  .related-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .affiliate-note {
+    margin: 10px 0 0;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #667085;
+    text-align: center;
+  }
+
+  @media (max-width: 720px) {
+    .article-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .thumb-inline {
+      width: 104px;
+    }
+
+    .product-image-link img {
+      height: 220px;
+    }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "치이카와 굿즈 모아보기",
+  "description": "치이카와, 하치와레, 우사기 쪽으로 많이 보는 키링, 작은인형, 파우치, 데스크 굿즈를 카드형으로 묶은 페이지입니다.",
+  "datePublished": "2026-05-15",
+  "dateModified": "2026-05-15",
+  "mainEntityOfPage": "https://idont82.github.io/search/chiikawa-goods-collection.html",
+  "image": [
+    "https://idont82.github.io/images/chiikawa-goods-collection-thumbnail.png"
+  ],
+  "author": {
+    "@type": "Organization",
+    "name": "idont82.github.io"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "구매 가이드"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "홈",
+      "item": "https://idont82.github.io/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "구매 가이드",
+      "item": "https://idont82.github.io/search/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "치이카와 굿즈 모아보기"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "치이카와 굿즈 모아보기",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "치이카와 토끼 키링 파우치 CH-PU06" },
+    { "@type": "ListItem", "position": 2, "name": "치이카와 가르마 키링 파우치" },
+    { "@type": "ListItem", "position": 3, "name": "치이카와 키링 13cm" },
+    { "@type": "ListItem", "position": 4, "name": "치이카와 산리오 콜라보 키링" },
+    { "@type": "ListItem", "position": 5, "name": "소장각 치이카와 작은인형" },
+    { "@type": "ListItem", "position": 6, "name": "MORIPiLO 치이카와 봉제인형" },
+    { "@type": "ListItem", "position": 7, "name": "치이카와 데스크 매트" },
+    { "@type": "ListItem", "position": 8, "name": "치이카와 크리스탈 퍼즐 피규어" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "치이카와 굿즈는 처음이면 어떤 타입부터 보기 쉬운가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "가볍게 시작하려면 키링이나 파우치가 무난하고, 방 안에 두고 보기 좋은 쪽을 원하면 작은인형이나 데스크 굿즈부터 보는 편이 편합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "치이카와 굿즈는 캐릭터가 섞여 있어도 괜찮나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "치이카와, 하치와레, 우사기, 랏코처럼 같이 묶여 나오는 경우가 많아서 한 페이지에서 함께 보는 편이 오히려 고르기 쉽습니다."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <div class="site-title"><span class="brand-mark" aria-hidden="true">&#9819;</span> 구매 가이드</div>
+    <nav class="site-nav"><a href="/">홈</a></nav>
+  </div>
+</header>
+
+<main class="container article-page">
+  <nav class="breadcrumb"><a href="/">홈</a><span>/</span><a href="/search/">구매 가이드</a></nav>
+
+  <section class="article-header">
+    <div class="article-header-copy">
+      <h1>치이카와 굿즈 모아보기</h1>
+      <div class="article-meta">게시일: 2026-05-15 · 최종 업데이트: 2026-05-15</div>
+    </div>
+    <span class="thumb-inline">
+      <button type="button" id="thumbPreviewButton" aria-label="치이카와 굿즈 썸네일 크게 보기">
+        <img src="/images/chiikawa-goods-collection-thumbnail.png" alt="치이카와 굿즈 모아보기 썸네일 미리보기">
+      </button>
+    </span>
+  </section>
+
+  <p class="intro">
+    치이카와, 하치와레, 우사기 쪽으로 많이 찾는 실제 상품만 추려서 묶었습니다. 키링, 인형, 파우치, 데스크 굿즈를 한 번에 훑어보고 마음에 드는 카드만 바로 눌러서 이어서 보면 됩니다.
+  </p>
+
+  <section class="goods-grid" aria-label="치이카와 굿즈 카드">
+    <article class="product-card">
+      <a class="product-image-link" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9505132585&itemId=28320983722&vendorItemId=95242194687&traceid=V0-153-d98524d518205f28&requestid=20260515163839084177201803&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank">
+        <img src="https://ads-partners.coupang.com/image1/jCzMsu_GxEDv4fryjP3B8VC7ygLG88071C68hJDITmr3Q2DtI9sd6fjGV3gz4qGkFb6zG2WV-YQ1rrnCLJb5NRzgfOpszhVcSKHaxPewlap31mh0Ule6cbz0PND7Ydbdp3gtMGf9LZUtf59kkIqSfYG46zn9ZZvy5AiUQA4nkNTR_-YMRZHUh0hR8Rer5C-MmIw-xJWy5ItdMBUxkQ_5pof8xj0qPnDEDX6NFvcKnkDxduTR4A6Md-B0OCuHy-i6FoXQSrsSouMBJCQLIaxpiAL4hBxmQLSZO8JOYLBFnEC3YYJiRVQW7fsIJj3xahE40pmzV_CBcEI740XAfvnvtSvvseWUezKEBLFmhlYYzXpAkZVXbA==" alt="캐릭터 치이카와 키링 열쇠고리">
+      </a>
+      <h2>치이카와 키링 열쇠고리 세트</h2>
+      <div class="product-meta">
+        <p class="product-name">캐릭터 치이카와 키링 열쇠고리 귀여운 키링 스티커 세트</p>
+        <p class="product-price">약 9천 4백원</p>
+      </div>
+      <p class="card-copy">가방이나 파우치에 바로 달기 좋고, 치이카와 굿즈를 가장 가볍게 시작하기 쉬운 타입입니다.</p>
+      <p><a class="buy-button" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9505132585&itemId=28320983722&vendorItemId=95242194687&traceid=V0-153-d98524d518205f28&requestid=20260515163839084177201803&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+    </article>
+
+    <article class="product-card">
+      <a class="product-image-link" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9205266342&itemId=27183924887&vendorItemId=94151475267&traceid=V0-153-77ce16189bba5569&requestid=20260515163839084177201803&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank">
+        <img src="https://ads-partners.coupang.com/image1/FdIgxNvpYemlFA_FFSclvtohDVbCdR3qPqCThzBl0z7o44yH4zv5yLC84uTtdfpm-zoK2CWRvd5pu_gx45_IkAZzQEUrP_pumtEFzJe8X2G9jvIK7OiauPkrqS5mD0HSod4BQDXAGI-ufKJYh_Ho_fAxRac0sMnAZbwPQ-aZduYrP8fQuouKyiZfc1xlxbyTp1fMYEAxmXE0KDw1YsWx0crLj-DrSIQLp78GlHzLxVZ3bItPC-VEsRG1bAEj6K9eNrshxf3tSszE-pvJg6w9xmwQghQgJ4ql_a_9vDS_lD8zh8_TxR3MaYK1dDDkfkHxmBdf1ZgVdnCPWwQJCYCb47uy_KTOSicScCNkdE38F5YCmk0xCg==" alt="먼작귀 봉제 거울 달린 가방고리 키홀더">
+      </a>
+      <h2>먼작귀 거울 달린 키홀더</h2>
+      <div class="product-meta">
+        <p class="product-name">먼작귀 봉제라서 부드러운 거울 달린 가방고리 키홀더 3탄</p>
+        <p class="product-price">약 9천 9백원</p>
+      </div>
+      <p class="card-copy">키링이면서 거울 포인트까지 있어 실사용 감성이 있고, 가방에 달았을 때 귀여운 존재감이 잘 살아납니다.</p>
+      <p><a class="buy-button" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9205266342&itemId=27183924887&vendorItemId=94151475267&traceid=V0-153-77ce16189bba5569&requestid=20260515163839084177201803&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+    </article>
+
+    <article class="product-card">
+      <a class="product-image-link" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=8768960037&itemId=25504438460&vendorItemId=92308257310&traceid=V0-153-3b6d6ae96f76f2c4&requestid=20260515163840365257401750&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank">
+        <img src="https://ads-partners.coupang.com/image1/AHYbuI7nWznu0X1nAPSz6s5XvC-y0WXoS18qzKyy-rG-tddDvhZZVoI6UWltmiDrknr2ZyWy5cbheG6dF0WG2UaxYL-h5AZjpBfIbPuExpxKfVi7nX20cjUuR1KT13WFs46Tsa5bYiJlruVZBdhIjTvEwnBZIsXOn4WChjlmtSxJEcdRCZS_mvt2DDBhZKX_Lcx8e23uSkdRWULOnutPQ_vrVnbBtfvoYSTtxjFh3xZ_9jru_LoYsMCNZ3B--9URG8VJpO16PZ5ZMBmOl8OhW6eHbIp8RpjKMADyJO661mWjSy5z5851HH8HQNxOu5z6RwyGx2FYPKdZNvOroUmC0riVfSEqtpupAmrd7W7T3a6BX6UgN3Y=" alt="치이카와 하치와레 우사기 시리즈 부드러운 인형">
+      </a>
+      <h2>치이카와 시리즈 부드러운 인형</h2>
+      <div class="product-meta">
+        <p class="product-name">치이카와, 하치와레, 우사기 시리즈 부드러운 인형 귀여운 생일 선물 18-58cm</p>
+        <p class="product-price">약 9천 9백원</p>
+      </div>
+      <p class="card-copy">치이카와 캐릭터 인형을 가장 무난하게 시작하기 좋고, 선물용으로도 꺼내기 쉬운 쪽입니다.</p>
+      <p><a class="buy-button" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=8768960037&itemId=25504438460&vendorItemId=92308257310&traceid=V0-153-3b6d6ae96f76f2c4&requestid=20260515163840365257401750&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+    </article>
+
+    <article class="product-card">
+      <a class="product-image-link" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9296222450&itemId=27535612872&vendorItemId=94500157268&traceid=V0-153-3fce9636f475ee29&requestid=20260515163840365257401750&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank">
+        <img src="https://ads-partners.coupang.com/image1/mxHVx-FbSHw833Mbm2-duTb6DJjtG6U2JqAAkX5_gzS9xjoqqAIGMPid74OV9wb6D5Mrt3yrd3cxO7bTAiGc5ZN11cbIWu5N95VZoZ5WPCgHiefQmzgwqcdLvAkZLx5h1qZfTGNKQls55DsDrURnyJLNCzkUGrpIvSNXsMKnSsO50Ri1YUHUKA-ludWeMZvG9lOQLNKbAAaH2oalKc7u5oDQF4cIRpxxoBT4Lw3Ue_LOODC39FagOSSeCCk7AjcMmxwEVFvXUSbpeU_Po9UoIV6CkcWj561Rq-ywJliOGz2F5okEwoG9tPljuOM0amcYVb73JgKfp2dSz4_fgGGhBbggoouPCCNPkD-_QZ2aL71TpgqY0g==" alt="먼작귀 치이카와 대형 쿠션 인형">
+      </a>
+      <h2>치이카와 대형 쿠션 인형</h2>
+      <div class="product-meta">
+        <p class="product-name">먼작귀 치이카와 대형 쿠션 인형 하치와레 우사기 80cm 굿즈</p>
+        <p class="product-price">약 2만 5천원</p>
+      </div>
+      <p class="card-copy">조금 더 크게 안고 볼 수 있는 인형을 원할 때 고르기 좋고, 방 안 포인트 소품으로도 존재감이 큰 편입니다.</p>
+      <p><a class="buy-button" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9296222450&itemId=27535612872&vendorItemId=94500157268&traceid=V0-153-3fce9636f475ee29&requestid=20260515163840365257401750&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+    </article>
+
+    <article class="product-card">
+      <a class="product-image-link" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9263885895&itemId=27412701771&vendorItemId=94378314797&traceid=V0-153-f224c6f365207cde&requestid=20260515163841648157852124&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank">
+        <img src="https://ads-partners.coupang.com/image1/xWSJmr8F1MY9-R1-xX_OmypC5AJt7OERLq29kDKx763Wf47pbrD30UdlKwi5JEiA0dMFIP6khe06RzP1R0EC28uRQsmEdWRr8GA3Rpq1TRcbw35wAfQu9S_DMv02UuVxSzIC7Dx-OgCegJ7pl7x_P3R4uUGlz54_3nZTM5ct3Jiw9VnS2wyHdJa6tDhBgOtKEXtd5g3pF0a1T1XSyO8SExOPQ07gX-JMMCehs8aD4_quQE_hoavrmVJkEc7tJGvfgeqLIXGfxWTUsq6d56xXs5Zivu49xemyGI-5c84LVlQ9LH72aSzvw3Ajb4PyAehAu7srCDohRp_Zm_NfxGsoWCpiIuIe7YlUInWMfOEA0Oc9EI0FKg==" alt="먼작귀 치이카와 페이스 파우치 2탄">
+      </a>
+      <h2>치이카와 페이스 파우치 2탄</h2>
+      <div class="product-meta">
+        <p class="product-name">먼작귀 치이카와 페이스 파우치 2탄 9종택1</p>
+        <p class="product-price">약 2만 7천원</p>
+      </div>
+      <p class="card-copy">캐릭터 얼굴이 바로 보여서 치이카와 감성이 강하고, 작은 소지품을 넣어 다니기에도 편한 타입입니다.</p>
+      <p><a class="buy-button" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9263885895&itemId=27412701771&vendorItemId=94378314797&traceid=V0-153-f224c6f365207cde&requestid=20260515163841648157852124&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+    </article>
+
+    <article class="product-card">
+      <a class="product-image-link" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=8291036605&itemId=23911078809&vendorItemId=91660496930&traceid=V0-153-cae4a9fd1a74b05d&requestid=20260515163841648157852124&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank">
+        <img src="https://ads-partners.coupang.com/image1/WFdOH2aykpXsFBQBWIhNIL3eUIdSQM0qomrvthmNwxWxto0yNGAhBRRcq4Ox9BHfc-noNxygxwv_i3F5ziwC-hDvjfTJsWwyZFgS6BGKPms6lLv4Ieb6pv46fTbjNuwlewm8yKMYOXrUsZmleWlircrhffN81GM3WPdfg_5vpAf9Tzlk32VVFFKjuA87Lz_WNN7UcfyOGWhmQL3h224B7oYMonFx8jev71fD3-Q6q8xyXsJKsSzdYU0DInkK-dTJDVa2LT0W0sB1ueRJ3WH5o9fU-KUIHYK4aVyDL6ZnEX8EpoONtz82wP40kaZG5TttcTqogzuq3lFXIpKXbyg=" alt="대원미디어 먼작귀 미니 파우치">
+      </a>
+      <h2>먼작귀 미니 파우치</h2>
+      <div class="product-meta">
+        <p class="product-name">대원미디어 먼작귀 미니 파우치 CH PU0</p>
+        <p class="product-price">약 5천원</p>
+      </div>
+      <p class="card-copy">파우치류 중에서도 부담이 적은 편이라 가볍게 하나 집어 보기 좋고, 데일리 소지품용으로도 무난합니다.</p>
+      <p><a class="buy-button" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=8291036605&itemId=23911078809&vendorItemId=91660496930&traceid=V0-153-cae4a9fd1a74b05d&requestid=20260515163841648157852124&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+    </article>
+
+    <article class="product-card">
+      <a class="product-image-link" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9384179511&itemId=27862431893&vendorItemId=94821747150&traceid=V0-153-75ce580b6e5f890e&requestid=20260515163842834261383598&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank">
+        <img src="https://ads-partners.coupang.com/image1/UFsd58HahxUWAJ81UE9fIUU4SsACP4tLrcLoVCx-5Sh1xzRjVg5pzrAOS63_vmrADRjSGKKVkhFRl1_AJ5c_JiAn-Wros_k7TD2Yrkw7PJAKOCkfInpv-_I9UwZ4_ZsqqNvLtmMGYwLbrdLNUFpaIG6juYCdggWHuVKdM04OwoF1DfElyU0PhUPt07CrfpbrseoiYV6IkU9U2Zlt_qNsEEuoh4Khh8brb-Mr0w7l5oSCfu0OkQ-0Y4JnNhPRuAZLU1lKBNprU6B7JcYsfWAkavPLvwLFMJRGyBPpbZzF6vjKQisiCgTrDYtbiiii94_pbexBfCyHx1wEFAs9vGB2s75ozLdYX-5WktAz" alt="먼작귀 치이카와 다이어리 플래너 다꾸">
+      </a>
+      <h2>치이카와 다이어리 플래너</h2>
+      <div class="product-meta">
+        <p class="product-name">먼작귀 치이카와 다이어리 플래너 다꾸</p>
+        <p class="product-price">약 3만 2천원</p>
+      </div>
+      <p class="card-copy">책상에서 실제로 쓰는 굿즈를 먼저 찾는다면 보기 좋은 카드고, 다꾸 감성까지 같이 챙기기 편합니다.</p>
+      <p><a class="buy-button" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9384179511&itemId=27862431893&vendorItemId=94821747150&traceid=V0-153-75ce580b6e5f890e&requestid=20260515163842834261383598&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+    </article>
+
+    <article class="product-card">
+      <a class="product-image-link" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=8357641818&itemId=24150602751&vendorItemId=91657477726&traceid=V0-153-8cdeb96fe83f6be9&requestid=20260515163317414078816346&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank">
+        <img src="https://ads-partners.coupang.com/image1/UPWq_-N1A69jOyblUBjkFpXoStyou2-Gff1ux1FRoSJQSP86oW24lBJw6OFrqdc96IYYxEq_vC-f-v_EKL_0vFsgk8ndau_enzJGFYThGHGDd2_wSkzIBq1ies3oPkocEy0wR1EpIW9ul68Q8yh3P7ykBVgmV-5eNacOWNLKSGuYywak43ovo0c-TttZtEed-fE_x79uR5ZW1CioBsYn_CamDvHiiH8ezrOcfKUvOaVnwtio8PWioBxZoT20lzK5zxui0DJ5Y_RQHqkrVdQ0CXQI10f6IU_N_oxTaXt0nsapWyLqSl9UydI-y1NTb2F4-nWZBP1InLPxSsKy7ZawyzHQmffv" alt="릴팡 먼작귀 치이카와 액자 혼밥상">
+      </a>
+      <h2>치이카와 액자 혼밥상</h2>
+      <div class="product-meta">
+        <p class="product-name">릴팡 먼작귀 바닥 스크래치 방지 치이카와 액자 혼밥상 MZ8477</p>
+        <p class="product-price">약 3만 3천원</p>
+      </div>
+      <p class="card-copy">책상이나 침대 옆에서 쓰는 생활형 굿즈를 찾는다면 이쪽이 더 직접적이고, 치이카와 무드를 꾸준히 보기 좋습니다.</p>
+      <p><a class="buy-button" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=8357641818&itemId=24150602751&vendorItemId=91657477726&traceid=V0-153-8cdeb96fe83f6be9&requestid=20260515163317414078816346&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank">쿠팡에서 구매</a></p>
+    </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>자주 묻는 질문</h2>
+    <details>
+      <summary>치이카와 굿즈는 처음이면 어떤 타입부터 보기 쉬운가요?</summary>
+      <p>가볍게 시작하려면 키링이나 파우치가 무난하고, 방 안에 두고 보기 좋은 쪽을 원하면 작은인형이나 데스크 굿즈부터 보는 편이 편합니다.</p>
+    </details>
+    <details>
+      <summary>치이카와 굿즈는 캐릭터가 섞여 있어도 괜찮나요?</summary>
+      <p>치이카와, 하치와레, 우사기처럼 같이 묶여 나오는 경우가 많아서 한 페이지에서 함께 보는 편이 오히려 고르기 쉽습니다.</p>
+    </details>
+  </section>
+
+  <section class="related-box">
+    <h2>같이 보면 좋은 캐릭터 가이드</h2>
+    <p>치이카와 다음으로 많이 보는 캐릭터 카드도 이어서 볼 수 있게 묶었습니다.</p>
+    <div class="related-links">
+      <a href="/search/adult-claw-characters-top5.html">어른들이 인형뽑기에서 많이 찾는 캐릭터 TOP 5</a>
+      <a href="/search/hatsune-miku-claw-goods-top5.html">하츠네 미쿠 굿즈 모아보기</a>
+    </div>
+  </section>
+
+  <p class="affiliate-note">이 페이지에는 쿠팡 파트너스 링크가 포함되어 있으며, 링크를 통해 구매가 발생하면 일정액의 수수료를 제공받을 수 있습니다.</p>
+</main>
+
+<div class="thumb-lightbox" id="thumbLightbox" aria-hidden="true">
+  <button type="button" id="thumbLightboxClose" aria-label="썸네일 크게 보기 닫기">
+    <img src="/images/chiikawa-goods-collection-thumbnail.png" alt="치이카와 굿즈 모아보기 썸네일 크게 보기">
+  </button>
+</div>
+
+<footer class="site-footer">
+  <div class="container">가격과 상품 구성은 판매처 사정에 따라 달라질 수 있습니다. 실제 구매 전 최신 옵션과 배송 조건을 다시 확인하세요.</div>
+</footer>
+<script>
+  (function () {
+    var previewButton = document.getElementById('thumbPreviewButton');
+    var lightbox = document.getElementById('thumbLightbox');
+    var closeButton = document.getElementById('thumbLightboxClose');
+
+    if (!previewButton || !lightbox || !closeButton) {
+      return;
+    }
+
+    function openLightbox() {
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+    }
+
+    previewButton.addEventListener('click', openLightbox);
+    closeButton.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function (event) {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+  }());
+</script>
+</body>
+</html>
