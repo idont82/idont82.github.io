@@ -6,8 +6,8 @@
   "route": {
     "steps": [
       "연신내역 6번 출구로 나와 로데오거리 방향으로 약 50m 직진합니다.",
-      "파리바게뜨 골목으로 좌회전하여 로데오 메인 거리로 진입합니다.",
-      "짱구게임장을 먼저 방문한 뒤 로데오거리를 따라 매장을 순회합니다."
+      "짱구게임장과 캑티 가챠샵이 있는 메인 블록을 먼저 보고, 주변 소형 매장을 이어서 둘러봅니다.",
+      "골목 안쪽 매장까지 체크한 뒤 로데오거리 중간으로 다시 나오면 동선이 깔끔합니다."
     ],
     "totalDistance": "약 200m",
     "mapImage": "images/yeonsinnae-map.png",
@@ -18,50 +18,67 @@
       "name": "짱구게임장",
       "size": "대형",
       "rating": 4.7,
-      "comment": "연신내의 랜드마크! 리뷰 115개, 자정까지 영업",
-      "recommended": true
+      "comment": "연신내 로데오거리 초입에서 가장 먼저 확인하기 쉬운 대형 매장으로 코스 시작점으로 무난합니다.",
+      "recommended": true,
+      "address": "서울 은평구 연서로29길 8-8 인락빌딩",
+      "lat": 37.619023,
+      "lng": 126.919669
     },
     {
       "name": "캑티 가챠샵 연신내점",
       "size": "중형",
       "rating": 4.3,
-      "comment": "가챠와 인형뽑기를 동시에 즐길 수 있는 곳. 자정까지 영업",
-      "recommended": true
+      "comment": "연신내 메인 거리에서 가챠와 인형뽑기를 함께 보기 좋은 프랜차이즈 계열 매장입니다.",
+      "recommended": true,
+      "address": "서울 은평구 통일로 855-8 연신내진원와이타운 104~107호",
+      "hours": "매일 09:00~24:00",
+      "lat": 37.61897,
+      "lng": 126.920242
     },
     {
       "name": "깡인형뽑기 연신내점",
       "size": "중형",
       "rating": 4.2,
-      "comment": "인형뽑기 전문 매장",
-      "recommended": false
+      "comment": "메인 동선에서 이어 보기 좋은 인형뽑기 중심 매장입니다.",
+      "recommended": false,
+      "lat": 37.618669,
+      "lng": 126.919483
     },
     {
       "name": "슈퍼토이 연신내점",
       "size": "소형",
       "rating": 4.0,
-      "comment": "정품 캐릭터 인형과 피규어 뽑기 특화. 매장이 깔끔함",
-      "recommended": false
+      "comment": "작은 규모로 빠르게 들르기 좋고, 메인 거리에서 크게 벗어나지 않습니다.",
+      "recommended": false,
+      "lat": 37.618648,
+      "lng": 126.91987
     },
     {
       "name": "블링팝",
       "size": "소형",
       "rating": 3.8,
-      "comment": "아기자기한 소형 뽑기방",
-      "recommended": false
+      "comment": "짧게 체크하기 좋은 소형 매장으로 로데오거리 동선에 붙어 있습니다.",
+      "recommended": false,
+      "lat": 37.618546,
+      "lng": 126.919798
     },
     {
       "name": "젬마게임",
       "size": "소형",
       "rating": 3.8,
-      "comment": "로데오거리 내 소규모 게임장",
-      "recommended": false
+      "comment": "연신내 로데오거리 중간 구간에서 가볍게 둘러보기 좋은 매장입니다.",
+      "recommended": false,
+      "lat": 37.61791,
+      "lng": 126.91957
     },
     {
       "name": "별뽑기",
       "size": "소형",
       "rating": 3.5,
-      "comment": "갈현동 소형 무인 뽑기방",
-      "recommended": false
+      "comment": "메인 골목 끝쪽에서 함께 보기 좋은 소형 인형뽑기 매장입니다.",
+      "recommended": false,
+      "lat": 37.618694,
+      "lng": 126.919746
     }
   ]
 }

@@ -416,6 +416,19 @@ main{max-width:900px;margin:0 auto;padding:16px}
   border-color:#cc9933;
   box-shadow:0 0 12px rgba(204,153,51,0.15);
 }
+.card-stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 12px;
+}
+.card-stats .stat-strong{
+  font-weight:900;
+  color:var(--text);
+}
+.card-stats .stat-strong .stat-num{
+  font-size:1.04em;
+  letter-spacing:-0.01em;
+}
 .spot-media{
   margin:0 0 12px;
   border-radius:12px;
@@ -564,8 +577,52 @@ main{max-width:900px;margin:0 auto;padding:16px}
   cursor:pointer;
 }
 .ad-popup-count{
-  font-size:13px;
-  font-weight:800;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.ad-popup-timer{
+  --timer-progress:1;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    conic-gradient(#f5a623 calc(var(--timer-progress) * 1turn), rgba(255,255,255,0.12) 0);
+  box-shadow:0 8px 18px rgba(0,0,0,0.18);
+}
+.ad-popup-timer::before{
+  content:"";
+  position:absolute;
+  inset:4px;
+  border-radius:50%;
+  background:linear-gradient(145deg,var(--surface),var(--surface-2));
+}
+.ad-popup-timer-num{
+  position:relative;
+  z-index:1;
+  font-size:14px;
+  font-weight:900;
+  color:var(--text);
+  line-height:1;
+}
+.ad-popup-count-text{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  line-height:1.2;
+}
+.ad-popup-count-label{
+  font-size:12px;
+  font-weight:900;
+  color:var(--text);
+}
+.ad-popup-count-sub{
+  font-size:11px;
+  font-weight:700;
   color:var(--muted);
 }
 .ad-popup-note{
@@ -982,7 +1039,7 @@ function renderListView(areas){
         <div class="card-summary">${a.summary}</div>
         ${!isEmpty ? `
         <div class="card-stats">
-          <span>🏪 ${a.spotCount}개 매장</span>
+          <span class="stat-strong">🏪 <span class="stat-num">${a.spotCount}</span>개 매장</span>
           <span>🎰 ${a.totalMachines}대</span>
           <span>📍 ${a.radius}</span>
           <span>🚶 투어 ${a.totalDistance}</span>
@@ -1015,6 +1072,8 @@ let pendingAreaId = null;
 let adPopupRemaining = 5;
 let adPopupTimer = null;
 let adPopupDelayTimer = null;
+let adPopupStartedAt = 0;
+const AD_POPUP_DURATION = 5000;
 
 function renderAdPopupContent(item){
   if(item.type === 'iframe'){
@@ -1065,8 +1124,10 @@ function closeAdPopup(){
 function showRandomAdPopup(){
   const overlay = document.getElementById('adPopupOverlay');
   const content = document.getElementById('adPopupContent');
-  const count = document.getElementById('adPopupCount');
-  if(!overlay || !content || !count){
+  const countNum = document.getElementById('adPopupCountNum');
+  const countLabel = document.getElementById('adPopupCountLabel');
+  const timer = document.getElementById('adPopupTimer');
+  if(!overlay || !content || !countNum || !countLabel || !timer){
     return;
   }
 
@@ -1082,18 +1143,26 @@ function showRandomAdPopup(){
   const items = [...coupangListAds, coupangBannerAd];
   const item = items[Math.floor(Math.random() * items.length)];
   adPopupRemaining = 5;
+  adPopupStartedAt = Date.now();
   content.innerHTML = renderAdPopupContent(item);
-  count.textContent = `${adPopupRemaining}초 후 닫기`;
+  countNum.textContent = `${adPopupRemaining}`;
+  countLabel.textContent = `${adPopupRemaining}초 후 닫기`;
+  timer.style.setProperty('--timer-progress', '1');
   overlay.classList.add('is-open');
 
   adPopupTimer = setInterval(() => {
-    adPopupRemaining -= 1;
-    if(adPopupRemaining <= 0){
+    const elapsed = Date.now() - adPopupStartedAt;
+    const remainingMs = Math.max(0, AD_POPUP_DURATION - elapsed);
+    const progress = Math.max(0, remainingMs / AD_POPUP_DURATION);
+    const remainingSeconds = Math.max(0, Math.ceil(remainingMs / 1000));
+    timer.style.setProperty('--timer-progress', progress.toFixed(3));
+    countNum.textContent = `${remainingSeconds}`;
+    countLabel.textContent = remainingSeconds > 0 ? `${remainingSeconds}초 후 닫기` : '곧 닫힙니다';
+    if(remainingMs <= 0){
       closeAdPopup();
       return;
     }
-    count.textContent = `${adPopupRemaining}초 후 닫기`;
-  }, 1000);
+  }, 100);
 }
 
 function handleAreaCardClick(areaId){
@@ -1170,12 +1239,13 @@ async function initAreaAddressMap(d){
   }
   const grouped = [];
   (d.spots || []).forEach(sp => {
-    if(!sp.address || typeof sp.lat !== 'number' || typeof sp.lng !== 'number') return;
-    const found = grouped.find(item => item.address === sp.address);
+    if(typeof sp.lat !== 'number' || typeof sp.lng !== 'number') return;
+    const groupKey = sp.address || `__${sp.name}`;
+    const found = grouped.find(item => item.key === groupKey);
     if(found){
       found.names.push(sp.name);
     } else {
-      grouped.push({ address: sp.address, names: [sp.name], lat: sp.lat, lng: sp.lng });
+      grouped.push({ key: groupKey, address: sp.address || '', names: [sp.name], lat: sp.lat, lng: sp.lng });
     }
   });
   if(!grouped.length){
@@ -1206,7 +1276,7 @@ async function initAreaAddressMap(d){
       });
       L.marker([point.lat, point.lng], { icon: markerIcon })
         .addTo(map)
-        .bindPopup(`<strong>${point.names.join(', ')}</strong><br>${point.address}`);
+        .bindPopup(`<strong>${point.names.join(', ')}</strong>${point.address ? `<br>${point.address}` : ''}`);
     });
     if(latLngs.length === 1){
       map.setView(latLngs[0], 17);
@@ -1272,12 +1342,12 @@ function renderDetailView(d){
           ${d.route.naverStreetViewUrl ? `<a class="map-btn secondary" href="${d.route.naverStreetViewUrl}" target="_blank" rel="noopener">👀 거리뷰 보기</a>` : ''}
         </div>`;
     }
-    if((d.spots || []).some(sp => sp.address)){
+    if((d.spots || []).some(sp => typeof sp.lat === 'number' && typeof sp.lng === 'number')){
       html += `
         <div class="section-title">📍 매장 위치 한눈에</div>
         <div class="area-map-shell">
           <div id="areaMap-${d.id}" class="area-map-canvas"></div>
-          <div class="area-map-note">주소가 확인된 매장 중 지도 좌표를 찾은 곳만 핀으로 표시합니다. 일부 위치는 지도 서비스 보정에 따라 조금 다르게 보일 수 있습니다.</div>
+          <div class="area-map-note">저장된 좌표가 있는 매장만 핀으로 표시합니다. 일부 위치는 지도 서비스 보정에 따라 조금 다르게 보일 수 있습니다.</div>
         </div>`;
     }
   } else {
@@ -1436,7 +1506,15 @@ window.addEventListener('DOMContentLoaded', () => {
     <div id="adPopupContent"></div>
     <div class="ad-popup-footer">
       <button type="button" class="ad-popup-close" onclick="closeAdPopup()">X 닫기</button>
-      <div id="adPopupCount" class="ad-popup-count">5초 후 닫기</div>
+      <div class="ad-popup-count" aria-live="polite">
+        <div id="adPopupTimer" class="ad-popup-timer">
+          <span id="adPopupCountNum" class="ad-popup-timer-num">5</span>
+        </div>
+        <div class="ad-popup-count-text">
+          <div id="adPopupCountLabel" class="ad-popup-count-label">5초 후 닫기</div>
+          <div class="ad-popup-count-sub">자동으로 닫힙니다</div>
+        </div>
+      </div>
     </div>
     <div class="ad-popup-note">쿠팡 파트너스 활동의 일환으로 일정액의 수수료를 제공받을 수 있습니다</div>
   </div>

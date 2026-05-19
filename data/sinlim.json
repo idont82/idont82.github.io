@@ -5,9 +5,9 @@
   "exit": "3번 / 4번 출구",
   "route": {
     "steps": [
-      "신림역 3번 또는 4번 출구로 나와 순대타운 방향으로 이동합니다.",
-      "골목 초입의 '짱오락실 신림점'을 필수 방문합니다.",
-      "별빛거리 방면으로 이동하며 '팝플레이', '뽀꼬팡' 등을 순회합니다."
+      "신림역 3번 또는 4번 출구로 나와 순대타운과 별빛거리 방향으로 이동합니다.",
+      "짱오락실과 냥냥스테이션이 있는 메인 블록을 먼저 보고, 신림로 라인 매장들을 이어서 둘러봅니다.",
+      "타임스트림과 별빛거리 쪽 매장까지 붙여 보면 신림 코스를 한 번에 보기 좋습니다."
     ],
     "totalDistance": "약 350m",
     "mapImage": "images/sinlim-map.png"
@@ -17,85 +17,122 @@
       "name": "짱오락실 신림점",
       "size": "대형",
       "rating": 4.7,
-      "comment": "리뷰 85개, 신림 성지의 핵심. 대형 인형부터 소형 키링까지 압도적 라인업",
-      "recommended": true
+      "comment": "신림역 메인 동선에서 가장 먼저 체크하기 쉬운 대표 오락실 계열 매장입니다.",
+      "recommended": true,
+      "address": "서울 관악구 신림로59길 12",
+      "hours": "매일 14:00~24:00",
+      "lat": 37.483211,
+      "lng": 126.929097
     },
     {
       "name": "뽀꼬팡 신림점",
       "size": "중형",
       "rating": 4.3,
-      "comment": "자정까지 영업, 다양한 뽑기 기계 보유",
-      "recommended": true
+      "comment": "남부순환로 쪽 라인에서 같이 보기 좋은 중형 매장입니다.",
+      "recommended": true,
+      "address": "서울 관악구 남부순환로 1598 1층 105호",
+      "lat": 37.483722,
+      "lng": 126.928303
     },
     {
       "name": "토이즈팝 신림점",
       "size": "중형",
       "rating": 4.1,
-      "comment": "캐릭터 인형 위주의 중형 매장",
-      "recommended": false
+      "comment": "남부순환로 쪽에서 캐릭터 위주 상품과 인형 라인을 보기 좋은 매장입니다.",
+      "recommended": false,
+      "address": "서울 관악구 남부순환로 1608",
+      "lat": 37.483978,
+      "lng": 126.929186
     },
     {
       "name": "액션 신림 타임스트림점",
       "size": "중형",
       "rating": 4.0,
-      "comment": "22시까지 영업, 타임스트림 내 위치",
-      "recommended": false
+      "comment": "타임스트림 안쪽에서 쇼핑 동선과 함께 보기 쉬운 중형 매장입니다.",
+      "recommended": false,
+      "address": "서울 관악구 신림로 330 타임스트림 9층",
+      "lat": 37.483805,
+      "lng": 126.930106
     },
     {
       "name": "팝플레이 신림점",
       "size": "소형",
       "rating": 4.0,
-      "comment": "별빛거리의 힙한 매장. 자정까지 영업",
-      "recommended": false
+      "comment": "신림로 메인 라인에서 가볍게 들르기 좋은 소형 매장입니다.",
+      "recommended": false,
+      "address": "서울 관악구 신림로 315 1층",
+      "lat": 37.482434,
+      "lng": 126.929674
     },
     {
       "name": "캑티 가챠샵 신림점",
       "size": "소형",
       "rating": 3.9,
-      "comment": "가챠와 뽑기를 동시에 즐길 수 있는 프랜차이즈. 자정까지 영업",
-      "recommended": false
+      "comment": "가챠와 인형뽑기를 함께 보기 좋은 프랜차이즈 계열 매장입니다.",
+      "recommended": false,
+      "address": "서울 관악구 신림로 321 1층",
+      "lat": 37.482981,
+      "lng": 126.92946
     },
     {
       "name": "사격팡 신림점",
       "size": "소형",
       "rating": 3.8,
-      "comment": "사격 게임과 뽑기를 함께 즐길 수 있는 곳",
-      "recommended": false
+      "comment": "사격 게임과 인형뽑기를 함께 즐길 수 있는 매장입니다.",
+      "recommended": false,
+      "address": "서울 관악구 신림로 323 1층 101호",
+      "lat": 37.483235,
+      "lng": 126.929674
     },
     {
       "name": "러블리박스",
       "size": "소형",
       "rating": 3.8,
-      "comment": "22시까지 영업, 아기자기한 소형 매장",
-      "recommended": false
+      "comment": "신림 메인 라인에서 분위기 좋게 가볍게 들르기 좋은 소형 매장입니다.",
+      "recommended": false,
+      "address": "서울 관악구 신림로 323 105-비호",
+      "lat": 37.483052,
+      "lng": 126.929682
     },
     {
       "name": "캐치팡프리미엄 신림2호점",
       "size": "소형",
       "rating": 3.7,
-      "comment": "프리미엄 인형 위주의 소형 뽑기방",
-      "recommended": false
+      "comment": "프리미엄형 인형 위주로 보기 좋은 소형 매장입니다.",
+      "recommended": false,
+      "address": "서울 관악구 남부순환로 1600 1층",
+      "lat": 37.483905,
+      "lng": 126.928502
     },
     {
       "name": "냥냥스테이션 신림점",
       "size": "소형",
       "rating": 3.6,
-      "comment": "귀여운 컨셉의 소형 뽑기방",
-      "recommended": false
+      "comment": "메인 골목 초입에서 붙여 보기 좋은 소형 매장입니다.",
+      "recommended": false,
+      "address": "서울 관악구 신림로59길 9",
+      "lat": 37.483035,
+      "lng": 126.929116
     },
     {
       "name": "INTA",
       "size": "소형",
       "rating": 3.5,
-      "comment": "신림동 소형 오락실",
-      "recommended": false
+      "comment": "별빛거리 쪽으로 살짝 들어가 둘러보기 좋은 소형 매장입니다.",
+      "recommended": false,
+      "address": "서울 관악구 남부순환로176길 18",
+      "lat": 37.483194,
+      "lng": 126.928556
     },
     {
       "name": "와글와글 신림직영점",
       "size": "소형",
       "rating": 3.5,
-      "comment": "신림동 소규모 매장",
-      "recommended": false
+      "comment": "별빛거리 쪽 소형 매장으로 다른 신림 매장들과 함께 묶어 보기 좋습니다.",
+      "recommended": false,
+      "address": "서울 관악구 남부순환로176길 12",
+      "lat": 37.483396,
+      "lng": 126.928435
     }
   ]
 }
