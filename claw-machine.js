@@ -1588,6 +1588,33 @@ const timeTxt = document.getElementById('timeTxt');
 const scoreTxt = document.getElementById('scoreTxt');
 const msgOverlay = document.getElementById('msgOverlay');
 const joyStick = document.getElementById('joyStick');
+let adFooterFlyCleanup = null;
+const FOOTER_TRIPLE_BANNERS_HTML = `
+  <a href="https://link.coupang.com/a/ek4gDo" target="_blank" referrerpolicy="unsafe-url" class="q-banner">
+    <img src="https://image1.coupangcdn.com/image/affiliate/banner/e862e13c7284f83115bf1e796a0c81f8@2x.jpg" alt="미니 인형뽑기">
+  </a>
+  <a href="https://link.coupang.com/a/ek4rgW" target="_blank" referrerpolicy="unsafe-url" class="q-banner">
+    <img src="https://image13.coupangcdn.com/image/affiliate/banner/a5ea46c9cfa6c620061e5de6d74733cf@2x.jpg" alt="캐치핑 인형뽑기">
+  </a>
+  <a href="https://link.coupang.com/a/ek6ZFc" target="_blank" referrerpolicy="unsafe-url" class="q-banner">
+    <img src="https://image13.coupangcdn.com/image/affiliate/banner/6ec5c3d390e8b7a962b8b7cc32f7390e@2x.jpg" alt="유니콘 인형뽑기">
+  </a>
+`;
+const FOOTER_IFRAME_BANNER_HTML = `
+  <div class="q-banner-iframe-wrap">
+    <iframe
+      src="https://ads-partners.coupang.com/widgets.html?id=989908&amp;template=carousel&amp;trackingCode=AF7523287&amp;subId=&amp;width=300&amp;height=250&amp;tsource="
+      width="300"
+      height="250"
+      frameborder="0"
+      scrolling="no"
+      referrerpolicy="unsafe-url"
+      browsingtopics
+      title="쿠팡 파트너스 관심 배너"
+      class="q-banner-iframe"
+    ></iframe>
+  </div>
+`;
 
 function updateUI(){
   creditTxt.textContent = 'CREDIT: ' + credits;
@@ -1599,6 +1626,60 @@ function showMessage(text, duration=2000){
   msgOverlay.textContent = text;
   msgOverlay.style.opacity = '1';
   setTimeout(()=>{ msgOverlay.style.opacity = '0'; }, duration);
+}
+
+function triggerAdFooterFlyIn(adFooter){
+  if(!adFooter) return;
+
+  if(typeof adFooterFlyCleanup === 'function'){
+    adFooterFlyCleanup();
+    adFooterFlyCleanup = null;
+  }
+
+  adFooter.classList.add('visible');
+  adFooter.classList.remove('sparkle-active', 'fly-in-active');
+  void adFooter.offsetWidth;
+
+  const finalRect = adFooter.getBoundingClientRect();
+  const endY = Math.max(0, finalRect.top - 14);
+  adFooter.style.setProperty('--ad-footer-end-y', `${endY}px`);
+  adFooter.classList.add('fly-in-active');
+
+  const handleEnd = () => {
+    adFooterFlyCleanup = null;
+    adFooter.classList.remove('fly-in-active');
+    adFooter.style.removeProperty('--ad-footer-end-y');
+    adFooter.classList.remove('sparkle-active');
+    void adFooter.offsetWidth;
+    adFooter.classList.add('sparkle-active');
+    adFooter.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    adFooter.removeEventListener('animationend', handleEnd);
+  };
+
+  adFooterFlyCleanup = () => {
+    adFooter.classList.remove('fly-in-active');
+    adFooter.style.removeProperty('--ad-footer-end-y');
+    adFooter.removeEventListener('animationend', handleEnd);
+  };
+  adFooter.addEventListener('animationend', handleEnd);
+}
+
+function setRandomFooterBanner(bannerContainer){
+  if(!bannerContainer) return;
+
+  const useIframeBanner = Math.random() < 0.5;
+  bannerContainer.dataset.bannerMode = useIframeBanner ? 'iframe' : 'triple';
+  bannerContainer.innerHTML = useIframeBanner ? FOOTER_IFRAME_BANNER_HTML : FOOTER_TRIPLE_BANNERS_HTML;
+
+  if(!useIframeBanner){
+    const banners = Array.from(bannerContainer.children);
+    for(let i = banners.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      if(i !== j){
+        bannerContainer.appendChild(banners[j]);
+      }
+    }
+  }
 }
 
 // ─── Nickname ───
@@ -1659,18 +1740,12 @@ function insertCoin(){
   const bannerContainer = document.getElementById('bannerContainer');
   if(adFooter && bannerContainer){
     adFooter.classList.add('visible');
-    
-    // Shuffle banners
-    const banners = Array.from(bannerContainer.children);
-    for (let i = banners.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      bannerContainer.appendChild(banners[j]);
-    }
+    setRandomFooterBanner(bannerContainer);
 
     // Sparkle effect
     adFooter.classList.remove('sparkle-active');
     void adFooter.offsetWidth; // Force reflow
-    adFooter.classList.add('sparkle-active');
+    triggerAdFooterFlyIn(adFooter);
   }
 }
 
