@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>스타벅스 텀블러 모아보기 | 리유저블 콜드컵·스테인리스 텀블러</title>
+  <meta name="description" content="스타벅스 텀블러를 찾고 있다면 리유저블 콜드컵, 스테인리스 텀블러, 사이렌 라인처럼 많이 보는 타입을 먼저 비교해보세요. 선물용과 데일리용을 나눠 보기 쉽게 정리했습니다.">
+  <meta name="keywords" content="스타벅스 텀블러, 스타벅스 콜드컵, 스타벅스 리유저블컵, 스타벅스 스테인리스 텀블러, 스타벅스 굿즈">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://idont82.github.io/search/starbucks-tumbler-collection.html">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/images/favicon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="스타벅스 텀블러 모아보기 | 리유저블 콜드컵·스테인리스 텀블러">
+  <meta property="og:description" content="데일리 콜드컵부터 선물용 스테인리스 텀블러까지, 스타벅스 텀블러를 고를 때 많이 보는 타입을 한 번에 모았습니다.">
+  <meta property="og:url" content="https://idont82.github.io/search/starbucks-tumbler-collection.html">
+  <meta property="og:image" content="https://idont82.github.io/images/starbucks-tumbler-collection-thumbnail.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="스타벅스 텀블러 모아보기 | 리유저블 콜드컵·스테인리스 텀블러">
+  <meta name="twitter:description" content="스타벅스 텀블러를 찾고 있다면 데일리용, 선물용, 리유저블형을 한 번에 비교해보세요.">
+  <meta name="twitter:image" content="https://idont82.github.io/images/starbucks-tumbler-collection-thumbnail.png">
+  <link rel="stylesheet" href="/search/assets/style.css">
+  <style>
+    :root {
+      --sb-green: #006241;
+      --sb-mint: #d8efe6;
+      --sb-cream: #f8f4ec;
+      --sb-ink: #244039;
+    }
+
+    .article-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .article-header-copy {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .thumb-inline {
+      width: 118px;
+      flex: 0 0 auto;
+    }
+
+    .thumb-inline button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .thumb-inline img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
+
+    .thumb-lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(15, 23, 42, 0.78);
+      z-index: 9999;
+    }
+
+    .thumb-lightbox.is-open {
+      display: flex;
+    }
+
+    .thumb-lightbox button {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .thumb-lightbox img {
+      display: block;
+      max-width: min(1100px, 94vw);
+      max-height: 90vh;
+      border-radius: 18px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
+    }
+
+    .quick-note {
+      margin: 18px 0 0;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(216, 239, 230, 0.65), rgba(248, 244, 236, 0.95));
+      border: 1px solid rgba(36, 64, 57, 0.1);
+    }
+
+    .quick-note h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: var(--sb-ink);
+    }
+
+    .quick-note ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #425466;
+      line-height: 1.7;
+    }
+
+    .goods-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .product-card {
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(36, 64, 57, 0.12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 244, 236, 0.96) 100%);
+      box-shadow: 0 12px 24px rgba(36, 64, 57, 0.08);
+    }
+
+    .product-image-link {
+      display: block;
+      margin-bottom: 14px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 98, 65, 0.12);
+      background: #fff;
+      text-decoration: none;
+    }
+
+    .product-image-link img {
+      display: block;
+      width: 100%;
+      height: 240px;
+      object-fit: contain;
+      object-position: center center;
+      background: linear-gradient(180deg, #ffffff 0%, #f8f4ec 100%);
+    }
+
+    .product-name {
+      margin: 0 0 6px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--sb-ink);
+      font-weight: 700;
+    }
+
+    .product-price {
+      margin: 0 0 14px;
+      font-size: 22px;
+      line-height: 1.2;
+      color: #c2410c;
+      font-weight: 800;
+    }
+
+    .product-card h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      line-height: 1.35;
+      color: var(--sb-ink);
+    }
+
+    .card-copy {
+      margin: 0 0 14px;
+      font-size: 14px;
+      color: #425466;
+      line-height: 1.6;
+    }
+
+    .buy-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 148px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 98, 65, 0.18);
+      background: linear-gradient(180deg, #fffefb 0%, #f3ece0 100%);
+      color: #3f3022 !important;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 6px 16px rgba(36, 64, 57, 0.08);
+    }
+
+    .buy-button:hover {
+      text-decoration: none;
+      transform: translateY(-1px);
+      border-color: rgba(0, 98, 65, 0.28);
+    }
+
+    .faq-section,
+    .related-box {
+      margin: 40px 0 0;
+      padding: 24px;
+      border-radius: 20px;
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .faq-section h2,
+    .related-box h2 {
+      margin: 0 0 14px;
+    }
+
+    .faq-section dl {
+      margin: 0;
+    }
+
+    .faq-section dt {
+      font-weight: 800;
+      margin-top: 16px;
+    }
+
+    .faq-section dt:first-child {
+      margin-top: 0;
+    }
+
+    .faq-section dd {
+      margin: 8px 0 0;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .related-links {
+      display: grid;
+      gap: 10px;
+    }
+
+    .related-links a {
+      display: block;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(216, 239, 230, 0.9), rgba(248, 244, 236, 0.95));
+      color: #355048;
+      font-weight: 700;
+    }
+
+    @media (max-width: 720px) {
+      .article-header {
+        flex-direction: column;
+      }
+
+      .thumb-inline {
+        width: 108px;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://idont82.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "구매 가이드", "item": "https://idont82.github.io/search/" },
+      { "@type": "ListItem", "position": 3, "name": "스타벅스 텀블러 모아보기", "item": "https://idont82.github.io/search/starbucks-tumbler-collection.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "스타벅스 리유저블 벤티 콜드컵" },
+      { "@type": "ListItem", "position": 2, "name": "스타벅스 SS 스테인리스 텀블러 591ml" },
+      { "@type": "ListItem", "position": 3, "name": "스타벅스 SS 사이렌 텀블러" }
+    ]
+  }
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <div class="site-title"><span class="brand-mark" aria-hidden="true">&#9819;</span> 구매 가이드</div>
+    <nav class="site-nav"><a href="/">홈</a></nav>
+  </div>
+</header>
+<main class="container">
+  <div class="disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받을 수 있습니다.</div>
+
+  <section class="article-header">
+    <div class="article-header-copy">
+      <h1>스타벅스 텀블러 모아보기</h1>
+      <div class="article-meta">게시일: 2026-05-20 · 최종 업데이트: 2026-05-20</div>
+      <p class="intro">스타벅스 텀블러를 찾을 때는 예쁜 디자인보다 <strong>평소에 실제로 들고 다닐지</strong>, 집에서만 쓸지, 선물용으로 고를지가 먼저 정해져야 합니다. 이미 마음에 둔 모델이 있어도 리유저블 타입인지, 스테인리스 보온형인지에 따라 만족도가 꽤 달라집니다.</p>
+      <p class="intro">이 페이지는 <strong>데일리 콜드컵</strong>, <strong>선물용 스테인리스 텀블러</strong>, <strong>무난한 사이렌 라인</strong>처럼 많이 보는 3가지 축으로 나눠서, 어떤 상황에 더 잘 맞는지 빠르게 판단할 수 있게 정리했습니다.</p>
+    </div>
+    <div class="thumb-inline">
+      <button type="button" id="thumbOpen" aria-label="스타벅스 텀블러 썸네일 크게 보기">
+        <img src="/images/starbucks-tumbler-collection-thumbnail.png" alt="스타벅스 텀블러 썸네일">
+      </button>
+    </div>
+  </section>
+
+  <div class="quick-note">
+    <h2>먼저 이렇게 보면 편합니다</h2>
+    <ul>
+      <li>가볍게 카페 들고 다닐 컵이 필요하면 리유저블 콜드컵부터 보면 편합니다.</li>
+      <li>선물용이거나 오래 쓸 한 개를 찾는다면 스테인리스 텀블러 쪽이 후회가 적습니다.</li>
+      <li>디자인과 실사용을 모두 무난하게 챙기고 싶다면 사이렌 라인을 같이 비교해보면 됩니다.</li>
+    </ul>
+  </div>
+
+  <section class="goods-grid">
+    <article class="product-card">
+      <a class="product-image-link" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=1274197935&itemId=2279852988&vendorItemId=94124770832&traceid=V0-153-0b17147b6bef4357&requestid=20260520164206085184214043&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">
+        <img src="https://ads-partners.coupang.com/image1/66LTfJ36l9tGlYnB65vWdwtVSNO0-geiUwggTENZ_I-6dMgEAx7Y59m6FiGl29i4lvpgIejesLrcYRAK44IPytFQ6Cp7h_N4xCpWutx7H_kQBOOZlGxj8ZA_3sM3jM-ktoqORZbbza242VgDC5ho12_WIqS0bwcu16HkDQqgN33fjN4XkXjGTlaxq3ceM4LnRrYLxckwbUXsNCeBaHUIfFfzuc3Knk9gzQusgaGGMYJ_2hzlbGymGiivzN9kcH9DLjI0JH8E9eeLXrVeqP0N_2ho5IS8nEbGqqUlNu-5zYssi_41LKkHtPdkLGvWoAUbtZ6OjCnnTFxAkZj2V0N1-xchhdEMalBH8O8-rXmepnx77DZFvw==" alt="스타벅스 리유저블 벤티 콜드컵">
+      </a>
+      <p class="product-name">스타벅스 리유저블 벤티 콜드컵</p>
+      <p class="product-price">약 8천원대</p>
+      <h2>가볍게 들고 다니기 좋은 데일리 콜드컵</h2>
+      <p class="card-copy">스타벅스 감성은 챙기고 싶지만 가격 부담은 크지 않았으면 할 때 가장 먼저 보게 되는 타입입니다. 출근길이나 집에서 아이스 음료를 자주 마신다면, 무겁지 않고 막 쓰기 편한 컵 쪽이 만족도가 높습니다.</p>
+      <a class="buy-button" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=1274197935&itemId=2279852988&vendorItemId=94124770832&traceid=V0-153-0b17147b6bef4357&requestid=20260520164206085184214043&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">쿠팡에서 구매</a>
+    </article>
+
+    <article class="product-card">
+      <a class="product-image-link" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9456148004&itemId=28135488053&vendorItemId=95093436654&traceid=V0-153-fc40c65ece6cb333&requestid=20260520164206085184214043&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">
+        <img src="https://ads-partners.coupang.com/image1/yTBUchoO4l4IyfX9yWrhCl_xqdXNzf3KSvMewE29vZAcUPb9wAGvRx9KCqtXSFyMQJ-n876VYkntNggODpOf-67xqtaWEVRlY_k7jjoXpH-Ef6f4vf-RBQxIkXO45owD7B__ctziNJlnI5eq3rVurBd24BSpeeG_Dpj-rYEf9hy_sXRCvshUknKFK-N77gyanDULeAdyU6L_HHCXchLJltKqCy9JL8slN8SheFKvTN5TYHhwaYOUgkzp-TG3SdbHWL29VQZpP5QNpVCj20dys5aXrfw7yOyY7b1uM-cekghoMI3trQHC5q9sSaS9wtTRkIT5QV2PFsq02mRjNd3y4xlrUOU47iQVf8-GhIE-rRAT_mBehw==" alt="스타벅스 SS 스테인리스 텀블러 591ml">
+      </a>
+      <p class="product-name">스타벅스 SS 스테인리스 텀블러 591ml</p>
+      <p class="product-price">약 5만 7천원대</p>
+      <h2>선물용으로 볼 때 먼저 비교하게 되는 스테인리스형</h2>
+      <p class="card-copy">가격대가 올라가더라도 오래 쓰고, 선물 받았을 때 만족감이 높은 쪽을 찾는다면 이 축을 먼저 봐야 합니다. 보온·보냉 체감이나 묵직한 마감이 중요할 때는 리유저블컵보다 스테인리스형이 훨씬 낫습니다.</p>
+      <a class="buy-button" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9456148004&itemId=28135488053&vendorItemId=95093436654&traceid=V0-153-fc40c65ece6cb333&requestid=20260520164206085184214043&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">쿠팡에서 구매</a>
+    </article>
+
+    <article class="product-card">
+      <a class="product-image-link" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9522204766&itemId=28387371337&vendorItemId=95338896084&traceid=V0-153-fa713409c117cb33&requestid=20260520164206085184214043&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">
+        <img src="https://ads-partners.coupang.com/image1/JdYuFNVHh6euKfjJJY4i6yWYOwT6WS82wx8QLoCHnQAmApoUwVCgyX2EoNGRmj_ePAcducggm2qNkZcdDdUDKw9xMHA6OwkCMZCEoSJeKn0LJ7EasSI6Cqv1XU6y8TSfZU9XKurAiG1nLGtuRqUXjLZhyceNQhdY-PDfsKG6X0m6DYoBZSXb9O_QHd8rU6WMDqERLleM-pYrqzT2c_bSExDI1x9u4vuNWaQariECmPM8ZJZuxsMhhimjdD2VBTf9kG77XFsJLN_4aigkFgCmQCA6pk8jpUmOiJjeVbNn_KmvOC1q4uTjigUcR7_taWpkDWeq8JM7gjSnGRr3mBGT4akhFbc_7HcJQgcVRe61" alt="스타벅스 SS 사이렌 텀블러">
+      </a>
+      <p class="product-name">스타벅스 SS 사이렌 텀블러</p>
+      <p class="product-price">약 3만원대</p>
+      <h2>디자인과 실사용 사이에서 무난하게 고르기 좋은 사이렌 라인</h2>
+      <p class="card-copy">예쁜 굿즈 느낌도 챙기고 싶지만 너무 과한 가격은 부담스러울 때 보기 좋은 중간 지점입니다. 이미 보고 온 다른 스타벅스 컵이 있다면, 실제로 오래 들고 다닐 수 있을지 기준으로 이 타입도 같이 비교해보는 편이 좋습니다.</p>
+      <a class="buy-button" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9522204766&itemId=28387371337&vendorItemId=95338896084&traceid=V0-153-fa713409c117cb33&requestid=20260520164206085184214043&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">쿠팡에서 구매</a>
+    </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>자주 보는 질문</h2>
+    <dl>
+      <dt>스타벅스 텀블러를 처음 사면 어떤 타입이 제일 무난한가요?</dt>
+      <dd>매일 가볍게 쓰려면 리유저블 콜드컵이 부담이 적습니다. 오래 쓸 한 개를 찾거나 선물용이라면 스테인리스형이 더 만족도가 높습니다.</dd>
+      <dt>이미 보고 있는 제품이 있어도 이 페이지를 같이 볼 이유가 있나요?</dt>
+      <dd>같은 스타벅스 텀블러라도 실제로는 리유저블형, 보온형, 굿즈형 체감이 크게 다릅니다. 가격과 무게, 실사용 상황을 나눠보면 훨씬 고르기 쉬워집니다.</dd>
+      <dt>선물용은 어떤 쪽이 더 무난한가요?</dt>
+      <dd>일반적으로는 스테인리스 텀블러가 실패가 적습니다. 데일리 감성보다는 오래 쓰는 느낌과 포장 만족도가 더 잘 살아납니다.</dd>
+    </dl>
+  </section>
+
+  <section class="related-box">
+    <h2>스타벅스 관련 페이지 같이 보기</h2>
+    <div class="related-links">
+      <a href="/search/starbucks-beans-top3.html">스타벅스 원두 추천 TOP 3</a>
+      <a href="/search/starbucks-capsules-top3.html">스타벅스 캡슐 커피 추천 TOP 3</a>
+    </div>
+  </section>
+</main>
+
+<div class="thumb-lightbox" id="thumbLightbox" aria-hidden="true">
+  <button type="button" id="thumbClose" aria-label="썸네일 크게 보기 닫기">
+    <img src="/images/starbucks-tumbler-collection-thumbnail.png" alt="스타벅스 텀블러 썸네일 크게 보기">
+  </button>
+</div>
+
+<footer class="site-footer">
+  <div class="container">© idont82.github.io · 구매 가이드</div>
+</footer>
+
+<script>
+  (function () {
+    const open = document.getElementById('thumbOpen');
+    const close = document.getElementById('thumbClose');
+    const lightbox = document.getElementById('thumbLightbox');
+
+    if (!open || !close || !lightbox) {
+      return;
+    }
+
+    function show() {
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+    }
+
+    function hide() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+    }
+
+    open.addEventListener('click', show);
+    close.addEventListener('click', hide);
+    lightbox.addEventListener('click', function (event) {
+      if (event.target === lightbox) {
+        hide();
+      }
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        hide();
+      }
+    });
+  }());
+</script>
+</body>
+</html>
