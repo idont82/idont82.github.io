@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BTS 응원봉 모아보기 | 본체·배터리·키링 한눈에</title>
+  <meta name="description" content="BTS 응원봉 본체, 공식 배터리, 응원봉 키링까지 한눈에 모았습니다. 콘서트 준비 전에 뭘 먼저 챙겨야 하는지 기준으로 바로 보기 쉽게 정리한 페이지입니다.">
+  <meta name="keywords" content="BTS 응원봉, BTS 아미밤, BTS 공식 응원봉, BTS 응원봉 배터리, BTS 응원봉 키링">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://idont82.github.io/search/bts-light-stick-collection.html">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/images/favicon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="BTS 응원봉 모아보기 | 본체·배터리·키링 한눈에">
+  <meta property="og:description" content="BTS 응원봉 본체, 공식 배터리, 응원봉 키링까지 한눈에 모았습니다.">
+  <meta property="og:url" content="https://idont82.github.io/search/bts-light-stick-collection.html">
+  <meta property="og:image" content="https://idont82.github.io/images/bts-light-stick-collection-thumbnail.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BTS 응원봉 모아보기 | 본체·배터리·키링 한눈에">
+  <meta name="twitter:description" content="BTS 응원봉 본체, 공식 배터리, 응원봉 키링까지 한눈에 모았습니다.">
+  <meta name="twitter:image" content="https://idont82.github.io/images/bts-light-stick-collection-thumbnail.png">
+  <link rel="stylesheet" href="/search/assets/style.css">
+  <style>
+    :root {
+      --army-purple: #d9ccff;
+      --army-deep: #5d4d8e;
+      --army-pale: #f6f0ff;
+      --army-line: rgba(93, 77, 142, 0.16);
+    }
+
+    .article-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .article-header-copy {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .thumb-inline {
+      width: 118px;
+      flex: 0 0 auto;
+    }
+
+    .thumb-inline button,
+    .thumb-lightbox button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .thumb-inline img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
+
+    .thumb-lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(15, 23, 42, 0.78);
+      z-index: 9999;
+    }
+
+    .thumb-lightbox.is-open {
+      display: flex;
+    }
+
+    .thumb-lightbox img {
+      display: block;
+      max-width: min(1100px, 94vw);
+      max-height: 90vh;
+      border-radius: 18px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
+    }
+
+    .goods-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .quick-note {
+      margin: 18px 0 0;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(217, 204, 255, 0.36), rgba(246, 240, 255, 0.82));
+      border: 1px solid rgba(93, 77, 142, 0.12);
+    }
+
+    .quick-note h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: #312950;
+    }
+
+    .quick-note ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #425466;
+      line-height: 1.7;
+    }
+
+    .product-card {
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid var(--army-line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 244, 255, 0.96) 100%);
+      box-shadow: 0 12px 24px rgba(93, 77, 142, 0.08);
+    }
+
+    .product-image-link {
+      display: block;
+      margin-bottom: 14px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(93, 77, 142, 0.18);
+      text-decoration: none;
+      background: linear-gradient(180deg, #ffffff 0%, #faf7ff 100%);
+    }
+
+    .product-image-link img {
+      display: block;
+      width: 100%;
+      height: 240px;
+      object-fit: contain;
+      background: linear-gradient(180deg, #ffffff 0%, #faf7ff 100%);
+    }
+
+    .product-meta {
+      margin: 0 0 14px;
+    }
+
+    .product-name {
+      margin: 0 0 6px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: #312950;
+      font-weight: 700;
+    }
+
+    .product-price {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.2;
+      color: #d12f2f;
+      font-weight: 800;
+    }
+
+    .product-card h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      line-height: 1.35;
+      color: #312950;
+    }
+
+    .card-copy {
+      margin: 0 0 14px;
+      font-size: 14px;
+      color: #425466;
+      line-height: 1.6;
+    }
+
+    .buy-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      min-width: 148px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(184, 148, 82, 0.35);
+      background: linear-gradient(180deg, #fffaf0 0%, #f8efd8 100%);
+      color: #6b4f1f !important;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 6px 16px rgba(122, 92, 38, 0.1);
+    }
+
+    .buy-button:hover {
+      text-decoration: none;
+      transform: translateY(-1px);
+      border-color: rgba(184, 148, 82, 0.48);
+      background: linear-gradient(180deg, #fff8e7 0%, #f3e2b3 100%);
+    }
+
+    .faq-section,
+    .related-box {
+      margin: 40px 0 0;
+      padding: 24px;
+      border-radius: 20px;
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .faq-section h2,
+    .related-box h2 {
+      margin: 0 0 14px;
+    }
+
+    .faq-section dl {
+      margin: 0;
+    }
+
+    .faq-section dt {
+      font-weight: 800;
+      margin-top: 16px;
+    }
+
+    .faq-section dt:first-child {
+      margin-top: 0;
+    }
+
+    .faq-section dd {
+      margin: 8px 0 0;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .related-links {
+      display: grid;
+      gap: 10px;
+    }
+
+    .related-links a {
+      display: block;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--army-purple), #f3ddff);
+      color: #4d3e77;
+      font-weight: 700;
+    }
+
+    @media (max-width: 720px) {
+      .article-header {
+        flex-direction: column;
+      }
+
+      .thumb-inline {
+        width: 110px;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://idont82.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "구매 가이드", "item": "https://idont82.github.io/search/" },
+      { "@type": "ListItem", "position": 3, "name": "BTS 응원봉 모아보기", "item": "https://idont82.github.io/search/bts-light-stick-collection.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "BTS 아미스틱 블루투스 콘서트 응원봉" },
+      { "@type": "ListItem", "position": 2, "name": "HYBE OFFICIAL LIGHT STICK BATTERY" },
+      { "@type": "ListItem", "position": 3, "name": "BTS Official Light Stick Keyring SE" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="site-title">구매 가이드</div>
+    <nav class="site-nav"><a href="/">홈</a></nav>
+  </div>
+</header>
+
+<main class="container">
+  <div class="disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받을 수 있습니다.</div>
+
+  <section class="article-header">
+    <div class="article-header-copy">
+      <h1>BTS 응원봉 모아보기</h1>
+      <div class="article-meta">게시일 2026-05-20 · 최종 업데이트 2026-05-20</div>
+    </div>
+    <div class="thumb-inline">
+      <button type="button" id="thumbButton" aria-label="BTS 응원봉 썸네일 크게 보기">
+        <img src="/images/bts-light-stick-collection-thumbnail.png" alt="BTS 응원봉 대표 썸네일">
+      </button>
+    </div>
+  </section>
+
+  <div class="thumb-lightbox" id="thumbLightbox" aria-hidden="true">
+    <button type="button" id="thumbLightboxButton" aria-label="썸네일 닫기">
+      <img src="/images/bts-light-stick-collection-thumbnail.png" alt="BTS 응원봉 대표 썸네일 크게 보기">
+    </button>
+  </div>
+
+  <p class="intro">BTS 응원봉을 찾는 분들은 보통 <strong>본체만 사면 끝인 줄 알았다가</strong> 배터리나 파우치, 키링까지 같이 찾게 됩니다. 콘서트 직전에 급하게 찾으면 가격도 흔들리고 선택도 꼬이기 쉬워서, 필요한 축을 먼저 나눠보는 편이 좋습니다.</p>
+  <p class="intro">이 페이지는 <strong>실제 사용에 필요한 본체</strong>, <strong>현장에서 바로 필요한 배터리</strong>, <strong>일상에서 같이 들고 다니기 좋은 키링</strong>으로 나눠서 한 번에 보기 쉽게 정리했습니다.</p>
+
+  <section class="quick-note">
+    <h2>먼저 이렇게 보면 편합니다</h2>
+    <ul>
+      <li>응원봉이 아직 없으면 본체 재고부터 먼저 확인하세요.</li>
+      <li>본체는 있는데 현장 전원이 불안하면 배터리를 같이 보세요.</li>
+      <li>공연이 끝난 뒤에도 계속 들고 다닐 굿즈를 찾는다면 키링이 가장 가볍습니다.</li>
+    </ul>
+  </section>
+
+  <section class="goods-grid">
+    <article class="product-card">
+      <a class="product-image-link" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9543665112&itemId=28469875146&vendorItemId=95420183989&traceid=V0-153-9a514d1f93ec6e22&requestid=20260520150235295144486814&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">
+        <img src="https://ads-partners.coupang.com/image1/VX9Aqcm3c9gyFy6iVZok3cKF5W78E7jNfjPiU_gB7Tk1OkZlhJUPMVtbRYFwCno9afshVsLbzfsgVqjXZVefiwASOySE_5KLJTY_MPROVu8R-cBHDwok08VNGKnpBKqDiy3THWQ_27LITr0TfGeAXts7ZslhGWtczw7bNrvTEv4MOcvQ-wk-YFwAUXk3X_XGTCSTsp0QyogFIeQMFC-0geBIcObZvRa_NHRY2H3OWH4bWBXShDaU9vVGcbwmCuUXtrNJ69vS6S8HKEPKtCmjFUHhIKDP06vJOorA75xJ8z5WU4mzrwWyi724zAe9KcTKT4MMiGEQNRrVEOWtnq5gXF-GSX0LqqimATWpA4z4" alt="BTS 아미스틱 블루투스 콘서트 응원봉">
+      </a>
+      <div class="product-meta">
+        <p class="product-name">BTS 아미스틱 블루투스 콘서트 응원봉</p>
+        <p class="product-price">약 10만 3천원</p>
+      </div>
+      <h2>응원봉 본체</h2>
+      <p class="card-copy">본체가 있어야 시작이 됩니다. 공연 직전에 찾는 분이라면 <strong>악세사리보다 본체 재고와 상태를 먼저 확인</strong>하는 게 우선입니다.</p>
+      <a class="buy-button" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9543665112&itemId=28469875146&vendorItemId=95420183989&traceid=V0-153-9a514d1f93ec6e22&requestid=20260520150235295144486814&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">쿠팡에서 구매</a>
+    </article>
+
+    <article class="product-card">
+      <a class="product-image-link" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=8653634281&itemId=25122479930&vendorItemId=92229795164&traceid=V0-153-90738966491b33ec&clickBeacon=7f5c5210-5411-11f1-a07b-feb9831a326c%7E3&requestid=20260520150235295144486814&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">
+        <img src="https://ads-partners.coupang.com/image1/nOWODXd6Cj81zI5snFKk0S13jjf0eSjyeH8Zr_ZD1HQ0DCZ57it3zSqz2bDMpn6BXXdARLYmkZYIlkCjXrmL9GDdx96VMnFYYSj1qjO7DIL8HVVYBNTeClF2mlaTGY8qw83qYB91DM79KM6RgwCVE2i85J5O2b0Rgy3Lel-iZwICA3PnqhH4K0cnvnwJnveQYtJLSl29tKmsHokLdp38z6qQIC1_7tdtUDRIVcQtQWwa5M3J8ja_j76rruUEack_aun4Bua38rKAbOK5ZzkBMOeqlCcqT0IyXC5764Lkng80gNb_QfXR0bAqJCEXoqXJcTIABgt554JlSBEAcN4kCNgEO6gAxYvp_wk4" alt="HYBE OFFICIAL LIGHT STICK BATTERY">
+      </a>
+      <div class="product-meta">
+        <p class="product-name">HYBE OFFICIAL LIGHT STICK BATTERY</p>
+        <p class="product-price">약 1만 8천원</p>
+      </div>
+      <h2>공식 배터리</h2>
+      <p class="card-copy">본체만 챙기고 끝내기 쉬운데 실제로는 전원이 더 중요할 때가 많습니다. <strong>현장 직전 불안함을 줄이고 싶다면</strong> 배터리를 같이 챙기는 편이 편합니다.</p>
+      <a class="buy-button" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=8653634281&itemId=25122479930&vendorItemId=92229795164&traceid=V0-153-90738966491b33ec&clickBeacon=7f5c5210-5411-11f1-a07b-feb9831a326c%7E3&requestid=20260520150235295144486814&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">쿠팡에서 구매</a>
+    </article>
+
+    <article class="product-card">
+      <a class="product-image-link" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9376250790&itemId=27832606745&vendorItemId=91388689732&traceid=V0-153-2f0c768f45643926&requestid=20260520150235295144486814&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">
+        <img src="https://ads-partners.coupang.com/image1/QfI0Cv7e6ojCtWl3Qe6_kvqQnGr-nTkQbN6drYQzjKXrjpVzxMhwV9z73oQI4QEEdVHdKEsoDararp5Up7O2aN5F_K_zOBjwNBQB8JIGgBOS8tJS2hbaVcGtUBCyw0HCGs_YbP3FxBPkgqg5DIPNoO_22pm30z0dFY55l1sO_U-kNBtX1qjyFAPenEMY4PPQt3YgEwTqrTPQUA7tQTGeA-lPOlCLAhSYLNXFYWFa4Y7WC0eu998YIc5Oyx-ZRTtIDBXw8SQk7kp517zJkn5g96bb4aTJqb73333PdBL0tCGao9kLc3nndgfGlGMO1Xwjk5N5bFuYIFSA6nbV16sOZteAchd6TJbI_I7w1pfdiajbua2l4Q==" alt="BTS Official Light Stick Keyring SE">
+      </a>
+      <div class="product-meta">
+        <p class="product-name">BTS Official Light Stick Keyring SE</p>
+        <p class="product-price">약 6만 5천원</p>
+      </div>
+      <h2>응원봉 키링</h2>
+      <p class="card-copy">본체는 이미 있고, 공연이 끝난 뒤에도 <strong>작게 계속 들고 다닐 굿즈</strong>를 찾는다면 이 축이 자연스럽습니다. 부담은 덜하고 팬심은 오래 갑니다.</p>
+      <a class="buy-button" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9376250790&itemId=27832606745&vendorItemId=91388689732&traceid=V0-153-2f0c768f45643926&requestid=20260520150235295144486814&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">쿠팡에서 구매</a>
+    </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>자주 보는 질문</h2>
+    <dl>
+      <dt>응원봉을 처음 살 때 제일 먼저 볼 건 뭔가요?</dt>
+      <dd>본체 상태와 버전, 그리고 배터리 준비 여부입니다. 공연 직전에 급하게 찾으면 본체만 보고 끝내기 쉬운데, 실제 현장에선 배터리 준비가 같이 중요합니다.</dd>
+      <dt>키링이나 악세사리는 나중에 사도 되나요?</dt>
+      <dd>됩니다. 본체가 이미 있으면 키링이나 파우치처럼 일상에 들고 다니는 축으로 굿즈를 넓히는 방식이 자연스럽습니다.</dd>
+      <dt>이 페이지 링크는 어떤 용도로 보면 좋나요?</dt>
+      <dd>응원봉 본체를 먼저 보고, 바로 이어서 배터리와 키링 축까지 한 번에 살펴보는 용도로 쓰면 편합니다.</dd>
+    </dl>
+  </section>
+
+  <section class="related-box">
+    <h2>같이 보기</h2>
+    <div class="related-links">
+      <a href="/search/bt21-goods-collection.html">BT21 굿즈 모아보기</a>
+      <a href="/search/bts-concert-goods-collection.html">BTS 콘서트 준비물 모아보기</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">© idont82.github.io · 구매 가이드</div>
+</footer>
+
+<script>
+  (function () {
+    const button = document.getElementById('thumbButton');
+    const lightbox = document.getElementById('thumbLightbox');
+    const lightboxButton = document.getElementById('thumbLightboxButton');
+
+    if (!button || !lightbox || !lightboxButton) {
+      return;
+    }
+
+    const close = function () {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+    };
+
+    button.addEventListener('click', function () {
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+    });
+
+    lightboxButton.addEventListener('click', close);
+    lightbox.addEventListener('click', function (event) {
+      if (event.target === lightbox) {
+        close();
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        close();
+      }
+    });
+  }());
+</script>
+
+</body>
+</html>

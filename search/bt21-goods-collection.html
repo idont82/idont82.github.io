@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BT21 굿즈 모아보기 | 키링·인형·파우치 한눈에</title>
+  <meta name="description" content="BT21 키링, 인형, 파우치를 한눈에 모았습니다. RJ, CHIMMY, TATA처럼 익숙한 캐릭터 굿즈를 가볍게 비교하고 바로 이어서 볼 수 있게 정리한 페이지입니다.">
+  <meta name="keywords" content="BT21 굿즈, BT21 키링, BT21 인형, BT21 파우치, RJ 굿즈, CHIMMY 굿즈, TATA 굿즈">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://idont82.github.io/search/bt21-goods-collection.html">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/images/favicon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="BT21 굿즈 모아보기 | 키링·인형·파우치 한눈에">
+  <meta property="og:description" content="BT21 키링, 인형, 파우치를 한눈에 모았습니다. 가방에 달기 좋은 키링부터 작은 쿠션, 캐릭터 파우치까지 바로 보기 쉽게 묶었습니다.">
+  <meta property="og:url" content="https://idont82.github.io/search/bt21-goods-collection.html">
+  <meta property="og:image" content="https://idont82.github.io/images/bt21-goods-collection-thumbnail.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BT21 굿즈 모아보기 | 키링·인형·파우치 한눈에">
+  <meta name="twitter:description" content="BT21 키링, 인형, 파우치를 한눈에 모았습니다.">
+  <meta name="twitter:image" content="https://idont82.github.io/images/bt21-goods-collection-thumbnail.png">
+  <link rel="stylesheet" href="/search/assets/style.css">
+  <style>
+    :root {
+      --bt21-yellow: #ffe59d;
+      --bt21-peach: #ffe4db;
+      --bt21-sky: #dff3ff;
+      --bt21-ink: #334155;
+      --bt21-line: rgba(51, 65, 85, 0.12);
+    }
+
+    .article-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .article-header-copy {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .thumb-inline {
+      width: 118px;
+      flex: 0 0 auto;
+    }
+
+    .thumb-inline button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .thumb-inline img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
+
+    .thumb-lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(15, 23, 42, 0.78);
+      z-index: 9999;
+    }
+
+    .thumb-lightbox.is-open {
+      display: flex;
+    }
+
+    .thumb-lightbox button {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .thumb-lightbox img {
+      display: block;
+      max-width: min(1100px, 94vw);
+      max-height: 90vh;
+      border-radius: 18px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
+    }
+
+    .goods-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .quick-note {
+      margin: 18px 0 0;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255, 229, 157, 0.34), rgba(223, 243, 255, 0.45));
+      border: 1px solid rgba(51, 65, 85, 0.1);
+    }
+
+    .quick-note h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: var(--bt21-ink);
+    }
+
+    .quick-note ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #425466;
+      line-height: 1.7;
+    }
+
+    .product-card {
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid var(--bt21-line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 250, 243, 0.96) 100%);
+      box-shadow: 0 12px 24px rgba(51, 65, 85, 0.08);
+    }
+
+    .product-image-link {
+      display: block;
+      margin-bottom: 14px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 229, 157, 0.4);
+      text-decoration: none;
+      background: linear-gradient(180deg, #ffffff 0%, #fffaf4 100%);
+    }
+
+    .product-image-link img {
+      display: block;
+      width: 100%;
+      height: 240px;
+      object-fit: contain;
+      object-position: center center;
+      background: linear-gradient(180deg, #ffffff 0%, #fffaf4 100%);
+    }
+
+    .product-meta {
+      margin: 0 0 14px;
+    }
+
+    .product-name {
+      margin: 0 0 6px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--bt21-ink);
+      font-weight: 700;
+    }
+
+    .product-price {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.2;
+      color: #d12f2f;
+      font-weight: 800;
+    }
+
+    .product-card h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      line-height: 1.35;
+      color: var(--bt21-ink);
+    }
+
+    .card-copy {
+      margin: 0 0 14px;
+      font-size: 14px;
+      color: #425466;
+      line-height: 1.6;
+    }
+
+    .buy-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      min-width: 148px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(184, 148, 82, 0.35);
+      background: linear-gradient(180deg, #fffaf0 0%, #f8efd8 100%);
+      color: #6b4f1f !important;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 6px 16px rgba(122, 92, 38, 0.1);
+    }
+
+    .buy-button:hover {
+      text-decoration: none;
+      transform: translateY(-1px);
+      border-color: rgba(184, 148, 82, 0.48);
+      background: linear-gradient(180deg, #fff8e7 0%, #f3e2b3 100%);
+    }
+
+    .faq-section,
+    .related-box {
+      margin: 40px 0 0;
+      padding: 24px;
+      border-radius: 20px;
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .faq-section h2,
+    .related-box h2 {
+      margin: 0 0 14px;
+    }
+
+    .faq-section dl {
+      margin: 0;
+    }
+
+    .faq-section dt {
+      font-weight: 800;
+      margin-top: 16px;
+    }
+
+    .faq-section dt:first-child {
+      margin-top: 0;
+    }
+
+    .faq-section dd {
+      margin: 8px 0 0;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .related-links {
+      display: grid;
+      gap: 10px;
+    }
+
+    .related-links a {
+      display: block;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--bt21-yellow), var(--bt21-peach));
+      color: #5d4930;
+      font-weight: 700;
+    }
+
+    @media (max-width: 720px) {
+      .article-header {
+        flex-direction: column;
+      }
+
+      .thumb-inline {
+        width: 110px;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://idont82.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "구매 가이드", "item": "https://idont82.github.io/search/" },
+      { "@type": "ListItem", "position": 3, "name": "BT21 굿즈 모아보기", "item": "https://idont82.github.io/search/bt21-goods-collection.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "BT21 minini 메탈키링" },
+      { "@type": "ListItem", "position": 2, "name": "BT21 방탄굿즈 미니니 라운드쿠션 7종" },
+      { "@type": "ListItem", "position": 3, "name": "BT21 minini 페이스 파우치 (체크무늬) RJ" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="site-title">구매 가이드</div>
+    <nav class="site-nav"><a href="/">홈</a></nav>
+  </div>
+</header>
+
+<main class="container">
+  <div class="disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받을 수 있습니다.</div>
+
+  <section class="article-header">
+    <div class="article-header-copy">
+      <h1>BT21 굿즈 모아보기</h1>
+      <div class="article-meta">게시일 2026-05-20 · 최종 업데이트 2026-05-20</div>
+    </div>
+    <div class="thumb-inline">
+      <button type="button" id="thumbButton" aria-label="BT21 굿즈 썸네일 크게 보기">
+        <img src="/images/bt21-goods-collection-thumbnail.png" alt="BT21 굿즈 대표 썸네일">
+      </button>
+    </div>
+  </section>
+
+  <div class="thumb-lightbox" id="thumbLightbox" aria-hidden="true">
+    <button type="button" id="thumbLightboxButton" aria-label="썸네일 닫기">
+      <img src="/images/bt21-goods-collection-thumbnail.png" alt="BT21 굿즈 대표 썸네일 크게 보기">
+    </button>
+  </div>
+
+  <p class="intro">BT21 굿즈를 찾을 때는 막연하게 이것저것 보게 되기보다 <strong>가방에 달아 자주 보게 되는 키링</strong>, <strong>책상이나 침대 쪽에 두기 좋은 인형</strong>, <strong>작게 챙기기 쉬운 파우치</strong>로 먼저 나누면 훨씬 고르기 쉽습니다.</p>
+  <p class="intro">이미 마음에 드는 캐릭터가 있어도 굿즈 타입에 따라 만족감이 꽤 다릅니다. 그래서 이 페이지는 <strong>일상에서 제일 자주 손이 가는 타입 3개</strong>만 먼저 모아두고, 마음에 드는 쪽으로 바로 이어서 볼 수 있게 정리했습니다.</p>
+
+  <section class="quick-note">
+    <h2>먼저 이렇게 보면 편합니다</h2>
+    <ul>
+      <li>가볍게 하나만 시작해보고 싶으면 키링부터 보세요.</li>
+      <li>방이나 책상 위에 두고 자주 보고 싶으면 인형·쿠션 쪽이 만족감이 큽니다.</li>
+      <li>매일 쓰는 소지품까지 굿즈로 바꾸고 싶으면 파우치가 제일 실용적입니다.</li>
+    </ul>
+  </section>
+
+  <section class="goods-grid">
+    <article class="product-card">
+      <a class="product-image-link" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=6959094485&itemId=16935626345&vendorItemId=84113284747&traceid=V0-153-9af2940e2490c4c1&requestid=20260520150301197052419045&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">
+        <img src="https://ads-partners.coupang.com/image1/MI74rE8oXTey1B5iMP5Gr-pq0DEf4wzYiJS8XPyk9gbvG9Uzgg0qw9dr8wlx7LpO1FaHzkVIOpQov9xR06bsrUSbjnQtcHYejwtFeFnSv4utUftuM0PH3RjH5BbZv77YOgWAJ2JGi-y8q2b-Yn6fk5hl1U3XXdV0_3MkpwzRIZ89TD00A0K2j0SXLVL4ITjAz7vtkdExj1n5bVQgJ4yb4fH5wYjKyWbCxxYoYTzqurkuNRz-zzEUcHXjh4tN7BaF5PCrtpgdxMLgSuqcxLqKw2gsiUTrBm8pgakD9E7yZCiLOlMFd2SW5O9voBztJyxfXAV_Gej8ZJZmo4W2O2E=" alt="BT21 minini 메탈키링">
+      </a>
+      <div class="product-meta">
+        <p class="product-name">BT21 minini 메탈키링</p>
+        <p class="product-price">약 7,000원</p>
+      </div>
+      <h2>BT21 키링</h2>
+      <p class="card-copy">가장 부담 없이 시작하기 좋은 타입입니다. 가방이나 파우치에 바로 달 수 있어서 <strong>BT21 굿즈를 처음 하나 사보는 분</strong>에게 제일 무난합니다.</p>
+      <a class="buy-button" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=6959094485&itemId=16935626345&vendorItemId=84113284747&traceid=V0-153-9af2940e2490c4c1&requestid=20260520150301197052419045&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">쿠팡에서 구매</a>
+    </article>
+
+    <article class="product-card">
+      <a class="product-image-link" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=6842516746&itemId=16275210161&vendorItemId=92808869099&traceid=V0-153-01c0ecc5e65803d8&requestid=20260520150302034058531063&token=31850C%7CGM" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">
+        <img src="https://ads-partners.coupang.com/image1/f1PvdMynVw2kI_GFf5cgDD7whcLxLBUVKuI006SkwjVxQ1PDRSBW1zr3XnsbVI30m0X9EoIMUtu0C-OpiH-D3oSd5-hJa8sKLLqXwyLs4hhDg8etsua6vzOXnhO2QeYoHuFzKRo4ZRX09a_gFCNpopfM1_icmy-uBswt9yWzAGxJAu9Mf_bkqO2KYusBim3yvWPbgxdghMFqpVvvqTrQwG47DkBYM9REvFjahw-kXOKgqL4rLtYdoQzQW1an9FVxMSxSWnIGK_2UNDnUzsf9VAoO1kS1IZSeo85bzeWtHdpP5vFws9Mim8jAVgQVY8TNNJJIqkEH9J37C3bY1lm2fAijNDyCK_4yKXFysyZpaenUpbiYRA==" alt="BT21 방탄굿즈 미니니 라운드쿠션 7종">
+      </a>
+      <div class="product-meta">
+        <p class="product-name">BT21 방탄굿즈 미니니 라운드쿠션 7종</p>
+        <p class="product-price">약 5,400원</p>
+      </div>
+      <h2>BT21 인형</h2>
+      <p class="card-copy">계속 눈에 들어오는 자리에 두고 싶다면 이쪽이 맞습니다. <strong>책상, 침대, 차 안에 포인트로 두기 좋고</strong> 선물용으로도 무난합니다.</p>
+      <a class="buy-button" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=6842516746&itemId=16275210161&vendorItemId=92808869099&traceid=V0-153-01c0ecc5e65803d8&requestid=20260520150302034058531063&token=31850C%7CGM" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">쿠팡에서 구매</a>
+    </article>
+
+    <article class="product-card">
+      <a class="product-image-link" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=8499080587&itemId=24601423864&vendorItemId=91612910145&traceid=V0-153-c546c4d05e63fec1&requestid=20260520150302035026685980&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">
+        <img src="https://ads-partners.coupang.com/image1/lmFASnmoMZqs0Qvqlkf6r0a7etu4Ok0u8rNiDZfc5gs01O5n59y8z34a1VdiKstgXjhZ6o0h9IJoVxWUFzH-rb84Ultu-Sc8toOMySA8T_-x4qopvDZIP9nESRGWqyz7VBxEatZ6xLzejsGV_iaeViI8H55IAQLVigpMpskSpdjSt3CQxshneTkzfMeUaVyk73NFIArogLsaHKoKpmI-XzXHPKdU7UfzHf1FCKI_r7vQ-D4se5aVEycxGwneBYDusJDH04W3uRDjZBGGtj8yWLFNo1-EkYTQxNVGzME5JC8GgT2FMG4LqfeP32mSISPnI2Xytjpdtr6dCJvY3nLBgWbmDke1FpYZGIwuii1BJoOgdH1BRlA=" alt="BT21 minini 페이스 파우치 (체크무늬) RJ">
+      </a>
+      <div class="product-meta">
+        <p class="product-name">BT21 minini 페이스 파우치 (체크무늬) RJ</p>
+        <p class="product-price">약 9,800원</p>
+      </div>
+      <h2>BT21 파우치</h2>
+      <p class="card-copy">실사용으로 연결하기 가장 쉬운 타입입니다. <strong>이어폰, 립밤, 충전선처럼 자주 꺼내는 물건</strong>을 넣어 다니기 좋아서 손이 가장 자주 갑니다.</p>
+      <a class="buy-button" href="https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=8499080587&itemId=24601423864&vendorItemId=91612910145&traceid=V0-153-c546c4d05e63fec1&requestid=20260520150302035026685980&token=31850C%7CMIXED" rel="sponsored nofollow" target="_blank" referrerpolicy="unsafe-url">쿠팡에서 구매</a>
+    </article>
+  </section>
+
+  <section class="faq-section">
+    <h2>자주 보는 질문</h2>
+    <dl>
+      <dt>BT21은 BTS 공식 캐릭터라고 봐도 되나요?</dt>
+      <dd>BT21은 BTS와 LINE FRIENDS가 함께 만든 캐릭터 브랜드입니다. BTS 관련 굿즈를 찾는 분들이 가장 자연스럽게 이어서 보는 축이라, 얼굴 사진 굿즈보다도 접근이 편한 편입니다.</dd>
+      <dt>처음 하나만 사본다면 어떤 타입이 무난한가요?</dt>
+      <dd>가볍게 시작할 거면 키링, 실사용까지 생각하면 파우치, 책상이나 침대 위 포인트까지 원하면 인형/쿠션 타입이 가장 무난합니다.</dd>
+      <dt>페이지에 있는 링크는 어떻게 쓰면 좋나요?</dt>
+      <dd>마음에 드는 타입을 먼저 고른 다음 같은 링크 안에서 캐릭터별 옵션을 이어서 보는 방식이 가장 편합니다.</dd>
+    </dl>
+  </section>
+
+  <section class="related-box">
+    <h2>같이 보기</h2>
+    <div class="related-links">
+      <a href="/search/bts-light-stick-collection.html">BTS 응원봉 모아보기</a>
+      <a href="/search/bts-concert-goods-collection.html">BTS 콘서트 준비물 모아보기</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">© idont82.github.io · 구매 가이드</div>
+</footer>
+
+<script>
+  (function () {
+    const button = document.getElementById('thumbButton');
+    const lightbox = document.getElementById('thumbLightbox');
+    const lightboxButton = document.getElementById('thumbLightboxButton');
+
+    if (!button || !lightbox || !lightboxButton) {
+      return;
+    }
+
+    const close = function () {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+    };
+
+    button.addEventListener('click', function () {
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+    });
+
+    lightboxButton.addEventListener('click', close);
+    lightbox.addEventListener('click', function (event) {
+      if (event.target === lightbox) {
+        close();
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        close();
+      }
+    });
+  }());
+</script>
+
+</body>
+</html>
