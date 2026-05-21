@@ -60,6 +60,7 @@
     .tip-box p, .note-box p { margin: 0; color: var(--text-muted); line-height: 1.8; }
     .top-list { display: grid; gap: 18px; margin-top: 26px; }
     .top-item { padding: 20px; border-radius: 20px; background: linear-gradient(180deg, #fff 0%, #fffaf5 100%); border: 1px solid #dde5ee; box-shadow: 0 12px 24px rgba(31, 36, 48, 0.08); }
+    .top-item .image-link { display: block; }
     .top-item img { display: block; width: 100%; max-width: 260px; margin: 0 auto 14px; border-radius: 14px; }
     .top-item h2 { margin: 0 0 10px; font-size: 22px; line-height: 1.45; }
     .top-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
@@ -99,5 +100,24 @@
     <section class="related-box"><h2>같이 보면 좋은 페이지</h2><div class="related-links"><a href="/search/popular-diapers-top3.html">많이 쓰는 기저귀 추천 TOP 3</a><a href="/search/thin-diapers-top3.html">얇은 기저귀 추천 TOP 3</a><a href="/search/summer-diapers-top3.html">여름 기저귀 추천 TOP 3</a></div></section>
   </main>
   <footer class="site-footer"><div class="container">&copy; idont82.github.io · 구매 가이드</div></footer>
+  <script>
+    document.querySelectorAll('.top-item').forEach(function(item) {
+      var image = item.querySelector('img');
+      var cta = item.querySelector('.cta');
+      if (!image || !cta || item.querySelector('.image-link')) {
+        return;
+      }
+
+      var imageLink = document.createElement('a');
+      imageLink.className = 'image-link';
+      imageLink.href = cta.href;
+      imageLink.target = '_blank';
+      imageLink.rel = 'sponsored nofollow';
+      imageLink.referrerPolicy = 'unsafe-url';
+      imageLink.setAttribute('aria-label', image.alt + ' 쿠팡에서 구매');
+      image.parentNode.insertBefore(imageLink, image);
+      imageLink.appendChild(image);
+    });
+  </script>
 </body>
 </html>
