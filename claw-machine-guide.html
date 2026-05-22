@@ -23,18 +23,24 @@
 <meta name="twitter:title" content="서울 인형뽑기 성지 가이드">
 <meta name="twitter:description" content="서울 인형뽑기 성지 총정리! 홍대, 강남, 건대, 연신내, 종로, 신림 지역별 매장 위치·가격·꿀팁.">
 <meta name="twitter:image" content="https://idont82.github.io/images/main-thumbnail3.png">
-<meta name="robots" content="index, follow">
-<meta name="googlebot" content="index, follow">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="googlebot" content="index, follow, max-image-preview:large">
 <meta name="naver-site-verification" content="naver7151b1a0bf41ea39a21f8d07bb84a3b7">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebPage",
+  "@type": "CollectionPage",
   "name": "서울 인형뽑기 성지 가이드",
   "url": "https://idont82.github.io/claw-machine-guide.html",
   "description": "서울 인형뽑기 성지 총정리. 홍대, 강남, 건대, 연신내, 종로, 신림 지역별 인형뽑기 매장 정보.",
   "image": "https://idont82.github.io/images/main-thumbnail3.png",
+  "primaryImageOfPage": {
+    "@type": "ImageObject",
+    "url": "https://idont82.github.io/images/main-thumbnail3.png",
+    "width": 1200,
+    "height": 630
+  },
   "inLanguage": "ko",
   "isPartOf": {
     "@type": "WebSite",
@@ -235,6 +241,55 @@ header p{
 
 /* ── Main ── */
 main{max-width:900px;margin:0 auto;padding:16px}
+
+.search-hero{
+  background:linear-gradient(145deg,var(--surface),var(--surface-2));
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:18px;
+  margin-bottom:18px;
+  box-shadow:var(--hover-shadow);
+}
+.search-hero-figure{
+  margin:0;
+  max-width:760px;
+  margin-inline:auto;
+  overflow:hidden;
+  border-radius:18px;
+  border:1px solid var(--border);
+  background:var(--surface-soft);
+}
+.search-hero-figure img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+.search-hero-copy{
+  margin-top:14px;
+  display:grid;
+  gap:10px;
+  max-width:760px;
+  margin-inline:auto;
+}
+.search-hero-copy p{
+  color:var(--muted-2);
+  line-height:1.65;
+}
+.search-hero-stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.search-hero-stats span{
+  display:inline-flex;
+  align-items:center;
+  padding:7px 12px;
+  border-radius:999px;
+  background:var(--surface-soft-2);
+  color:var(--text);
+  font-size:13px;
+  font-weight:700;
+}
 
 /* ── Area cards grid ── */
 .area-grid{
@@ -852,6 +907,22 @@ html[data-theme="light"] .loading::after{
 </header>
 
 <main>
+  <section class="search-hero">
+    <figure class="search-hero-figure">
+      <img src="/images/main-thumbnail3.png" alt="서울 인형뽑기 성지 가이드 대표 지도와 지역 요약" width="1200" height="630" fetchpriority="high">
+    </figure>
+    <div class="search-hero-copy">
+      <p>홍대, 강남, 건대, 연신내, 종각/종로, 신림처럼 실제로 많이 도는 서울 인형뽑기 코스를 한 페이지에서 바로 확인할 수 있게 정리했습니다.</p>
+      <div class="search-hero-stats">
+        <span>홍대 15곳</span>
+        <span>강남 10곳</span>
+        <span>건대 13곳</span>
+        <span>연신내 7곳</span>
+        <span>종각/종로 9곳</span>
+        <span>신림 12곳</span>
+      </div>
+    </div>
+  </section>
   <div id="listView"></div>
   <div id="detailView" style="display:none"></div>
 </main>
