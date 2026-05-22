@@ -90,13 +90,13 @@
       "emoji": "🎢",
       "station": "잠실새내역",
       "exit": "4번 출구",
-      "summary": "잠실 상권과 먹자골목 중심의 투어 예정지",
-      "spotCount": 0,
-      "radius": "-",
-      "totalDistance": "-",
-      "totalMachines": 0,
-      "environment": ["먹자골목", "Coming Soon"],
-      "tags": ["투어예정"]
+      "summary": "잠실새내 먹자골목 안쪽으로 소형·중형 인형뽑기 매장이 촘촘하게 모인 코스",
+      "spotCount": 9,
+      "radius": "반경 180m",
+      "totalDistance": "약 430m",
+      "totalMachines": 95,
+      "environment": ["먹자골목", "실내", "역세권"],
+      "tags": ["NEW", "HOT"]
     },
     {
       "id": "jamsil",
