@@ -123,6 +123,7 @@ header{
   padding:clamp(24px,5vw,48px) 20px;text-align:center;
   position:relative;overflow:hidden;
   border-bottom:3px solid var(--header-border);
+  transition:padding 0.28s ease,border-bottom-width 0.28s ease;
 }
 header::before{
   content:'';position:absolute;inset:0;
@@ -135,10 +136,12 @@ header h1{
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   background-clip:text;
   margin-bottom:8px;position:relative;
+  transition:font-size 0.28s ease,margin-bottom 0.28s ease;
 }
 header p{
   color:var(--muted);font-size:clamp(13px,2.5vw,18px);
   position:relative;
+  transition:font-size 0.28s ease,opacity 0.28s ease;
 }
 
 .utility-header{
@@ -249,6 +252,7 @@ main{max-width:900px;margin:0 auto;padding:16px}
   padding:18px;
   margin-bottom:18px;
   box-shadow:var(--hover-shadow);
+  transition:padding 0.28s ease,margin-bottom 0.28s ease,border-radius 0.28s ease;
 }
 .search-hero-figure{
   margin:0;
@@ -258,11 +262,13 @@ main{max-width:900px;margin:0 auto;padding:16px}
   border-radius:18px;
   border:1px solid var(--border);
   background:var(--surface-soft);
+  transition:max-width 0.28s ease,border-radius 0.28s ease;
 }
 .search-hero-figure img{
   display:block;
   width:100%;
   height:auto;
+  transition:transform 0.28s ease;
 }
 .search-hero-copy{
   margin-top:14px;
@@ -270,15 +276,18 @@ main{max-width:900px;margin:0 auto;padding:16px}
   gap:10px;
   max-width:760px;
   margin-inline:auto;
+  transition:margin-top 0.28s ease,gap 0.28s ease;
 }
 .search-hero-copy p{
   color:var(--muted-2);
   line-height:1.65;
+  transition:font-size 0.28s ease,line-height 0.28s ease,opacity 0.28s ease;
 }
 .search-hero-stats{
   display:flex;
   flex-wrap:wrap;
   gap:8px;
+  transition:gap 0.28s ease;
 }
 .search-hero-stats span{
   display:inline-flex;
@@ -289,6 +298,53 @@ main{max-width:900px;margin:0 auto;padding:16px}
   color:var(--text);
   font-size:13px;
   font-weight:700;
+  transition:padding 0.28s ease,font-size 0.28s ease;
+}
+
+body.detail-focus header{
+  padding:14px 20px 12px;
+  border-bottom-width:2px;
+}
+body.detail-focus header h1{
+  font-size:clamp(20px,3.9vw,29px);
+  margin-bottom:4px;
+}
+body.detail-focus header p{
+  font-size:clamp(11px,2vw,14px);
+  opacity:0.92;
+}
+body.detail-focus .search-hero{
+  padding:8px 10px;
+  margin-bottom:10px;
+  border-radius:16px;
+}
+body.detail-focus .search-hero-figure{
+  max-width:320px;
+  border-radius:12px;
+}
+body.detail-focus .search-hero-figure img{
+  transform:scale(0.975);
+}
+body.detail-focus .search-hero-copy{
+  margin-top:6px;
+  gap:6px;
+}
+body.detail-focus .search-hero-copy p{
+  font-size:12px;
+  line-height:1.45;
+}
+body.detail-focus .search-hero-stats{
+  gap:5px;
+}
+body.detail-focus .search-hero-stats span{
+  padding:5px 9px;
+  font-size:11px;
+}
+body.detail-focus .search-hero-copy p:last-of-type{
+  display:none;
+}
+body.detail-focus .search-hero-copy p:first-of-type{
+  opacity:0.9;
 }
 
 /* ── Area cards grid ── */
@@ -1526,6 +1582,9 @@ async function router(){
   const hash = location.hash.slice(1);
   const listView = document.getElementById('listView');
   const detailView = document.getElementById('detailView');
+  const setDetailFocus = (active) => {
+    document.body.classList.toggle('detail-focus', active);
+  };
   if(adPopupDelayTimer){
     clearTimeout(adPopupDelayTimer);
     adPopupDelayTimer = null;
@@ -1539,10 +1598,12 @@ async function router(){
     listView.innerHTML = '<div class="loading">불러오는 중...</div>';
     listView.style.display = '';
     detailView.style.display = 'none';
+    setDetailFocus(false);
     const data = await loadAreas();
     listView.innerHTML = renderListView(data.areas);
   } else {
     detailView.innerHTML = '<div class="loading">불러오는 중...</div>';
+    setDetailFocus(true);
     listView.style.display = 'none';
     detailView.style.display = '';
     try {
@@ -1562,6 +1623,7 @@ async function router(){
     } catch(e) {
       detailView.innerHTML = '<div class="empty-state"><span class="big-emoji">❌</span>해당 지역 정보를 찾을 수 없습니다</div>';
       pendingAreaId = null;
+      setDetailFocus(false);
     }
   }
 }
