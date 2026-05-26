@@ -378,6 +378,228 @@ body.blog-home{
   font-weight:700;
 }
 
+body.blog-article-page{
+  min-height:100vh;
+}
+
+body.blog-article-page .blog-sidebar-right .blog-panel{
+  position:static;
+}
+
+body.blog-article-page .blog-sidebar-right .blog-stack{
+  position:sticky;
+  top:24px;
+}
+
+.blog-article-shell{
+  padding:32px;
+  border:1px solid var(--line);
+  border-radius:28px;
+  background:var(--surface);
+  box-shadow:var(--shadow);
+}
+
+.blog-article-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:12px;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:700;
+}
+
+.blog-article-title{
+  margin:0;
+  font-size:clamp(30px, 4vw, 42px);
+  line-height:1.24;
+}
+
+.article-summary-box{
+  margin-top:18px;
+  padding:16px 18px;
+  border-radius:18px;
+  border:1px solid rgba(20,184,90,0.18);
+  background:linear-gradient(180deg, #f8fffb, #eefbf3);
+  font-weight:700;
+  line-height:1.65;
+}
+
+.article-hero{
+  margin:24px 0 0;
+  overflow:hidden;
+  border-radius:24px;
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+}
+
+.article-hero img{
+  width:100%;
+  aspect-ratio:16 / 9;
+  object-fit:cover;
+}
+
+.article-hero figcaption{
+  padding:12px 16px 16px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.article-body{
+  margin-top:28px;
+}
+
+.article-body h2{
+  margin:36px 0 14px;
+  font-size:28px;
+  line-height:1.3;
+}
+
+.article-body h3{
+  margin:0 0 8px;
+  font-size:20px;
+  line-height:1.4;
+}
+
+.article-body p{
+  margin:0 0 16px;
+  color:#334155;
+  font-size:17px;
+  line-height:1.85;
+}
+
+.article-body a{
+  color:#0f766e;
+  text-underline-offset:3px;
+}
+
+.article-lead{
+  font-size:20px;
+  font-weight:700;
+  color:#0f172a;
+}
+
+.article-ad{
+  margin:28px 0;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:var(--surface-soft);
+}
+
+.article-ad-label{
+  margin:0 0 12px;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+}
+
+.article-ad-frame-block{
+  display:grid;
+  justify-items:center;
+}
+
+.article-ad-frame-block iframe{
+  display:block;
+  max-width:100%;
+  border:0;
+}
+
+.article-product-card{
+  display:grid;
+  grid-template-columns:140px minmax(0, 1fr);
+  gap:18px;
+  align-items:center;
+}
+
+.article-product-media{
+  display:block;
+  overflow:hidden;
+  border-radius:18px;
+  background:#fff;
+  border:1px solid var(--line);
+}
+
+.article-product-media img{
+  width:100%;
+  aspect-ratio:1 / 1;
+  object-fit:cover;
+}
+
+.article-product-copy{
+  display:grid;
+  gap:10px;
+}
+
+.article-product-copy strong{
+  font-size:20px;
+  line-height:1.4;
+}
+
+.article-product-copy p{
+  margin:0;
+  font-size:15px;
+  line-height:1.75;
+}
+
+.article-product-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:0 16px;
+  border-radius:12px;
+  background:var(--accent);
+  color:#fff;
+  text-decoration:none;
+  font-weight:800;
+}
+
+.faq-list{
+  margin-top:40px;
+  padding-top:8px;
+}
+
+.faq-item{
+  padding:20px 0;
+  border-top:1px solid var(--line);
+}
+
+.faq-item:last-child{
+  border-bottom:1px solid var(--line);
+}
+
+.faq-item p{
+  margin-bottom:0;
+}
+
+.related-posts{
+  margin-top:36px;
+  padding:24px;
+  border-radius:22px;
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+}
+
+.related-posts h2{
+  margin-top:0;
+}
+
+.related-posts ul{
+  margin:0;
+  padding-left:20px;
+}
+
+.related-posts li + li{
+  margin-top:10px;
+}
+
+.blog-toc-list a{
+  align-items:flex-start;
+}
+
 @media (max-width:1100px){
   .blog-layout{
     grid-template-columns:240px minmax(0, 1fr);
@@ -388,6 +610,10 @@ body.blog-home{
   }
 
   .blog-sidebar-right .blog-panel{
+    position:static;
+  }
+
+  body.blog-article-page .blog-sidebar-right .blog-stack{
     position:static;
   }
 }
@@ -430,5 +656,51 @@ body.blog-home{
 
   .blog-tag-list{
     grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+
+  .blog-article-shell{
+    padding:22px 18px;
+    border-radius:22px;
+  }
+
+  .blog-article-title{
+    font-size:30px;
+  }
+
+  .article-summary-box{
+    padding:14px 16px;
+  }
+
+  .article-body{
+    margin-top:24px;
+  }
+
+  .article-body h2{
+    font-size:24px;
+    margin:30px 0 12px;
+  }
+
+  .article-body p,
+  .article-lead{
+    font-size:16px;
+    line-height:1.8;
+  }
+
+  .article-product-card{
+    grid-template-columns:1fr;
+  }
+
+  .article-product-media{
+    max-width:220px;
+  }
+
+  .article-ad{
+    margin:24px 0;
+    padding:16px;
+    border-radius:18px;
+  }
+
+  .related-posts{
+    padding:18px;
   }
 }
