@@ -1,0 +1,39 @@
+:root{
+  --bg:#f5f6f8;
+  --surface:#ffffff;
+  --surface-soft:#fafafc;
+  --line:#e5e7eb;
+  --line-strong:#d1d5db;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --muted-2:#9ca3af;
+  --accent:#14b85a;
+  --accent-soft:#e8fff1;
+  --tag:#eef2ff;
+  --shadow:0 12px 32px rgba(15,23,42,0.08);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:"Segoe UI", "Malgun Gothic", sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.6;
+}
+
+img{
+  display:block;
+  max-width:100%;
+}
+
+a{
+  color:inherit;
+}
