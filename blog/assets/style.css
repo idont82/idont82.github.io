@@ -973,13 +973,13 @@ body.blog-article-page{
   .blog-shell{
     width:100%;
     max-width:100%;
-    padding:6px 8px 32px;
+    padding:0 8px 32px;
     overflow-x:hidden;
   }
 
   .blog-header{
     display:block;
-    margin:0 0 18px;
+    margin:0 -8px 18px;
     padding:16px 18px;
     border-radius:0;
     border-color:rgba(214,154,0,0.22);
