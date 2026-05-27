@@ -167,6 +167,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  document.querySelectorAll('[data-card-carousel]').forEach((carousel) => {
+    const slides = Array.from(carousel.querySelectorAll('img'));
+    if (slides.length < 2) {
+      return;
+    }
+    let activeIndex = Math.max(0, slides.findIndex((slide) => slide.classList.contains('is-active')));
+    let carouselTimer = null;
+    slides.forEach((slide, index) => {
+      slide.classList.toggle('is-active', index === activeIndex);
+    });
+
+    const showNextSlide = () => {
+      slides[activeIndex].classList.remove('is-active');
+      activeIndex = (activeIndex + 1) % slides.length;
+      slides[activeIndex].classList.add('is-active');
+    };
+    const startCarousel = () => {
+      if (carouselTimer) {
+        return;
+      }
+      carouselTimer = window.setInterval(showNextSlide, 3000);
+    };
+    const stopCarousel = () => {
+      if (!carouselTimer) {
+        return;
+      }
+      window.clearInterval(carouselTimer);
+      carouselTimer = null;
+    };
+
+    carousel.addEventListener('mouseenter', startCarousel);
+    carousel.addEventListener('mouseleave', stopCarousel);
+    carousel.addEventListener('focusin', startCarousel);
+    carousel.addEventListener('focusout', stopCarousel);
+  });
+
   const mobileTopAd = document.querySelector('[data-mobile-top-ad]');
   if (mobileTopAd) {
     let mobileTopAdOffset = mobileTopAd.getBoundingClientRect().top + window.scrollY;
