@@ -119,6 +119,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  const filterButtons = Array.from(document.querySelectorAll('[data-blog-filter]'));
+  const filterCards = Array.from(document.querySelectorAll('[data-blog-category]'));
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const selectedCategory = button.dataset.blogFilter;
+      filterButtons.forEach((item) => {
+        item.classList.toggle('is-current', item === button);
+      });
+      filterCards.forEach((card) => {
+        const categories = (card.dataset.blogCategory || '').split(/\s+/);
+        const shouldShow = selectedCategory === 'all' || categories.includes(selectedCategory);
+        card.classList.toggle('is-filter-hidden', !shouldShow);
+      });
+    });
+  });
+
   document.querySelectorAll('[data-toggle-mobile-nav]').forEach((button) => {
     const drawerId = button.getAttribute('aria-controls');
     const drawer = drawerId ? document.getElementById(drawerId) : null;
