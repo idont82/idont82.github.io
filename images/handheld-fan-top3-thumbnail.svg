@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">휴대용 손선풍기 추천 TOP 3</title>
+  <desc id="desc">여름용 휴대용 손선풍기 3종 비교를 표현한 썸네일</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#eef8ff"/>
+      <stop offset="52%" stop-color="#fff7ef"/>
+      <stop offset="100%" stop-color="#eefcf7"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" x2="1">
+      <stop offset="0%" stop-color="#f3d36d"/>
+      <stop offset="100%" stop-color="#c68510"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#4a6782" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" rx="34" fill="url(#bg)"/>
+  <g opacity="0.75">
+    <circle cx="1080" cy="96" r="64" fill="#ffffff"/>
+    <circle cx="1102" cy="132" r="28" fill="#dff1ff"/>
+    <circle cx="126" cy="544" r="84" fill="#ffffff"/>
+    <circle cx="170" cy="502" r="34" fill="#ffe8d0"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="72" y="88" width="1056" height="454" rx="34" fill="#ffffff" fill-opacity="0.9"/>
+  </g>
+  <text x="86" y="74" font-size="26" font-family="Malgun Gothic, Apple SD Gothic Neo, sans-serif" fill="#4f6b84">여름 출퇴근 · 책상 · 야외 대기</text>
+  <text x="86" y="154" font-size="64" font-weight="800" font-family="Malgun Gothic, Apple SD Gothic Neo, sans-serif" fill="#203447">휴대용 손선풍기 TOP 3</text>
+  <text x="88" y="202" font-size="26" font-family="Malgun Gothic, Apple SD Gothic Neo, sans-serif" fill="#5f7387">바람 세기, 탁상 겸용, 초경량 기준으로 고르기</text>
+
+  <g transform="translate(126 246)">
+    <rect width="270" height="220" rx="26" fill="#f5fbff" stroke="#d9e6f1"/>
+    <circle cx="136" cy="86" r="54" fill="#6ab6ff"/>
+    <circle cx="136" cy="86" r="18" fill="#ffffff"/>
+    <path d="M136 36c20 0 36 16 36 36c-22 8-40 8-56 0c0-20 16-36 20-36Z" fill="#ffffff"/>
+    <path d="M180 112c0 22-16 40-36 40c-8-22-8-40 0-56c20 0 36 16 36 16Z" fill="#ffffff"/>
+    <path d="M92 112c0-22 16-40 36-40c8 22 8 40 0 56c-20 0-36-16-36-16Z" fill="#ffffff"/>
+    <rect x="124" y="140" width="24" height="48" rx="12" fill="#6ab6ff"/>
+    <rect x="106" y="186" width="60" height="14" rx="7" fill="#cfe9ff"/>
+    <text x="24" y="34" font-size="22" font-weight="700" font-family="Malgun Gothic, Apple SD Gothic Neo, sans-serif" fill="#30506b">강풍형</text>
+    <text x="24" y="198" font-size="18" font-family="Malgun Gothic, Apple SD Gothic Neo, sans-serif" fill="#57708b">밖에서 더위 많이 탈 때</text>
+  </g>
+
+  <g transform="translate(464 246)">
+    <rect width="270" height="220" rx="26" fill="#fffaf3" stroke="#ead9bb"/>
+    <circle cx="136" cy="86" r="50" fill="#ffb55e"/>
+    <circle cx="136" cy="86" r="16" fill="#ffffff"/>
+    <path d="M136 40c16 0 30 14 30 30c-18 6-34 6-48 0c0-16 14-30 18-30Z" fill="#ffffff"/>
+    <path d="M174 108c0 18-14 34-30 34c-6-18-6-34 0-48c16 0 30 14 30 14Z" fill="#ffffff"/>
+    <path d="M98 108c0-18 14-34 30-34c6 18 6 34 0 48c-16 0-30-14-30-14Z" fill="#ffffff"/>
+    <rect x="122" y="138" width="28" height="34" rx="10" fill="#ffb55e"/>
+    <rect x="88" y="170" width="96" height="28" rx="14" fill="#ffe2b7"/>
+    <text x="24" y="34" font-size="22" font-weight="700" font-family="Malgun Gothic, Apple SD Gothic Neo, sans-serif" fill="#6b4a1e">탁상 겸용</text>
+    <text x="24" y="198" font-size="18" font-family="Malgun Gothic, Apple SD Gothic Neo, sans-serif" fill="#7d633f">책상에 세워두기 편한 쪽</text>
+  </g>
+
+  <g transform="translate(802 246)">
+    <rect width="270" height="220" rx="26" fill="#f6fbf8" stroke="#d7eadf"/>
+    <circle cx="136" cy="86" r="46" fill="#4bc9a4"/>
+    <circle cx="136" cy="86" r="15" fill="#ffffff"/>
+    <path d="M136 44c16 0 28 12 28 28c-16 6-30 6-44 0c0-16 12-28 16-28Z" fill="#ffffff"/>
+    <path d="M170 106c0 18-12 32-28 32c-6-16-6-30 0-44c16 0 28 12 28 12Z" fill="#ffffff"/>
+    <path d="M102 106c0-18 12-32 28-32c6 16 6 30 0 44c-16 0-28-12-28-12Z" fill="#ffffff"/>
+    <rect x="128" y="136" width="16" height="52" rx="8" fill="#4bc9a4"/>
+    <rect x="116" y="186" width="40" height="12" rx="6" fill="#cbeee4"/>
+    <text x="24" y="34" font-size="22" font-weight="700" font-family="Malgun Gothic, Apple SD Gothic Neo, sans-serif" fill="#2e6755">초경량형</text>
+    <text x="24" y="198" font-size="18" font-family="Malgun Gothic, Apple SD Gothic Neo, sans-serif" fill="#5b7d72">매일 가방에 넣기 편한 쪽</text>
+  </g>
+
+  <rect x="86" y="548" width="264" height="40" rx="20" fill="url(#gold)"/>
+  <text x="218" y="575" text-anchor="middle" font-size="22" font-weight="800" font-family="Malgun Gothic, Apple SD Gothic Neo, sans-serif" fill="#fffdf5">이미 보던 제품이 있어도 비교</text>
