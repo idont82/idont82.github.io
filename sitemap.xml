@@ -586,7 +586,7 @@
   </url>
   <url>
     <loc>https://idont82.github.io/blog/index.html</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -595,8 +595,18 @@
     </image:image>
   </url>
   <url>
+    <loc>https://idont82.github.io/blog/seoul-claw-machine-guide.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://idont82.github.io/images/main-thumbnail3.png</image:loc>
+      <image:title>서울 인형뽑기 성지 지도 대표 이미지</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://idont82.github.io/blog/hongdae-claw-tour.html</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>

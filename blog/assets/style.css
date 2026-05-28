@@ -630,14 +630,17 @@ body.blog-article-page{
   margin:24px 0 0;
   overflow:hidden;
   border-radius:24px;
-  background:var(--surface-soft);
+  background:#f8fafc;
   border:1px solid var(--line);
 }
 
 .article-hero img{
+  display:block;
   width:100%;
-  aspect-ratio:16 / 9;
-  object-fit:cover;
+  height:auto;
+  max-height:420px;
+  object-fit:contain;
+  background:#f8fafc;
 }
 
 .article-hero figcaption{
@@ -798,11 +801,66 @@ body.blog-article-page{
   color:#0f172a;
 }
 
+.article-stop-count{
+  display:inline-flex;
+  margin-left:4px;
+  padding:3px 8px;
+  border-radius:999px;
+  background:#f8fafc;
+  color:#64748b;
+  font-size:13px;
+  font-weight:800;
+  vertical-align:middle;
+}
+
+.article-stop-hand{
+  display:inline-block;
+  margin-left:8px;
+  font-family:"Nanum Pen Script", "Malgun Gothic", cursive;
+  font-size:28px;
+  line-height:1;
+  color:#d14343;
+  transform:rotate(-1.1deg);
+  vertical-align:middle;
+}
+
+.article-stop-hand--blue{
+  color:#315fcb;
+  transform:rotate(0.8deg);
+}
+
 .article-stop p{
   margin:0;
   font-size:15px;
   line-height:1.78;
   color:#334155;
+}
+
+.article-stop-map{
+  display:grid;
+  grid-template-columns:132px minmax(0, 1fr);
+  gap:12px;
+  align-items:center;
+  margin:12px 0;
+  padding:10px;
+  border-radius:16px;
+  background:#f8fafc;
+}
+
+.article-stop-map img{
+  display:block;
+  width:132px;
+  height:88px;
+  border-radius:12px;
+  object-fit:cover;
+  background:#eef2f7;
+}
+
+.article-stop-map figcaption{
+  margin:0;
+  color:#64748b;
+  font-size:13px;
+  line-height:1.6;
 }
 
 .article-stop-photo{
@@ -1277,9 +1335,36 @@ body.blog-article-page{
     margin-bottom:7px;
   }
 
+  .article-stop-count{
+    font-size:12px;
+  }
+
+  .article-stop-hand{
+    display:block;
+    margin:8px 0 0;
+    font-size:25px;
+  }
+
   .article-stop p{
     font-size:14px;
     line-height:1.72;
+  }
+
+  .article-stop-map{
+    grid-template-columns:104px minmax(0, 1fr);
+    gap:10px;
+    padding:8px;
+  }
+
+  .article-stop-map img{
+    width:104px;
+    height:74px;
+    border-radius:10px;
+  }
+
+  .article-stop-map figcaption{
+    font-size:12px;
+    line-height:1.5;
   }
 
   .article-stop-photo{
