@@ -664,5 +664,25 @@
       <image:title>홍대 인형뽑기 코스 대표 사진</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://idont82.github.io/blog/yevester-porcine-chondroitin-1200.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://idont82.github.io/images/chondroitin-1200-thumbnail.png</image:loc>
+      <image:title>여에스더 포사인 콘드로이친 1200 대표 제품 이미지</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://idont82.github.io/blog/harutin-liposomal-vitamin-c.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://idont82.github.io/images/liposomal-vitamin-c-thumbnail.png</image:loc>
+      <image:title>하루틴 리포좀 비타민C 대표 이미지</image:title>
+    </image:image>
+  </url>
 </urlset>
 

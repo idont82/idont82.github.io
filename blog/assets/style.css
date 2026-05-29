@@ -1632,3 +1632,210 @@ body.blog-article-page{
     padding:18px;
   }
 }
+
+
+/* ==========================================================================
+   실시간 제품 상세 카드 일체형 스타일링 (반응형 지원)
+   ========================================================================== */
+.article-product-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin: 36px 0;
+}
+
+.product-detail-card {
+  display: flex;
+  background: #111122;
+  border: 1px solid #22223c;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.product-detail-card:hover {
+  transform: translateY(-2px);
+  border-color: #5f5ffb;
+}
+
+.product-detail-media {
+  flex: 0 0 240px;
+  max-width: 240px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.product-detail-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.product-detail-card:hover .product-detail-media img {
+  transform: scale(1.05);
+}
+
+.product-detail-info {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-detail-badge {
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #ff4d4d;
+  color: #ffffff;
+}
+
+.product-detail-badge--orange {
+  background: #ff9f43;
+}
+
+.product-detail-badge--blue {
+  background: #2e86de;
+}
+
+.product-detail-info h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff;
+}
+
+.product-detail-price {
+  font-size: 0.95rem;
+  color: #a0a0c0;
+}
+
+.product-detail-price strong {
+  font-size: 1.15rem;
+  color: #ff4d4d;
+}
+
+.product-detail-specs {
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 3px solid #5f5ffb;
+  color: #ffffff;
+}
+
+.product-detail-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #a0a0c0;
+  margin: 0;
+}
+
+.product-detail-target {
+  font-size: 0.85rem;
+  color: #8080a0;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  padding-top: 12px;
+  margin-top: 4px;
+}
+
+.product-detail-btn {
+  display: inline-block;
+  align-self: flex-start;
+  background: linear-gradient(135deg, #ff4d4d 0%, #ff9f43 100%);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
+  transition: filter 0.2s ease, transform 0.1s ease;
+  margin-top: auto;
+  text-align: center;
+}
+
+.product-detail-btn:hover {
+  filter: brightness(1.1);
+  color: #ffffff;
+}
+
+.product-detail-btn:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .product-detail-card {
+    flex-direction: column;
+  }
+
+  .product-detail-media {
+    flex: 0 0 200px;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .product-detail-info {
+    padding: 20px 16px;
+  }
+
+  .product-detail-btn {
+    align-self: stretch;
+  }
+}
+
+
+/* ==========================================================================
+   실시간 제품 상세 카드 고대비 가독성 강화 패치 (High Contrast Text Patch)
+   ========================================================================== */
+.product-detail-card {
+  background: #16162a !important; /* 카드 배경을 조금 더 선명한 톤으로 조율 */
+  border: 1px solid #2e2e4e !important;
+}
+
+.product-detail-info h3 {
+  color: #ffffff !important; /* 100% 완전한 백색 타이틀 */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.product-detail-price {
+  color: #cbd5e1 !important; /* 한결 선명한 밝은 회색조 */
+}
+
+.product-detail-price strong {
+  color: #ff6b6b !important; /* 쨍하고 눈에 띄는 형광 코랄 레드 */
+  font-weight: 800;
+}
+
+.product-detail-specs {
+  background: rgba(0, 0, 0, 0.45) !important; /* 반투명 블랙배경으로 글자 대비 극대화 */
+  border-left: 3px solid #7575ff !important;
+  color: #f8fafc !important; /* 완전히 밝은 아이보리 백색 */
+  font-weight: 600;
+}
+
+.product-detail-desc {
+  color: #f1f5f9 !important; /* 가장 밝은 슬레이트 화이트 계열로 변경하여 시인성 보장 */
+  line-height: 1.65 !important;
+  font-size: 0.95rem !important; /* 텍스트 폰트 크기 미세 증폭 */
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.product-detail-target {
+  color: #cbd5e1 !important; /* 선명하게 정돈된 밝은 추천 대상 문구 */
+  border-top: 1px dashed rgba(255, 255, 255, 0.2) !important;
+  line-height: 1.5 !important;
+}
+
+.product-detail-target strong {
+  color: #ffd24d !important; /* 옐로우 포인트 컬러로 강조성 향상 */
+}
