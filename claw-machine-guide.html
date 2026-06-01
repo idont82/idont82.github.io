@@ -308,6 +308,39 @@ main{max-width:900px;margin:0 auto;padding:16px}
   font-weight:700;
   transition:padding 0.28s ease,font-size 0.28s ease;
 }
+.blog-route-links{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin:0 0 18px;
+}
+.blog-route-link{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  padding:14px 15px;
+  border-radius:16px;
+  border:1px solid rgba(255,204,68,0.28);
+  background:linear-gradient(145deg,rgba(255,204,68,0.12),var(--surface));
+  color:var(--text);
+  text-decoration:none;
+  box-shadow:0 10px 24px rgba(0,0,0,0.1);
+  transition:transform 0.2s,border-color 0.2s,box-shadow 0.2s;
+}
+.blog-route-link:hover{
+  transform:translateY(-2px);
+  border-color:rgba(255,204,68,0.62);
+  box-shadow:0 14px 30px rgba(255,170,40,0.14);
+}
+.blog-route-link strong{
+  font-size:15px;
+  line-height:1.35;
+}
+.blog-route-link span{
+  color:var(--muted-2);
+  font-size:12px;
+  line-height:1.45;
+}
 
 body.detail-focus header{
   padding:14px 20px 12px;
@@ -334,6 +367,9 @@ body.detail-focus .search-hero-figure img{
   transform:scale(0.97);
 }
 body.detail-focus .search-hero-copy{
+  display:none;
+}
+body.detail-focus .blog-route-links{
   display:none;
 }
 
@@ -907,6 +943,18 @@ footer{
   48%{transform:translateX(135%) rotate(10deg);opacity:0}
   100%{transform:translateX(135%) rotate(10deg);opacity:0}
 }
+@media (max-width:720px){
+  .blog-route-links{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  .blog-route-link{
+    padding:12px 13px;
+  }
+  .blog-route-link strong{
+    font-size:14px;
+  }
+}
 html[data-theme="light"] header h1{
   background:linear-gradient(90deg,#c85d1e,#de8c2f,#8e52ef);
   -webkit-background-clip:text;
@@ -974,6 +1022,20 @@ html[data-theme="light"] .loading::after{
       </div>
     </div>
   </section>
+  <nav class="blog-route-links" aria-label="서울 인형뽑기 블로그 글 바로가기">
+    <a class="blog-route-link" href="/blog/seoul-claw-machine-guide.html">
+      <strong>서울 성지 블로그로 보기</strong>
+      <span>처음 가는 사람 기준으로 홍대·강남·건대·신림 코스를 짧게 정리했습니다.</span>
+    </a>
+    <a class="blog-route-link" href="/blog/hongdae-claw-tour.html">
+      <strong>홍대 코스 글로 보기</strong>
+      <span>상수역과 홍대입구역 시작 동선을 사진과 함께 볼 수 있습니다.</span>
+    </a>
+    <a class="blog-route-link" href="/claw-machine.html">
+      <strong>집에서 먼저 감 잡기</strong>
+      <span>매장 가기 전 온라인 인형뽑기 게임으로 집게 감각을 가볍게 봅니다.</span>
+    </a>
+  </nav>
   <div id="listView"></div>
   <div id="detailView" style="display:none"></div>
 </main>
