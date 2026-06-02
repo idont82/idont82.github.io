@@ -106,6 +106,32 @@ async function initAreaMap(areaId, containerId) {
   }
 }
 
+function trackCoupangClick(link) {
+  const href = link.href || link.getAttribute('href') || '';
+  const isCoupangLink = /(?:link|www|ads-partners)\.coupang\.com/.test(href);
+  if (!isCoupangLink) {
+    return;
+  }
+
+  const eventParams = {
+    page_path: window.location.pathname,
+    link_url: href,
+    coupang_placement: link.dataset.coupangPlacement || 'unknown',
+    coupang_product_type: link.dataset.coupangProductType || 'unknown',
+    outbound: true
+  };
+
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'coupang_click', eventParams);
+  }
+  if (Array.isArray(window.dataLayer)) {
+    window.dataLayer.push({
+      event: 'coupang_click',
+      ...eventParams
+    });
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.documentElement.classList.add('blog-ready');
 
@@ -181,6 +207,13 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error(error);
       }
     });
+  });
+
+  document.addEventListener('click', (event) => {
+    const coupangLink = event.target.closest('a[data-coupang-link], a[href*="coupang.com"]');
+    if (coupangLink) {
+      trackCoupangClick(coupangLink);
+    }
   });
 
   document.querySelectorAll('[data-card-carousel]').forEach((carousel) => {

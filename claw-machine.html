@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
   <!-- Google Tag Manager -->
@@ -36,6 +36,7 @@
 <link rel="apple-touch-icon" href="/images/favicon.png">
 
 <link href="claw-machine.css" rel="stylesheet">
+<script defer src="/assets/coupang-tracking.js"></script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -108,7 +109,10 @@
         <span class="joy-arrow right">▶</span>
         <div id="joyStick"><div id="joyBall"></div></div>
       </div>
-      <div id="coinBtn"><span>💰<br>COIN</span></div>
+      <div class="coin-control">
+        <div id="coinBtn"><span>💰<br>COIN</span></div>
+        <div id="coinStatus">코인 누르면 광고가 내려옵니다</div>
+      </div>
       <div id="startBtn"><span>CATCH</span></div>
       <div id="creditDisplay">
         <div style="color:#0f0" id="creditTxt">CREDIT: 3</div>
@@ -121,13 +125,13 @@
   <div id="gameAdFooter">
     <div class="ad-disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로 수수료를 제공받습니다</div>
     <div id="bannerContainer" data-banner-mode="triple">
-      <a href="https://link.coupang.com/a/ek4gDo" target="_blank" referrerpolicy="unsafe-url" class="q-banner">
+      <a href="https://link.coupang.com/a/ek4gDo" target="_blank" referrerpolicy="unsafe-url" class="q-banner" data-coupang-link data-coupang-placement="game_coin" data-coupang-product-type="mini_claw">
         <img src="https://image1.coupangcdn.com/image/affiliate/banner/e862e13c7284f83115bf1e796a0c81f8@2x.jpg" alt="미니 인형뽑기">
       </a>
-      <a href="https://link.coupang.com/a/ek4rgW" target="_blank" referrerpolicy="unsafe-url" class="q-banner">
+      <a href="https://link.coupang.com/a/ek4rgW" target="_blank" referrerpolicy="unsafe-url" class="q-banner" data-coupang-link data-coupang-placement="game_coin" data-coupang-product-type="mini_claw">
         <img src="https://image13.coupangcdn.com/image/affiliate/banner/a5ea46c9cfa6c620061e5de6d74733cf@2x.jpg" alt="캐치핑 인형뽑기">
       </a>
-      <a href="https://link.coupang.com/a/ek6ZFc" target="_blank" referrerpolicy="unsafe-url" class="q-banner">
+      <a href="https://link.coupang.com/a/ek6ZFc" target="_blank" referrerpolicy="unsafe-url" class="q-banner" data-coupang-link data-coupang-placement="game_coin" data-coupang-product-type="mini_claw">
         <img src="https://image13.coupangcdn.com/image/affiliate/banner/6ec5c3d390e8b7a962b8b7cc32f7390e@2x.jpg" alt="유니콘 인형뽑기">
       </a>
     </div>

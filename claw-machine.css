@@ -105,11 +105,14 @@ body{
 .joy-arrow.up{top:2px;left:50%;transform:translateX(-50%)} .joy-arrow.down{bottom:2px;left:50%;transform:translateX(-50%)}
 .joy-arrow.left{left:2px;top:50%;transform:translateY(-50%)} .joy-arrow.right{right:2px;top:50%;transform:translateY(-50%)}
 
+.coin-control { display: flex; flex-direction: column; align-items: center; gap: 5px; max-width: 78px; }
 #coinBtn, #startBtn { width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.1s; }
 #coinBtn { background: radial-gradient(circle at 35% 35%,#ffdd44,#cc9900 50%,#aa7700); border: 3px solid #ddaa22; box-shadow: 0 0 10px rgba(255,200,0,0.3); }
+#coinBtn.coin-charged { animation: coinPulse 0.75s ease-out 2; }
 #startBtn { background: radial-gradient(circle at 35% 35%,#5f5,#0c0 50%,#090); border: 3px solid #4a4; box-shadow: 0 0 12px rgba(0,255,0,0.3); }
 #coinBtn:active, #startBtn:active { transform: scale(0.9); }
 #coinBtn span, #startBtn span { color: #fff; font-size: 9px; font-weight: bold; text-align: center; line-height: 1.1; }
+#coinStatus { color: #ffd95a; font-size: 9px; font-weight: 800; line-height: 1.25; text-align: center; text-shadow: 0 0 8px rgba(255,200,0,0.35); }
 
 #creditDisplay { background: #0a0a0a; padding: 6px 10px; border-radius: 6px; border: 1px solid #444; }
 #creditDisplay div { font-family: 'Courier New', monospace; font-size: 10px; font-weight: bold; line-height: 1.4; }
@@ -166,6 +169,16 @@ body{
 @keyframes sparkle {
   0%, 100% { filter: brightness(1); }
   50% { filter: brightness(1.6); box-shadow: 0 0 20px #ffcc44; }
+}
+.coin-status-active { animation: coinStatusBlink 0.9s ease-in-out 2; }
+@keyframes coinPulse {
+  0% { transform: scale(1); box-shadow: 0 0 10px rgba(255,200,0,0.3); }
+  55% { transform: scale(1.12); box-shadow: 0 0 24px rgba(255,220,70,0.8); }
+  100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,200,0,0.3); }
+}
+@keyframes coinStatusBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
 }
 .sparkle-active .q-banner { animation: sparkle 1s ease-in-out 3; }
 .sparkle-active .q-banner-iframe-wrap { animation: sparkle 1s ease-in-out 3; }

@@ -87,6 +87,31 @@ Claude, Gemini CLI, Codex 등 어떤 도구로 작성하더라도 아래 운영 
   - `바로 사기보다, 지금 쓰는 공간에 맞는지 먼저 확인해 보세요.`
   - `후기보다 먼저 볼 건 크기, 전력, 보관 방식입니다.`
 
+### Mobile Monetization And Coupang Tracking Rules
+
+- Sitewide rule: every published HTML page that contains a Coupang URL must load either `/assets/coupang-tracking.js` or a page-specific script that emits the same `coupang_click` event shape.
+- Search pages, recipe pages, root landing pages, `claw-machine-guide.html`, and `claw-machine.html` are not exceptions. They must be tracked the same way as blog pages.
+- Keep `tests/sitewide-coupang-tracking.test.js` passing whenever adding or editing Coupang links outside the blog folder.
+- Search pages use one mobile-only top CTA generated from the first product card. Do not add multiple top CTAs; keep the first screen useful rather than ad-heavy.
+- Game page ad clicks that are exposed through the coin flow use `data-coupang-placement="game_coin"`.
+- Area guide product cards use explicit guide placements such as `guide_area_middle` and `guide_detail_top`.
+- 현재 분석 기준으로 블로그 유입은 모바일 비중이 높으므로, 모든 수익형 글은 모바일 첫 화면 전환을 우선한다.
+- 제품명 글, 비교 글, 구매 의도 글은 요약 박스 바로 아래에 모바일 전환 카드를 둔다. 히어로 이미지가 CTA를 너무 아래로 밀면 요약 박스 다음에 `mobile-conversion-card`를 먼저 배치한다.
+- `mobile-conversion-card`에는 상품 이미지, 짧은 맥락 문장, CTA 버튼을 포함한다.
+- 기본 CTA 문구는 `쿠팡에서 구매하기`보다 `현재 가격 확인하기`, `후기와 가격 보기`, `내 조건에 맞는지 보기`를 우선한다.
+- 인형뽑기 글은 `미니 인형뽑기 가격 보기`, 건강식품 글은 `함량 기준으로 가격 확인하기`처럼 검색 의도에 맞춘 문구를 쓴다.
+- 블로그의 모든 쿠팡 상품 링크에는 다음 속성을 넣는다.
+  - `data-coupang-link`
+  - `data-coupang-placement`
+  - `data-coupang-product-type`
+- `data-coupang-placement` 값은 위치를 구분할 수 있어야 한다. 예: `mobile_summary_card`, `product_card`, `faq_before`, `top_banner`, `middle_ad`, `game_coin`.
+- `data-coupang-product-type` 값은 상품군을 구분할 수 있어야 한다. 예: `chondroitin`, `vitamin`, `mini_claw`, `diaper`, `fan`, `banner`.
+- 공통 JS는 쿠팡 링크 클릭 시 `coupang_click` 이벤트를 전송한다. 가능하면 `gtag`와 `dataLayer`에 모두 보낸다.
+- `coupang_click` 이벤트에는 `page_path`, `link_url`, `coupang_placement`, `coupang_product_type`, `outbound: true`를 포함한다.
+- 속성이 없는 쿠팡 링크도 `unknown`으로 추적될 수 있지만, 새로 만들거나 수정하는 링크는 `unknown`에 의존하지 않는다.
+- 쿠팡 추적 동작을 바꿀 때는 Node 테스트를 추가하거나 갱신한다. 최소 검증은 `blog/assets/blog.js`에 `coupang_click`이 있고, 대상 글에 의미 있는 `data-coupang-link`와 placement가 있는지 확인하는 것이다.
+- 쿠팡 파트너스 수수료 문구는 상품 카드 또는 광고 카드 아래에 작고 회색으로 둔다. 모바일 첫 화면을 수수료 문구가 지배하지 않게 한다.
+
 ### Publishing Cadence
 
 - 자동화 목표는 하루 2~3개까지 가능하지만, 무검수 대량 발행은 금지한다.

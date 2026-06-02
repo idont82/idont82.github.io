@@ -1586,17 +1586,18 @@ renderCollection();
 const creditTxt = document.getElementById('creditTxt');
 const timeTxt = document.getElementById('timeTxt');
 const scoreTxt = document.getElementById('scoreTxt');
+const coinStatus = document.getElementById('coinStatus');
 const msgOverlay = document.getElementById('msgOverlay');
 const joyStick = document.getElementById('joyStick');
 let adFooterFlyCleanup = null;
 const FOOTER_TRIPLE_BANNERS_HTML = `
-  <a href="https://link.coupang.com/a/ek4gDo" target="_blank" referrerpolicy="unsafe-url" class="q-banner">
+  <a href="https://link.coupang.com/a/ek4gDo" target="_blank" referrerpolicy="unsafe-url" class="q-banner" data-coupang-link data-coupang-placement="game_coin" data-coupang-product-type="mini_claw">
     <img src="https://image1.coupangcdn.com/image/affiliate/banner/e862e13c7284f83115bf1e796a0c81f8@2x.jpg" alt="미니 인형뽑기">
   </a>
-  <a href="https://link.coupang.com/a/ek4rgW" target="_blank" referrerpolicy="unsafe-url" class="q-banner">
+  <a href="https://link.coupang.com/a/ek4rgW" target="_blank" referrerpolicy="unsafe-url" class="q-banner" data-coupang-link data-coupang-placement="game_coin" data-coupang-product-type="mini_claw">
     <img src="https://image13.coupangcdn.com/image/affiliate/banner/a5ea46c9cfa6c620061e5de6d74733cf@2x.jpg" alt="캐치핑 인형뽑기">
   </a>
-  <a href="https://link.coupang.com/a/ek6ZFc" target="_blank" referrerpolicy="unsafe-url" class="q-banner">
+  <a href="https://link.coupang.com/a/ek6ZFc" target="_blank" referrerpolicy="unsafe-url" class="q-banner" data-coupang-link data-coupang-placement="game_coin" data-coupang-product-type="mini_claw">
     <img src="https://image13.coupangcdn.com/image/affiliate/banner/6ec5c3d390e8b7a962b8b7cc32f7390e@2x.jpg" alt="유니콘 인형뽑기">
   </a>
 `;
@@ -1733,6 +1734,17 @@ function insertCoin(){
   if(state !== State.IDLE) return;
   credits += 3;
   updateUI();
+  if(coinStatus){
+    coinStatus.textContent = '+3 CREDIT 충전됨 · 아래 추천도 확인';
+    coinStatus.classList.remove('coin-status-active');
+    void coinStatus.offsetWidth;
+    coinStatus.classList.add('coin-status-active');
+  }
+  if(coinBtn){
+    coinBtn.classList.remove('coin-charged');
+    void coinBtn.offsetWidth;
+    coinBtn.classList.add('coin-charged');
+  }
   showMessage('💰 '+nn()+'~ 코인 충전했어!', 1500);
 
   // Coupang Banner logic

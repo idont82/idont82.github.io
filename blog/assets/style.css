@@ -639,6 +639,82 @@ body.blog-article-page{
   line-height:1.65;
 }
 
+.mobile-conversion-card{
+  display:grid;
+  grid-template-columns:92px 1fr;
+  gap:14px;
+  margin:18px 0 0;
+  padding:14px;
+  border:1px solid rgba(214,154,0,0.28);
+  border-radius:22px;
+  background:linear-gradient(135deg, #fffaf0, #fff);
+  box-shadow:0 14px 30px rgba(15,23,42,0.07);
+}
+
+.mobile-conversion-card__image{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:92px;
+  border-radius:18px;
+  background:#fff;
+  overflow:hidden;
+  border:1px solid #f2dfb6;
+}
+
+.mobile-conversion-card__image img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.mobile-conversion-card__body{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  min-width:0;
+}
+
+.mobile-conversion-card__eyebrow{
+  color:#b77900;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:-0.01em;
+}
+
+.mobile-conversion-card__body strong{
+  color:#111827;
+  font-size:16px;
+  line-height:1.35;
+}
+
+.mobile-conversion-card__body p{
+  margin:0;
+  color:#64748b;
+  font-size:13px;
+  line-height:1.55;
+}
+
+.mobile-conversion-card__button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:4px;
+  padding:11px 14px;
+  border-radius:999px;
+  background:linear-gradient(135deg, #d99a00, #f59e0b);
+  color:#fff;
+  font-size:14px;
+  font-weight:900;
+  text-decoration:none;
+  box-shadow:0 10px 22px rgba(217,154,0,0.25);
+}
+
+.mobile-conversion-card__button:hover{
+  color:#fff;
+  filter:brightness(1.04);
+}
+
 .article-hero{
   margin:24px 0 0;
   overflow:hidden;
@@ -1507,6 +1583,26 @@ body.blog-article-page{
     font-size:14px;
     line-height:1.75;
     overflow-wrap:anywhere;
+  }
+
+  .mobile-conversion-card{
+    grid-template-columns:82px 1fr;
+    margin-top:14px;
+    padding:12px;
+    border-radius:20px;
+  }
+
+  .mobile-conversion-card__image{
+    min-height:82px;
+    border-radius:16px;
+  }
+
+  .mobile-conversion-card__body strong{
+    font-size:15px;
+  }
+
+  .mobile-conversion-card__button{
+    width:100%;
   }
 
   .article-route-copy{

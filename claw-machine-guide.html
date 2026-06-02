@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
   <!-- Google Tag Manager -->
@@ -992,6 +992,7 @@ html[data-theme="light"] .loading::after{
   border-top-color:#c66d31;
 }
 </style>
+<script defer src="/assets/coupang-tracking.js"></script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -1101,13 +1102,13 @@ async function loadDetail(id){
 function renderCoupangListCard(item){
   return `
     <div class="area-card coupang-card" style="cursor:default; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:14px 12px; text-align:center; gap:10px;">
-      <a href="${item.link}" target="_blank" referrerpolicy="unsafe-url" style="display:block; text-decoration:none;">
+      <a href="${item.link}" target="_blank" referrerpolicy="unsafe-url" data-coupang-link data-coupang-placement="${item.placement || 'guide_area_middle'}" data-coupang-product-type="${item.productType || 'mini_claw'}" style="display:block; text-decoration:none;">
         <img src="${item.image}" alt="${item.alt}" width="140" height="140" style="width:140px; height:140px; object-fit:cover; border-radius:18px; box-shadow:0 10px 24px rgba(0,0,0,0.22);">
       </a>
       <div style="font-size:18px; font-weight:800; color:var(--text); line-height:1.35;">${item.title}</div>
       <div style="font-size:13px; color:var(--muted-2); line-height:1.55;">${item.body}</div>
       <div style="font-size:14px; font-weight:800; color:#ffbe47; line-height:1.4;">${item.price}</div>
-      <a href="${item.link}" target="_blank" referrerpolicy="unsafe-url" style="display:inline-flex; align-items:center; justify-content:center; min-width:138px; padding:10px 18px; border-radius:999px; background:linear-gradient(135deg,#ffcf5b,#f59e0b); color:#2b1700; text-decoration:none; font-size:14px; font-weight:800; box-shadow:0 10px 24px rgba(245,158,11,0.25);">
+      <a href="${item.link}" target="_blank" referrerpolicy="unsafe-url" data-coupang-link data-coupang-placement="${item.placement || 'guide_area_middle'}" data-coupang-product-type="${item.productType || 'mini_claw'}" style="display:inline-flex; align-items:center; justify-content:center; min-width:138px; padding:10px 18px; border-radius:999px; background:linear-gradient(135deg,#ffcf5b,#f59e0b); color:#2b1700; text-decoration:none; font-size:14px; font-weight:800; box-shadow:0 10px 24px rgba(245,158,11,0.25);">
         ${item.cta}
       </a>
       <div style="font-size:11px; color:#6b7280; line-height:1.45;">
@@ -1119,13 +1120,13 @@ function renderCoupangListCard(item){
 function renderCoupangDetailBanner(item){
   return `
     <div class="detail-ad-banner">
-      <a href="${item.link}" target="_blank" referrerpolicy="unsafe-url">
+      <a href="${item.link}" target="_blank" referrerpolicy="unsafe-url" data-coupang-link data-coupang-placement="${item.placement || 'guide_detail_top'}" data-coupang-product-type="${item.productType || 'mini_claw'}">
         <img src="${item.image}" alt="${item.alt}" width="140" height="140" style="width:140px; height:140px; object-fit:cover;">
       </a>
       <div style="margin-top:14px; font-size:18px; font-weight:800; color:var(--text); line-height:1.35;">${item.title}</div>
       <div style="margin-top:8px; font-size:14px; color:var(--muted-2); line-height:1.6;">${item.body}</div>
       <div style="margin-top:8px; font-size:14px; font-weight:800; color:#ffbe47; line-height:1.4;">${item.price}</div>
-      <a href="${item.link}" target="_blank" referrerpolicy="unsafe-url" style="display:inline-flex; align-items:center; justify-content:center; margin-top:12px; min-width:150px; padding:10px 18px; border-radius:999px; background:linear-gradient(135deg,#ffcf5b,#f59e0b); color:#2b1700; text-decoration:none; font-size:14px; font-weight:800; box-shadow:0 10px 24px rgba(245,158,11,0.22);">
+      <a href="${item.link}" target="_blank" referrerpolicy="unsafe-url" data-coupang-link data-coupang-placement="${item.placement || 'guide_detail_top'}" data-coupang-product-type="${item.productType || 'mini_claw'}" style="display:inline-flex; align-items:center; justify-content:center; margin-top:12px; min-width:150px; padding:10px 18px; border-radius:999px; background:linear-gradient(135deg,#ffcf5b,#f59e0b); color:#2b1700; text-decoration:none; font-size:14px; font-weight:800; box-shadow:0 10px 24px rgba(245,158,11,0.22);">
         ${item.cta}
       </a>
       <div class="detail-ad-label">쿠팡 파트너스 활동의 일환으로 일정액의 수수료를 제공받을 수 있습니다</div>
