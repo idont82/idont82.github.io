@@ -37,12 +37,19 @@ async function initAreaMap(areaId, containerId) {
     }
     const data = await response.json();
     const spots = (data.spots || []).filter((spot) => typeof spot.lat === 'number' && typeof spot.lng === 'number');
-    const stationPoints = areaId === 'hongdae'
-      ? [
-          { name: '홍대입구역', lat: 37.557192, lng: 126.92449, className: 'blog-station-marker blog-station-marker--green', emoji: '🚉' },
-          { name: '상수역', lat: 37.547716, lng: 126.922852, className: 'blog-station-marker blog-station-marker--brown', emoji: '🚉' }
-        ]
-      : [];
+    const stationPoints = {
+      hongdae: [
+        { name: '홍대입구역', lat: 37.557192, lng: 126.92449, className: 'blog-station-marker blog-station-marker--green', emoji: '🚇' },
+        { name: '상수역', lat: 37.547716, lng: 126.922852, className: 'blog-station-marker blog-station-marker--brown', emoji: '🚇' }
+      ],
+      yeonsinnae: [
+        { name: '연신내역 6번 출구', lat: 37.619001, lng: 126.920766, className: 'blog-station-marker blog-station-marker--green', emoji: '🚇' }
+      ],
+      jongro: [
+        { name: '종로3가역 4번 출구', lat: 37.571654, lng: 126.991004, className: 'blog-station-marker blog-station-marker--brown', emoji: '🚇' },
+        { name: '종각역 4번 출구', lat: 37.570368, lng: 126.985291, className: 'blog-station-marker blog-station-marker--green', emoji: '🚇' }
+      ]
+    }[areaId] || [];
     if (!spots.length) {
       container.innerHTML = '<div class="article-map-loading">표시할 좌표가 없습니다.</div>';
       return;
@@ -77,7 +84,7 @@ async function initAreaMap(areaId, containerId) {
       const marker = L.marker([spot.lat, spot.lng], {
         icon: L.divIcon({
           className: 'blog-spot-marker',
-          html: '<span class="blog-spot-marker-dot">📍</span>',
+          html: '<span class="blog-spot-marker-dot" aria-hidden="true"></span>',
           iconSize: [20, 20],
           iconAnchor: [10, 10]
         })

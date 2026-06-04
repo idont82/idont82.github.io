@@ -724,5 +724,21 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://idont82.github.io/blog/yeonsinnae-claw-tour.html</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://idont82.github.io/blog/jongro-claw-tour.html</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://idont82.github.io/blog/images/jongro/20260603_160246.jpg</image:loc>
+      <image:title>종각 종로 인형뽑기 코스 대표 사진</image:title>
+    </image:image>
+  </url>
 </urlset>
 

@@ -44,3 +44,32 @@ for (const file of [
     assert.match(html, /미니 인형뽑기 가격 보기/);
   });
 }
+
+test('jongro claw tour blog page is SEO discoverable and map based', () => {
+  const html = read('blog/jongro-claw-tour.html');
+  const index = read('blog/index.html');
+  const sitemap = read('sitemap.xml');
+
+  assert.match(html, /<html lang="ko">/);
+  assert.match(html, /종각\/종로 인형뽑기/);
+  assert.match(html, /data-area-map="jongro"/);
+  assert.match(html, /BlogPosting/);
+  assert.match(html, /data-coupang-placement="mobile_summary_card"/);
+  assert.match(html, /data-coupang-product-type="mini_claw"/);
+  assert.match(html, /쿠팡 파트너스 활동/);
+  assert.match(html, /와쿠와쿠 종각점/);
+  assert.match(html, /20260603_143336\.jpg/);
+  assert.doesNotMatch(html, /사용자 촬영 기준/);
+  assert.doesNotMatch(html, /GPS는 주변 매장/);
+  assert.match(html, /2층까지/);
+  assert.match(html, /모모스테이션 종각점은 2층까지/);
+  assert.match(html, /2층은 주로 가챠/);
+
+  const cactiSection = html.match(/<h3>7\. 캑티 가챠샵 종각점[\s\S]*?<\/section>/)?.[0] || '';
+  const wakuwakuSection = html.match(/<h3>8\. 와쿠와쿠 종각점[\s\S]*?<\/section>/)?.[0] || '';
+  assert.ok((cactiSection.match(/article-photo-card/g) || []).length >= 4, 'cacti section should show at least 4 photos');
+  assert.ok((wakuwakuSection.match(/article-photo-card/g) || []).length >= 4, 'wakuwaku section should show at least 4 photos');
+
+  assert.ok(index.includes('/blog/jongro-claw-tour.html'), 'blog index should link jongro article');
+  assert.ok(sitemap.includes('https://idont82.github.io/blog/jongro-claw-tour.html'), 'sitemap should include jongro article');
+});
