@@ -47,7 +47,7 @@ for (const file of [
 
 test('jongro claw tour blog page is SEO discoverable and map based', () => {
   const html = read('blog/jongro-claw-tour.html');
-  const index = read('blog/index.html');
+  const index = read('index.html');
   const sitemap = read('sitemap.xml');
 
   assert.match(html, /<html lang="ko">/);
@@ -70,6 +70,6 @@ test('jongro claw tour blog page is SEO discoverable and map based', () => {
   assert.ok((cactiSection.match(/article-photo-card/g) || []).length >= 4, 'cacti section should show at least 4 photos');
   assert.ok((wakuwakuSection.match(/article-photo-card/g) || []).length >= 4, 'wakuwaku section should show at least 4 photos');
 
-  assert.ok(index.includes('/blog/jongro-claw-tour.html'), 'blog index should link jongro article');
+  assert.ok(index.includes('/blog/jongro-claw-tour.html'), 'root blog home should link jongro article');
   assert.ok(sitemap.includes('https://idont82.github.io/blog/jongro-claw-tour.html'), 'sitemap should include jongro article');
 });

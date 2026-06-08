@@ -168,6 +168,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  document.querySelectorAll('[data-toggle-recent-posts]').forEach((button) => {
+    const recentList = button.previousElementSibling;
+    if (!recentList?.matches('[data-recent-post-list]')) {
+      return;
+    }
+    const extraLinks = Array.from(recentList.querySelectorAll('.blog-recent-extra'));
+    button.addEventListener('click', () => {
+      const nextOpen = button.getAttribute('aria-expanded') !== 'true';
+      extraLinks.forEach((link) => {
+        link.hidden = !nextOpen;
+      });
+      button.setAttribute('aria-expanded', nextOpen ? 'true' : 'false');
+      button.textContent = nextOpen ? '최근 글 접기' : '최근 글 더 보기';
+    });
+  });
+
   document.querySelectorAll('[data-toggle-mobile-nav]').forEach((button) => {
     const drawerId = button.getAttribute('aria-controls');
     const drawer = drawerId ? document.getElementById(drawerId) : null;

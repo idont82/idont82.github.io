@@ -17,6 +17,8 @@ test('sitemap is clean XML with key blog URLs', () => {
   assert.doesNotMatch(sitemap, /<!--/);
   assert.doesNotMatch(sitemap, /\.worktrees\//);
   assert.ok(locs.length > 100);
+  assert.ok(locs.includes('https://idont82.github.io/'));
+  assert.ok(!locs.includes('https://idont82.github.io/blog/'));
   assert.ok(locs.includes('https://idont82.github.io/blog/seoul-claw-machine-guide.html'));
   assert.ok(locs.includes('https://idont82.github.io/blog/hongdae-claw-tour.html'));
   assert.ok(locs.includes('https://idont82.github.io/blog/jongro-claw-tour.html'));

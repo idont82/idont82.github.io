@@ -31,7 +31,7 @@ test('home-shopping blog pages expose SEO metadata and Coupang CTAs', () => {
 });
 
 test('home-shopping blog pages are discoverable from index and sitemap', () => {
-  const index = fs.readFileSync('blog/index.html', 'utf8');
+  const index = fs.readFileSync('index.html', 'utf8');
   const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
 
   for (const page of pages) {
