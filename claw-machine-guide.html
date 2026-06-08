@@ -1351,6 +1351,15 @@ function showRandomAdPopup(){
 }
 
 function handleAreaCardClick(areaId){
+  const blogAreaLinks = {
+    hongdae: '/blog/hongdae-claw-tour.html',
+    jongro: '/blog/jongro-claw-tour.html',
+    yeonsinnae: '/blog/yeonsinnae-claw-tour.html'
+  };
+  if(blogAreaLinks[areaId]){
+    window.location.href = blogAreaLinks[areaId];
+    return;
+  }
   pendingAreaId = areaId;
   location.hash = areaId;
 }

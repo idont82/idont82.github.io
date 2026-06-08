@@ -67,3 +67,12 @@ test('claw game and guide Coupang links expose useful placement metadata', () =>
   assert.match(gameJs, /data-coupang-placement="game_coin"/);
   assert.match(guideHtml, /data-coupang-placement="\$\{item\.placement \|\| 'guide_area_middle'\}"/);
 });
+
+test('claw guide sends blog-backed areas to blog articles', () => {
+  const guideHtml = fs.readFileSync(path.join(root, 'claw-machine-guide.html'), 'utf8');
+
+  assert.match(guideHtml, /hongdae:\s*'\/blog\/hongdae-claw-tour\.html'/);
+  assert.match(guideHtml, /jongro:\s*'\/blog\/jongro-claw-tour\.html'/);
+  assert.match(guideHtml, /yeonsinnae:\s*'\/blog\/yeonsinnae-claw-tour\.html'/);
+  assert.match(guideHtml, /window\.location\.href\s*=\s*blogAreaLinks\[areaId\]/);
+});
