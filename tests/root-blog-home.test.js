@@ -46,9 +46,23 @@ test('root blog home keeps recent posts compact with an expand control', () => {
 
   assert.ok(recentMatch, 'recent post list should exist');
   assert.match(recentMatch[0], /data-recent-post-list/);
-  assert.match(recentMatch[0], /class="blog-recent-extra"/);
+  assert.match(recentMatch[0], /id="blogRecentPostList"/);
+  assert.doesNotMatch(recentMatch[0], /<a\b/);
   assert.match(html, /data-toggle-recent-posts/);
   assert.match(html, /aria-expanded="false"/);
+  assert.match(html, /aria-controls="blogRecentPostList"/);
+  assert.match(html, />최근 글 더 보기<\/button>/);
+});
+
+test('blog script builds recent posts from visible blog cards', () => {
+  const js = fs.readFileSync('blog/assets/blog.js', 'utf8');
+
+  assert.match(js, /querySelectorAll\('\.blog-card-link'\)/);
+  assert.match(js, /recentPostLimit/);
+  assert.match(js, /function renderRecentPosts/);
+  assert.match(js, /recentLinks\.slice\(0, count\)/);
+  assert.match(js, /recentList\.recentPostExpanded/);
+  assert.doesNotMatch(js, /jquery|jQuery/);
 });
 
 test('root blog home promotes the full Seoul claw machine guide in the right sidebar', () => {

@@ -56,6 +56,8 @@ test('jongro claw tour blog page is SEO discoverable and map based', () => {
   assert.match(html, /BlogPosting/);
   assert.match(html, /data-coupang-placement="mobile_summary_card"/);
   assert.match(html, /data-coupang-product-type="mini_claw"/);
+  assert.match(html, /<aside class="blog-sidebar blog-sidebar-right">/);
+  assert.match(html, /추천 배너/);
   assert.match(html, /쿠팡 파트너스 활동/);
   assert.match(html, /와쿠와쿠 종각점/);
   assert.match(html, /20260603_143336\.jpg/);

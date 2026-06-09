@@ -139,8 +139,64 @@ function trackCoupangClick(link) {
   }
 }
 
+function initRecentPosts() {
+  const recentList = document.querySelector('[data-recent-post-list]');
+  if (!recentList) {
+    return;
+  }
+
+  const limit = Number.parseInt(recentList.dataset.recentPostLimit || '5', 10);
+  const toggleButton = document.querySelector(`[data-toggle-recent-posts][aria-controls="${recentList.id}"]`);
+  const cardLinks = Array.from(document.querySelectorAll('.blog-card-link'));
+  const seenHrefs = new Set();
+  const recentLinks = cardLinks
+    .map((cardLink) => {
+      const href = cardLink.getAttribute('href');
+      const title = cardLink.querySelector('h3')?.textContent?.trim();
+      const label = cardLink.querySelector('.blog-card-meta')?.textContent?.split('·')?.[0]?.trim() || '글';
+      if (!href || !title || seenHrefs.has(href)) {
+        return null;
+      }
+      seenHrefs.add(href);
+      return { href, title, label };
+    })
+    .filter(Boolean);
+
+  function renderRecentPosts(count) {
+    recentList.innerHTML = '';
+    recentLinks.slice(0, count).forEach((item) => {
+      const link = document.createElement('a');
+      link.href = item.href;
+      link.dataset.blogPath = item.href;
+      link.textContent = item.title;
+
+      const label = document.createElement('span');
+      label.textContent = item.label;
+      link.appendChild(label);
+      recentList.appendChild(link);
+    });
+  }
+
+  recentList.recentPostExpanded = false;
+  renderRecentPosts(limit);
+
+  if (!toggleButton) {
+    return;
+  }
+
+  toggleButton.hidden = recentLinks.length <= limit;
+  toggleButton.addEventListener('click', () => {
+    recentList.recentPostExpanded = !recentList.recentPostExpanded;
+    renderRecentPosts(recentList.recentPostExpanded ? recentLinks.length : limit);
+    toggleButton.setAttribute('aria-expanded', recentList.recentPostExpanded ? 'true' : 'false');
+    toggleButton.textContent = recentList.recentPostExpanded ? '최근 글 접기' : '최근 글 더 보기';
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.documentElement.classList.add('blog-ready');
+
+  initRecentPosts();
 
   let currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
   if (currentPath === '/blog') {
@@ -165,22 +221,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const shouldShow = selectedCategory === 'all' || categories.includes(selectedCategory);
         card.classList.toggle('is-filter-hidden', !shouldShow);
       });
-    });
-  });
-
-  document.querySelectorAll('[data-toggle-recent-posts]').forEach((button) => {
-    const recentList = button.previousElementSibling;
-    if (!recentList?.matches('[data-recent-post-list]')) {
-      return;
-    }
-    const extraLinks = Array.from(recentList.querySelectorAll('.blog-recent-extra'));
-    button.addEventListener('click', () => {
-      const nextOpen = button.getAttribute('aria-expanded') !== 'true';
-      extraLinks.forEach((link) => {
-        link.hidden = !nextOpen;
-      });
-      button.setAttribute('aria-expanded', nextOpen ? 'true' : 'false');
-      button.textContent = nextOpen ? '최근 글 접기' : '최근 글 더 보기';
     });
   });
 
