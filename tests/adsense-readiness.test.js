@@ -39,13 +39,13 @@ test('privacy policy discloses Google advertising cookies and opt-out path', () 
   assert.match(html, /adssettings\.google\.com/);
 });
 
-test('root blog home links to required trust pages and AdSense preparation article', () => {
+test('root blog home links to required trust pages without exposing the AdSense checklist card', () => {
   const html = fs.readFileSync('index.html', 'utf8');
 
   assert.match(html, /href="\/privacy-policy\.html"/);
   assert.match(html, /href="\/terms\.html"/);
   assert.match(html, /href="\/contact\.html"/);
-  assert.match(html, /href="\/blog\/adsense-approval-checklist-2026\.html"/);
+  assert.doesNotMatch(html, /href="\/blog\/adsense-approval-checklist-2026\.html"/);
 });
 
 test('AdSense preparation article is discoverable and uses official references', () => {
