@@ -46,6 +46,15 @@ test('world cup match blog pages expose schedule, SEO metadata, and ads', () => 
     assert.match(html, /FIFA 랭킹/);
     assert.match(html, /월드컵 본선/);
     assert.match(html, /article-source-note/);
+    assert.match(html, /2026 월드컵 달라진 규정/);
+    assert.match(html, /48개국·104경기/);
+    assert.match(html, /12개 조/);
+    assert.match(html, /32강 토너먼트/);
+    assert.match(html, /스로인·골킥 5초/);
+    assert.match(html, /교체 10초 제한/);
+    assert.match(html, /골키퍼 8초 초과 시 코너킥/);
+    assert.match(html, /IFAB 경기 규칙 변경/);
+    assert.doesNotMatch(html, /입 가림 퇴장/);
     for (const fact of page.facts) {
       assert.match(html, new RegExp(fact));
     }
