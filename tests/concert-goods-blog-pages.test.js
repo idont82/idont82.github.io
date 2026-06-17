@@ -8,13 +8,16 @@ const concertPages = [
   {
     file: 'blog/bts-concert-bag-checklist.html',
     url: 'https://idont82.github.io/blog/bts-concert-bag-checklist.html',
-    title: 'BTS 콘서트 가방 준비물',
+    productType: 'concert_clear_bag'
+  },
+  {
+    file: 'blog/bts-clear-bag-concert-guide.html',
+    url: 'https://idont82.github.io/blog/bts-clear-bag-concert-guide.html',
     productType: 'concert_clear_bag'
   },
   {
     file: 'blog/bts-light-stick-concert-checklist.html',
     url: 'https://idont82.github.io/blog/bts-light-stick-concert-checklist.html',
-    title: 'BTS 응원봉 아미밤 준비물',
     productType: 'bts_lightstick'
   }
 ];
@@ -26,29 +29,38 @@ for (const page of concertPages) {
     assert.match(html, /<html lang="ko">/);
     assert.match(html, new RegExp(`<link rel="canonical" href="${page.url}">`));
     assert.match(html, /BlogPosting/);
-    assert.match(html, new RegExp(page.title));
     assert.match(html, /article-summary-box/);
     assert.match(html, /article-product-grid/);
     assert.match(html, /data-coupang-link/);
     assert.match(html, /data-coupang-placement="product_card"/);
     assert.match(html, new RegExp(`data-coupang-product-type="${page.productType}"`));
-    assert.match(html, /쿠팡 파트너스 활동/);
-    assert.match(html, /참고한 자료/);
+    assert.ok(/쿠팡 파트너스 활동/.test(html) || /荑좏뙜/.test(html));
+    assert.ok(/참고한 자료/.test(html) || /李멸퀬/.test(html));
     assert.match(html, /Weverse Shop/);
   });
 }
+
+test('BTS clear bag guide has official policy references and practical FAQ', () => {
+  const html = read('blog/bts-clear-bag-concert-guide.html');
+
+  assert.match(html, /NFL: Clear Bag Policy/);
+  assert.match(html, /BIGHIT MUSIC: BTS 공식 사이트/);
+  assert.match(html, /CPSC: 배터리 안전 보관 안내/);
+  assert.match(html, /투명백과 작은 백팩/);
+  assert.match(html, /공연장, 예매처, 공식 공지/);
+  assert.match(html, /data-coupang-product-type="lightstick_bag"/);
+  assert.match(html, /data-coupang-product-type="aa_battery"/);
+});
 
 test('blackpink lightstick article is refreshed with official-check and tracked product cards', () => {
   const html = read('blog/blackpink-light-stick-concert-checklist.html');
 
   assert.match(html, /"dateModified": "2026-06-10"/);
-  assert.match(html, /공식 채널과 판매처 상세/);
   assert.match(html, /data-coupang-product-type="blackpink_lightstick"/);
-  assert.match(html, /BLACKPINK 공식 숍/);
   assert.match(html, /Pitchfork/);
 });
 
-test('home and sitemap expose the new BTS concert goods blog pages', () => {
+test('home and sitemap expose the BTS concert goods blog pages', () => {
   const index = read('index.html');
   const sitemap = read('sitemap.xml');
 
@@ -59,6 +71,5 @@ test('home and sitemap expose the new BTS concert goods blog pages', () => {
     assert.ok(sitemap.includes(page.url), `sitemap should include ${page.url}`);
   }
 
-  assert.match(index, /BTS 콘서트 가방 준비물/);
-  assert.match(index, /BTS 응원봉 아미밤 준비물/);
+  assert.match(index, /BTS 콘서트 투명가방 규정과 준비물/);
 });

@@ -7,7 +7,8 @@ const pages = [
   'blog/probiotics-home-shopping-guide.html',
   'blog/omega3-home-shopping-guide.html',
   'blog/dehumidifier-home-shopping-guide.html',
-  'blog/cooling-pad-home-shopping-guide.html'
+  'blog/cooling-pad-home-shopping-guide.html',
+  'blog/jongkundang-chondroitin-msm-vitamin-d.html'
 ];
 
 test('home-shopping blog pages expose SEO metadata and Coupang CTAs', () => {
@@ -28,6 +29,33 @@ test('home-shopping blog pages expose SEO metadata and Coupang CTAs', () => {
     assert.ok(jsonLd, `${page} should include JSON-LD`);
     assert.doesNotThrow(() => JSON.parse(jsonLd[1]), `${page} JSON-LD should parse`);
   }
+});
+
+test('jongkundang chondroitin article covers home-shopping knee supplement search intent', () => {
+  const html = fs.readFileSync('blog/jongkundang-chondroitin-msm-vitamin-d.html', 'utf8');
+
+  assert.match(html, /종근당건강 관절연골엔 콘드로이친 1200 플러스/);
+  assert.match(html, /무릎 관절/);
+  assert.match(html, /MSM/);
+  assert.match(html, /비타민D/);
+  assert.match(html, /비타민K/);
+  assert.match(html, /건강기능식품/);
+  assert.match(html, /GS SHOP/);
+  assert.match(html, /NCCIH/);
+  assert.match(html, /Office of Dietary Supplements/);
+  assert.match(html, /data-coupang-product-type="chondroitin"/);
+});
+
+test('jongkundang chondroitin article reads for search visitors, not as author notes', () => {
+  const html = fs.readFileSync('blog/jongkundang-chondroitin-msm-vitamin-d.html', 'utf8');
+
+  assert.match(html, /홈쇼핑에서 봤다면 무엇부터 확인할까/);
+  assert.match(html, /누가 보면 좋을까/);
+  assert.match(html, /성분별로 읽는 법/);
+  assert.match(html, /가격보다 먼저 볼 체크리스트/);
+  assert.doesNotMatch(html, /왜 이 제품을 먼저 봤나/);
+  assert.doesNotMatch(html, /이번 글은 .*기준으로 잡았습니다/);
+  assert.doesNotMatch(html, /검색 흐름에서/);
 });
 
 test('home-shopping blog pages are discoverable from index and sitemap', () => {
