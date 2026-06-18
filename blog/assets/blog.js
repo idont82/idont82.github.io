@@ -139,6 +139,38 @@ function trackCoupangClick(link) {
   }
 }
 
+function initSortedBlogCards() {
+  const feed = document.querySelector('.blog-card-list');
+  if (!feed) {
+    return;
+  }
+
+  const cards = Array.from(feed.querySelectorAll(':scope > .blog-card'));
+  if (cards.length < 2) {
+    return;
+  }
+
+  const datedCards = cards.map((card, index) => {
+    const metaText = card.querySelector('.blog-card-meta')?.textContent || '';
+    const dateMatch = metaText.match(/(\d{4})\.(\d{2})\.(\d{2})/);
+    const timestamp = dateMatch
+      ? Date.UTC(Number(dateMatch[1]), Number(dateMatch[2]) - 1, Number(dateMatch[3]))
+      : 0;
+    return { card, index, timestamp };
+  });
+
+  datedCards
+    .sort((a, b) => {
+      if (b.timestamp !== a.timestamp) {
+        return b.timestamp - a.timestamp;
+      }
+      return a.index - b.index;
+    })
+    .forEach((item) => {
+      feed.appendChild(item.card);
+    });
+}
+
 function initRecentPosts() {
   const recentList = document.querySelector('[data-recent-post-list]');
   if (!recentList) {
@@ -196,6 +228,7 @@ function initRecentPosts() {
 document.addEventListener('DOMContentLoaded', () => {
   document.documentElement.classList.add('blog-ready');
 
+  initSortedBlogCards();
   initRecentPosts();
 
   let currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
