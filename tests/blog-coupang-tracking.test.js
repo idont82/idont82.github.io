@@ -27,6 +27,42 @@ test('chondroitin article has a mobile-first Coupang CTA after the summary', () 
   assert.match(html, /현재 가격 확인하기/);
 });
 
+test('water size guide has tracked product links and is discoverable', () => {
+  const html = read('blog/water-500ml-vs-2l-guide.html');
+  const index = read('index.html');
+  const sitemap = read('sitemap.xml');
+  const summaryIndex = html.indexOf('article-summary-box');
+  const mobileCtaIndex = html.indexOf('mobile-conversion-card');
+
+  assert.ok(summaryIndex > -1, 'summary box should exist');
+  assert.ok(mobileCtaIndex > summaryIndex, 'mobile CTA should appear after the summary');
+  assert.match(html, /자취생 생수 500ml vs 2L/);
+  assert.match(html, /data-coupang-placement="mobile_summary_card"/);
+  assert.match(html, /data-coupang-placement="product_card"/);
+  assert.match(html, /data-coupang-product-type="bottled_water"/);
+  assert.match(html, /쿠팡 파트너스 활동/);
+  assert.ok(index.includes('/blog/water-500ml-vs-2l-guide.html'), 'root blog home should link water guide');
+  assert.ok(sitemap.includes('https://idont82.github.io/blog/water-500ml-vs-2l-guide.html'), 'sitemap should include water guide');
+});
+
+test('instant rice size guide has tracked product links and is discoverable', () => {
+  const html = read('blog/instant-rice-210g-vs-130g-guide.html');
+  const index = read('index.html');
+  const sitemap = read('sitemap.xml');
+  const summaryIndex = html.indexOf('article-summary-box');
+  const mobileCtaIndex = html.indexOf('mobile-conversion-card');
+
+  assert.ok(summaryIndex > -1, 'summary box should exist');
+  assert.ok(mobileCtaIndex > summaryIndex, 'mobile CTA should appear after the summary');
+  assert.match(html, /즉석밥 210g vs 130g/);
+  assert.match(html, /data-coupang-placement="mobile_summary_card"/);
+  assert.match(html, /data-coupang-placement="product_card"/);
+  assert.match(html, /data-coupang-product-type="instant_rice"/);
+  assert.match(html, /쿠팡 파트너스 활동/);
+  assert.ok(index.includes('/blog/instant-rice-210g-vs-130g-guide.html'), 'root blog home should link instant rice guide');
+  assert.ok(sitemap.includes('https://idont82.github.io/blog/instant-rice-210g-vs-130g-guide.html'), 'sitemap should include instant rice guide');
+});
+
 for (const file of [
   'blog/seoul-claw-machine-guide.html',
   'blog/hongdae-claw-tour.html'
