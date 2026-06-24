@@ -2,6 +2,12 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const test = require('node:test');
 
+test('local server serves svg images with the correct content type', () => {
+  const js = fs.readFileSync('server.js', 'utf8');
+
+  assert.match(js, /'\.svg': 'image\/svg\+xml'/);
+});
+
 test('root index is the canonical blog home', () => {
   const html = fs.readFileSync('index.html', 'utf8');
 

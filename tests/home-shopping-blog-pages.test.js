@@ -3,12 +3,35 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 
 const pages = [
+  'blog/magnesium-supplement-home-shopping-guide.html',
+  'blog/daily-nuts-home-shopping-guide.html',
+  'blog/manuka-honey-home-shopping-guide.html',
+  'blog/red-ginseng-stick-home-shopping-guide.html',
+  'blog/vitamin-b-fatigue-home-shopping-guide.html',
+  'blog/lactofit-probiotics-home-shopping-guide.html',
+  'blog/collagen-retinol-home-shopping-guide.html',
+  'blog/black-goat-extract-home-shopping-guide.html',
+  'blog/glutathione-film-home-shopping-guide.html',
+  'blog/bnr17-diet-probiotics-home-shopping-guide.html',
   'blog/lutein-omega3-home-shopping-guide.html',
   'blog/probiotics-home-shopping-guide.html',
   'blog/omega3-home-shopping-guide.html',
   'blog/dehumidifier-home-shopping-guide.html',
   'blog/cooling-pad-home-shopping-guide.html',
   'blog/jongkundang-chondroitin-msm-vitamin-d.html'
+];
+
+const healthTvPages = [
+  'blog/magnesium-supplement-home-shopping-guide.html',
+  'blog/daily-nuts-home-shopping-guide.html',
+  'blog/manuka-honey-home-shopping-guide.html',
+  'blog/red-ginseng-stick-home-shopping-guide.html',
+  'blog/vitamin-b-fatigue-home-shopping-guide.html',
+  'blog/lactofit-probiotics-home-shopping-guide.html',
+  'blog/collagen-retinol-home-shopping-guide.html',
+  'blog/black-goat-extract-home-shopping-guide.html',
+  'blog/glutathione-film-home-shopping-guide.html',
+  'blog/bnr17-diet-probiotics-home-shopping-guide.html'
 ];
 
 test('home-shopping blog pages expose SEO metadata and Coupang CTAs', () => {
@@ -65,5 +88,18 @@ test('home-shopping blog pages are discoverable from index and sitemap', () => {
   for (const page of pages) {
     assert.ok(index.includes(`/${page}`), `blog index should link ${page}`);
     assert.ok(sitemap.includes(`https://idont82.github.io/${page}`), `sitemap should include ${page}`);
+  }
+});
+
+test('health TV guide pages use the standard ad placements', () => {
+  for (const page of healthTvPages) {
+    const html = fs.readFileSync(page, 'utf8');
+
+    assert.match(html, /class="mobile-top-ad" data-mobile-top-ad/, `${page} should have the mobile top ad`);
+    assert.match(html, /widgets\.html\?id=992213/, `${page} should have the 380x50 mobile ad iframe`);
+    assert.match(html, /article-ad article-ad-frame-block/, `${page} should have an in-article ad block`);
+    assert.match(html, /widgets\.html\?id=989908&template=carousel/, `${page} should have the 300x250 article ad iframe`);
+    assert.match(html, /blog-sidebar blog-sidebar-right/, `${page} should have the right sidebar`);
+    assert.match(html, /class="blog-ad-frame"/, `${page} should have the right rail ad frame`);
   }
 });
