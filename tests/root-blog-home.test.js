@@ -46,6 +46,16 @@ test('root blog home prioritizes claw tour articles', () => {
   ]);
 });
 
+test('root blog home uses a dedicated thumbnail for the MBTI article card', () => {
+  const html = fs.readFileSync('index.html', 'utf8');
+  const cardMatch = html.match(/<article class="blog-card" data-blog-category="test life">[\s\S]*?<\/article>/);
+
+  assert.ok(cardMatch, 'MBTI article card should exist');
+  assert.match(cardMatch[0], /\/blog\/mbti-16-vs-64-personality-types\.html/);
+  assert.match(cardMatch[0], /\/blog\/images\/mbti-64-personality-thumbnail\.svg/);
+  assert.doesNotMatch(cardMatch[0], /\/blog\/images\/blog-home-thumbnail\.png/);
+});
+
 test('root blog home keeps recent posts compact with an expand control', () => {
   const html = fs.readFileSync('index.html', 'utf8');
   const recentMatch = html.match(/<div class="blog-mini-list"[\s\S]*?<\/div>/);
