@@ -20,7 +20,11 @@ test('MBTI 16 vs 64 article explains the test and links to the tool', () => {
   assert.match(html, /href="\/tools\/64-personality-test.html"/);
   assert.match(html, /64유형 테스트 바로가기/);
   assert.match(html, /BlogPosting/);
-  assert.match(html, /mbti-64-personality-thumbnail\.svg/);
+  assert.match(html, /<meta property="og:image" content="https:\/\/idont82\.github\.io\/blog\/images\/mbti-64-personality-thumbnail\.png">/);
+  assert.match(html, /<meta property="og:image:width" content="1200">/);
+  assert.match(html, /<meta property="og:image:height" content="630">/);
+  assert.match(html, /<meta name="twitter:image" content="https:\/\/idont82\.github\.io\/blog\/images\/mbti-64-personality-thumbnail\.png">/);
+  assert.match(html, /<link rel="image_src" href="https:\/\/idont82\.github\.io\/blog\/images\/mbti-64-personality-thumbnail\.png">/);
   assert.match(html, /"dateModified": "2026-07-15"/);
 });
 

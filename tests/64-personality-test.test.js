@@ -33,6 +33,18 @@ test('64 personality test page exposes the expected test contract', () => {
   assert.match(html, /function showDirectResult/);
 });
 
+test('64 personality test page has social image metadata for search previews', () => {
+  const html = read(pagePath);
+
+  assert.match(html, /<meta property="og:image" content="https:\/\/idont82\.github\.io\/blog\/images\/mbti-64-personality-thumbnail\.png">/);
+  assert.match(html, /<meta property="og:image:width" content="1200">/);
+  assert.match(html, /<meta property="og:image:height" content="630">/);
+  assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
+  assert.match(html, /<meta name="twitter:image" content="https:\/\/idont82\.github\.io\/blog\/images\/mbti-64-personality-thumbnail\.png">/);
+  assert.match(html, /<link rel="image_src" href="https:\/\/idont82\.github\.io\/blog\/images\/mbti-64-personality-thumbnail\.png">/);
+  assert.ok(fs.existsSync(path.join(root, 'blog', 'images', 'mbti-64-personality-thumbnail.png')));
+});
+
 test('64 personality test result includes user-based Coupang recommendation banners', () => {
   const html = read(pagePath);
 
