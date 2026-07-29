@@ -122,9 +122,10 @@ supported choices:
 </p>
 ```
 
-Add a `사용 기준` row to the existing comparison table with `드럼·통돌이
-겸용` for each product only because the FAQ already states that compatibility.
-Keep the current non-numeric price bands and do not make a live-price claim.
+Keep the current comparison rows and non-numeric price bands. Do not label the
+three exact products as unconditionally compatible with both washer types:
+the FAQ only gives a general rule and tells readers to verify each package.
+Point the opening to that check instead, and do not make a live-price claim.
 
 - [ ] **Step 4: Verify required decision markers**
 
@@ -132,7 +133,7 @@ Run:
 
 ```powershell
 $page = Get-Content -Raw -Encoding UTF8 search/capsule-detergent-budget-top3.html
-@('캡슐세제 추천 TOP 3','세척력은 퍼실','대용량 가성비는 탐사','실내건조 쉰내 관리는 피지','드럼·통돌이') | ForEach-Object { if (-not $page.Contains($_)) { throw "Missing marker: $_" } }
+@('캡슐세제 추천 TOP 3','세척력은 퍼실','대용량 가성비는 탐사','실내건조 쉰내 관리는 피지','드럼·통돌이 사용 전 확인점') | ForEach-Object { if (-not $page.Contains($_)) { throw "Missing marker: $_" } }
 ```
 
 Expected: command exits with code 0 and no output.
