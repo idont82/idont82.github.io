@@ -119,6 +119,7 @@
               <a href="#basic">16유형 구조 <span>기본축</span></a>
               <a href="#limits">왜 더 나눌까 <span>한계</span></a>
               <a href="#extended">64유형 구조 <span>A/T · C/S</span></a>
+              <a href="#type-matrix">64유형 비교표 <span>한눈에 보기</span></a>
               <a href="#hexaco">HEXACO와 차이 <span>참고</span></a>
               <a href="#test">테스트 이동 <span>바로가기</span></a>
             </div>
@@ -177,19 +178,166 @@
             <p>결국 16유형에 A/T 두 갈래와 C/S 두 갈래가 붙어 <strong>16 x 2 x 2 = 64유형</strong>이 됩니다. 예를 들어 INTJ-A-C와 INTJ-T-S는 기본 유형은 같지만 자신감 반응과 관계 처리 방식에서 다르게 해석됩니다.</p>
             <p><a class="product-detail-btn" href="/tools/64-personality-test.html">내 16유형과 64유형 같이 확인하기</a></p>
 
-            <h2>4. INTJ와 INTJ-A-C는 어떻게 다를까?</h2>
+            <h2 id="type-matrix">4. MBTI 64유형 한눈에 보기</h2>
+            <p>아래 64유형은 <strong>공식 MBTI 검사가 아닌 자체 확장 해석</strong>입니다. 기본 네 글자에 자신감 반응을 나타내는 A/T와, 함께 조율하거나 자기 방식으로 실행하는 경향을 나타내는 C/S를 조합했습니다.</p>
+            <p>A-C는 확신 있게 조율하고, A-S는 확신 있게 자율 실행하며, T-C는 세심하게 반응하며 조율하고, T-S는 충분히 숙고한 뒤 독립적으로 완성하는 행동 결을 나타냅니다.</p>
+
+            <figure class="mbti64-axis-figure">
+              <img src="/blog/images/mbti-64-axis-map.svg" alt="MBTI 16유형에 A/T와 C/S 보조축을 더해 64유형으로 확장하는 구조" width="1200" height="630" loading="lazy">
+              <figcaption>16개 기본유형 각각이 네 가지 행동 결로 나뉘어 총 64유형이 됩니다.</figcaption>
+            </figure>
+
+            <div class="mbti64-legend" aria-label="확장 코드 범례">
+              <span><strong>A-C</strong> 확신 있게 조율</span>
+              <span><strong>A-S</strong> 확신 있게 자율 실행</span>
+              <span><strong>T-C</strong> 세심하게 반응하며 조율</span>
+              <span><strong>T-S</strong> 숙고한 뒤 독립 완성</span>
+            </div>
+            <p id="mbti64-scroll-hint">좌우로 밀어 4가지 변형 비교</p>
+
+            <div class="mbti64-matrix-scroll" tabindex="0" role="region" aria-label="MBTI 64유형 비교표" aria-describedby="mbti64-scroll-hint">
+              <table class="mbti64-matrix">
+                <caption>MBTI 기본 16유형과 A-C, A-S, T-C, T-S 확장형 비교표</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">기본유형</th>
+                    <th scope="col">A-C</th>
+                    <th scope="col">A-S</th>
+                    <th scope="col">T-C</th>
+                    <th scope="col">T-S</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="mbti64-group-sentinel">
+                    <th scope="row"><strong>ISTJ</strong><span>책임 관리자</span></th>
+                    <td class="mbti64-variant-ac"><a href="/tools/64-personality-test.html?result=ISTJ-A-C" data-type-code="ISTJ-A-C"><strong>ISTJ-A-C</strong><span class="mbti64-type-name">원칙 조율 관리자</span><span class="mbti64-type-copy">검증된 절차를 분명히 세우고 구성원과 안정적으로 맞춥니다.</span></a></td>
+                    <td class="mbti64-variant-as"><a href="/tools/64-personality-test.html?result=ISTJ-A-S" data-type-code="ISTJ-A-S"><strong>ISTJ-A-S</strong><span class="mbti64-type-name">독립 실행 관리자</span><span class="mbti64-type-copy">정한 기준을 흔들림 없이 지키며 자신의 속도로 끝까지 실행합니다.</span></a></td>
+                    <td class="mbti64-variant-tc"><a href="/tools/64-personality-test.html?result=ISTJ-T-C" data-type-code="ISTJ-T-C"><strong>ISTJ-T-C</strong><span class="mbti64-type-name">세심 조율 관리자</span><span class="mbti64-type-copy">누락 가능성을 꼼꼼히 살피고 의견을 확인하며 절차를 다듬습니다.</span></a></td>
+                    <td class="mbti64-variant-ts"><a href="/tools/64-personality-test.html?result=ISTJ-T-S" data-type-code="ISTJ-T-S"><strong>ISTJ-T-S</strong><span class="mbti64-type-name">숙고 완성 관리자</span><span class="mbti64-type-copy">변수를 충분히 점검한 뒤 혼자 집중해 정확한 결과를 완성합니다.</span></a></td>
+                  </tr>
+                  <tr class="mbti64-group-sentinel">
+                    <th scope="row"><strong>ISFJ</strong><span>헌신 보호자</span></th>
+                    <td class="mbti64-variant-ac"><a href="/tools/64-personality-test.html?result=ISFJ-A-C" data-type-code="ISFJ-A-C"><strong>ISFJ-A-C</strong><span class="mbti64-type-name">든든 조율 보호자</span><span class="mbti64-type-copy">필요한 지원을 자신 있게 챙기고 주변의 역할을 편안히 잇습니다.</span></a></td>
+                    <td class="mbti64-variant-as"><a href="/tools/64-personality-test.html?result=ISFJ-A-S" data-type-code="ISFJ-A-S"><strong>ISFJ-A-S</strong><span class="mbti64-type-name">묵묵 실행 보호자</span><span class="mbti64-type-copy">중요한 사람과 약속을 기억하며 눈에 띄지 않아도 꾸준히 돕습니다.</span></a></td>
+                    <td class="mbti64-variant-tc"><a href="/tools/64-personality-test.html?result=ISFJ-T-C" data-type-code="ISFJ-T-C"><strong>ISFJ-T-C</strong><span class="mbti64-type-name">배려 조율 보호자</span><span class="mbti64-type-copy">작은 불편과 감정 변화를 살피며 모두가 편한 방식을 찾아갑니다.</span></a></td>
+                    <td class="mbti64-variant-ts"><a href="/tools/64-personality-test.html?result=ISFJ-T-S" data-type-code="ISFJ-T-S"><strong>ISFJ-T-S</strong><span class="mbti64-type-name">신중 돌봄 보호자</span><span class="mbti64-type-copy">도움이 필요한 지점을 깊이 생각하고 조용히 세부까지 채웁니다.</span></a></td>
+                  </tr>
+                  <tr class="mbti64-group-diplomat">
+                    <th scope="row"><strong>INFJ</strong><span>통찰 설계자</span></th>
+                    <td class="mbti64-variant-ac"><a href="/tools/64-personality-test.html?result=INFJ-A-C" data-type-code="INFJ-A-C"><strong>INFJ-A-C</strong><span class="mbti64-type-name">비전 조율 설계자</span><span class="mbti64-type-copy">사람을 위한 큰 방향을 분명히 제시하고 공감대를 모아갑니다.</span></a></td>
+                    <td class="mbti64-variant-as"><a href="/tools/64-personality-test.html?result=INFJ-A-S" data-type-code="INFJ-A-S"><strong>INFJ-A-S</strong><span class="mbti64-type-name">신념 실행 설계자</span><span class="mbti64-type-copy">내면의 비전을 믿고 방해에 흔들리지 않으며 차분히 구현합니다.</span></a></td>
+                    <td class="mbti64-variant-tc"><a href="/tools/64-personality-test.html?result=INFJ-T-C" data-type-code="INFJ-T-C"><strong>INFJ-T-C</strong><span class="mbti64-type-name">공감 조율 설계자</span><span class="mbti64-type-copy">말하지 않은 마음까지 헤아리며 관계에 맞는 방향을 세밀히 찾습니다.</span></a></td>
+                    <td class="mbti64-variant-ts"><a href="/tools/64-personality-test.html?result=INFJ-T-S" data-type-code="INFJ-T-S"><strong>INFJ-T-S</strong><span class="mbti64-type-name">성찰 완성 설계자</span><span class="mbti64-type-copy">의미와 영향을 오래 성찰한 뒤 자신만의 언어로 비전을 완성합니다.</span></a></td>
+                  </tr>
+                  <tr class="mbti64-group-analyst">
+                    <th scope="row"><strong>INTJ</strong><span>전략 설계자</span></th>
+                    <td class="mbti64-variant-ac"><a href="/tools/64-personality-test.html?result=INTJ-A-C" data-type-code="INTJ-A-C"><strong>INTJ-A-C</strong><span class="mbti64-type-name">전략 조율 설계자</span><span class="mbti64-type-copy">장기 방향을 선명하게 세우고 역할과 자원을 논리적으로 조율합니다.</span></a></td>
+                    <td class="mbti64-variant-as"><a href="/tools/64-personality-test.html?result=INTJ-A-S" data-type-code="INTJ-A-S"><strong>INTJ-A-S</strong><span class="mbti64-type-name">독립 전략 설계자</span><span class="mbti64-type-copy">스스로 세운 청사진을 믿고 효율적인 경로로 빠르게 추진합니다.</span></a></td>
+                    <td class="mbti64-variant-tc"><a href="/tools/64-personality-test.html?result=INTJ-T-C" data-type-code="INTJ-T-C"><strong>INTJ-T-C</strong><span class="mbti64-type-name">정밀 조율 설계자</span><span class="mbti64-type-copy">계획의 허점을 세밀히 검토하고 다양한 관점을 반영해 보완합니다.</span></a></td>
+                    <td class="mbti64-variant-ts"><a href="/tools/64-personality-test.html?result=INTJ-T-S" data-type-code="INTJ-T-S"><strong>INTJ-T-S</strong><span class="mbti64-type-name">심층 전략 설계자</span><span class="mbti64-type-copy">복잡한 변수를 혼자 깊게 분석하고 완성도 높은 체계로 정리합니다.</span></a></td>
+                  </tr>
+                  <tr class="mbti64-group-explorer">
+                    <th scope="row"><strong>ISTP</strong><span>실전 해결사</span></th>
+                    <td class="mbti64-variant-ac"><a href="/tools/64-personality-test.html?result=ISTP-A-C" data-type-code="ISTP-A-C"><strong>ISTP-A-C</strong><span class="mbti64-type-name">현장 조율 해결사</span><span class="mbti64-type-copy">상황의 핵심을 빠르게 잡고 필요한 사람과 해법을 실용적으로 맞춥니다.</span></a></td>
+                    <td class="mbti64-variant-as"><a href="/tools/64-personality-test.html?result=ISTP-A-S" data-type-code="ISTP-A-S"><strong>ISTP-A-S</strong><span class="mbti64-type-name">즉응 실행 해결사</span><span class="mbti64-type-copy">문제가 생기면 직접 시험하고 가장 간결한 방식으로 바로 해결합니다.</span></a></td>
+                    <td class="mbti64-variant-tc"><a href="/tools/64-personality-test.html?result=ISTP-T-C" data-type-code="ISTP-T-C"><strong>ISTP-T-C</strong><span class="mbti64-type-name">점검 조율 해결사</span><span class="mbti64-type-copy">위험 요소를 차분히 확인하고 현장의 피드백에 맞춰 해법을 조정합니다.</span></a></td>
+                    <td class="mbti64-variant-ts"><a href="/tools/64-personality-test.html?result=ISTP-T-S" data-type-code="ISTP-T-S"><strong>ISTP-T-S</strong><span class="mbti64-type-name">정교 완성 해결사</span><span class="mbti64-type-copy">도구와 원리를 세밀히 파악한 뒤 혼자 집중해 문제를 풀어냅니다.</span></a></td>
+                  </tr>
+                  <tr class="mbti64-group-explorer">
+                    <th scope="row"><strong>ISFP</strong><span>감각 표현가</span></th>
+                    <td class="mbti64-variant-ac"><a href="/tools/64-personality-test.html?result=ISFP-A-C" data-type-code="ISFP-A-C"><strong>ISFP-A-C</strong><span class="mbti64-type-name">온기 조율 표현가</span><span class="mbti64-type-copy">자연스러운 감각을 편안히 드러내며 주변 분위기와 부드럽게 어울립니다.</span></a></td>
+                    <td class="mbti64-variant-as"><a href="/tools/64-personality-test.html?result=ISFP-A-S" data-type-code="ISFP-A-S"><strong>ISFP-A-S</strong><span class="mbti64-type-name">자유 감각 표현가</span><span class="mbti64-type-copy">자신의 취향을 믿고 정해진 틀보다 순간의 감각대로 표현합니다.</span></a></td>
+                    <td class="mbti64-variant-tc"><a href="/tools/64-personality-test.html?result=ISFP-T-C" data-type-code="ISFP-T-C"><strong>ISFP-T-C</strong><span class="mbti64-type-name">섬세 조율 표현가</span><span class="mbti64-type-copy">상대의 반응과 미묘한 분위기를 살피며 표현의 결을 조정합니다.</span></a></td>
+                    <td class="mbti64-variant-ts"><a href="/tools/64-personality-test.html?result=ISFP-T-S" data-type-code="ISFP-T-S"><strong>ISFP-T-S</strong><span class="mbti64-type-name">내면 감각 표현가</span><span class="mbti64-type-copy">감정을 조용히 음미하고 자신만의 방식으로 세밀하게 완성합니다.</span></a></td>
+                  </tr>
+                  <tr class="mbti64-group-diplomat">
+                    <th scope="row"><strong>INFP</strong><span>가치 이상가</span></th>
+                    <td class="mbti64-variant-ac"><a href="/tools/64-personality-test.html?result=INFP-A-C" data-type-code="INFP-A-C"><strong>INFP-A-C</strong><span class="mbti64-type-name">가치 조율 이상가</span><span class="mbti64-type-copy">중요한 가치를 선명히 말하고 서로의 의미를 연결해 공감대를 만듭니다.</span></a></td>
+                    <td class="mbti64-variant-as"><a href="/tools/64-personality-test.html?result=INFP-A-S" data-type-code="INFP-A-S"><strong>INFP-A-S</strong><span class="mbti64-type-name">신념 실천 이상가</span><span class="mbti64-type-copy">자신이 믿는 가능성을 따라 독창적인 방식으로 꾸준히 나아갑니다.</span></a></td>
+                    <td class="mbti64-variant-tc"><a href="/tools/64-personality-test.html?result=INFP-T-C" data-type-code="INFP-T-C"><strong>INFP-T-C</strong><span class="mbti64-type-name">공감 탐색 이상가</span><span class="mbti64-type-copy">서로의 감정과 가치 충돌을 세심히 살피며 따뜻한 접점을 찾습니다.</span></a></td>
+                    <td class="mbti64-variant-ts"><a href="/tools/64-personality-test.html?result=INFP-T-S" data-type-code="INFP-T-S"><strong>INFP-T-S</strong><span class="mbti64-type-name">내면 성찰 이상가</span><span class="mbti64-type-copy">마음속 기준을 깊이 탐색하고 고유한 이야기로 천천히 빚어냅니다.</span></a></td>
+                  </tr>
+                  <tr class="mbti64-group-analyst">
+                    <th scope="row"><strong>INTP</strong><span>원리 탐구자</span></th>
+                    <td class="mbti64-variant-ac"><a href="/tools/64-personality-test.html?result=INTP-A-C" data-type-code="INTP-A-C"><strong>INTP-A-C</strong><span class="mbti64-type-name">논리 조율 탐구자</span><span class="mbti64-type-copy">새 원리를 명료하게 설명하고 토론을 통해 더 탄탄한 구조로 만듭니다.</span></a></td>
+                    <td class="mbti64-variant-as"><a href="/tools/64-personality-test.html?result=INTP-A-S" data-type-code="INTP-A-S"><strong>INTP-A-S</strong><span class="mbti64-type-name">자율 원리 탐구자</span><span class="mbti64-type-copy">흥미로운 질문을 자유롭게 파고들며 독자적인 논리 체계를 세웁니다.</span></a></td>
+                    <td class="mbti64-variant-tc"><a href="/tools/64-personality-test.html?result=INTP-T-C" data-type-code="INTP-T-C"><strong>INTP-T-C</strong><span class="mbti64-type-name">검증 조율 탐구자</span><span class="mbti64-type-copy">논리의 빈틈을 거듭 확인하고 반론을 반영해 설명을 정교하게 다듬습니다.</span></a></td>
+                    <td class="mbti64-variant-ts"><a href="/tools/64-personality-test.html?result=INTP-T-S" data-type-code="INTP-T-S"><strong>INTP-T-S</strong><span class="mbti64-type-name">심층 원리 탐구자</span><span class="mbti64-type-copy">복잡한 의문을 오래 붙들고 혼자 사유하며 일관된 답을 완성합니다.</span></a></td>
+                  </tr>
+                  <tr class="mbti64-group-explorer">
+                    <th scope="row"><strong>ESTP</strong><span>현장 행동가</span></th>
+                    <td class="mbti64-variant-ac"><a href="/tools/64-personality-test.html?result=ESTP-A-C" data-type-code="ESTP-A-C"><strong>ESTP-A-C</strong><span class="mbti64-type-name">기동 조율 행동가</span><span class="mbti64-type-copy">변화를 빠르게 읽고 사람들을 모아 현실적인 다음 행동을 이끕니다.</span></a></td>
+                    <td class="mbti64-variant-as"><a href="/tools/64-personality-test.html?result=ESTP-A-S" data-type-code="ESTP-A-S"><strong>ESTP-A-S</strong><span class="mbti64-type-name">돌파 실행 행동가</span><span class="mbti64-type-copy">기회를 포착하면 주저하지 않고 직접 부딪치며 길을 만들어갑니다.</span></a></td>
+                    <td class="mbti64-variant-tc"><a href="/tools/64-personality-test.html?result=ESTP-T-C" data-type-code="ESTP-T-C"><strong>ESTP-T-C</strong><span class="mbti64-type-name">상황 조율 행동가</span><span class="mbti64-type-copy">현장 반응을 예민하게 읽고 위험을 낮추며 움직임을 맞춰갑니다.</span></a></td>
+                    <td class="mbti64-variant-ts"><a href="/tools/64-personality-test.html?result=ESTP-T-S" data-type-code="ESTP-T-S"><strong>ESTP-T-S</strong><span class="mbti64-type-name">판단 집중 행동가</span><span class="mbti64-type-copy">변수를 재빨리 점검한 뒤 자기 판단으로 정확한 순간에 움직입니다.</span></a></td>
+                  </tr>
+                  <tr class="mbti64-group-explorer">
+                    <th scope="row"><strong>ESFP</strong><span>활력 경험가</span></th>
+                    <td class="mbti64-variant-ac"><a href="/tools/64-personality-test.html?result=ESFP-A-C" data-type-code="ESFP-A-C"><strong>ESFP-A-C</strong><span class="mbti64-type-name">활기 조율 경험가</span><span class="mbti64-type-copy">즐거운 에너지를 자신 있게 나누며 모두가 참여할 흐름을 만듭니다.</span></a></td>
+                    <td class="mbti64-variant-as"><a href="/tools/64-personality-test.html?result=ESFP-A-S" data-type-code="ESFP-A-S"><strong>ESFP-A-S</strong><span class="mbti64-type-name">자유 체험 경험가</span><span class="mbti64-type-copy">마음이 끌리는 경험을 즉시 선택하고 생생하게 자기 방식으로 즐깁니다.</span></a></td>
+                    <td class="mbti64-variant-tc"><a href="/tools/64-personality-test.html?result=ESFP-T-C" data-type-code="ESFP-T-C"><strong>ESFP-T-C</strong><span class="mbti64-type-name">공감 활력 경험가</span><span class="mbti64-type-copy">주변의 표정과 분위기를 살피며 모두가 편한 즐거움을 조율합니다.</span></a></td>
+                    <td class="mbti64-variant-ts"><a href="/tools/64-personality-test.html?result=ESFP-T-S" data-type-code="ESFP-T-S"><strong>ESFP-T-S</strong><span class="mbti64-type-name">감각 선별 경험가</span><span class="mbti64-type-copy">마음의 반응을 세심히 확인한 뒤 자신에게 맞는 경험에 몰입합니다.</span></a></td>
+                  </tr>
+                  <tr class="mbti64-group-diplomat">
+                    <th scope="row"><strong>ENFP</strong><span>가능성 탐험가</span></th>
+                    <td class="mbti64-variant-ac"><a href="/tools/64-personality-test.html?result=ENFP-A-C" data-type-code="ENFP-A-C"><strong>ENFP-A-C</strong><span class="mbti64-type-name">영감 조율 탐험가</span><span class="mbti64-type-copy">새 가능성을 열정적으로 제안하고 사람들의 아이디어를 연결합니다.</span></a></td>
+                    <td class="mbti64-variant-as"><a href="/tools/64-personality-test.html?result=ENFP-A-S" data-type-code="ENFP-A-S"><strong>ENFP-A-S</strong><span class="mbti64-type-name">자유 도전 탐험가</span><span class="mbti64-type-copy">호기심이 향하는 곳으로 과감히 움직이며 새로운 길을 시험합니다.</span></a></td>
+                    <td class="mbti64-variant-tc"><a href="/tools/64-personality-test.html?result=ENFP-T-C" data-type-code="ENFP-T-C"><strong>ENFP-T-C</strong><span class="mbti64-type-name">공감 연결 탐험가</span><span class="mbti64-type-copy">사람들의 기대와 감정을 세심히 읽으며 함께할 가능성을 넓힙니다.</span></a></td>
+                    <td class="mbti64-variant-ts"><a href="/tools/64-personality-test.html?result=ENFP-T-S" data-type-code="ENFP-T-S"><strong>ENFP-T-S</strong><span class="mbti64-type-name">성찰 가능 탐험가</span><span class="mbti64-type-copy">수많은 가능성을 내면에서 비교한 뒤 의미 있는 선택에 깊이 빠집니다.</span></a></td>
+                  </tr>
+                  <tr class="mbti64-group-analyst">
+                    <th scope="row"><strong>ENTP</strong><span>관점 발명가</span></th>
+                    <td class="mbti64-variant-ac"><a href="/tools/64-personality-test.html?result=ENTP-A-C" data-type-code="ENTP-A-C"><strong>ENTP-A-C</strong><span class="mbti64-type-name">아이디어 조율 발명가</span><span class="mbti64-type-copy">새 관점을 자신 있게 던지고 토론을 엮어 실험의 동력을 만듭니다.</span></a></td>
+                    <td class="mbti64-variant-as"><a href="/tools/64-personality-test.html?result=ENTP-A-S" data-type-code="ENTP-A-S"><strong>ENTP-A-S</strong><span class="mbti64-type-name">파격 실험 발명가</span><span class="mbti64-type-copy">관습에 얽매이지 않고 떠오른 가설을 빠르게 자기 방식으로 시험합니다.</span></a></td>
+                    <td class="mbti64-variant-tc"><a href="/tools/64-personality-test.html?result=ENTP-T-C" data-type-code="ENTP-T-C"><strong>ENTP-T-C</strong><span class="mbti64-type-name">논점 조율 발명가</span><span class="mbti64-type-copy">반응과 반론을 예민하게 포착해 아이디어의 약점을 유연하게 고칩니다.</span></a></td>
+                    <td class="mbti64-variant-ts"><a href="/tools/64-personality-test.html?result=ENTP-T-S" data-type-code="ENTP-T-S"><strong>ENTP-T-S</strong><span class="mbti64-type-name">가설 숙고 발명가</span><span class="mbti64-type-copy">여러 반례를 혼자 깊게 검토하며 독창적인 해법으로 발전시킵니다.</span></a></td>
+                  </tr>
+                  <tr class="mbti64-group-sentinel">
+                    <th scope="row"><strong>ESTJ</strong><span>기준 추진자</span></th>
+                    <td class="mbti64-variant-ac"><a href="/tools/64-personality-test.html?result=ESTJ-A-C" data-type-code="ESTJ-A-C"><strong>ESTJ-A-C</strong><span class="mbti64-type-name">기준 조율 추진자</span><span class="mbti64-type-copy">목표와 역할을 명확히 제시하고 구성원의 실행을 체계적으로 잇습니다.</span></a></td>
+                    <td class="mbti64-variant-as"><a href="/tools/64-personality-test.html?result=ESTJ-A-S" data-type-code="ESTJ-A-S"><strong>ESTJ-A-S</strong><span class="mbti64-type-name">직진 실행 추진자</span><span class="mbti64-type-copy">효율적인 기준을 세우면 망설임 없이 직접 속도감 있게 추진합니다.</span></a></td>
+                    <td class="mbti64-variant-tc"><a href="/tools/64-personality-test.html?result=ESTJ-T-C" data-type-code="ESTJ-T-C"><strong>ESTJ-T-C</strong><span class="mbti64-type-name">점검 조율 추진자</span><span class="mbti64-type-copy">성과와 반응을 꼼꼼히 확인하며 현실에 맞게 계획과 역할을 고칩니다.</span></a></td>
+                    <td class="mbti64-variant-ts"><a href="/tools/64-personality-test.html?result=ESTJ-T-S" data-type-code="ESTJ-T-S"><strong>ESTJ-T-S</strong><span class="mbti64-type-name">정밀 실행 추진자</span><span class="mbti64-type-copy">오차와 지연 요소를 세세히 따진 뒤 자기 기준으로 완수합니다.</span></a></td>
+                  </tr>
+                  <tr class="mbti64-group-sentinel">
+                    <th scope="row"><strong>ESFJ</strong><span>관계 조율자</span></th>
+                    <td class="mbti64-variant-ac"><a href="/tools/64-personality-test.html?result=ESFJ-A-C" data-type-code="ESFJ-A-C"><strong>ESFJ-A-C</strong><span class="mbti64-type-name">화합 주도 조율자</span><span class="mbti64-type-copy">필요한 교류를 먼저 만들고 모두가 편히 참여하도록 분위기를 이끕니다.</span></a></td>
+                    <td class="mbti64-variant-as"><a href="/tools/64-personality-test.html?result=ESFJ-A-S" data-type-code="ESFJ-A-S"><strong>ESFJ-A-S</strong><span class="mbti64-type-name">실천 돌봄 조율자</span><span class="mbti64-type-copy">소중한 관계를 위한 일을 스스로 정하고 활기 있게 챙겨나갑니다.</span></a></td>
+                    <td class="mbti64-variant-tc"><a href="/tools/64-personality-test.html?result=ESFJ-T-C" data-type-code="ESFJ-T-C"><strong>ESFJ-T-C</strong><span class="mbti64-type-name">세심 화합 조율자</span><span class="mbti64-type-copy">표정과 피드백을 놓치지 않고 누구도 소외되지 않을 접점을 찾습니다.</span></a></td>
+                    <td class="mbti64-variant-ts"><a href="/tools/64-personality-test.html?result=ESFJ-T-S" data-type-code="ESFJ-T-S"><strong>ESFJ-T-S</strong><span class="mbti64-type-name">숙고 돌봄 조율자</span><span class="mbti64-type-copy">관계에 미칠 영향을 깊이 생각한 뒤 필요한 배려를 조용히 실천합니다.</span></a></td>
+                  </tr>
+                  <tr class="mbti64-group-diplomat">
+                    <th scope="row"><strong>ENFJ</strong><span>성장 안내자</span></th>
+                    <td class="mbti64-variant-ac"><a href="/tools/64-personality-test.html?result=ENFJ-A-C" data-type-code="ENFJ-A-C"><strong>ENFJ-A-C</strong><span class="mbti64-type-name">비전 조율 안내자</span><span class="mbti64-type-copy">사람의 가능성을 분명히 북돋우고 함께 성장할 방향을 모읍니다.</span></a></td>
+                    <td class="mbti64-variant-as"><a href="/tools/64-personality-test.html?result=ENFJ-A-S" data-type-code="ENFJ-A-S"><strong>ENFJ-A-S</strong><span class="mbti64-type-name">소신 성장 안내자</span><span class="mbti64-type-copy">믿는 변화를 주도적으로 실천하며 자신의 방식으로 긍정적 흐름을 냅니다.</span></a></td>
+                    <td class="mbti64-variant-tc"><a href="/tools/64-personality-test.html?result=ENFJ-T-C" data-type-code="ENFJ-T-C"><strong>ENFJ-T-C</strong><span class="mbti64-type-name">공감 성장 안내자</span><span class="mbti64-type-copy">각자의 마음과 속도를 세심히 살피며 모두에게 맞는 격려를 건넵니다.</span></a></td>
+                    <td class="mbti64-variant-ts"><a href="/tools/64-personality-test.html?result=ENFJ-T-S" data-type-code="ENFJ-T-S"><strong>ENFJ-T-S</strong><span class="mbti64-type-name">성찰 성장 안내자</span><span class="mbti64-type-copy">도움의 의미와 영향을 깊이 돌아본 뒤 진정성 있는 방향을 제시합니다.</span></a></td>
+                  </tr>
+                  <tr class="mbti64-group-analyst">
+                    <th scope="row"><strong>ENTJ</strong><span>목표 지휘자</span></th>
+                    <td class="mbti64-variant-ac"><a href="/tools/64-personality-test.html?result=ENTJ-A-C" data-type-code="ENTJ-A-C"><strong>ENTJ-A-C</strong><span class="mbti64-type-name">목표 조율 지휘자</span><span class="mbti64-type-copy">큰 목표를 선명히 공유하고 강점과 자원을 전략적으로 배치합니다.</span></a></td>
+                    <td class="mbti64-variant-as"><a href="/tools/64-personality-test.html?result=ENTJ-A-S" data-type-code="ENTJ-A-S"><strong>ENTJ-A-S</strong><span class="mbti64-type-name">개척 실행 지휘자</span><span class="mbti64-type-copy">목표가 정해지면 독립적으로 결단하고 빠르게 장애물을 돌파합니다.</span></a></td>
+                    <td class="mbti64-variant-tc"><a href="/tools/64-personality-test.html?result=ENTJ-T-C" data-type-code="ENTJ-T-C"><strong>ENTJ-T-C</strong><span class="mbti64-type-name">전략 점검 지휘자</span><span class="mbti64-type-copy">성과 위험과 구성원 반응을 세밀히 읽으며 전략을 계속 보정합니다.</span></a></td>
+                    <td class="mbti64-variant-ts"><a href="/tools/64-personality-test.html?result=ENTJ-T-S" data-type-code="ENTJ-T-S"><strong>ENTJ-T-S</strong><span class="mbti64-type-name">숙고 결단 지휘자</span><span class="mbti64-type-copy">가능한 실패를 깊이 검토한 뒤 자신이 책임질 결론을 단단히 실행합니다.</span></a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p><a class="product-detail-btn" href="/tools/64-personality-test.html">내 확장 64유형 확인하기</a></p>
+
+            <h2>5. INTJ와 INTJ-A-C는 어떻게 다를까?</h2>
             <p>INTJ라는 기본 결과는 큰 그림을 보고 구조를 설계하는 성향을 말합니다. 여기에 A-C가 붙으면 선택 후 흔들림이 적고, 작업 안에서도 방향을 제안하며 협업을 정리하는 쪽으로 해석할 수 있습니다.</p>
             <p>반대로 INTJ-T-S라면 같은 전략형이라도 변화에 더 민감하고, 합의가 길어지기보다 혼자 깊게 정리해서 움직이는 쪽이 편할 수 있습니다. 이런 식으로 64유형은 기본 MBTI 코드보다 행동 결을 조금 더 구체적으로 보여주는 장점이 있습니다.</p>
 
-            <h2 id="hexaco">5. HEXACO 64유형과 MBTI 확장형 64유형은 다르다</h2>
+            <h2 id="hexaco">6. HEXACO 64유형과 MBTI 확장형 64유형은 다르다</h2>
             <p>64유형이라는 말이 항상 같은 모델을 뜻하지는 않습니다. HEXACO는 정직-겸손성, 정서성, 외향성, 원만성, 성실성, 개방성처럼 여섯 차원을 보는 성격 모델입니다. 각 차원을 높고 낮음으로 나누면 64유형처럼 설명할 수 있습니다.</p>
             <p>반면 이 글에서 말하는 64유형은 기존 16유형 코드에 보조축을 더해 세분화하는 방식입니다. 둘 다 자기이해를 위한 참고자료가 될 수 있지만, 같은 검사라고 보면 안 됩니다. 어떤 축을 쓰는지, 결과를 어떤 목적으로 해석하는지 먼저 확인하는 것이 좋습니다.</p>
 
-            <h2>6. 결과는 어떻게 읽으면 좋을까?</h2>
+            <h2>7. 결과는 어떻게 읽으면 좋을까?</h2>
             <p>성격 테스트 결과는 나를 고정된 상자에 넣기 위한 것이 아닙니다. 최근 컨디션, 일하는 환경, 관계 상황에 따라 답변이 조금씩 달라질 수 있습니다. 특히 A/T와 C/S 같은 보조축은 상황의 영향을 많이 받을 수 있습니다.</p>
             <p>그래서 결과를 "무조건 이런 사람"이라는 결론보다, "내가 어떤 환경에서 편하고 어떤 방식에서 에너지가 줄어드는지"를 보는 힌트로 쓰는 편이 좋습니다.</p>
 
-            <h2 id="test">7. 직접 64유형 테스트 해보기</h2>
+            <h2 id="test">8. 직접 64유형 테스트 해보기</h2>
             <p>아래 테스트는 공식 MBTI 검사가 아닌 자기이해와 재미를 위한 참고용 테스트입니다. 36문항에 답하면 기본 16유형과 확장 64유형, 유형별 캐릭터와 성향 해석을 함께 볼 수 있습니다.</p>
             <p><a class="product-detail-btn" href="/tools/64-personality-test.html">64유형 테스트 바로가기</a></p>
 
