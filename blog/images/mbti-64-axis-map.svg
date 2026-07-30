@@ -67,7 +67,7 @@
         <tspan x="905" dy="0">신중하게</tspan>
         <tspan x="905" dy="34">독립 완성</tspan>
       </text>
-      <text x="905" y="518" font-size="28" font-weight="600" fill="#6d28d9">민감 반응 × 자기주도</text>
+      <text x="895" y="518" font-size="24" font-weight="600" fill="#6d28d9">민감 반응 × 자기주도</text>
     </g>
 
     <g fill="none" stroke-width="6" stroke-linecap="round">
