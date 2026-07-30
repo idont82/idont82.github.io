@@ -99,11 +99,11 @@ test('MBTI article includes the 64-type axis infographic and updated navigation'
   assert.match(html, /href="#type-matrix"/);
   assert.match(html, /src="\/blog\/images\/mbti-64-axis-map\.svg"/);
   assert.match(html, /alt="MBTI 16유형에 A\/T와 C\/S 보조축을 더해 64유형으로 확장하는 구조"/);
-  assert.match(html, /<figcaption>16개 기본유형 각각은 네 가지 행동 경로로 나뉘어 총 64유형이 됩니다.<\/figcaption>/);
+  assert.match(html, /<figcaption>16개 기본유형 각각이 네 가지 행동 결로 나뉘어 총 64유형이 됩니다\.<\/figcaption>/);
   assert.match(html, /<h2 id="type-matrix">4\. MBTI 64유형 한눈에 보기<\/h2>/);
-  assert.match(html, /<h2>5\. INTJ와 INTJ-A-C는 어떻게 다를까<\/h2>/);
+  assert.match(html, /<h2>5\. INTJ와 INTJ-A-C는 어떻게 다를까\?<\/h2>/);
   assert.match(html, /<h2 id="hexaco">6\. HEXACO 64유형과 MBTI 확장형 64유형은 다르다<\/h2>/);
-  assert.match(html, /<h2>7\. 결과는 어떻게 읽으면 좋을까<\/h2>/);
+  assert.match(html, /<h2>7\. 결과는 어떻게 읽으면 좋을까\?<\/h2>/);
   assert.match(html, /<h2 id="test">8\. 직접 64유형 테스트 해보기<\/h2>/);
 
   assert.match(svg, /<svg/);
