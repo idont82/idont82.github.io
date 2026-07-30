@@ -59,18 +59,43 @@ test('MBTI article exposes all 64 extended types exactly once', () => {
   ];
   const variants = ['A-C', 'A-S', 'T-C', 'T-S'];
   const expected = baseTypes.flatMap((base) => variants.map((variant) => `${base}-${variant}`));
-  const codes = [...html.matchAll(/data-type-code="([A-Z]{4}-[AT]-[CS])"/g)].map((match) => match[1]);
+  const tableMatch = html.match(/<table\b(?=[^>]*\bclass="[^"]*\bmbti64-matrix\b[^"]*")[^>]*>([\s\S]*?)<\/table>/);
+
+  assert.ok(tableMatch, 'the matrix table should exist');
+
+  const tbodyMatch = tableMatch[1].match(/<tbody\b[^>]*>([\s\S]*?)<\/tbody>/);
+  assert.ok(tbodyMatch, 'the matrix table should contain a tbody');
+
+  const rows = [...tbodyMatch[1].matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/g)].map((match) => match[1]);
+  assert.equal(rows.length, 16);
+
+  const codes = rows.flatMap((row, index) => {
+    const base = baseTypes[index];
+    const anchors = [...row.matchAll(/<a\b[^>]*>/g)].map((match) => match[0]);
+
+    assert.match(
+      row,
+      new RegExp(`<th\\b(?=[^>]*\\bscope="row")[^>]*>[\\s\\S]*?<strong>${base}<\\/strong>`)
+    );
+    assert.equal(anchors.length, 4);
+
+    const rowCodes = anchors.map((anchor) => {
+      const href = anchor.match(/\bhref="([^"]+)"/);
+      const code = anchor.match(/\bdata-type-code="([A-Z]{4}-[AT]-[CS])"/);
+
+      assert.ok(href, 'each matrix cell should link to its result');
+      assert.ok(code, 'each matrix cell should expose its type code');
+      assert.equal(href[1], `/tools/64-personality-test.html?result=${code[1]}`);
+      return code[1];
+    });
+
+    assert.deepEqual(rowCodes, variants.map((variant) => `${base}-${variant}`));
+    return rowCodes;
+  });
 
   assert.equal(codes.length, 64);
   assert.equal(new Set(codes).size, 64);
   assert.deepEqual([...codes].sort(), [...expected].sort());
-
-  expected.forEach((code) => {
-    assert.match(
-      html,
-      new RegExp(`href="/tools/64-personality-test\\.html\\?result=${code}"[^>]*data-type-code="${code}"`)
-    );
-  });
 
   variants.forEach((variant) => {
     assert.equal(codes.filter((code) => code.endsWith(variant)).length, 16);
@@ -79,15 +104,17 @@ test('MBTI article exposes all 64 extended types exactly once', () => {
 
 test('MBTI 64 matrix is semantic, descriptive, and mobile-scrollable', () => {
   const html = fs.readFileSync(articlePath, 'utf8');
+  const scrollRegion = html.match(/<div\b(?=[^>]*\bclass="[^"]*\bmbti64-matrix-scroll\b[^"]*")(?=[^>]*\btabindex="0")(?=[^>]*\brole="region")(?=[^>]*\baria-label="MBTI 64유형 비교표")(?=[^>]*\baria-describedby="mbti64-scroll-hint")[^>]*>/);
+  const tableMatch = html.match(/<table\b(?=[^>]*\bclass="[^"]*\bmbti64-matrix\b[^"]*")[^>]*>([\s\S]*?)<\/table>/);
 
   assert.match(html, /id="type-matrix"/);
-  assert.match(html, /class="mbti64-matrix-scroll"[^>]*tabindex="0"/);
-  assert.match(html, /aria-describedby="mbti64-scroll-hint"/);
-  assert.match(html, /<table class="mbti64-matrix">/);
-  assert.match(html, /<caption>MBTI 기본 16유형과 A-C, A-S, T-C, T-S 확장형 비교표<\/caption>/);
-  assert.equal((html.match(/<th scope="row"/g) || []).length, 16);
-  assert.equal((html.match(/class="mbti64-type-name"/g) || []).length, 64);
-  assert.equal((html.match(/class="mbti64-type-copy"/g) || []).length, 64);
+  assert.ok(scrollRegion, 'the matrix scroll region should include all accessibility attributes');
+  assert.ok(tableMatch, 'the semantic matrix table should exist');
+  assert.match(tableMatch[1], /<caption>MBTI 기본 16유형과 A-C, A-S, T-C, T-S 확장형 비교표<\/caption>/);
+  assert.equal((tableMatch[1].match(/<th\b(?=[^>]*\bscope="col")[^>]*>/g) || []).length, 5);
+  assert.equal((tableMatch[1].match(/<th\b(?=[^>]*\bscope="row")[^>]*>/g) || []).length, 16);
+  assert.equal((tableMatch[1].match(/class="mbti64-type-name"/g) || []).length, 64);
+  assert.equal((tableMatch[1].match(/class="mbti64-type-copy"/g) || []).length, 64);
   assert.match(html, /좌우로 밀어 4가지 변형 비교/);
   assert.match(html, /공식 MBTI 검사가 아닌 자체 확장 해석/);
 });
@@ -95,16 +122,24 @@ test('MBTI 64 matrix is semantic, descriptive, and mobile-scrollable', () => {
 test('MBTI article includes the 64-type axis infographic and updated navigation', () => {
   const html = fs.readFileSync(articlePath, 'utf8');
   const svg = fs.readFileSync('blog/images/mbti-64-axis-map.svg', 'utf8');
+  const tocMatch = html.match(/<div\b(?=[^>]*\bclass="[^"]*\bblog-toc-list\b[^"]*")[^>]*>([\s\S]*?)<\/div>/);
+  const numberedHeadings = [...html.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/g)]
+    .map((match) => match[1])
+    .filter((heading) => /^[4-8]\. /.test(heading));
 
-  assert.match(html, /href="#type-matrix"/);
+  assert.ok(tocMatch, 'the article table of contents should exist');
+  assert.match(tocMatch[1], /<a\b(?=[^>]*\bhref="#type-matrix")[^>]*>/);
   assert.match(html, /src="\/blog\/images\/mbti-64-axis-map\.svg"/);
   assert.match(html, /alt="MBTI 16유형에 A\/T와 C\/S 보조축을 더해 64유형으로 확장하는 구조"/);
   assert.match(html, /<figcaption>16개 기본유형 각각이 네 가지 행동 결로 나뉘어 총 64유형이 됩니다\.<\/figcaption>/);
-  assert.match(html, /<h2 id="type-matrix">4\. MBTI 64유형 한눈에 보기<\/h2>/);
-  assert.match(html, /<h2>5\. INTJ와 INTJ-A-C는 어떻게 다를까\?<\/h2>/);
-  assert.match(html, /<h2 id="hexaco">6\. HEXACO 64유형과 MBTI 확장형 64유형은 다르다<\/h2>/);
-  assert.match(html, /<h2>7\. 결과는 어떻게 읽으면 좋을까\?<\/h2>/);
-  assert.match(html, /<h2 id="test">8\. 직접 64유형 테스트 해보기<\/h2>/);
+  assert.match(html, /<h2\b(?=[^>]*\bid="type-matrix")[^>]*>4\. MBTI 64유형 한눈에 보기<\/h2>/);
+  assert.deepEqual(numberedHeadings, [
+    '4. MBTI 64유형 한눈에 보기',
+    '5. INTJ와 INTJ-A-C는 어떻게 다를까?',
+    '6. HEXACO 64유형과 MBTI 확장형 64유형은 다르다',
+    '7. 결과는 어떻게 읽으면 좋을까?',
+    '8. 직접 64유형 테스트 해보기'
+  ]);
 
   assert.match(svg, /<svg/);
   assert.match(svg, /16 기본유형/);
