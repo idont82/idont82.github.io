@@ -14,17 +14,17 @@
     <filter id="card-shadow" x="-15%" y="-20%" width="130%" height="145%">
       <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.12"/>
     </filter>
-    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+    <marker id="arrow-blue" viewBox="0 0 18 18" refX="17" refY="9" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" orient="auto">
+      <path d="M 0 0 L 18 9 L 0 18 z" fill="#2563eb"/>
     </marker>
-    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#059669"/>
+    <marker id="arrow-green" viewBox="0 0 18 18" refX="17" refY="9" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" orient="auto">
+      <path d="M 0 0 L 18 9 L 0 18 z" fill="#059669"/>
     </marker>
-    <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ea580c"/>
+    <marker id="arrow-orange" viewBox="0 0 18 18" refX="17" refY="9" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" orient="auto">
+      <path d="M 0 0 L 18 9 L 0 18 z" fill="#ea580c"/>
     </marker>
-    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7c3aed"/>
+    <marker id="arrow-purple" viewBox="0 0 18 18" refX="17" refY="9" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" orient="auto">
+      <path d="M 0 0 L 18 9 L 0 18 z" fill="#7c3aed"/>
     </marker>
   </defs>
 
@@ -32,56 +32,62 @@
 
   <g font-family="Pretendard, 'Noto Sans KR', Arial, sans-serif">
     <g aria-label="두 개의 세부 축">
-      <rect x="352" y="20" width="236" height="48" rx="24" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
-      <text x="470" y="52" text-anchor="middle" font-size="24" font-weight="700" fill="#334155">A/T 자신감 반응</text>
-      <rect x="612" y="20" width="236" height="48" rx="24" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
-      <text x="730" y="52" text-anchor="middle" font-size="24" font-weight="700" fill="#334155">C/S 관계 처리</text>
-    </g>
-
-    <g fill="none" stroke-width="7" stroke-linecap="round">
-      <path d="M 470 257 C 405 232, 385 205, 350 180" stroke="#2563eb" marker-end="url(#arrow-blue)"/>
-      <path d="M 730 257 C 795 232, 815 205, 850 180" stroke="#059669" marker-end="url(#arrow-green)"/>
-      <path d="M 470 373 C 405 398, 385 425, 350 450" stroke="#ea580c" marker-end="url(#arrow-orange)"/>
-      <path d="M 730 373 C 795 398, 815 425, 850 450" stroke="#7c3aed" marker-end="url(#arrow-purple)"/>
+      <rect x="312" y="18" width="276" height="54" rx="27" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+      <text x="450" y="55" text-anchor="middle" font-size="28" font-weight="700" fill="#334155">A/T 자신감 반응</text>
+      <rect x="612" y="18" width="276" height="54" rx="27" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+      <text x="750" y="55" text-anchor="middle" font-size="28" font-weight="700" fill="#334155">C/S 관계 처리</text>
     </g>
 
     <g filter="url(#card-shadow)">
       <rect x="45" y="82" width="350" height="142" rx="24" fill="#eff6ff" stroke="#2563eb" stroke-width="3"/>
-      <circle cx="99" cy="133" r="32" fill="#2563eb"/>
-      <text x="99" y="143" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">A-C</text>
-      <text x="145" y="131" font-size="30" font-weight="800" fill="#1e3a8a">확신 있게 조율</text>
-      <text x="145" y="171" font-size="24" font-weight="600" fill="#1e40af">자신감 × 협업</text>
+      <circle cx="99" cy="153" r="32" fill="#2563eb"/>
+      <text x="99" y="163" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">A-C</text>
+      <text x="145" y="143" font-size="30" font-weight="800" fill="#1e3a8a">확신 있게 조율</text>
+      <text x="145" y="185" font-size="28" font-weight="600" fill="#1e40af">자신감 × 협업</text>
 
       <rect x="805" y="82" width="350" height="142" rx="24" fill="#ecfdf5" stroke="#059669" stroke-width="3"/>
-      <circle cx="859" cy="133" r="32" fill="#059669"/>
-      <text x="859" y="143" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">A-S</text>
-      <text x="905" y="131" font-size="28" font-weight="800" fill="#064e3b">확신 있게 자율 실행</text>
-      <text x="905" y="171" font-size="24" font-weight="600" fill="#047857">자신감 × 자기주도</text>
+      <circle cx="859" cy="153" r="32" fill="#059669"/>
+      <text x="859" y="163" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">A-S</text>
+      <text x="905" y="120" font-size="28" font-weight="800" fill="#064e3b" aria-label="확신 있게 자율 실행">
+        <tspan x="905" dy="0">확신 있게</tspan>
+        <tspan x="905" dy="34">자율 실행</tspan>
+      </text>
+      <text x="905" y="194" font-size="28" font-weight="600" fill="#047857">자신감 × 자기주도</text>
 
       <rect x="45" y="406" width="350" height="142" rx="24" fill="#fff7ed" stroke="#ea580c" stroke-width="3"/>
-      <circle cx="99" cy="457" r="32" fill="#ea580c"/>
-      <text x="99" y="467" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">T-C</text>
-      <text x="145" y="455" font-size="30" font-weight="800" fill="#7c2d12">신중하게 조율</text>
-      <text x="145" y="495" font-size="24" font-weight="600" fill="#c2410c">민감 반응 × 협업</text>
+      <circle cx="99" cy="477" r="32" fill="#ea580c"/>
+      <text x="99" y="487" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">T-C</text>
+      <text x="145" y="467" font-size="30" font-weight="800" fill="#7c2d12">신중하게 조율</text>
+      <text x="145" y="509" font-size="28" font-weight="600" fill="#c2410c">민감 반응 × 협업</text>
 
       <rect x="805" y="406" width="350" height="142" rx="24" fill="#f5f3ff" stroke="#7c3aed" stroke-width="3"/>
-      <circle cx="859" cy="457" r="32" fill="#7c3aed"/>
-      <text x="859" y="467" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">T-S</text>
-      <text x="905" y="455" font-size="28" font-weight="800" fill="#4c1d95">신중하게 독립 완성</text>
-      <text x="905" y="495" font-size="24" font-weight="600" fill="#6d28d9">민감 반응 × 자기주도</text>
+      <circle cx="859" cy="477" r="32" fill="#7c3aed"/>
+      <text x="859" y="487" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">T-S</text>
+      <text x="905" y="444" font-size="28" font-weight="800" fill="#4c1d95" aria-label="신중하게 독립 완성">
+        <tspan x="905" dy="0">신중하게</tspan>
+        <tspan x="905" dy="34">독립 완성</tspan>
+      </text>
+      <text x="905" y="518" font-size="28" font-weight="600" fill="#6d28d9">민감 반응 × 자기주도</text>
+    </g>
+
+    <g fill="none" stroke-width="6" stroke-linecap="round">
+      <path d="M 458 240 C 438 232, 419 211, 395 190" stroke="#2563eb" marker-end="url(#arrow-blue)"/>
+      <path d="M 742 240 C 762 232, 781 211, 805 190" stroke="#059669" marker-end="url(#arrow-green)"/>
+      <path d="M 458 390 C 438 398, 419 419, 395 440" stroke="#ea580c" marker-end="url(#arrow-orange)"/>
+      <path d="M 742 390 C 762 398, 781 419, 805 440" stroke="#7c3aed" marker-end="url(#arrow-purple)"/>
     </g>
 
     <g filter="url(#card-shadow)">
       <rect x="420" y="240" width="360" height="150" rx="30" fill="#ffffff" stroke="#475569" stroke-width="3"/>
       <text x="600" y="307" text-anchor="middle" font-size="38" font-weight="900" fill="#0f172a">16 기본유형</text>
-      <text x="600" y="349" text-anchor="middle" font-size="24" font-weight="600" fill="#64748b">각 유형마다 4가지 세부 조합</text>
+      <text x="600" y="351" text-anchor="middle" font-size="28" font-weight="600" fill="#64748b">각 유형마다 4가지 세부 조합</text>
     </g>
 
     <g aria-label="축 방향 안내" font-weight="700" fill="#475569">
-      <text x="600" y="105" text-anchor="middle" font-size="24">A · 자신감</text>
-      <text x="600" y="598" text-anchor="middle" font-size="24">T · 민감 반응</text>
-      <text x="35" y="323" text-anchor="middle" font-size="24" transform="rotate(-90 35 323)">C · 협업</text>
-      <text x="1165" y="323" text-anchor="middle" font-size="24" transform="rotate(90 1165 323)">S · 자기주도</text>
+      <text x="600" y="110" text-anchor="middle" font-size="28">A · 자신감</text>
+      <text x="600" y="601" text-anchor="middle" font-size="28">T · 민감 반응</text>
+      <text x="35" y="323" text-anchor="middle" font-size="28" transform="rotate(-90 35 323)">C · 협업</text>
+      <text x="1165" y="323" text-anchor="middle" font-size="28" transform="rotate(90 1165 323)">S · 자기주도</text>
     </g>
   </g>
 </svg>
