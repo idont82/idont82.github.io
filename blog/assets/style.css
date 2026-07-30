@@ -1551,12 +1551,14 @@ body.blog-article-page{
 
 .mbti64-matrix-scroll{
   max-width:100%;
+  max-height:min(75vh, 880px);
   overflow-x:auto;
+  overflow-y:auto;
   border:1px solid var(--line);
   border-radius:18px;
   background:#ffffff;
   -webkit-overflow-scrolling:touch;
-  overscroll-behavior-inline:contain;
+  overscroll-behavior:contain;
 }
 
 .mbti64-matrix{

@@ -178,6 +178,8 @@ test('MBTI 64 matrix styles keep the table and infographic usable across widths'
   const mobileCss = css.slice(mobileStart, mobileEnd === -1 ? undefined : mobileEnd);
 
   assert.match(css, /\.mbti64-matrix-scroll\s*\{[^}]*overflow-x:\s*auto\s*;/s);
+  assert.match(css, /\.mbti64-matrix-scroll\s*\{[^}]*overflow-y:\s*auto\s*;/s);
+  assert.match(css, /\.mbti64-matrix-scroll\s*\{[^}]*max-height:\s*min\(75vh,\s*880px\)\s*;/s);
   assert.match(css, /\.mbti64-matrix\s*\{[^}]*min-width:\s*1040px\s*;/s);
   assert.match(css, /\.mbti64-matrix thead th\s*\{[^}]*position:\s*sticky\s*;/s);
   assert.match(css, /\.mbti64-matrix th:first-child\s*\{[^}]*position:\s*sticky\s*;/s);
