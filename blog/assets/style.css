@@ -1588,6 +1588,10 @@ body.blog-article-page{
   vertical-align:top;
 }
 
+.mbti64-matrix td{
+  height:1px;
+}
+
 .mbti64-matrix tr:last-child th,
 .mbti64-matrix tr:last-child td{
   border-bottom:0;
@@ -1636,7 +1640,7 @@ body.blog-article-page{
 }
 
 .mbti64-matrix tbody th strong,
-.mbti64-matrix tbody th small{
+.mbti64-matrix tbody th span{
   display:block;
 }
 
@@ -1645,11 +1649,43 @@ body.blog-article-page{
   font-size:16px;
 }
 
-.mbti64-matrix tbody th small{
+.mbti64-matrix tbody th span{
   margin-top:4px;
   color:#64748b;
   font-size:12px;
   line-height:1.4;
+}
+
+.mbti64-matrix tbody tr[class*="mbti64-group-"] th:first-child::after{
+  display:inline-flex;
+  align-items:center;
+  min-height:20px;
+  margin-top:9px;
+  padding:2px 7px;
+  border:1px solid #d8dee8;
+  border-radius:999px;
+  background:#f8fafc;
+  color:#475569;
+  font-size:10px;
+  font-weight:800;
+  line-height:1;
+  letter-spacing:.02em;
+}
+
+.mbti64-group-analyst th:first-child::after{
+  content:"분석가";
+}
+
+.mbti64-group-diplomat th:first-child::after{
+  content:"외교관";
+}
+
+.mbti64-group-sentinel th:first-child::after{
+  content:"관리자";
+}
+
+.mbti64-group-explorer th:first-child::after{
+  content:"탐험가";
 }
 
 .mbti64-matrix tbody tr.mbti64-group-analyst th:first-child{
@@ -1673,9 +1709,12 @@ body.blog-article-page{
 }
 
 .mbti64-matrix td a{
-  display:block;
+  display:flex;
+  flex-direction:column;
+  height:100%;
   min-height:132px;
   padding:15px 14px;
+  box-sizing:border-box;
   color:#334155;
   text-decoration:none;
   outline-offset:-3px;

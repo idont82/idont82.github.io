@@ -182,6 +182,12 @@ test('MBTI 64 matrix styles keep the table and infographic usable across widths'
   assert.match(css, /\.mbti64-matrix thead th\s*\{[^}]*position:\s*sticky\s*;/s);
   assert.match(css, /\.mbti64-matrix th:first-child\s*\{[^}]*position:\s*sticky\s*;/s);
   assert.match(css, /\.mbti64-matrix a:focus-visible\s*\{/);
+  assert.match(css, /\.mbti64-matrix td\s*\{[^}]*height:\s*1px\s*;/s);
+  assert.match(css, /\.mbti64-matrix td a\s*\{[^}]*display:\s*flex\s*;[^}]*flex-direction:\s*column\s*;[^}]*height:\s*100%\s*;/s);
+  assert.match(css, /\.mbti64-group-analyst th:first-child::after\s*\{[^}]*content:\s*"분석가"\s*;/s);
+  assert.match(css, /\.mbti64-group-diplomat th:first-child::after\s*\{[^}]*content:\s*"외교관"\s*;/s);
+  assert.match(css, /\.mbti64-group-sentinel th:first-child::after\s*\{[^}]*content:\s*"관리자"\s*;/s);
+  assert.match(css, /\.mbti64-group-explorer th:first-child::after\s*\{[^}]*content:\s*"탐험가"\s*;/s);
 
   assert.notEqual(mobileStart, -1, 'the 760px mobile breakpoint should exist');
   assert.match(mobileCss, /\.mbti64-scroll-hint\s*\{[^}]*display:\s*block\s*;/s);
