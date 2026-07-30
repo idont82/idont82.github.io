@@ -25,7 +25,7 @@ test('MBTI 16 vs 64 article explains the test and links to the tool', () => {
   assert.match(html, /<meta property="og:image:height" content="630">/);
   assert.match(html, /<meta name="twitter:image" content="https:\/\/idont82\.github\.io\/blog\/images\/mbti-64-personality-thumbnail\.png">/);
   assert.match(html, /<link rel="image_src" href="https:\/\/idont82\.github\.io\/blog\/images\/mbti-64-personality-thumbnail\.png">/);
-  assert.match(html, /"dateModified": "2026-07-15"/);
+  assert.match(html, /"dateModified": "2026-07-30"/);
 });
 
 test('MBTI article uses the existing blog three-column layout', () => {
