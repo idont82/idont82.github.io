@@ -85,10 +85,26 @@ test('MBTI article exposes all 64 extended types exactly once', () => {
 
       const href = anchors[0][0].match(/\bhref="([^"]+)"/);
       const code = anchors[0][0].match(/\bdata-type-code="([A-Z]{4}-[AT]-[CS])"/);
+      const anchorContent = anchors[0][1];
 
       assert.ok(href, 'each matrix cell should link to its result');
       assert.ok(code, 'each matrix cell should expose its type code');
       assert.equal(href[1], `/tools/64-personality-test.html?result=${code[1]}`);
+
+      ['name', 'copy'].forEach((part) => {
+        const elements = [...anchorContent.matchAll(new RegExp(
+          `<span\\b(?=[^>]*\\bclass="[^"]*\\bmbti64-type-${part}\\b[^"]*")[^>]*>([\\s\\S]*?)<\\/span>`,
+          'g'
+        ))];
+
+        assert.equal(elements.length, 1, `${code[1]} should contain one type ${part}`);
+        assert.notEqual(
+          elements[0][1].replace(/<[^>]+>/g, '').trim(),
+          '',
+          `${code[1]} type ${part} should not be empty`
+        );
+      });
+
       return code[1];
     });
 
@@ -153,4 +169,22 @@ test('MBTI article includes the 64-type axis infographic and updated navigation'
   assert.match(svg, /A-S/);
   assert.match(svg, /T-C/);
   assert.match(svg, /T-S/);
+});
+
+test('MBTI 64 matrix styles keep the table and infographic usable across widths', () => {
+  const css = fs.readFileSync('blog/assets/style.css', 'utf8');
+  const mobileStart = css.indexOf('@media (max-width:760px)');
+  const mobileEnd = css.indexOf('@media', mobileStart + 1);
+  const mobileCss = css.slice(mobileStart, mobileEnd === -1 ? undefined : mobileEnd);
+
+  assert.match(css, /\.mbti64-matrix-scroll\s*\{[^}]*overflow-x:\s*auto\s*;/s);
+  assert.match(css, /\.mbti64-matrix\s*\{[^}]*min-width:\s*1040px\s*;/s);
+  assert.match(css, /\.mbti64-matrix thead th\s*\{[^}]*position:\s*sticky\s*;/s);
+  assert.match(css, /\.mbti64-matrix th:first-child\s*\{[^}]*position:\s*sticky\s*;/s);
+  assert.match(css, /\.mbti64-matrix a:focus-visible\s*\{/);
+
+  assert.notEqual(mobileStart, -1, 'the 760px mobile breakpoint should exist');
+  assert.match(mobileCss, /\.mbti64-scroll-hint\s*\{[^}]*display:\s*block\s*;/s);
+  assert.match(mobileCss, /\.mbti64-axis-figure\s*\{[^}]*overflow-x:\s*auto\s*;/s);
+  assert.match(mobileCss, /\.mbti64-axis-figure img\s*\{[^}]*min-width:\s*(?:7[2-9]\d|[89]\d{2,})px\s*;/s);
 });
