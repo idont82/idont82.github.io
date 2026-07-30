@@ -71,17 +71,20 @@ test('MBTI article exposes all 64 extended types exactly once', () => {
 
   const codes = rows.flatMap((row, index) => {
     const base = baseTypes[index];
-    const anchors = [...row.matchAll(/<a\b[^>]*>/g)].map((match) => match[0]);
+    const rowHeaders = [...row.matchAll(/<th\b(?=[^>]*\bscope="row")[^>]*>([\s\S]*?)<\/th>/g)];
+    const cells = [...row.matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/g)].map((match) => match[1]);
 
-    assert.match(
-      row,
-      new RegExp(`<th\\b(?=[^>]*\\bscope="row")[^>]*>[\\s\\S]*?<strong>${base}<\\/strong>`)
-    );
-    assert.equal(anchors.length, 4);
+    assert.equal(rowHeaders.length, 1);
+    assert.match(rowHeaders[0][1], new RegExp(`<strong>${base}<\\/strong>`));
+    assert.equal(cells.length, 4);
 
-    const rowCodes = anchors.map((anchor) => {
-      const href = anchor.match(/\bhref="([^"]+)"/);
-      const code = anchor.match(/\bdata-type-code="([A-Z]{4}-[AT]-[CS])"/);
+    const rowCodes = cells.map((cell) => {
+      const anchors = [...cell.matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/g)];
+
+      assert.equal(anchors.length, 1);
+
+      const href = anchors[0][0].match(/\bhref="([^"]+)"/);
+      const code = anchors[0][0].match(/\bdata-type-code="([A-Z]{4}-[AT]-[CS])"/);
 
       assert.ok(href, 'each matrix cell should link to its result');
       assert.ok(code, 'each matrix cell should expose its type code');
@@ -104,11 +107,14 @@ test('MBTI article exposes all 64 extended types exactly once', () => {
 
 test('MBTI 64 matrix is semantic, descriptive, and mobile-scrollable', () => {
   const html = fs.readFileSync(articlePath, 'utf8');
-  const scrollRegion = html.match(/<div\b(?=[^>]*\bclass="[^"]*\bmbti64-matrix-scroll\b[^"]*")(?=[^>]*\btabindex="0")(?=[^>]*\brole="region")(?=[^>]*\baria-label="MBTI 64유형 비교표")(?=[^>]*\baria-describedby="mbti64-scroll-hint")[^>]*>/);
-  const tableMatch = html.match(/<table\b(?=[^>]*\bclass="[^"]*\bmbti64-matrix\b[^"]*")[^>]*>([\s\S]*?)<\/table>/);
+  const scrollRegion = html.match(/<div\b(?=[^>]*\bclass="[^"]*\bmbti64-matrix-scroll\b[^"]*")(?=[^>]*\btabindex="0")(?=[^>]*\brole="region")(?=[^>]*\baria-label="MBTI 64유형 비교표")(?=[^>]*\baria-describedby="mbti64-scroll-hint")[^>]*>([\s\S]*?)<\/div>/);
 
   assert.match(html, /id="type-matrix"/);
   assert.ok(scrollRegion, 'the matrix scroll region should include all accessibility attributes');
+  assert.match(html, /<[a-z][\w-]*\b(?=[^>]*\bid="mbti64-scroll-hint")[^>]*>/i);
+
+  const tableMatch = scrollRegion[1].match(/<table\b(?=[^>]*\bclass="[^"]*\bmbti64-matrix\b[^"]*")[^>]*>([\s\S]*?)<\/table>/);
+
   assert.ok(tableMatch, 'the semantic matrix table should exist');
   assert.match(tableMatch[1], /<caption>MBTI 기본 16유형과 A-C, A-S, T-C, T-S 확장형 비교표<\/caption>/);
   assert.equal((tableMatch[1].match(/<th\b(?=[^>]*\bscope="col")[^>]*>/g) || []).length, 5);
