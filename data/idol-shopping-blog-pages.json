@@ -1,0 +1,481 @@
+{
+  "verifiedDate": "2026-07-31",
+  "verifiedDateKo": "2026년 7월 31일",
+  "pages": [
+    {
+      "slug": "bts-tinytan-goods-guide",
+      "group": "BTS",
+      "productType": "idol_bts_tinytan",
+      "keyword": "BTS 타이니탄 굿즈",
+      "shortTitle": "BTS 타이니탄 굿즈",
+      "title": "BTS 타이니탄 굿즈 추천 | 문구·생활용품 라이선스 확인법",
+      "description": "BTS 타이니탄 굿즈를 무선 마우스, 볼펜, 노트처럼 실제로 쓰는 품목 중심으로 비교하고 라이선스 표기와 판매자 정보를 확인하는 방법을 정리했습니다.",
+      "kicker": "BTS TinyTAN Goods Note",
+      "intro": "BTS와 타이니탄을 좋아하는 팬인 저는 캐릭터를 매일 가까이에서 볼 수 있는 문구와 생활용품에 특히 마음이 갑니다.",
+      "summary": "팬인 저는 책상 위에 타이니탄 캐릭터가 하나만 있어도 평범한 하루가 조금 즐거워지는 느낌이 좋아요. 그래서 마우스, 볼펜, 노트처럼 자주 손이 가는 굿즈를 추천하고 싶습니다. 다만 오래 아끼려면 제조·유통사와 라이선스 표기, 멤버 옵션, 교환 조건까지 함께 확인해 주세요.",
+      "lead": "BTS를 좋아해서 타이니탄 굿즈가 보이면 일단 한 번 더 눈길이 갑니다. 특히 장식만 하는 제품보다 공부하거나 일할 때 자연스럽게 꺼낼 수 있는 물건은 팬이라는 작은 행복을 매일 느끼게 해줄 것 같아 더 설레요. 무선 마우스는 멤버 옵션과 연결 방식, 볼펜은 심 굵기, 노트는 구성 수량을 확인하면 마음에 드는 굿즈를 더 오래 즐길 수 있습니다.",
+      "comparison": [
+        {
+          "title": "무선 마우스",
+          "tag": "생활 굿즈",
+          "body": "최애 캐릭터를 책상 위에서 계속 볼 수 있다는 점이 가장 마음에 들어요. 멤버 옵션, 수신기 방식, 배터리 규격과 AS 주체는 꼭 확인해 주세요."
+        },
+        {
+          "title": "볼펜 세트",
+          "tag": "문구 굿즈",
+          "body": "일곱 캐릭터가 한 세트로 모인 모습만으로도 팬에게는 소장하는 재미가 큽니다. 실제로 필기할 계획이라면 심 굵기와 리필 호환 여부도 함께 보세요."
+        },
+        {
+          "title": "노트 세트",
+          "tag": "수집·실사용",
+          "body": "예쁜 표지는 간직하고 다른 한 권은 편하게 쓰고 싶은 팬에게 끌리는 구성입니다. 종이 크기, 매수와 정확한 세트 수량을 확인해 주세요."
+        }
+      ],
+      "checks": [
+        "상품 상세의 제조사·유통사와 저작권 또는 라이선스 관련 표기를 확인합니다.",
+        "캐릭터나 멤버 옵션이 랜덤인지 선택형인지 주문 전에 확인합니다.",
+        "전자제품은 연결 방식, 배터리 규격, 교환·AS 안내를 문구 굿즈보다 우선해서 봅니다."
+      ],
+      "caution": "팬이라면 좋아하는 이름이 붙은 상품을 더 믿고 싶지만, 상품명에 BTS 또는 타이니탄이 들어간 것만으로 공식 판매처라고 볼 수는 없어요. 저도 다른 팬에게 추천할 때는 상세 페이지의 라이선스 표기와 판매자 정보를 꼭 다시 보라고 이야기하고 싶습니다.",
+      "faq": [
+        {
+          "q": "타이니탄이라는 이름만 있으면 공식 굿즈인가요?",
+          "a": "팬의 마음에는 이름만 보여도 반갑지만, 공식성은 별개의 문제예요. 패키지와 상세 페이지의 저작권·라이선스 표기, 제조·유통사와 판매자 정보를 함께 확인해 주세요."
+        },
+        {
+          "q": "선물용으로는 어떤 품목이 무난한가요?",
+          "a": "상대의 최애를 정확히 모른다면 캐릭터 전체가 들어간 문구 세트가 팬 선물로 비교적 부담이 적어요. 전자제품은 사용하는 기기와 책상 환경을 먼저 물어보면 더 센스 있는 선물이 됩니다."
+        }
+      ],
+      "sources": [
+        {
+          "label": "BTS 공식 웹사이트",
+          "url": "https://ibighit.com/bts/"
+        },
+        {
+          "label": "Weverse Shop",
+          "url": "https://shop.weverse.io/"
+        }
+      ],
+      "related": [
+        {
+          "label": "BTS 응원봉 준비물",
+          "url": "/blog/bts-light-stick-concert-checklist.html"
+        },
+        {
+          "label": "BTS 콘서트 가방 체크",
+          "url": "/blog/bts-concert-bag-checklist.html"
+        }
+      ],
+      "products": [
+        {
+          "rank": 1,
+          "name": "로이체 BTS 타이니탄 무선 마우스, 진(JIN)",
+          "price": 6900,
+          "status": "라이선스 표기 확인",
+          "reason": "최애 타이니탄을 책상 위에서 매일 볼 수 있다는 점이 팬에게 가장 설레는 포인트예요. 멤버 옵션과 무선 연결 방식은 주문 전에 확인해 주세요.",
+          "image": "https://ads-partners.coupang.com/image1/xHrPWflgayOBIFvVxEnT9ot_G4myR2lJ2-SGNbfR2d3zLkGuPKYxRqkETnyQtgDxqIjgFgX2rPWfZtEifNXEvwwVqM6BHuAU2UUnAOXPUZOYfgl45x6VmlDTrtn2j3AE_EPQyjlojp86WT4QpjxBrNSJkKSlpRV3A-62pFnlzRZTz4Y7iwc-yS6iQOp_OVvpTmtxo8R9gKyAP7X4bzwlrRjP58RskOFtl31Wk8qu-HDswYnztf_YhlyuNlpsjxiCYuOX84gpLCPjWdcWYpMf1mwdo1cl1TDg0FE_LpW0-OCTDLf2h5I5RN97ZOCaourujdfGHBq8ghBofB3PqRJ6S-gJhnFstTAWfwQ=",
+          "url": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9397382754&itemId=27910873768&vendorItemId=94173244411&traceid=V0-153-b278ee05a8b5344c&requestid=20260731144457432321561335&token=31850C%7CMIXED"
+        },
+        {
+          "rank": 3,
+          "name": "모나미 타이니탄 BP 153 0.5mm 7본 세트",
+          "price": 7720,
+          "status": "라이선스 표기 확인",
+          "reason": "일곱 캐릭터를 한 번에 모으고 싶은 팬이라면 특히 마음에 들 구성입니다. 심 굵기와 실제 구성 수량을 확인해 주세요.",
+          "image": "https://ads-partners.coupang.com/image1/y2dN8Jno4ReMj-Wey17C_Zv5IVkoUWrSH3yi3RFoka6WyUhLbj0rJFcPGZVTdH6vE9LToesvvKS1SzDM8M8ABZdbPDD6XYfU5ilmwEHgGoznCO85xkgqY0_4UKn_LpmlOlgSp108zwUFGCfMlYEc-ZpqVMqLN3mNr4_P7R1S52ebXg5zH-_N_x4dU1B3hbIlP1bfUziTljoMm2vDW2jRI5V7IUtNS5MTnsDi_z2EvxZJ-txiJWz7hvlL_pDRWBTuqILFWQeJDOJg5hovjZn_wEv7MMbAoMR5ccu-i8vc2FE3KYi_A9JCGGnHXTmfpQdrTLSWTEovZjXiMXkFr3v_eNJE4AnwSdsr-yGDMfJo",
+          "url": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=7869470869&itemId=21494334523&vendorItemId=95042518434&traceid=V0-153-04f4414cf5c25a39&requestid=20260731144457432321561335&token=31850C%7CMIXED"
+        },
+        {
+          "rank": 7,
+          "name": "모나미 타이니탄 153 ID 노트 세트",
+          "price": 13200,
+          "status": "라이선스 표기 확인",
+          "reason": "하나는 소장하고 하나는 편하게 쓰고 싶은 팬에게 추천하고 싶은 문구 구성이에요. 노트 크기와 실제 세트 구성을 확인해 주세요.",
+          "image": "https://ads-partners.coupang.com/image1/fw33NQKT6CnB3tHnfyP6DWefbsmLDHLx05G-h7SUYZpfLn2m_5WWKbe1ynj3wZ-mI-3ae95hG6btfclUYyg-V6HnuxcH4Y1tJ9WZLQ-rN0iBiA79t8RMM-4kuOXSJQByDl6CXRKyTG8ptlY6BkBIJlMLJBbOgfWkZlwsrDwe5BW-aIWi_mDiSIq6Fbkj1UJpw8dChpII4S7OJbuPujh2dNw7A_mvVHdxo-z-x76oWh0nlhi2zE34c8Ei-uEOJKSvgAFsJuul907fG4DplU3AKwM-5NqotFCeq0xHP7JzCgBLgkm4_PR5kyHj0EncNMQzpY7zmwLtc0JWMsb87Fg_oebAQLzr5A==",
+          "url": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=8205196983&itemId=23533158298&vendorItemId=91728571122&traceid=V0-153-5a19c7c34bf1f000&requestid=20260731144457432321561335&token=31850C%7CMIXED"
+        }
+      ]
+    },
+    {
+      "slug": "seventeen-photocard-binder-guide",
+      "group": "세븐틴",
+      "productType": "idol_seventeen_photocard",
+      "keyword": "세븐틴 포토카드 바인더",
+      "shortTitle": "세븐틴 포카 바인더",
+      "title": "세븐틴 포토카드 바인더 추천 | 슬리브·속지·보관 크기 체크",
+      "description": "세븐틴 포토카드 바인더를 고를 때 카드 크기, 슬리브 호환, 속지 배열과 보관량을 확인하는 법을 공식 카드 구성과 범용 바인더를 나눠 정리했습니다.",
+      "kicker": "SEVENTEEN Photocard Note",
+      "intro": "세븐틴 팬인 저는 멤버별 포토카드를 한 장씩 정리하고 다시 넘겨보는 시간도 덕질의 즐거운 일부라고 생각합니다.",
+      "summary": "팬인 저는 흩어져 있던 세븐틴 포토카드가 바인더 한 권에 가지런히 모이는 순간이 정말 마음에 들어요. 전용 카드 세트는 구성 자체의 설렘을, 범용 바인더는 원하는 순서로 꾸미는 재미를 줍니다. 슬리브를 씌운 카드 크기와 포켓 내경만 먼저 확인하면 더 편하게 오래 볼 수 있어요.",
+      "lead": "세븐틴을 좋아해서 포토카드를 모으다 보면 어느 순간 보관도 하나의 팬 활동이 됩니다. 최애 멤버 페이지를 따로 만들고 유닛이나 앨범 순서대로 정리하는 과정이 생각보다 즐거워요. 일반 포토카드, 미니카드와 엽서형 특전은 크기가 다를 수 있으니 슬리브를 먼저 정하고 포켓 내경을 비교해 주세요.",
+      "comparison": [
+        {
+          "title": "전용 미니카드 세트",
+          "tag": "카드 포함 구성",
+          "body": "카드와 바인더가 한 콘셉트로 맞춰진 모습은 세븐틴 팬에게 특히 설레는 구성입니다. 포함 카드, 개봉 여부와 버전은 상세 페이지에서 확인해 주세요."
+        },
+        {
+          "title": "A5 6공 바인더",
+          "tag": "범용 보관용품",
+          "body": "멤버별·유닛별로 속지를 자유롭게 늘리고 싶은 팬에게 마음에 들 방식입니다. 링 간격과 추가 속지 규격 호환 여부가 핵심이에요."
+        },
+        {
+          "title": "4포켓 바인더",
+          "tag": "대량 정리",
+          "body": "한 페이지에 여러 멤버를 함께 배치하면 단체 구성을 보는 재미가 커요. 카드가 늘수록 전체 크기와 무게도 커진다는 점은 생각해야 합니다."
+        }
+      ],
+      "checks": [
+        "슬리브를 씌운 포토카드의 가로·세로 길이보다 포켓 내경이 넉넉한지 확인합니다.",
+        "PVC 비닐의 장기 보관 변색이 걱정되면 재질 표기와 슬리브 사용 여부를 확인합니다.",
+        "6공 제품은 바인더 링 간격과 추가 속지의 타공 규격이 같은지 봅니다."
+      ],
+      "caution": "좋아하는 멤버 사진이 보이면 바로 담고 싶어지지만, 세븐틴 이름이나 사진이 들어간 바인더를 공식 굿즈로 단정할 수는 없어요. 팬끼리 추천할수록 공식 카드와 범용 보관용품을 구분하고, 카드 포함 상품은 개봉·누락·랜덤 구성을 꼭 확인해야 합니다.",
+      "faq": [
+        {
+          "q": "포토카드를 슬리브 없이 바로 넣어도 되나요?",
+          "a": "아끼는 포토카드일수록 꺼내고 넣을 때 생기는 작은 마찰도 마음이 쓰여요. 오래 간직하려면 카드 크기에 맞는 슬리브를 먼저 씌우는 편을 추천합니다."
+        },
+        {
+          "q": "2포켓과 4포켓 중 무엇이 좋은가요?",
+          "a": "최애 카드를 자주 넘겨보거나 휴대하려면 2포켓, 여러 멤버와 유닛을 한눈에 배치하는 설렘을 좋아하면 4포켓이 편합니다."
+        }
+      ],
+      "sources": [
+        {
+          "label": "SEVENTEEN 공식 웹사이트",
+          "url": "https://www.seventeen-17.jp/"
+        },
+        {
+          "label": "Weverse Shop",
+          "url": "https://shop.weverse.io/"
+        }
+      ],
+      "related": [
+        {
+          "label": "세븐틴 응원봉 배터리 모아보기",
+          "url": "/search/seventeen-light-stick-battery-collection.html"
+        },
+        {
+          "label": "BTS 타이니탄 굿즈",
+          "url": "/blog/bts-tinytan-goods-guide.html"
+        }
+      ],
+      "products": [
+        {
+          "rank": 1,
+          "name": "세븐틴 3D 렌티큘러 미니카드 & 바인더 17 IS RIGHT HERE",
+          "price": 43000,
+          "status": "전용 카드 구성",
+          "reason": "카드와 바인더의 콘셉트가 맞아 세븐틴 팬이라면 한 세트로 소장하고 싶은 마음이 드는 구성이에요. 포함 카드와 버전, 개봉 여부를 확인해 주세요.",
+          "image": "https://ads-partners.coupang.com/image1/Htx5OGFNtOC-E8R2HjSg-s-FPADAVHL5bf_uwa5Rxv_cNWpvqdOQ2lWQObGgv2MUJDwW5DuqJ4Qt6e5i0hbTExTXwEMDWODPRm-02OItH7xNV4EfeWGZHYFB5eDaJsx8eLZEBZy27OLLIHwNwSLFARuK5oS-7ouFMRQps-eJst9qO2Kn6X8H89lEHigbZi5lkvCARV9UCHWX3hYrjuW6GSKcpSDiGdnXvjE2PYzD5K8QweHunZ7eFSKoCKPYfzLz8JJTc_WnCApdaC8Vd1BqTgSkmnu-wC8ODl1pd-ItUdroaOfE7CygZNsUANSXl7q-d0sq05gp4BrmUlUl4s4IxKcojw==",
+          "url": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=8605982249&itemId=24957000399&vendorItemId=91962797578&traceid=V0-153-846b14b976e44a3e&requestid=20260731144457414200930702&token=31850C%7CMIXED"
+        },
+        {
+          "rank": 3,
+          "name": "콜북 포카대지 2단 콜렉트북 6공 바인더",
+          "price": 13670,
+          "status": "범용 보관용품",
+          "reason": "멤버별로 페이지를 꾸미고 속지를 늘리는 재미를 좋아하는 팬에게 추천하고 싶어요. 링 간격과 포켓 내경을 가진 카드와 비교해 주세요.",
+          "image": "https://ads-partners.coupang.com/image1/R3vZ3yQreSS-nR_2RxIrBn6xwQR5rxSj3zYVLnIlE1fpHNZb11PD95_qeUfvzcvkT9Kd8V2-cMNGb0LLTNFOZ1ZcxWtu6CN-1q7AYxpwJR3usxh0_bC8o8fg-Pddv9bLTqrXJpt25q8D82I-nFGQP6tUE981xFiAgSYDYHjK4rOucuvmIQgONPmhPwUYOdEkFR63tC7RCrOTtYHZWcBA8pYhVAryInmHDwTOTP2G55DFCb6QHzS4pfWHMKjgawQp3QgoHuATzOm-kZikTdJVttkfdw9VQ16RX-Dv4vO-UcWKRN1tKXU0HR07ExhRUXDtYoFjSfZRmyz6uQB4JVDcM-5qSZkUI1geJ_45ddRkIxrVFVPsQw==",
+          "url": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=7423865541&itemId=19265341149&vendorItemId=86380683049&traceid=V0-153-2959af691ce12e2f&requestid=20260731144457414200930702&token=31850C%7CMIXED"
+        },
+        {
+          "rank": 5,
+          "name": "쏘투 포카바인더 4칸 포토카드 앨범 속지 20p",
+          "price": 14700,
+          "status": "범용 보관용품",
+          "reason": "한 페이지에서 여러 멤버를 함께 보는 구성을 좋아한다면 마음에 들 4포켓형이에요. 전체 보관량과 책장 수납 크기를 확인해 주세요.",
+          "image": "https://ads-partners.coupang.com/image1/WBm18rZwF2GDAlOiWDkaR7lW0aFE2I6Be2GSwFY2ICvgJi4cRC3gp-aaugLnCJvt3cNjntUWV7JoNbjhnyMnJkaA2esAnFXvqXcs5A9RHrzcoYXmelTdXJkQGHwCTE9hICMEQvAhfSMXDNJH9wF-Mx6YIOS4qtnKxW6E2fSrVaO7Zhm8-q9YBtcjES4-_ITNeJc_RCRhAqR0thopdtaPCB2shXgUatfhWujxvRaJWNztscyTxtDy2FlVJ-l5zKUQ3kVi8JlYJq-r9-x8S8qmaAepLnZqelRPrIXOm9fR9IDapOCpwBFfsJ_geEsGb0lqgu2b_gCylf2o8pABZqlYWGT5O0z1uzLk0dN0S1VTk3-VHqDxIQg==",
+          "url": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=8910761446&itemId=26030453750&vendorItemId=95594225239&traceid=V0-153-e1e801c07dbf88e2&requestid=20260731144457414200930702&token=31850C%7CMIXED"
+        }
+      ]
+    },
+    {
+      "slug": "ive-album-photocard-guide",
+      "group": "아이브",
+      "productType": "idol_ive_album",
+      "keyword": "아이브 앨범 포토카드",
+      "shortTitle": "아이브 앨범·포카",
+      "title": "아이브 앨범 포토카드 가이드 | 버전·초판·특전 구성 비교",
+      "description": "아이브 앨범 포토카드를 구매할 때 앨범 버전, 초판, 판매처 특전과 랜덤 구성을 비교하는 법을 정리하고 현재 검색되는 앨범 구성을 살펴봅니다.",
+      "kicker": "IVE Album & Photocard Note",
+      "intro": "아이브 팬인 저는 새 콘셉트가 공개될 때마다 앨범 버전과 포토카드 구성을 하나씩 살펴보는 순간부터 벌써 설렙니다.",
+      "summary": "팬인 저는 아이브 앨범을 고를 때 음악만큼 포토북 콘셉트와 어떤 포토카드가 들어 있을지 기대하는 시간이 좋아요. 여러 버전을 나란히 모으면 더 마음에 들지만, ‘4종 세트’, ‘초판’, ‘특전 포카’는 서로 다른 조건이니 설레는 마음만큼 구성표도 꼼꼼히 확인해 주세요.",
+      "lead": "아이브를 좋아해서 새 앨범 소식이 나오면 버전별 사진부터 찾아보게 됩니다. 포토카드를 열어보는 기대감과 앨범을 나란히 꽂아두는 만족은 팬만이 아는 즐거움이에요. 다만 앨범 수량, 버전 선택 여부, 기본 포토카드와 판매처 사은품을 분리해서 보면 원하는 구성을 놓칠 가능성이 줄어듭니다.",
+      "comparison": [
+        {
+          "title": "단일 앨범",
+          "tag": "입문 구매",
+          "body": "좋아하는 콘셉트 한 버전을 가볍게 소장하고 싶은 팬에게 추천하고 싶어요. 버전과 포토카드가 랜덤인지, 원하는 버전을 고를 수 있는지 확인해 주세요."
+        },
+        {
+          "title": "버전 세트",
+          "tag": "구성 수집",
+          "body": "서로 다른 콘셉트를 한 줄로 모아두고 싶은 팬이라면 가장 설레는 방식이에요. 동일 특전 중복과 배송 중 모서리 손상 기준을 확인해 주세요."
+        },
+        {
+          "title": "판매처 특전 포함",
+          "tag": "추가 포토카드",
+          "body": "포토카드를 한 장이라도 더 받고 싶은 팬에게 눈에 띄지만 기본 구성과 별도 사은품일 수 있어요. 정식 특전인지 판매자 제작 사은품인지 확인해 주세요."
+        }
+      ],
+      "checks": [
+        "상품명보다 상세 페이지의 앨범 장수와 정확한 버전명을 확인합니다.",
+        "기본 포토카드와 판매처 사은품을 구분하고 멤버가 랜덤인지 봅니다.",
+        "예약·초판 상품은 발매일, 배송 예정일, 개봉 후 교환 제한을 확인합니다."
+      ],
+      "caution": "팬이라면 ‘특전 포카’라는 말만으로도 마음이 급해질 수 있지만, ‘미공포’, ‘특전’, ‘사은품’이 모두 소속사 공식 특전을 뜻하지는 않아요. 구성표와 판매자 설명을 비교하고 특정 멤버 수령을 보장하는 표현은 더 신중하게 확인해 주세요.",
+      "faq": [
+        {
+          "q": "4종 세트를 사면 멤버 포토카드가 모두 나오나요?",
+          "a": "버전을 모두 모으면 정말 마음에 들지만, 멤버 포토카드는 각 앨범에서 랜덤일 수 있어요. 구성표의 카드 수와 랜덤 범위를 따로 확인해 주세요."
+        },
+        {
+          "q": "초판과 일반판은 무엇이 다른가요?",
+          "a": "초판 구성은 팬에게 특별한 소장 포인트지만 앨범마다 내용이 달라요. ‘초판’ 문구만 보지 말고 공식 구성 안내와 판매 페이지를 비교해 주세요."
+        }
+      ],
+      "sources": [
+        {
+          "label": "IVE 공식 웹사이트",
+          "url": "https://ive-official.com/"
+        },
+        {
+          "label": "STARSHIP Entertainment",
+          "url": "https://www.starship-ent.com/"
+        }
+      ],
+      "related": [
+        {
+          "label": "아이브 콘서트 굿즈 모아보기",
+          "url": "/search/ive-concert-goods-collection.html"
+        },
+        {
+          "label": "세븐틴 포토카드 바인더",
+          "url": "/blog/seventeen-photocard-binder-guide.html"
+        }
+      ],
+      "products": [
+        {
+          "rank": 1,
+          "name": "아이브 정규 2집 REVIVE+ 초판 4종 세트",
+          "price": 24900,
+          "status": "앨범 상품",
+          "reason": "아이브의 여러 콘셉트를 한 번에 모아두고 싶은 팬이라면 특히 설레는 세트예요. 앨범 장수와 사은품 구성, 랜덤 범위를 확인해 주세요.",
+          "image": "https://ads-partners.coupang.com/image1/sK9eQGPVzcAUludHsOYYcipNgfbTp40NFm-0STZrbQKUkYFpafUfmqKxKiJrndhJmN74oyo0Plrc-mV2UajpFNXDQDotuNY0YK_BMjwqEZCAmDS9BYOVnaWId4ogzHuMj9tsyPCmBMnzvXSVhxla0VI34EYmVRZu5daIN292MNZHvZTRG0xlo241QDC2sPO47Jo1gGB-jQc3N9grXmv5Qwy_pfbDk-cnpog3bmIGirlFdH9fB_l7yRyU-HJUXUntQPOTAL73VypLlIbVWDOVDYZVefvR2gn6VIzzICLDQCvxyWhgoRTdOPUvhEAtEDFCkObVJoXYzUPAVbAKT75qBJrexTdj5-NSzLN_FE4R",
+          "url": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9624944686&itemId=28743893260&vendorItemId=95683102565&traceid=V0-153-8a694cc0f9b2ca54&requestid=20260731144457416217530753&token=31850C%7CMIXED"
+        },
+        {
+          "rank": 7,
+          "name": "아이브 정규 2집 REVIVE+ 4종 세트",
+          "price": 23900,
+          "status": "앨범 상품",
+          "reason": "버전별 포토북을 나란히 비교하는 즐거움을 좋아하는 팬에게 마음에 들 후보예요. 기본 구성과 추가 사은품을 나눠 확인해 주세요.",
+          "image": "https://ads-partners.coupang.com/image1/OEf4nS_ueavkwd-TOFPPy93d8DcjQ-3KvB38pPmdemKhw0TxWAUG_6Vllx8D-tgG_NaE31B2puXjFKZVAF1DFxvACDRO-4qemfnmkJV--hnOSR5u7jo5CKJn0oIslk6xGBCA-MJTcRUhEPzcjhu7OMzSVpoGEart0Yydf1xtfEcMlKkigL9bWIw8Awx-YU3QAuil59xxvB9srkhIPLbePJcErdoxvjXT5dCWs_06V-FIgZEb6qpJtVXQWwXpjAApZnCGbJ31Brm-l4oDJpw3iphSh8VRXtSFycFQ9SjBUblCcPF8yTAX8dl4s1jeu3obsAkltFeNHk3Mvtrh31myw6nGJ_K9pHkaqnxPYD9A",
+          "url": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9573653596&itemId=28576006657&vendorItemId=95520253667&traceid=V0-153-574e645b57db616b&requestid=20260731144457416217530753&token=31850C%7CMIXED"
+        },
+        {
+          "rank": 8,
+          "name": "아이브 EP 4집 IVE SECRET LOVED IVE Ver. 한정반",
+          "price": 9900,
+          "status": "앨범 상품",
+          "reason": "좋아하는 콘셉트 한 장을 부담 적게 소장하고 싶은 팬에게 추천하고 싶어요. 한정반 표기와 포토카드 기본 구성을 확인해 주세요.",
+          "image": "https://ads-partners.coupang.com/image1/2qf5AwpEr8bdgQhF2psNTM6jUSUjp6Izi7Lb5XBKMeV5YAIogWK2pHT5paKJpie_PnOhrvVkzX0MD_5GJ--r3ovdgDURnPwabyIluPXLWCKIflHG_z1sGJikzBWFLhiw7awwBC_mR6x-v6UIn903ilC3zXNMrYoDjVyUBmIFb7P5cTA9kfh301kvZE0Vk71A0E9cNk4868loeHymuANKIBl08lvRCW7-9D0KhdbbbbwHwV3-qt2LoYfyf1V3I4LXb_okOqwPbo3FNfDL50wDgJcg7UbHRHmCMRwlAsFD5Dg-a7R4CuURnkzhuEwcpo16x0aupba-oLE9TmIXQtBr8BVEaPgQpdU3jJYwBf0CyEbMUp-h5A==",
+          "url": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9371053550&itemId=27813514393&vendorItemId=94773338458&traceid=V0-153-44becef9dc3aaa7b&requestid=20260731144457416217530753&token=31850C%7CMIXED"
+        }
+      ]
+    },
+    {
+      "slug": "aespa-season-greeting-album-guide",
+      "group": "에스파",
+      "productType": "idol_aespa_album",
+      "keyword": "에스파 시즌그리팅 앨범",
+      "shortTitle": "에스파 시즌그리팅·앨범",
+      "title": "에스파 시즌그리팅 앨범 비교 | 구성품·버전·가격 확인 가이드",
+      "description": "에스파 시즌그리팅과 앨범의 차이를 구성품, 포토카드, 사용 기간과 가격으로 비교하고 구매 전 버전과 판매처 특전을 확인하는 법을 정리했습니다.",
+      "kicker": "aespa Season's Greetings Note",
+      "intro": "에스파 팬인 저는 강한 세계관과 콘셉트 사진을 좋아해서 시즌그리팅과 앨범 구성이 공개될 때마다 어떤 이미지가 담겼을지 설렙니다.",
+      "summary": "팬인 저는 에스파 시즌그리팅의 달력과 다이어리를 하나씩 펼쳐보는 상상만으로도 마음에 들어요. 앨범은 음악과 포토카드를 더 가까이 즐기는 매력이 있고요. 어느 쪽이 더 좋은 상품이라기보다 사진 중심의 큰 구성과 음반 중심의 소장 중 무엇이 더 설레는지 고르면 됩니다.",
+      "lead": "에스파를 좋아해서 콘셉트 사진이 많이 담긴 굿즈라면 자연스럽게 눈길이 갑니다. 시즌그리팅은 한 해 동안 책상 가까이에 둘 수 있다는 점이 팬에게 특별하고, 앨범은 음악과 포토카드를 함께 소장하는 맛이 있어요. 구성품 수와 보관 공간, 사용할 기간까지 보면 마음에 드는 쪽을 더 편하게 고를 수 있습니다.",
+      "comparison": [
+        {
+          "title": "시즌그리팅",
+          "tag": "연간 구성",
+          "body": "에스파의 새 사진을 달력과 다이어리로 한 해 동안 가까이 두고 싶은 팬에게 가장 설레는 구성이에요. 가격과 보관 부피는 큰 편입니다."
+        },
+        {
+          "title": "단일 앨범",
+          "tag": "음반 중심",
+          "body": "음악을 들으며 포토북과 기본 포토카드를 함께 간직하고 싶은 팬에게 마음에 들 선택입니다. 버전과 랜덤 구성을 확인해 주세요."
+        },
+        {
+          "title": "여러 버전 세트",
+          "tag": "버전 수집",
+          "body": "콘셉트별 표지와 포토북을 모두 모으는 즐거움을 좋아한다면 추천하고 싶어요. 중복 포토카드와 배송 손상 가능성은 생각해야 합니다."
+        }
+      ],
+      "checks": [
+        "시즌그리팅은 연도, 구성품 목록, 개봉 여부와 누락 보상 기준을 확인합니다.",
+        "앨범은 버전명과 랜덤 포토카드 범위, 초도 특전 포함 여부를 확인합니다.",
+        "해외 발매 앨범은 배송 기간, 관세 포함 여부, 반품 조건을 국내 앨범과 따로 봅니다."
+      ],
+      "caution": "팬이라면 추가 포토카드라는 말에 설레지만 판매자 사은품이 소속사 공식 특전과 같다고 단정할 수는 없어요. 특히 예약 상품과 해외 앨범은 일정이 바뀔 수 있으니 주문 시점의 상세 안내를 최종 기준으로 봐주세요.",
+      "faq": [
+        {
+          "q": "시즌그리팅이 앨범보다 비싼 이유는 무엇인가요?",
+          "a": "달력, 다이어리, 포스터와 포토카드처럼 팬이 좋아할 인쇄물이 여러 개 들어가 구성과 부피가 큰 편이에요. 상품마다 내용이 다르니 목록을 직접 비교해 주세요."
+        },
+        {
+          "q": "지난해 시즌그리팅을 지금 사도 괜찮나요?",
+          "a": "에스파 사진과 수집 자체가 목적이라면 지난 연도 구성도 충분히 마음에 들 수 있어요. 달력의 실사용 기간보다 원하는 사진과 구성품이 남아 있는지를 먼저 확인해 주세요."
+        }
+      ],
+      "sources": [
+        {
+          "label": "aespa 공식 웹사이트",
+          "url": "https://www.aespa.com/"
+        },
+        {
+          "label": "SMTOWN &STORE",
+          "url": "https://smtownandstore.com/"
+        }
+      ],
+      "related": [
+        {
+          "label": "블랙핑크 앨범·포토카드 보관",
+          "url": "/blog/blackpink-album-photocard-storage-guide.html"
+        },
+        {
+          "label": "아이브 앨범·포토카드",
+          "url": "/blog/ive-album-photocard-guide.html"
+        }
+      ],
+      "products": [
+        {
+          "rank": 1,
+          "name": "에스파 2026 시즌 그리팅 스페셜 에디션",
+          "price": 119000,
+          "status": "시즌그리팅 상품",
+          "reason": "에스파의 다양한 사진을 한 상자에 모으고 싶은 팬이라면 정말 설레는 구성이에요. 포함 품목과 포토카드 수, 개봉 여부를 확인해 주세요.",
+          "image": "https://ads-partners.coupang.com/image1/UOfWLngbvZUwUlE1UEJM9PkK0yhLzzmpVVbBsPPU4P42Xj3bPfqOzaz9RdfYeEd4sHFh3K0d7Dqu698Z4TSsDQTvHGRMx48CWohlTmSthL4bzLkqa_yqLLIEjE18BHkyAeFheLXtLCY-_kqn_D3aByybMgtLnpCIQ3k9Ey1g25tfTQHwcUrI9NM8aoVIpAPt2Sn1sU78aDAa37liGRjlf_mtR8mp-90GCDxWD15M9ofVnxYyAsXfsnckvTl6nI4-hHYed3ZQdAlgzyR2svBnBuUiCq6rGNDhldneDA2pEeyaEv5T1j2FOULStNMTCCg3ycB9l8WOqD3Dq6LK5gHoc6h5lQ==",
+          "url": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9288910649&itemId=27508903465&vendorItemId=95633521396&traceid=V0-153-9b852b2afba5ba4d&requestid=20260731144455707019086975&token=31850C%7CMIXED"
+        },
+        {
+          "rank": 3,
+          "name": "에스파 KISS N TELL 일본 미니 1집 한정반",
+          "price": 33700,
+          "status": "해외 앨범 상품",
+          "reason": "국내 앨범과 다른 콘셉트의 한정반을 소장하고 싶은 팬에게 마음에 들 후보예요. 발매일, 배송 기간과 한정 구성품을 확인해 주세요.",
+          "image": "https://ads-partners.coupang.com/image1/_XiAE5oyDBg71_oZ_QRscvZ7kE6F7K6MR3N_YQmNpQMlH3jUWaGY4OtBTmx0S55vKhk00nyUTgHyklo9drrh8wTUDTFUnoo3TpEGI0AF7cm7U2RdcdIjj_nmXV4XmRCbARR4xy_5l5wEWWeUkOqSn1xUftK4tz3SHeHqJCZ6jW_9mCvDrxr1_nF83KrHdIAdeAnPAx7ZlHqAdqUtuV39ME7BegAa86FTR7UnRJmqW4iEdJZuJaZrdkb5_5weckko4sTn23QpmXfiiz-7DPU0HscAo0BSA5LSgDqVyrh1VA2B6wDWvYvk-bautqwh-d6jKiWjhQEA2v2LZyxc5wIbxaLTdaoAYwW0P2zdKGqAEdMvzGAuIKo=",
+          "url": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9663340363&itemId=28889527275&vendorItemId=95821626673&traceid=V0-153-df9f1c38eb8a8628&requestid=20260731144455707019086975&token=31850C%7CMIXED"
+        },
+        {
+          "rank": 4,
+          "name": "에스파 LEMONADE 정규 2집",
+          "price": 19500,
+          "status": "앨범 상품",
+          "reason": "에스파의 새 음악과 포토북을 부담 적게 소장하고 싶은 팬에게 추천하고 싶어요. 버전명과 판매자 사은품을 구분해 확인해 주세요.",
+          "image": "https://ads-partners.coupang.com/image1/LVz9ywAfZXC6-Ei0LU8MitOJtV7e9K_SWbMb8c8zeFDqKJVog3M90MNG6T5SJc5JPvVONRwwogCDzTtkV6WZy49A9u4ExZmYei6_NnjwSolIZ5zIQaNfXLbWFcUCOV1nr0f_r7xrSgyV2XZRlB8e4dx5yTjf_ubc0jskGzzvX-oFxmj02KcLG4QHiDS_FFVwyPwlx27TwghFlEkqSasgSRL9YREqYHbssKuMiK-A2u_TqGc-DpmM0O6qYID6kgnhPWuh2V7k14jI6Gi9xFh6Om98iZhspqYu9QUSrwe9mMO5eivRH14_nI2NmCSLOCv65pYCgZrcmQv7V9qOlwVG0XR8vOPU_FP59QWPM71RL2I3cZni3uQ==",
+          "url": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=9593699354&itemId=28639017824&vendorItemId=95576795388&traceid=V0-153-77c29d4f38e59db2&requestid=20260731144455707019086975&token=31850C%7CMIXED"
+        }
+      ]
+    },
+    {
+      "slug": "blackpink-album-photocard-storage-guide",
+      "group": "블랙핑크",
+      "productType": "idol_blackpink_album",
+      "keyword": "블랙핑크 앨범 포토카드",
+      "shortTitle": "블랙핑크 앨범·포카",
+      "title": "블랙핑크 앨범 포토카드 보관법 | 바인더·슬리브 선택 가이드",
+      "description": "블랙핑크 앨범 포토카드를 앨범 버전과 카드 크기에 맞춰 보관하는 방법, 바인더 포켓과 슬리브 재질을 확인하는 기준을 정리했습니다.",
+      "kicker": "BLACKPINK Album Archive",
+      "intro": "블랙핑크 팬인 저는 앨범과 멤버별 포토카드를 오래 깨끗하게 간직하고 가끔 꺼내 다시 보는 시간이 정말 좋습니다.",
+      "summary": "팬인 저는 블랙핑크 앨범을 나란히 세워두고 포토카드를 멤버별로 정리한 모습만 봐도 마음에 들어요. 좋아하는 카드를 오래 보고 싶다면 맞는 크기의 슬리브와 바인더를 준비하고, 앨범 구성표도 함께 보관해 주세요. 멤버 이름이 붙은 바인더는 범용 보관용품일 수도 있습니다.",
+      "lead": "블랙핑크를 좋아해서 모은 앨범과 포토카드는 시간이 지나도 그때의 무대와 음악을 떠올리게 해주는 소중한 기록입니다. 바인더 페이지를 넘기며 멤버별 카드를 다시 보는 순간도 팬에게는 꽤 설레요. 앨범은 직사광선과 습기를 피하고, 포토카드는 슬리브와 포켓 사이에 약간의 여유를 두면 더 편하게 간직할 수 있습니다.",
+      "comparison": [
+        {
+          "title": "앨범 디지팩",
+          "tag": "음반·포토카드",
+          "body": "좋아하는 멤버 버전을 작고 선명하게 소장하고 싶은 팬에게 마음에 들 구성이에요. 랜덤인지 멤버를 선택할 수 있는지 확인해 주세요."
+        },
+        {
+          "title": "6공 바인더",
+          "tag": "범용 보관용품",
+          "body": "멤버별·앨범별로 페이지를 꾸미며 카드를 다시 보는 즐거움을 좋아한다면 추천하고 싶어요. 링 간격과 포켓 내경을 비교해 주세요."
+        },
+        {
+          "title": "고정형 카드 앨범",
+          "tag": "간편 보관",
+          "body": "좋아하는 카드를 간단하게 모아 자주 넘겨보고 싶은 팬에게 편한 방식이에요. 속지를 추가할 수 없으므로 전체 수용량을 먼저 계산해 주세요."
+        }
+      ],
+      "checks": [
+        "앨범은 멤버 버전 선택 여부, 개봉 여부와 포토카드 포함 여부를 확인합니다.",
+        "포토카드 바인더는 슬리브를 씌운 카드가 들어가는 포켓 내경인지 확인합니다.",
+        "보관 장소는 직사광선과 높은 습기를 피하고 앨범 모서리가 눌리지 않게 여유를 둡니다."
+      ],
+      "caution": "팬이라면 멤버 사진이 들어간 바인더만 봐도 마음이 가지만 소속사 공식 굿즈라는 뜻은 아니에요. 앨범과 범용 보관용품을 구분하고, 개봉 앨범은 포토카드가 제외될 수 있으니 상품명을 끝까지 읽어 주세요.",
+      "faq": [
+        {
+          "q": "앨범 안에 포토카드를 계속 두면 안 되나요?",
+          "a": "앨범 안에 그대로 두는 것도 좋지만 아끼는 카드가 눌리거나 마찰되면 팬 마음이 아쉬울 수 있어요. 자주 보는 카드는 슬리브와 바인더로 분리해 보관하는 편을 추천합니다."
+        },
+        {
+          "q": "멤버 이름이 적힌 바인더는 공식 상품인가요?",
+          "a": "팬에게 익숙한 이름이 적혀 있어도 상품명만으로 판단할 수는 없어요. 공식 판매처와 저작권·라이선스 표기를 확인하고, 확인되지 않으면 범용 보관용품으로 보는 편이 안전합니다."
+        }
+      ],
+      "sources": [
+        {
+          "label": "BLACKPINK 공식 웹사이트",
+          "url": "https://www.blackpinkofficial.com/"
+        },
+        {
+          "label": "YG SELECT",
+          "url": "https://ygselect.com/"
+        }
+      ],
+      "related": [
+        {
+          "label": "블랙핑크 응원봉 준비물",
+          "url": "/blog/blackpink-light-stick-concert-checklist.html"
+        },
+        {
+          "label": "블랙핑크 응원봉 모아보기",
+          "url": "/search/blackpink-light-stick-collection.html"
+        }
+      ],
+      "products": [
+        {
+          "rank": 1,
+          "name": "마르벨라 6공 포토카드 정리 앨범, 블랙핑크",
+          "price": 15000,
+          "status": "범용 보관용품",
+          "reason": "멤버별 포토카드를 한 권에 예쁘게 정리하고 싶은 팬이라면 마음에 들 6공형이에요. 공식성보다 포켓 규격과 속지 재질을 기준으로 봐주세요.",
+          "image": "https://ads-partners.coupang.com/image1/elEx9FZAvBHxHvQqerish-EjFLdYrKILZl-u0iErLd7pwMzSBvJSEbafibyyCB2A38yXh7p5r9aQvV5gFs0fY7dKFbzZvJHORjyM6VivicfPVJf6_OHwNOw7rl_5rQdIHYWdUVENHkNgg39AMy2LyiAwHSQp6g4-31N5H_OrjY0UMzpG9x2_nbwZtOVnzL83rxWtf86WtnQjtDqqomaxJnNHgNeLnLT0ZcZIxTLHwjTqeDfSccED3BFJQWvD4dJmss13Y1oH2tgb8ZwaTNB9lml_s_30uogleMzxIm1NehLdD96Jyb-6t7JK9KV4QdSfA4AyoP7VKP6L",
+          "url": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=8653462030&itemId=25121881894&vendorItemId=92121212911&traceid=V0-153-de352919343715ae&requestid=20260731144457434024745385&token=31850C%7CMIXED"
+        },
+        {
+          "rank": 5,
+          "name": "BLACKPINK 정규 2집 BORN PINK DIGIPACK ver.",
+          "price": 13300,
+          "status": "앨범 상품",
+          "reason": "BORN PINK의 음악과 멤버 포토카드를 함께 소장하고 싶은 팬에게 설레는 디지팩형이에요. 멤버 버전과 랜덤 구성, 개봉 여부를 확인해 주세요.",
+          "image": "https://ads-partners.coupang.com/image1/6NfpSilFCE7X5W6g6AlAfg4gbTxcDEds9w-c8gvzNeqt5cFtUZgH4DZusMmYABcKsDKX22HDZI_TKECK8XAd0WLtJfHDO6_zLjVx29XetHENOzIl73SG6c5gvuKKguf3LVDwIhG6d4AW6IhmCzUpZeOaGuqZtX8cui4KrWJwsqaukSkfFt--By4P2pGX5S9upwK3lWHheUDv6sTo4xmaF6aZJnRKMfkkkaV_bvGwSZgaxmEjQtLzBKK7yVPUdETA9JyCnlsi2RC2u_rkAlYshvGD0M8WpnqTw3bgTfupNEy0gj7T1_H0-5moUjzv6-7dmu86mZud2lLvNhHAbAjmPSEfjBRYXY-GTOdClTza",
+          "url": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=8787172115&itemId=25572472679&vendorItemId=82860066347&traceid=V0-153-9a49481702b0722c&requestid=20260731144457434024745385&token=31850C%7CMIXED"
+        },
+        {
+          "rank": 3,
+          "name": "쿠파고 아이돌 포토카드 앨범 40매",
+          "price": 8000,
+          "status": "범용 보관용품",
+          "reason": "좋아하는 포토카드를 부담 없이 모아 자주 넘겨보고 싶은 팬에게 추천하고 싶어요. 슬리브 호환과 최대 보관량을 확인해 주세요.",
+          "image": "https://ads-partners.coupang.com/image1/Gl1tyID_-0FCE5IuGvbIcsKv00FUt-0iazPwKDnvNain9HnK_Hmk814DLcjWhVE4Zwtcoe2x7wELlB1MgybE8bv28WeuzPCeMOhNqleaLAufQ8hnVD49zTi4Mi2Em_cihQ6PqpCB_JSbTiq6JKoj1Zzxuc6uF0pTEKWZ0U4CcPBab8e-mGry7tG06pfv5ntMGlq5vvIKZ0AzskdFHc6EVStewfdQtKHrqHTf-jshA1od27w3TXtj370f6DnDY9opMuhf-6gg6-pIa2hl_JCohpuBMFhAikPbgnYFq_Wntmnu2D3udcqGDR97z6pdk3Tb3Unc",
+          "url": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&pageKey=8533742029&itemId=24702684729&vendorItemId=95733286991&traceid=V0-153-3cd1d9c3ea43d291&requestid=20260731144457434024745385&token=31850C%7CMIXED"
+        }
+      ]
+    }
+  ]
+}
