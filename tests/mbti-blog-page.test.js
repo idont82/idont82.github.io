@@ -65,57 +65,60 @@ test('MBTI article exposes all 64 extended types exactly once', () => {
   ];
   const variants = ['A-C', 'A-S', 'T-C', 'T-S'];
   const expected = baseTypes.flatMap((base) => variants.map((variant) => `${base}-${variant}`));
-  const tableMatch = html.match(/<table\b(?=[^>]*\bclass="[^"]*\bmbti64-matrix\b[^"]*")[^>]*>([\s\S]*?)<\/table>/);
+  const tableMatches = [...html.matchAll(/<table\b(?=[^>]*\bclass="[^"]*\bmbti64-matrix\b[^"]*")[^>]*>([\s\S]*?)<\/table>/g)];
 
-  assert.ok(tableMatch, 'the matrix table should exist');
+  assert.equal(tableMatches.length, 2, 'A and T matrix tables should both exist');
 
-  const tbodyMatch = tableMatch[1].match(/<tbody\b[^>]*>([\s\S]*?)<\/tbody>/);
-  assert.ok(tbodyMatch, 'the matrix table should contain a tbody');
+  const tableVariants = [['A-C', 'A-S'], ['T-C', 'T-S']];
+  const codes = tableMatches.flatMap((tableMatch, tableIndex) => {
+    const tbodyMatch = tableMatch[1].match(/<tbody\b[^>]*>([\s\S]*?)<\/tbody>/);
+    assert.ok(tbodyMatch, 'each matrix table should contain a tbody');
 
-  const rows = [...tbodyMatch[1].matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/g)].map((match) => match[1]);
-  assert.equal(rows.length, 16);
+    const rows = [...tbodyMatch[1].matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/g)].map((match) => match[1]);
+    assert.equal(rows.length, 16);
 
-  const codes = rows.flatMap((row, index) => {
-    const base = baseTypes[index];
-    const rowHeaders = [...row.matchAll(/<th\b(?=[^>]*\bscope="row")[^>]*>([\s\S]*?)<\/th>/g)];
-    const cells = [...row.matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/g)].map((match) => match[1]);
+    return rows.flatMap((row, index) => {
+      const base = baseTypes[index];
+      const rowHeaders = [...row.matchAll(/<th\b(?=[^>]*\bscope="row")[^>]*>([\s\S]*?)<\/th>/g)];
+      const cells = [...row.matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/g)].map((match) => match[1]);
 
-    assert.equal(rowHeaders.length, 1);
-    assert.match(rowHeaders[0][1], new RegExp(`<strong>${base}<\\/strong>`));
-    assert.equal(cells.length, 4);
+      assert.equal(rowHeaders.length, 1);
+      assert.match(rowHeaders[0][1], new RegExp(`<strong>${base}<\\/strong>`));
+      assert.equal(cells.length, 2);
 
-    const rowCodes = cells.map((cell) => {
-      const anchors = [...cell.matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/g)];
+      const rowCodes = cells.map((cell) => {
+        const anchors = [...cell.matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/g)];
 
-      assert.equal(anchors.length, 1);
+        assert.equal(anchors.length, 1);
 
-      const href = anchors[0][0].match(/\bhref="([^"]+)"/);
-      const code = anchors[0][0].match(/\bdata-type-code="([A-Z]{4}-[AT]-[CS])"/);
-      const anchorContent = anchors[0][1];
+        const href = anchors[0][0].match(/\bhref="([^"]+)"/);
+        const code = anchors[0][0].match(/\bdata-type-code="([A-Z]{4}-[AT]-[CS])"/);
+        const anchorContent = anchors[0][1];
 
-      assert.ok(href, 'each matrix cell should link to its result');
-      assert.ok(code, 'each matrix cell should expose its type code');
-      assert.equal(href[1], `/tools/64-personality-test.html?result=${code[1]}`);
+        assert.ok(href, 'each matrix cell should link to its result');
+        assert.ok(code, 'each matrix cell should expose its type code');
+        assert.equal(href[1], `/tools/64-personality-test.html?result=${code[1]}`);
 
-      ['name', 'copy'].forEach((part) => {
-        const elements = [...anchorContent.matchAll(new RegExp(
-          `<span\\b(?=[^>]*\\bclass="[^"]*\\bmbti64-type-${part}\\b[^"]*")[^>]*>([\\s\\S]*?)<\\/span>`,
-          'g'
-        ))];
+        ['name', 'copy'].forEach((part) => {
+          const elements = [...anchorContent.matchAll(new RegExp(
+            `<span\\b(?=[^>]*\\bclass="[^"]*\\bmbti64-type-${part}\\b[^"]*")[^>]*>([\\s\\S]*?)<\\/span>`,
+            'g'
+          ))];
 
-        assert.equal(elements.length, 1, `${code[1]} should contain one type ${part}`);
-        assert.notEqual(
-          elements[0][1].replace(/<[^>]+>/g, '').trim(),
-          '',
-          `${code[1]} type ${part} should not be empty`
-        );
+          assert.equal(elements.length, 1, `${code[1]} should contain one type ${part}`);
+          assert.notEqual(
+            elements[0][1].replace(/<[^>]+>/g, '').trim(),
+            '',
+            `${code[1]} type ${part} should not be empty`
+          );
+        });
+
+        return code[1];
       });
 
-      return code[1];
+      assert.deepEqual(rowCodes, tableVariants[tableIndex].map((variant) => `${base}-${variant}`));
+      return rowCodes;
     });
-
-    assert.deepEqual(rowCodes, variants.map((variant) => `${base}-${variant}`));
-    return rowCodes;
   });
 
   assert.equal(codes.length, 64);
@@ -127,23 +130,27 @@ test('MBTI article exposes all 64 extended types exactly once', () => {
   });
 });
 
-test('MBTI 64 matrix is semantic, descriptive, and mobile-scrollable', () => {
+test('MBTI 64 matrix is split into semantic A and T tables without scroll instructions', () => {
   const html = fs.readFileSync(articlePath, 'utf8');
-  const scrollRegion = html.match(/<div\b(?=[^>]*\bclass="[^"]*\bmbti64-matrix-scroll\b[^"]*")(?=[^>]*\btabindex="0")(?=[^>]*\brole="region")(?=[^>]*\baria-label="MBTI 64유형 비교표")(?=[^>]*\baria-describedby="mbti64-scroll-hint")[^>]*>([\s\S]*?)<\/div>/);
+  const panels = [...html.matchAll(/<div\b(?=[^>]*\bclass="[^"]*\bmbti64-matrix-panel\b[^"]*")(?=[^>]*\brole="region")(?=[^>]*\baria-label="([^"]+)")[^>]*>([\s\S]*?)<\/div>/g)];
 
   assert.match(html, /id="type-matrix"/);
-  assert.ok(scrollRegion, 'the matrix scroll region should include all accessibility attributes');
-  assert.match(html, /<[a-z][\w-]*\b(?=[^>]*\bid="mbti64-scroll-hint")[^>]*>/i);
+  assert.equal(panels.length, 2);
+  assert.deepEqual(panels.map((panel) => panel[1]), [
+    'A-C와 A-S 유형 비교표',
+    'T-C와 T-S 유형 비교표'
+  ]);
+  assert.match(panels[0][2], /<caption>MBTI 기본 16유형과 A-C, A-S 확장형 비교표<\/caption>/);
+  assert.match(panels[1][2], /<caption>MBTI 기본 16유형과 T-C, T-S 확장형 비교표<\/caption>/);
 
-  const tableMatch = scrollRegion[1].match(/<table\b(?=[^>]*\bclass="[^"]*\bmbti64-matrix\b[^"]*")[^>]*>([\s\S]*?)<\/table>/);
+  panels.forEach((panel) => {
+    assert.equal((panel[2].match(/<th\b(?=[^>]*\bscope="col")[^>]*>/g) || []).length, 3);
+    assert.equal((panel[2].match(/<th\b(?=[^>]*\bscope="row")[^>]*>/g) || []).length, 16);
+    assert.equal((panel[2].match(/class="mbti64-type-name"/g) || []).length, 32);
+    assert.equal((panel[2].match(/class="mbti64-type-copy"/g) || []).length, 32);
+  });
 
-  assert.ok(tableMatch, 'the semantic matrix table should exist');
-  assert.match(tableMatch[1], /<caption>MBTI 기본 16유형과 A-C, A-S, T-C, T-S 확장형 비교표<\/caption>/);
-  assert.equal((tableMatch[1].match(/<th\b(?=[^>]*\bscope="col")[^>]*>/g) || []).length, 5);
-  assert.equal((tableMatch[1].match(/<th\b(?=[^>]*\bscope="row")[^>]*>/g) || []).length, 16);
-  assert.equal((tableMatch[1].match(/class="mbti64-type-name"/g) || []).length, 64);
-  assert.equal((tableMatch[1].match(/class="mbti64-type-copy"/g) || []).length, 64);
-  assert.match(html, /좌우로 밀어 4가지 변형 비교/);
+  assert.doesNotMatch(html, /mbti64-scroll-hint|좌우로 밀어/);
   assert.match(html, /공식 MBTI 검사가 아닌 자체 확장 해석/);
 });
 
@@ -183,12 +190,11 @@ test('MBTI 64 matrix styles keep the table and infographic usable across widths'
   const mobileEnd = css.indexOf('@media', mobileStart + 1);
   const mobileCss = css.slice(mobileStart, mobileEnd === -1 ? undefined : mobileEnd);
 
-  assert.match(css, /\.mbti64-matrix-scroll\s*\{[^}]*overflow-x:\s*auto\s*;/s);
-  assert.match(css, /\.mbti64-matrix-scroll\s*\{[^}]*overflow-y:\s*auto\s*;/s);
-  assert.match(css, /\.mbti64-matrix-scroll\s*\{[^}]*max-height:\s*min\(75vh,\s*880px\)\s*;/s);
-  assert.match(css, /\.mbti64-matrix\s*\{[^}]*min-width:\s*1040px\s*;/s);
-  assert.match(css, /\.mbti64-matrix thead th\s*\{[^}]*position:\s*sticky\s*;/s);
-  assert.match(css, /\.mbti64-matrix th:first-child\s*\{[^}]*position:\s*sticky\s*;/s);
+  assert.match(css, /\.mbti64-matrix-panel\s*\{[^}]*overflow:\s*visible\s*;/s);
+  assert.match(css, /\.mbti64-matrix\s*\{[^}]*min-width:\s*0\s*;/s);
+  assert.doesNotMatch(css, /\.mbti64-matrix-scroll\s*\{/);
+  assert.doesNotMatch(css, /\.mbti64-matrix thead th\s*\{[^}]*position:\s*sticky\s*;/s);
+  assert.doesNotMatch(css, /\.mbti64-matrix th:first-child\s*\{[^}]*position:\s*sticky\s*;/s);
   assert.match(css, /\.mbti64-matrix a:focus-visible\s*\{/);
   assert.match(css, /\.mbti64-matrix td\s*\{[^}]*height:\s*1px\s*;/s);
   assert.match(css, /\.mbti64-matrix td a\s*\{[^}]*display:\s*flex\s*;[^}]*flex-direction:\s*column\s*;[^}]*height:\s*100%\s*;/s);
@@ -203,7 +209,6 @@ test('MBTI 64 matrix styles keep the table and infographic usable across widths'
   assert.match(css, /\.mbti64-matrix td a > strong\s*\{[^}]*color:\s*var\(--mbti64-code,\s*var\(--mbti64-accent\)\)\s*;/s);
 
   assert.notEqual(mobileStart, -1, 'the 760px mobile breakpoint should exist');
-  assert.match(mobileCss, /\.mbti64-scroll-hint\s*\{[^}]*display:\s*block\s*;/s);
   assert.match(mobileCss, /\.mbti64-axis-figure\s*\{[^}]*overflow-x:\s*auto\s*;/s);
   assert.match(mobileCss, /\.mbti64-axis-figure img\s*\{[^}]*min-width:\s*(?:7[2-9]\d|[89]\d{2,})px\s*;/s);
 });
