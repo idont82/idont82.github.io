@@ -100,17 +100,17 @@
     },
     {
       "id": "jamsil",
-      "name": "잠실",
-      "emoji": "🏟️",
+      "name": "잠실 방이",
+      "emoji": "🧸",
       "station": "잠실역",
-      "exit": "2번 출구",
-      "summary": "롯데월드타워와 석촌호수 인근의 대형 오락실 투어 예정지",
-      "spotCount": 0,
-      "radius": "-",
-      "totalDistance": "-",
-      "totalMachines": 0,
-      "environment": ["롯데월드", "Coming Soon"],
-      "tags": ["투어예정"]
+      "exit": "10번 출구",
+      "summary": "방이먹자골목 한 줄에서 인형뽑기·가챠·사격을 함께 보는 6곳 코스",
+      "spotCount": 6,
+      "radius": "반경 350m",
+      "totalDistance": "매장 구간 약 350m",
+      "totalMachines": 70,
+      "environment": ["방이먹자골목", "실내", "역세권"],
+      "tags": ["NEW", "사진답사"]
     },
     {
       "id": "sungshin",

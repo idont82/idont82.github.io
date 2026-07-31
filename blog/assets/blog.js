@@ -29,7 +29,7 @@ async function initAreaMap(areaId, containerId) {
   if (!container) {
     return;
   }
-  container.innerHTML = '<div class="article-map-loading">홍대 17곳 지도를 불러오는 중입니다…</div>';
+  container.innerHTML = '<div class="article-map-loading">매장 지도를 불러오는 중입니다…</div>';
   try {
     const response = await fetch(`/data/${areaId}.json`);
     if (!response.ok) {
@@ -41,6 +41,9 @@ async function initAreaMap(areaId, containerId) {
       hongdae: [
         { name: '홍대입구역', lat: 37.557192, lng: 126.92449, className: 'blog-station-marker blog-station-marker--green', emoji: '🚇' },
         { name: '상수역', lat: 37.547716, lng: 126.922852, className: 'blog-station-marker blog-station-marker--brown', emoji: '🚇' }
+      ],
+      jamsil: [
+        { name: '잠실역 10번 출구', lat: 37.5145, lng: 127.1048, className: 'blog-station-marker blog-station-marker--green', emoji: '🚇' }
       ],
       yeonsinnae: [
         { name: '연신내역 6번 출구', lat: 37.619001, lng: 126.920766, className: 'blog-station-marker blog-station-marker--green', emoji: '🚇' }
