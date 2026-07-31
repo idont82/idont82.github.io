@@ -688,6 +688,7 @@ body.blog-article-page{
 }
 
 .blog-article-shell{
+  min-width:0;
   padding:32px;
   border:1px solid var(--line);
   border-radius:28px;

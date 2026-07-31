@@ -40,6 +40,12 @@ test('MBTI article uses the existing blog three-column layout', () => {
   assert.doesNotMatch(html, /<main class="blog-article-layout">/);
 });
 
+test('MBTI article shell can shrink to the standard blog content column', () => {
+  const css = fs.readFileSync('blog/assets/style.css', 'utf8');
+
+  assert.match(css, /\.blog-article-shell\s*\{[^}]*min-width:\s*0\s*;/s);
+});
+
 test('MBTI article is discoverable from root blog home and sitemap', () => {
   const index = fs.readFileSync('index.html', 'utf8');
   const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
