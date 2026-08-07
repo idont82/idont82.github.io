@@ -1,0 +1,77 @@
+name: Facebook card news
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Generate cards without calling Meta
+        required: true
+        default: true
+        type: boolean
+  schedule:
+    - cron: '30 11 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: facebook-card-news-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    env:
+      META_PAGE_ID: ${{ secrets.META_PAGE_ID }}
+      META_PAGE_ACCESS_TOKEN: ${{ secrets.META_PAGE_ACCESS_TOKEN }}
+      META_GRAPH_VERSION: ${{ vars.META_GRAPH_VERSION }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install card renderer dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
+          python -m pip install Pillow==11.3.0
+      - name: Run Facebook automation tests
+        shell: bash
+        run: node --test tests/facebook-*.test.js
+      - name: Validate live Meta configuration
+        if: github.event_name == 'schedule' || !inputs.dry_run
+        shell: bash
+        run: |
+          test -n "$META_PAGE_ID"
+          test -n "$META_PAGE_ACCESS_TOKEN"
+          test -n "$META_GRAPH_VERSION"
+      - name: Generate or publish one queued post
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.dry_run }}" == "true" ]]; then
+            node scripts/publish-facebook-posts.js --dry-run
+          else
+            node scripts/publish-facebook-posts.js
+            node scripts/collect-facebook-insights.js
+          fi
+      - name: Upload dry-run cards
+        if: github.event_name == 'workflow_dispatch' && inputs.dry_run
+        uses: actions/upload-artifact@v4
+        with:
+          name: facebook-card-news-preview
+          path: .facebook-artifacts/
+      - name: Commit publishing results only
+        if: github.event_name == 'schedule' || !inputs.dry_run
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- data/facebook-post-queue.json data/facebook-post-insights.json
+          git diff --cached --quiet || git commit -m "chore: record facebook publishing result"
+          git push
