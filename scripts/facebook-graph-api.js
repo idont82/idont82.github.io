@@ -70,7 +70,7 @@ class FacebookGraphClient {
   }
 
   async listRecentPosts() {
-    const path = this.pathWithQuery(`/${this.pageId}/feed`, {
+    const path = this.pathWithQuery(`/${this.pageId}/published_posts`, {
       fields: 'id,message,permalink_url,created_time',
       limit: '50',
       access_token: this.token,

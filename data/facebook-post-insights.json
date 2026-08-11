@@ -1,4 +1,15 @@
 {
-  "updatedAt": null,
-  "posts": {}
+  "updatedAt": "2026-08-11T07:43:50.711Z",
+  "posts": {
+    "1243431898854300_122104701447428837": {
+      "queueId": "20260810-seasonal-neck-fan",
+      "metrics": {
+        "post_clicks": 0
+      },
+      "unsupportedMetrics": [
+        "post_impressions_unique",
+        "post_engaged_users"
+      ]
+    }
+  }
 }

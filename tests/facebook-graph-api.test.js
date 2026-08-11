@@ -49,13 +49,18 @@ test('Graph client retries a 500 but does not retry an OAuth 400', async () => {
 });
 
 test('duplicate lookup finds the tracking marker in recent Page posts', async () => {
-  const client = clientWith(async () => jsonResponse({
-    data: [
-      { id: 'page_1', message: 'https://site/?utm_content=post-1', permalink_url: 'https://facebook/post-1' },
-      { id: 'page_2', message: 'another post' },
-    ],
-  }));
+  let requestedUrl = '';
+  const client = clientWith(async (url) => {
+    requestedUrl = url;
+    return jsonResponse({
+      data: [
+        { id: 'page_1', message: 'https://site/?utm_content=post-1', permalink_url: 'https://facebook/post-1' },
+        { id: 'page_2', message: 'another post' },
+      ],
+    });
+  });
   assert.equal((await client.findDuplicate('utm_content=post-1')).id, 'page_1');
+  assert.match(requestedUrl, /\/page\/published_posts\?/);
   assert.equal(await client.findDuplicate('utm_content=missing'), null);
 });
 

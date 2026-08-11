@@ -43,7 +43,7 @@ test('due selection resumes rendered and publishing work before queued work', ()
 });
 
 test('queue transitions reject illegal state changes and write atomically', () => {
-  const sample = [{ ...queue[0] }];
+  const sample = [{ ...queue[0], status: 'queued' }];
   transitionPost(sample, sample[0].id, 'rendered');
   assert.equal(sample[0].status, 'rendered');
   assert.throws(() => transitionPost(sample, sample[0].id, 'published'), /rendered.*publishing/i);
