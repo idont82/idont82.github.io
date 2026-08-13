@@ -12,6 +12,8 @@ test('Facebook workflow is locked, secret-backed, scheduled at 20:30 KST and sup
   assert.match(yaml, /secrets\.META_PAGE_ID/);
   assert.match(yaml, /secrets\.META_PAGE_ACCESS_TOKEN/);
   assert.match(yaml, /node --test tests\/facebook-/);
+  assert.match(yaml, /build-facebook-short-links\.js/);
+  assert.match(yaml, /git diff --exit-code -- g\/redirect\.js/);
   assert.match(yaml, /publish-facebook-posts\.js/);
   assert.match(yaml, /collect-facebook-insights\.js/);
   assert.doesNotMatch(yaml, /coupang\/api\.txt/);
