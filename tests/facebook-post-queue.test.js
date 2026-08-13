@@ -58,7 +58,36 @@ test('queue transitions reject illegal state changes and write atomically', () =
 test('queue rejects the same article scheduled less than 60 days apart', () => {
   const duplicate = [
     { ...queue[0], id: 'repeat-a', scheduledAt: '2026-08-10T20:30:00+09:00' },
-    { ...queue[0], id: 'repeat-b', scheduledAt: '2026-09-01T20:30:00+09:00' },
+    {
+      ...queue[0],
+      id: 'repeat-b',
+      shortLinkId: 99,
+      scheduledAt: '2026-09-01T20:30:00+09:00',
+    },
   ];
   assert.throws(() => validateQueue(duplicate), /60 days/i);
+});
+
+test('queue has immutable unique short links and three reviewed card phrases', () => {
+  assert.deepEqual(
+    queue.map((item) => item.shortLinkId),
+    Array.from({ length: 14 }, (_, index) => index + 1)
+  );
+  for (const item of queue) {
+    assert.equal(item.cardCopy.length, 3, `${item.id} must have three card phrases`);
+    for (const copy of item.cardCopy) {
+      assert.ok(copy.length <= 28, `${item.id} copy must be at most 28 characters`);
+      assert.ok((copy.match(/\n/g) || []).length <= 1, `${item.id} copy must be at most two lines`);
+    }
+  }
+});
+
+test('queue rejects duplicate short ids and invalid reviewed copy', () => {
+  const duplicate = structuredClone(queue.slice(0, 2));
+  duplicate[1].shortLinkId = duplicate[0].shortLinkId;
+  assert.throws(() => validateQueue(duplicate), /Duplicate Facebook short link id/);
+
+  const tooLong = structuredClone(queue.slice(0, 1));
+  tooLong[0].cardCopy = ['가'.repeat(29), '기준', '비교'];
+  assert.throws(() => validateQueue(tooLong), /cardCopy/);
 });

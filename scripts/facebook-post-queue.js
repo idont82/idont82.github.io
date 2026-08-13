@@ -17,9 +17,13 @@ function validateQueue(queue) {
   }
 
   const ids = new Set();
+  const shortLinkIds = new Set();
   for (const item of queue) {
-    for (const field of ['id', 'category', 'article', 'linkMode', 'scheduledAt', 'status']) {
-      if (!item[field]) {
+    for (const field of [
+      'id', 'category', 'article', 'linkMode', 'scheduledAt', 'status',
+      'shortLinkId', 'cardCopy',
+    ]) {
+      if (item[field] === undefined || item[field] === null || item[field] === '') {
         throw new Error(`${item.id || 'queue item'} missing ${field}`);
       }
     }
@@ -27,6 +31,22 @@ function validateQueue(queue) {
       throw new Error(`Duplicate Facebook queue id: ${item.id}`);
     }
     ids.add(item.id);
+    if (!Number.isSafeInteger(item.shortLinkId) || item.shortLinkId < 1) {
+      throw new Error(`${item.id} has invalid shortLinkId`);
+    }
+    if (shortLinkIds.has(item.shortLinkId)) {
+      throw new Error(`Duplicate Facebook short link id: ${item.shortLinkId}`);
+    }
+    shortLinkIds.add(item.shortLinkId);
+    if (!Array.isArray(item.cardCopy) || item.cardCopy.length !== 3) {
+      throw new Error(`${item.id} cardCopy must contain exactly three phrases`);
+    }
+    for (const copy of item.cardCopy) {
+      if (typeof copy !== 'string' || !copy.trim() || copy.length > 28
+        || (copy.match(/\n/g) || []).length > 1) {
+        throw new Error(`${item.id} has invalid cardCopy`);
+      }
+    }
     if (!item.article.startsWith('/blog/') || !item.article.endsWith('.html')) {
       throw new Error(`${item.id} has invalid article path`);
     }
