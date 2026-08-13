@@ -108,7 +108,7 @@ async function runPublisher({
       writeQueueAtomic(queueFile, queue);
     }
 
-    const duplicate = await graphClient.findDuplicate(content.trackingId);
+    const duplicate = await graphClient.findDuplicate(content.duplicateMarker);
     if (duplicate) {
       transitionPost(queue, item.id, 'published', {
         trackingId: content.trackingId,

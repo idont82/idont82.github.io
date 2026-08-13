@@ -19,6 +19,9 @@ function createFixture(status = 'queued') {
       <h1 class="blog-article-title">테스트 상품 구매 가이드</h1>
       <div class="article-summary-box">가격과 성능을 함께 비교했습니다.</div>
       <h2>사용 환경 확인</h2><h2>예산 범위 정하기</h2><h2>후기 비교하기</h2>
+      <a data-coupang-link href="https://link.coupang.com/re/AFFSDP?pageKey=1">
+        <img src="https://example.com/product.jpg" alt="상품">
+      </a>
     </article>`, 'utf8');
   const queueFile = path.join(root, 'queue.json');
   const queue = [{
@@ -27,6 +30,8 @@ function createFixture(status = 'queued') {
     article,
     linkMode: 'blog',
     scheduledAt: '2026-08-10T11:30:00Z',
+    shortLinkId: 41,
+    cardCopy: ['상품 선택 기준', '가격 · 성능 확인', '구매 가이드 보기'],
     status,
     attempts: 0,
   }];
@@ -39,50 +44,50 @@ function fakeRenderer(calls) {
     calls.push(content);
     fs.mkdirSync(directory, { recursive: true });
     fs.writeFileSync(path.join(directory, 'content.json'), JSON.stringify(content), 'utf8');
-    const files = Array.from({ length: 5 }, (_, index) => path.join(directory, `${index + 1}.png`));
+    const files = Array.from({ length: 3 }, (_, index) => path.join(directory, `${index + 1}.png`));
     files.forEach((file) => fs.writeFileSync(file, 'png'));
     return files;
   };
 }
 
-test('dry-run renders files without credentials or queue mutation', async () => {
+test('dry-run renders three files without credentials or queue mutation', async () => {
   const fixture = createFixture();
   const before = fs.readFileSync(fixture.queueFile, 'utf8');
   const renders = [];
   const result = await runPublisher({
-    ...fixture,
-    now: NOW,
-    dryRun: true,
-    renderCards: fakeRenderer(renders),
+    ...fixture, now: NOW, dryRun: true, renderCards: fakeRenderer(renders),
   });
   assert.equal(result.status, 'dry-run');
   assert.equal(renders.length, 1);
-  assert.equal(result.files.length, 5);
+  assert.equal(result.files.length, 3);
   assert.equal(fs.readFileSync(fixture.queueFile, 'utf8'), before);
 });
 
-test('normal run publishes once and persists confirmed Facebook fields', async () => {
+test('normal run checks the short-link marker, publishes once, and persists confirmation', async () => {
   const fixture = createFixture();
   let publishes = 0;
+  let duplicateMarker = '';
   const graphClient = {
     token: 'secret-token',
-    findDuplicate: async () => null,
+    findDuplicate: async (marker) => {
+      duplicateMarker = marker;
+      return null;
+    },
     publishCarousel: async ({ files, message }) => {
       publishes += 1;
-      assert.equal(files.length, 5);
-      assert.match(message, /utm_content=20260810-test-product/);
+      assert.equal(files.length, 3);
+      assert.match(message, /https:\/\/idont82\.github\.io\/g\/\?n=41/);
+      assert.doesNotMatch(message, /utm_content/);
       return { id: 'page_post', permalink_url: 'https://facebook.test/page_post' };
     },
   };
   const result = await runPublisher({
-    ...fixture,
-    now: NOW,
-    graphClient,
-    renderCards: fakeRenderer([]),
+    ...fixture, now: NOW, graphClient, renderCards: fakeRenderer([]),
   });
   const [item] = JSON.parse(fs.readFileSync(fixture.queueFile, 'utf8'));
   assert.equal(result.status, 'published');
   assert.equal(publishes, 1);
+  assert.equal(duplicateMarker, 'https://idont82.github.io/g/?n=41');
   assert.equal(item.status, 'published');
   assert.equal(item.trackingId, '20260810-test-product');
   assert.equal(item.facebookPostId, 'page_post');
@@ -143,10 +148,7 @@ test('permanent error blocks the queue once and never persists the token', async
     },
   };
   await assert.rejects(runPublisher({
-    ...fixture,
-    now: NOW,
-    graphClient,
-    renderCards: fakeRenderer([]),
+    ...fixture, now: NOW, graphClient, renderCards: fakeRenderer([]),
   }));
   const [item] = JSON.parse(fs.readFileSync(fixture.queueFile, 'utf8'));
   assert.equal(item.status, 'failed');
