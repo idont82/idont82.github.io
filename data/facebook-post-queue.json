@@ -36,13 +36,13 @@
       "/images/facebook-card-news/wonyoung-jacket-detail.png",
       "/images/facebook-card-news/wonyoung-jacket-hood.png"
     ],
-    "status": "queued",
-    "attempts": 0,
-    "facebookPostId": null,
-    "facebookPermalink": null,
-    "publishedAt": null,
+    "status": "published",
+    "attempts": 1,
+    "facebookPostId": "1243431898854300_122109385809428837",
+    "facebookPermalink": "https://www.facebook.com/122104701477428837/posts/122109385809428837",
+    "publishedAt": "2026-08-18T12:30:00.000Z",
     "lastError": null,
-    "trackingId": null
+    "trackingId": "20260811-celebrity-wonyoung-eider"
   },
   {
     "id": "20260812-idol-blackpink-photocard",
