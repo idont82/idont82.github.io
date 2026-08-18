@@ -47,6 +47,14 @@ function validateQueue(queue) {
         throw new Error(`${item.id} has invalid cardCopy`);
       }
     }
+    if (item.cardImageUrls !== undefined) {
+      const safeImagePath = /^\/images\/facebook-card-news\/[a-z0-9-]+\.png$/;
+      if (!Array.isArray(item.cardImageUrls) || item.cardImageUrls.length !== 3
+        || item.cardImageUrls.some((imagePath) => typeof imagePath !== 'string'
+          || !safeImagePath.test(imagePath))) {
+        throw new Error(`${item.id} has invalid cardImageUrls`);
+      }
+    }
     if (!item.article.startsWith('/blog/') || !item.article.endsWith('.html')) {
       throw new Error(`${item.id} has invalid article path`);
     }

@@ -91,3 +91,27 @@ test('queue rejects duplicate short ids and invalid reviewed copy', () => {
   tooLong[0].cardCopy = ['가'.repeat(29), '기준', '비교'];
   assert.throws(() => validateQueue(tooLong), /cardCopy/);
 });
+
+test('queue accepts exactly three safe root-relative card image overrides', () => {
+  const overridden = structuredClone(queue.slice(0, 1));
+  overridden[0].cardImageUrls = [
+    '/images/facebook-card-news/front.png',
+    '/images/facebook-card-news/detail.png',
+    '/images/facebook-card-news/hood.png',
+  ];
+  assert.doesNotThrow(() => validateQueue(overridden));
+
+  for (const invalid of [
+    ['https://example.com/image.png'],
+    ['/images/facebook-card-news/one.png'],
+    [
+      '/images/facebook-card-news/../secret.png',
+      '/images/facebook-card-news/a.png',
+      '/images/facebook-card-news/b.png',
+    ],
+  ]) {
+    const changed = structuredClone(queue.slice(0, 1));
+    changed[0].cardImageUrls = invalid;
+    assert.throws(() => validateQueue(changed), /cardImageUrls/);
+  }
+});
