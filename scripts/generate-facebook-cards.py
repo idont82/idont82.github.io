@@ -73,6 +73,13 @@ def fit_text(draw, text, font_path, max_width, max_height, start_size=86,
 
 
 def open_source_image(url):
+  if url.startswith("/images/"):
+    project_root = Path(__file__).resolve().parent.parent
+    local_path = (project_root / url.lstrip("/")).resolve()
+    images_root = (project_root / "images").resolve()
+    if images_root not in local_path.parents:
+      raise ValueError("Card image path leaves the images directory")
+    return Image.open(local_path).convert("RGB")
   parsed = urlparse(url)
   if parsed.scheme == "file":
     local_path = Path(url2pathname(unquote(parsed.path)))

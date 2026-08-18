@@ -85,6 +85,23 @@ test('blog mode produces exactly three reviewed photo cards and one short public
   assert.equal(new URL(content.destinationLink).searchParams.get('utm_content'), queueItem.id);
 });
 
+test('queue card image overrides take priority and keep safe local fallbacks first', () => {
+  const cardImageUrls = [
+    '/images/facebook-card-news/a.png',
+    '/images/facebook-card-news/b.png',
+    '/images/facebook-card-news/c.png',
+  ];
+  const content = buildPostContent({ ...queueItem, cardImageUrls }, html);
+  assert.deepEqual(content.slides.map((slide) => slide.imageUrl), cardImageUrls);
+  assert.deepEqual(content.slides[0].imageUrls, [
+    cardImageUrls[0],
+    cardImageUrls[1],
+    cardImageUrls[2],
+    productOne,
+    productTwo,
+  ]);
+});
+
 test('tracking helpers remain stable and direct mode keeps its tracked Coupang destination private', () => {
   assert.equal(buildSubid(queueItem.id), 'fb-20260813-problem-water-size');
   assert.equal(buildShortUrl(4), 'https://idont82.github.io/g/?n=4');

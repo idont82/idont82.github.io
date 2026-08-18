@@ -69,6 +69,19 @@ test('renderer uses the next image candidate when the primary image fails', () =
   assert.equal(result.status, 0, result.stderr);
 });
 
+test('renderer loads a root-relative checked-in image', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'facebook-local-image-'));
+  const input = writeContent(dir);
+  const content = JSON.parse(fs.readFileSync(input, 'utf8'));
+  for (const slide of content.slides) {
+    slide.imageUrl = '/images/summer-diapers-top3-thumbnail.png';
+    slide.imageUrls = [slide.imageUrl];
+  }
+  fs.writeFileSync(input, JSON.stringify(content));
+  const result = render(input, dir);
+  assert.equal(result.status, 0, result.stderr);
+});
+
 test('renderer falls back to an installed Korean font when override is missing', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'facebook-font-'));
   const result = render(writeContent(dir), dir, {

@@ -133,7 +133,14 @@ function buildPostContent(queueItem, html) {
     ? buildTrackedBlogUrl(queueItem.article, queueItem.id)
     : buildDirectUrl(article.coupangUrl, queueItem.id);
   const link = buildShortUrl(queueItem.shortLinkId);
-  const imageCandidates = selectThreeImageCandidates(article.productImages);
+  const overrideImages = queueItem.cardImageUrls || [];
+  const imageCandidates = overrideImages.length
+    ? overrideImages.map((imageUrl, index) => [
+      imageUrl,
+      ...overrideImages.filter((_, candidateIndex) => candidateIndex !== index),
+      ...article.productImages.filter((candidate) => !overrideImages.includes(candidate)),
+    ])
+    : selectThreeImageCandidates(article.productImages);
   const slides = queueItem.cardCopy.map((title, index) => ({
     label: 'GOLD PICK',
     title,
