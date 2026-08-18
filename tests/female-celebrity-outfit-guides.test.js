@@ -121,3 +121,21 @@ test('Wonyoung guide selects the color-coded listing near the official price', (
   assert.match(html, /164,680원/, 'Wonyoung guide should show the verified comparable listing price');
   assert.doesNotMatch(html, /284,550원/, 'Wonyoung guide should avoid the overpriced search listing');
 });
+
+test('Wonyoung hero image links to the same tracked Coupang product as its product card', () => {
+  const html = fs.readFileSync('blog/wonyoung-eider-sheer-jacket-guide.html', 'utf8');
+  const hero = html.match(/<figure class="article-hero">([\s\S]*?)<\/figure>/)?.[1] || '';
+  const heroLink = hero.match(/<a href="([^"]+)"[^>]*data-coupang-link[^>]*data-coupang-placement="article_hero"[^>]*data-coupang-product-type="celebrity_wonyoung_eider_dwm26154"[^>]*>/);
+  const productLink = html.match(/<a href="([^"]+)"[^>]*data-coupang-placement="product_card"/);
+
+  assert.ok(heroLink, 'Wonyoung hero should be a tracked affiliate link');
+  assert.ok(productLink, 'Wonyoung product card should keep its affiliate link');
+  assert.equal(heroLink[1], productLink[1]);
+  assert.match(heroLink[0], /target="_blank"/);
+  assert.match(heroLink[0], /rel="sponsored nofollow"/);
+  assert.match(heroLink[0], /referrerpolicy="unsafe-url"/);
+
+  const suzy = fs.readFileSync('blog/suzy-k2-dry-ice-shirt-guide.html', 'utf8');
+  const suzyHero = suzy.match(/<figure class="article-hero">([\s\S]*?)<\/figure>/)?.[1] || '';
+  assert.doesNotMatch(suzyHero, /data-coupang-placement="article_hero"/);
+});

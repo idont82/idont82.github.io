@@ -116,6 +116,10 @@ function relatedItems(page) {
 function pageHtml(page) {
   const canonical = `${site}/blog/${page.slug}.html`;
   const hero = page.product.image;
+  const heroImage = `<img src="${escapeHtml(hero)}" alt="${escapeHtml(page.brand)} ${escapeHtml(page.productName)} ${escapeHtml(page.model)} 상품 이미지" width="657" height="657">`;
+  const heroMarkup = page.slug === 'wonyoung-eider-sheer-jacket-guide'
+    ? `<a href="${escapeHtml(page.product.url)}" target="_blank" rel="sponsored nofollow" referrerpolicy="unsafe-url" data-coupang-link data-coupang-placement="article_hero" data-coupang-product-type="${escapeHtml(page.productType)}">${heroImage}</a>`
+    : heroImage;
   return `<!doctype html>
 <html lang="ko">
 <head>
@@ -247,7 +251,7 @@ ${jsonLd(page)}
           </div>
 
           <figure class="article-hero">
-            <img src="${escapeHtml(hero)}" alt="${escapeHtml(page.brand)} ${escapeHtml(page.productName)} ${escapeHtml(page.model)} 상품 이미지" width="657" height="657">
+            ${heroMarkup}
             <figcaption>상품 이미지는 ${data.verifiedDateKo} 쿠팡 파트너스 API에서 확인했습니다. 연예인 화보 사진은 복제하지 않았습니다.</figcaption>
           </figure>
 
