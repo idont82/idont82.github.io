@@ -31,6 +31,11 @@
       "색상 · 핏 · 소재 확인",
       "비슷한 제품 비교하기"
     ],
+    "cardImageUrls": [
+      "/images/facebook-card-news/wonyoung-jacket-front.png",
+      "/images/facebook-card-news/wonyoung-jacket-detail.png",
+      "/images/facebook-card-news/wonyoung-jacket-hood.png"
+    ],
     "status": "queued",
     "attempts": 0,
     "facebookPostId": null,
