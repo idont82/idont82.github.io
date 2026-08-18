@@ -924,4 +924,36 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+<?AUTUMN-SITEMAP-START?>
+  <url>
+    <loc>https://idont82.github.io/blog/autumn-bedding-quilt-vs-blanket-guide.html</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://idont82.github.io/blog/humidifier-types-autumn-guide.html</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://idont82.github.io/blog/autumn-closet-storage-guide.html</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://idont82.github.io/blog/lightweight-windbreaker-autumn-guide.html</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://idont82.github.io/blog/autumn-lightweight-trekking-shoes-guide.html</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+<?AUTUMN-SITEMAP-END?>
 </urlset>

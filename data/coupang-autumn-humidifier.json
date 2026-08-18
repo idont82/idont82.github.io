@@ -1,0 +1,56 @@
+{
+  "group": "humidifier",
+  "verifiedAt": "2026-08-18T06:48:59.413Z",
+  "queries": [
+    "초음파 가습기",
+    "가열식 가습기",
+    "기화식 가습기"
+  ],
+  "items": [
+    {
+      "keyword": "초음파 가습기",
+      "rank": 1,
+      "isRocket": true,
+      "isFreeShipping": false,
+      "productId": 9183482617,
+      "productName": "세이닉 간편세척 무소음 초음파 가습기 4L",
+      "productPrice": 25900,
+      "priceLabel": "약 2만 6천원",
+      "productImage": "https://ads-partners.coupang.com/image1/OndieHHYC0IxfAKMOkS73KB0Y0lZEMS-KUyEaoolDCoJgXEkR0nZLebhuBslq_A3hXMvRq1S6swpWPbxRnHXjm12GVOnz2IOLeQ01AAn5xlAxGB_dmHA_MP0g6zBvVhe4N6bgLjHtC4nAvaayDE0dy1ABJg-vA1TV1gz23Ty0DKNULPESLXhuwlC6cgiYT6YbP5dQQgk5oPiymk8L7g8btXwkRX-bVyzqFz7hHvsoGnySG8UhFJk1rJKPd3sKq6UJeLGkp_bY12O5odK2wfNUWnKw0lB2sSjtLb9ceBvEboWbakJFovZXz3uS30hDK_lyWhGagIE8Q-561ShiT-N2FJGRB-ePz-FbyS3tjWxQTCJmbO6yX86f-P_jS3jMgTbdtnD",
+      "productUrl": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&subid=autumn-humidifier&pageKey=9183482617&itemId=27086329604&vendorItemId=94065597652&traceid=V0-153-e6c57f5687c61865&requestid=20260818154858833129717655&token=31850C%7CMIXED",
+      "categoryName": "가전디지털",
+      "impressionUrl": "",
+      "roleKeyword": "초음파 가습기"
+    },
+    {
+      "keyword": "가열식 가습기",
+      "rank": 1,
+      "isRocket": true,
+      "isFreeShipping": false,
+      "productId": 6781092371,
+      "productName": "아이리스 가열식 가습기",
+      "productPrice": 29900,
+      "priceLabel": "약 2만 10천원",
+      "productImage": "https://ads-partners.coupang.com/image1/xxRo_k4XTntoIhXhx_l1RiL9SiaNMecHBgh_cYluDUWjCgC7z5P7HAaD-6LXb5WPm0SYW_nT9Xm7KglM9Px2_7z2098Tug8_l3JFtuanu7GQdxxC_okPABVp4-mTyJKgLfBCwIcH9P795K-nFU4Edg4mLrtuoSH1s3Wru6Z2PyrLZFri527KEWTrW6frtR8ylEy62sFbcNbxoPK7v3lnqTDVD9NKPz2kmNXAze3EtviUqq2O49nIUmkrFUsQqru_Pk2CnHh9IoBy0ZjeZM-jh_jVYleOcPamW0RpwVA5R5-F_r20eodnL0b9v0GMpIyKtqGziQ9uaVWUezHxZgL2EAOpUD8qhfALm5ic9SQm6I61rA==",
+      "productUrl": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&subid=autumn-humidifier&pageKey=6781092371&itemId=15945829812&vendorItemId=82989579203&traceid=V0-153-072dbd96a344f5aa&requestid=20260818154859118015281452&token=31850C%7CMIXED",
+      "categoryName": "가전디지털",
+      "impressionUrl": "",
+      "roleKeyword": "가열식 가습기"
+    },
+    {
+      "keyword": "기화식 가습기",
+      "rank": 1,
+      "isRocket": true,
+      "isFreeShipping": false,
+      "productId": 7576687844,
+      "productName": "아이닉 대용량 공기청정 자연기화식 가습기, iAH01, 화이트",
+      "productPrice": 195770,
+      "priceLabel": "약 19만 6천원",
+      "productImage": "https://ads-partners.coupang.com/image1/fYClJZPhDtrUmBfqfZ7BmkU1gQj4h3kX4gszHoSR9-STcAcxvXtOMaiSwjAWt-0e-h7YRzhcggl7eiWe5fK6pikWbKlRLfmANVmsUIKeRYbrfSC-ueqWko8mI2cuCPeNkxiNFin16-OiT3w6bg8JPa7cNqFEYpxnenWTMfC686TET5DwPBODQfCYhg05F51E8M_qihpaKYN7_zKaDyF2xag1gvVm7VwZ64nlL6BrASKUG0fndHgDT5xNBtstz0_2WbmqoXJPgHhmpB9oCAorS2XKKCG57oyU1uebD39Kky5FyUvCERr_8Pw8I56IprVk-Oakt-rO8Zd8HKTXj4-3bQ==",
+      "productUrl": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&subid=autumn-humidifier&pageKey=7576687844&itemId=19992308565&vendorItemId=91137387134&traceid=V0-153-2eb7cedfd5604d09&clickBeacon=e3eb74d0-9ad0-11f1-9afe-b2c9d23da445%7E3&requestid=20260818154859216090218902&token=31850C%7CMIXED",
+      "categoryName": "헬스/건강식품",
+      "impressionUrl": "",
+      "roleKeyword": "기화식 가습기"
+    }
+  ]
+}
