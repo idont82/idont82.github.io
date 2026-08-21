@@ -11,13 +11,13 @@
       "가격 · 메모리 · 저장공간 비교",
       "예산에 맞는 선택 기준"
     ],
-    "status": "queued",
-    "attempts": 0,
-    "facebookPostId": null,
-    "facebookPermalink": null,
-    "publishedAt": null,
+    "status": "published",
+    "attempts": 1,
+    "facebookPostId": "1243431898854300_122110686801428837",
+    "facebookPermalink": "https://www.facebook.com/122104701477428837/posts/122110686801428837",
+    "publishedAt": "2026-08-21T05:07:25.262Z",
     "lastError": null,
-    "trackingId": null
+    "trackingId": "20260821-laptop-value-top3"
   },
   {
     "id": "20260821-laptop-performance-top3",
@@ -31,13 +31,13 @@
       "RTX 5090 · 5080 · 5070 Ti",
       "고사양 작업용 선택 기준"
     ],
-    "status": "queued",
+    "status": "published",
     "attempts": 0,
-    "facebookPostId": null,
-    "facebookPermalink": null,
-    "publishedAt": null,
+    "facebookPostId": "1243431898854300_122110687095428837",
+    "facebookPermalink": "https://www.facebook.com/122104701477428837/posts/122110687095428837",
+    "publishedAt": "2026-08-21T05:07:37.165Z",
     "lastError": null,
-    "trackingId": null
+    "trackingId": "20260821-laptop-performance-top3"
   },
   {
     "id": "20260821-laptop-document-top3",
@@ -51,12 +51,12 @@
       "Windows · 저장공간 · 화면 비교",
       "가벼운 업무용 선택 기준"
     ],
-    "status": "queued",
+    "status": "published",
     "attempts": 0,
-    "facebookPostId": null,
-    "facebookPermalink": null,
-    "publishedAt": null,
+    "facebookPostId": "1243431898854300_122110687353428837",
+    "facebookPermalink": "https://www.facebook.com/122104701477428837/posts/122110687353428837",
+    "publishedAt": "2026-08-21T05:07:49.627Z",
     "lastError": null,
-    "trackingId": null
+    "trackingId": "20260821-laptop-document-top3"
   }
 ]

@@ -15,11 +15,17 @@ test('노트북 전용 큐는 서로 다른 블로그 글 세 건을 담는다',
   assert.equal(new Set(queue.map((item) => item.article)).size, 3);
   assert.ok(queue.every((item) => item.category === 'laptop'));
   assert.ok(queue.every((item) => item.linkMode === 'blog'));
-  assert.ok(queue.every((item) => item.status === 'queued'));
+  assert.ok(queue.every((item) => item.status === 'published'));
+  assert.ok(queue.every((item) => item.facebookPostId));
+  assert.ok(queue.every((item) => item.facebookPermalink));
+  assert.ok(queue.every((item) => item.publishedAt));
 });
 
 test('가성비·최고성능·문서용 게시물을 예약 순서대로 선택한다', () => {
-  const sample = structuredClone(queue);
+  const sample = structuredClone(queue).map((item) => ({
+    ...item,
+    status: 'queued',
+  }));
   const expected = [
     '20260821-laptop-value-top3',
     '20260821-laptop-performance-top3',
