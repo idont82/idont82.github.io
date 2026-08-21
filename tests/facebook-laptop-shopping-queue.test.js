@@ -74,4 +74,12 @@ test('교체 큐는 실제 제품 아홉 개와 새 단축 링크를 고정한�
   assert.ok(queue[0].shoppingCards.every((card) => card.disclaimer.includes('가격 변동 가능')));
   assert.ok(queue[2].shoppingCards.every((card) => card.disclaimer.includes('가격 변동 가능')));
   assert.ok(queue[1].shoppingCards.every((card) => card.disclaimer.includes('옵션별')));
+  assert.ok(queue.every((item) => item.status === 'published'));
+  assert.deepEqual(queue.map((item) => item.facebookPostId), [
+    '1243431898854300_122110719435428837',
+    '1243431898854300_122110719705428837',
+    '1243431898854300_122110720005428837',
+  ]);
+  assert.ok(queue.every((item) => item.facebookPermalink?.startsWith('https://www.facebook.com/')));
+  assert.ok(queue.every((item) => !Number.isNaN(Date.parse(item.publishedAt))));
 });
