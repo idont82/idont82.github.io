@@ -1,4 +1,6 @@
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
 const test = require('node:test');
 
 const { validateQueue } = require('../scripts/facebook-post-queue');
@@ -54,3 +56,22 @@ test('쇼핑 카드 필드와 목록 길이를 엄격히 검증한다', () => {
 });
 
 module.exports = { shoppingCard, shoppingItem };
+
+test('교체 큐는 실제 제품 아홉 개와 새 단축 링크를 고정한다', () => {
+  const queueFile = path.join(__dirname, '..', 'data', 'facebook-laptop-shopping-post-queue.json');
+  assert.ok(fs.existsSync(queueFile), 'shopping replacement queue must exist');
+  const queue = JSON.parse(fs.readFileSync(queueFile, 'utf8'));
+  assert.doesNotThrow(() => validateQueue(queue));
+  assert.deepEqual(queue.map((item) => item.shortLinkId), [18, 19, 20]);
+  assert.deepEqual(queue.map((item) => item.replacesFacebookPostId), [
+    '1243431898854300_122110686801428837',
+    '1243431898854300_122110687095428837',
+    '1243431898854300_122110687353428837',
+  ]);
+  assert.equal(new Set(queue.flatMap((item) => (
+    item.shoppingCards.map((card) => card.imageUrls[0])
+  ))).size, 9);
+  assert.ok(queue[0].shoppingCards.every((card) => card.disclaimer.includes('가격 변동 가능')));
+  assert.ok(queue[2].shoppingCards.every((card) => card.disclaimer.includes('가격 변동 가능')));
+  assert.ok(queue[1].shoppingCards.every((card) => card.disclaimer.includes('옵션별')));
+});

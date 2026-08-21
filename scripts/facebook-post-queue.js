@@ -108,7 +108,12 @@ function validateQueue(queue) {
       continue;
     }
     const previous = byArticle.get(item.article);
-    if (previous && Date.parse(item.scheduledAt) - Date.parse(previous.scheduledAt) < SIXTY_DAYS_MS) {
+    const replacesPublishedPost = previous
+      && item.replacesFacebookPostId
+      && previous.status === 'published'
+      && previous.facebookPostId === item.replacesFacebookPostId;
+    if (previous && !replacesPublishedPost
+      && Date.parse(item.scheduledAt) - Date.parse(previous.scheduledAt) < SIXTY_DAYS_MS) {
       throw new Error(`${item.article} repeats within 60 days`);
     }
     byArticle.set(item.article, item);

@@ -68,6 +68,30 @@ test('queue rejects the same article scheduled less than 60 days apart', () => {
   assert.throws(() => validateQueue(duplicate), /60 days/i);
 });
 
+test('queue permits an explicit replacement only for the matching published post id', () => {
+  const original = {
+    ...structuredClone(queue[0]),
+    id: 'published-original',
+    status: 'published',
+    facebookPostId: 'page_original',
+    scheduledAt: '2026-08-10T20:30:00+09:00',
+  };
+  const replacement = {
+    ...structuredClone(queue[1]),
+    id: 'replacement',
+    article: original.article,
+    shortLinkId: 99,
+    scheduledAt: '2026-08-21T15:30:00+09:00',
+    replacesFacebookPostId: original.facebookPostId,
+  };
+
+  assert.doesNotThrow(() => validateQueue([original, replacement]));
+  assert.throws(
+    () => validateQueue([original, { ...replacement, replacesFacebookPostId: 'wrong_post' }]),
+    /60 days/i
+  );
+});
+
 test('queue has immutable unique short links and three reviewed card phrases', () => {
   assert.deepEqual(
     queue.map((item) => item.shortLinkId),

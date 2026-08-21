@@ -17,7 +17,10 @@ const SHORT_LINKS = Object.freeze({
   "14": "https://idont82.github.io/blog/waterpark-waterproof-kit-social-guide.html?utm_source=facebook&utm_medium=social&utm_campaign=card_news&utm_content=20260823-seasonal-waterpark",
   "15": "https://idont82.github.io/blog/best-value-laptop-top3-guide.html?utm_source=facebook&utm_medium=social&utm_campaign=card_news&utm_content=20260821-laptop-value-top3",
   "16": "https://idont82.github.io/blog/highest-performance-laptop-top3-guide.html?utm_source=facebook&utm_medium=social&utm_campaign=card_news&utm_content=20260821-laptop-performance-top3",
-  "17": "https://idont82.github.io/blog/document-work-laptop-top3-guide.html?utm_source=facebook&utm_medium=social&utm_campaign=card_news&utm_content=20260821-laptop-document-top3"
+  "17": "https://idont82.github.io/blog/document-work-laptop-top3-guide.html?utm_source=facebook&utm_medium=social&utm_campaign=card_news&utm_content=20260821-laptop-document-top3",
+  "18": "https://idont82.github.io/blog/best-value-laptop-top3-guide.html?utm_source=facebook&utm_medium=social&utm_campaign=card_news&utm_content=20260821-laptop-value-shopping",
+  "19": "https://idont82.github.io/blog/highest-performance-laptop-top3-guide.html?utm_source=facebook&utm_medium=social&utm_campaign=card_news&utm_content=20260821-laptop-performance-shopping",
+  "20": "https://idont82.github.io/blog/document-work-laptop-top3-guide.html?utm_source=facebook&utm_medium=social&utm_campaign=card_news&utm_content=20260821-laptop-document-shopping"
 });
 
 function resolveShortLink(value) {
