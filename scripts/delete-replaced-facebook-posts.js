@@ -63,6 +63,9 @@ async function verifyNewPost(item, graphClient) {
   if (post.id !== item.facebookPostId) {
     throw new Error(`${item.id} returned an unexpected post id`);
   }
+  if (post.permalink_url !== item.facebookPermalink) {
+    throw new Error(`${item.id} permalink mismatch`);
+  }
   const firstLine = typeof post.message === 'string' ? post.message.split(/\r?\n/)[0] : '';
   if (firstLine !== buildShortUrl(item.shortLinkId)) {
     throw new Error(`${item.id} first-line link mismatch`);

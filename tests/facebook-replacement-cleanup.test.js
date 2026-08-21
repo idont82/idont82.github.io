@@ -96,6 +96,19 @@ test('cleanup refuses incomplete, mismatched, or visually unverified replacement
     /exactly three cards/
   );
   assert.equal(badGraph.deleted.length, 0);
+
+  const badPermalink = publishedQueue();
+  const permalinkGraph = fakeGraph(badPermalink);
+  permalinkGraph.getPost = async (id) => {
+    const post = verifiedPost(badPermalink.find((item) => item.facebookPostId === id));
+    post.permalink_url = 'https://facebook.test/unexpected';
+    return post;
+  };
+  await assert.rejects(
+    () => cleanupReplacedPosts({ queue: badPermalink, graphClient: permalinkGraph, dryRun: false }),
+    /permalink mismatch/
+  );
+  assert.equal(permalinkGraph.deleted.length, 0);
 });
 
 test('cleanup validates all new posts before deleting exactly three old posts', async () => {
