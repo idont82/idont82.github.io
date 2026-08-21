@@ -132,9 +132,19 @@ class FacebookGraphClient {
 
   getPost(id) {
     return this.request(this.pathWithQuery(`/${id}`, {
-      fields: 'id,permalink_url,message',
+      fields: 'id,permalink_url,message,created_time,attachments.limit(10){media_type,subattachments.limit(10){media_type}}',
       access_token: this.token,
     }));
+  }
+
+  async deletePost(id) {
+    const body = await this.request(this.pathWithQuery(`/${id}`, {
+      access_token: this.token,
+    }), { method: 'DELETE' });
+    if (body.success !== true) {
+      throw new GraphApiError('Facebook did not confirm deletion');
+    }
+    return true;
   }
 
   getInsight(postId, metric) {

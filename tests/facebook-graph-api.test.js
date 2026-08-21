@@ -93,7 +93,7 @@ test('publishCarousel uploads unpublished photos, attaches them and reads the pe
   assert.equal(feed.options.body.get('attached_media[1]'), JSON.stringify({ media_fbid: 'photo-2' }));
   assert.match(
     requests.at(-1).url,
-    /page_post\?fields=id%2Cpermalink_url%2Cmessage&access_token=secret-token$/,
+    /page_post\?fields=id%2Cpermalink_url%2Cmessage%2Ccreated_time%2Cattachments\.limit%2810%29%7Bmedia_type%2Csubattachments\.limit%2810%29%7Bmedia_type%7D%7D&access_token=secret-token$/,
   );
 });
 
@@ -115,4 +115,19 @@ test('publishCarousel cleans up unpublished photos when feed creation fails', as
   await assert.rejects(client.publishCarousel({ files: [file], message: 'post' }), GraphApiError);
   assert.equal(deleted.length, 1);
   assert.match(deleted[0], /\/photo-1\?/);
+});
+
+test('deletePost requires a successful Graph delete response', async () => {
+  const requests = [];
+  const client = clientWith(async (url, options = {}) => {
+    requests.push({ url, options });
+    return jsonResponse({ success: true });
+  });
+  assert.equal(await client.deletePost('page_old'), true);
+  assert.equal(requests.length, 1);
+  assert.equal(requests[0].options.method, 'DELETE');
+  assert.match(requests[0].url, /\/page_old\?access_token=secret-token$/);
+
+  const failed = clientWith(async () => jsonResponse({ success: false }));
+  await assert.rejects(() => failed.deletePost('page_old'), /did not confirm deletion/);
 });
