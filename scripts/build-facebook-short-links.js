@@ -1,7 +1,11 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-const queue = require('../data/facebook-post-queue.json');
+const queues = [
+  require('../data/facebook-post-queue.json'),
+  require('../data/facebook-laptop-post-queue.json'),
+];
+const queue = queues.flat();
 const { buildPostContent } = require('./facebook-card-content');
 const { validateQueue } = require('./facebook-post-queue');
 

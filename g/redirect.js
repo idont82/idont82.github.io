@@ -14,7 +14,10 @@ const SHORT_LINKS = Object.freeze({
   "11": "https://idont82.github.io/blog/mosquito-repellent-summer-social-guide.html?utm_source=facebook&utm_medium=social&utm_campaign=card_news&utm_content=20260820-seasonal-mosquito",
   "12": "https://idont82.github.io/blog/ive-album-photocard-guide.html?utm_source=facebook&utm_medium=social&utm_campaign=card_news&utm_content=20260821-idol-ive-photocard",
   "13": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&subid=fb-20260822-problem-rainy-commute&pageKey=8786048514&itemId=25567577396&vendorItemId=92545161555&traceid=V0-153-ea4dcab5383a4202&clickBeacon=b2f80590-75e7-11f1-a8aa-3f7425985894%7E3&requestid=20260702162902488267152368&token=31850C%7CMIXED",
-  "14": "https://idont82.github.io/blog/waterpark-waterproof-kit-social-guide.html?utm_source=facebook&utm_medium=social&utm_campaign=card_news&utm_content=20260823-seasonal-waterpark"
+  "14": "https://idont82.github.io/blog/waterpark-waterproof-kit-social-guide.html?utm_source=facebook&utm_medium=social&utm_campaign=card_news&utm_content=20260823-seasonal-waterpark",
+  "15": "https://idont82.github.io/blog/best-value-laptop-top3-guide.html?utm_source=facebook&utm_medium=social&utm_campaign=card_news&utm_content=20260821-laptop-value-top3",
+  "16": "https://idont82.github.io/blog/highest-performance-laptop-top3-guide.html?utm_source=facebook&utm_medium=social&utm_campaign=card_news&utm_content=20260821-laptop-performance-top3",
+  "17": "https://idont82.github.io/blog/document-work-laptop-top3-guide.html?utm_source=facebook&utm_medium=social&utm_campaign=card_news&utm_content=20260821-laptop-document-top3"
 });
 
 function resolveShortLink(value) {
