@@ -24,6 +24,16 @@ function sampleRgb(file, x, y) {
   return JSON.parse(result.stdout);
 }
 
+function rightFooterEdgeInk(file) {
+  const result = spawnSync('python', [
+    '-c',
+    'import sys; from PIL import Image; im=Image.open(sys.argv[1]).convert("RGB"); bg=im.getpixel((1070,1240)); print(sum(im.getpixel((x,y)) != bg for x in range(1060,1080) for y in range(1260,1330)))',
+    file,
+  ], { encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  return Number(result.stdout.trim());
+}
+
 function whiteImage(dir) {
   const file = path.join(dir, 'white.ppm');
   const pixels = Buffer.alloc(40 * 40 * 3, 255);
@@ -149,6 +159,7 @@ test('shopping-grid renderer creates a distinct product area and information pan
   for (const card of manifest.cards) {
     assert.deepEqual(pngSize(card), { width: 1080, height: 1350 });
     assert.notDeepEqual(sampleRgb(card, 250, 1080), sampleRgb(card, 930, 1080));
+    assert.equal(rightFooterEdgeInk(card), 0, 'right footer must keep a 20px safe margin');
   }
 });
 

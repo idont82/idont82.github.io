@@ -184,7 +184,9 @@ def render_shopping_slide(slide, index, font_path, output_file):
     top = spec_top + position * 128
     draw.rounded_rectangle((752, top, 1048, top + 96), radius=20, fill="#2d3047")
     draw.ellipse((772, top + 29, 810, top + 67), fill="#a7f3d0")
-    draw.text((781, top + 29), "✓", font=small_font, fill="#064e3b")
+    marker = "+"
+    marker_width = text_width(draw, marker, small_font)
+    draw.text((791 - marker_width / 2, top + 29), marker, font=small_font, fill="#064e3b")
     draw_centered_text(
         draw, spec, (822, top + 12, 1032, top + 84), font_path,
         "#ffffff", 31, 22, 2,
@@ -198,7 +200,7 @@ def render_shopping_slide(slide, index, font_path, output_file):
   for position, use in enumerate(slide["uses"]):
     box = use_boxes[position]
     draw.rounded_rectangle(box, radius=20, fill="#ffffff", outline="#ded7ca", width=2)
-    icon = ("₩", "▣", "✓", "⚡")[position]
+    icon = str(position + 1)
     icon_font = ImageFont.truetype(font_path, 42)
     icon_width = text_width(draw, icon, icon_font)
     draw.text(((box[0] + box[2] - icon_width) / 2, box[1] + 24), icon,
@@ -208,8 +210,10 @@ def render_shopping_slide(slide, index, font_path, output_file):
         font_path, "#28241e", 25, 18, 2,
     )
 
-  footer = ImageFont.truetype(font_path, 20)
-  draw.text((754, 1283), "제품 옵션과 최신 가격은 본문에서 확인", font=footer, fill="#746d62")
+  draw_centered_text(
+      draw, "제품 옵션과 최신 가격은 본문에서 확인",
+      (750, 1256, 1050, 1324), font_path, "#746d62", 20, 16, 2,
+  )
   image.save(output_file, format="PNG", optimize=True)
 
 
