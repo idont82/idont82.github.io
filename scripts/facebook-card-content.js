@@ -133,20 +133,30 @@ function buildPostContent(queueItem, html) {
     ? buildTrackedBlogUrl(queueItem.article, queueItem.id)
     : buildDirectUrl(article.coupangUrl, queueItem.id);
   const link = buildShortUrl(queueItem.shortLinkId);
-  const overrideImages = queueItem.cardImageUrls || [];
-  const imageCandidates = overrideImages.length
-    ? overrideImages.map((imageUrl, index) => [
-      imageUrl,
-      ...overrideImages.filter((_, candidateIndex) => candidateIndex !== index),
-      ...article.productImages.filter((candidate) => !overrideImages.includes(candidate)),
-    ])
-    : selectThreeImageCandidates(article.productImages);
-  const slides = queueItem.cardCopy.map((title, index) => ({
-    label: 'GOLD PICK',
-    title,
-    imageUrl: imageCandidates[index][0],
-    imageUrls: imageCandidates[index],
-  }));
+  let slides;
+  if (queueItem.cardTemplate === 'shopping-grid') {
+    slides = queueItem.shoppingCards.map((card) => ({
+      template: 'shopping-grid',
+      label: 'GOLD PICK',
+      ...card,
+      imageUrl: card.imageUrls[0],
+    }));
+  } else {
+    const overrideImages = queueItem.cardImageUrls || [];
+    const imageCandidates = overrideImages.length
+      ? overrideImages.map((imageUrl, index) => [
+        imageUrl,
+        ...overrideImages.filter((_, candidateIndex) => candidateIndex !== index),
+        ...article.productImages.filter((candidate) => !overrideImages.includes(candidate)),
+      ])
+      : selectThreeImageCandidates(article.productImages);
+    slides = queueItem.cardCopy.map((title, index) => ({
+      label: 'GOLD PICK',
+      title,
+      imageUrl: imageCandidates[index][0],
+      imageUrls: imageCandidates[index],
+    }));
+  }
   const caption = queueItem.linkMode === 'blog'
     ? `${link}\n\n${queueItem.cardCopy[0]}\n${queueItem.cardCopy[1]}\n\n${DISCLOSURE}`
     : `${queueItem.cardCopy[0]}\n${queueItem.cardCopy[1]}\n\n${link}\n\n${DISCLOSURE}`;
