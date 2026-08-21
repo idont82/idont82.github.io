@@ -147,7 +147,9 @@ function buildPostContent(queueItem, html) {
     imageUrl: imageCandidates[index][0],
     imageUrls: imageCandidates[index],
   }));
-  const caption = `${queueItem.cardCopy[0]}\n${queueItem.cardCopy[1]}\n\n${link}\n\n${DISCLOSURE}`;
+  const caption = queueItem.linkMode === 'blog'
+    ? `${link}\n\n${queueItem.cardCopy[0]}\n${queueItem.cardCopy[1]}\n\n${DISCLOSURE}`
+    : `${queueItem.cardCopy[0]}\n${queueItem.cardCopy[1]}\n\n${link}\n\n${DISCLOSURE}`;
   return {
     id: queueItem.id,
     link,

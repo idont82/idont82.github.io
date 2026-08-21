@@ -81,6 +81,10 @@ test('blog mode produces exactly three reviewed photo cards and one short public
   assert.equal(content.link, 'https://idont82.github.io/g/?n=4');
   assert.equal(content.duplicateMarker, content.link);
   assert.equal((content.caption.match(/https:\/\/idont82\.github\.io\/g\/\?n=4/g) || []).length, 1);
+  const blogLines = content.caption.split('\n');
+  assert.equal(blogLines[0], content.link);
+  assert.equal(blogLines[1], '');
+  assert.ok(blogLines.indexOf(queueItem.cardCopy[0]) > 0);
   assert.equal(content.caption.includes('utm_campaign'), false);
   assert.equal(new URL(content.destinationLink).searchParams.get('utm_content'), queueItem.id);
 });
@@ -110,6 +114,7 @@ test('tracking helpers remain stable and direct mode keeps its tracked Coupang d
   const direct = buildPostContent({ ...queueItem, linkMode: 'direct' }, html);
   assert.equal(direct.link, 'https://idont82.github.io/g/?n=4');
   assert.equal(new URL(direct.destinationLink).searchParams.get('subid'), buildSubid(queueItem.id));
+  assert.equal(direct.caption.split('\n')[0], queueItem.cardCopy[0]);
   assert.ok(direct.caption.includes(direct.link));
 });
 
