@@ -76,6 +76,7 @@ test('입력 검증 후 세 상품이 있는 완전한 노트북 글을 렌더�
   assert.match(html, /data-coupang-placement="mobile_summary_card"/);
   assert.match(html, /BlogPosting/);
   assert.match(html, /수집 시점/);
+  assert.match(html, /\.laptop-nav\{display:grid;grid-template-columns:1fr auto 1fr/);
 });
 
 test('잘못된 링크·상품 수·전역 중복 상품을 쓰기 전에 거부한다', () => {
