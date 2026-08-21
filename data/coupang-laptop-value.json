@@ -1,0 +1,56 @@
+{
+  "group": "value",
+  "verifiedAt": "2026-08-21T01:01:46.214Z",
+  "queries": [
+    "HP 2026 라이젠5 노트북 16GB 512GB",
+    "에이수스 2026 비보북 16GB 512GB",
+    "LG전자 2026 그램북 AI 16GB 256GB"
+  ],
+  "items": [
+    {
+      "keyword": "HP 2026 라이젠5 노트북 16GB 512GB",
+      "rank": 1,
+      "isRocket": true,
+      "isFreeShipping": false,
+      "productId": 9424963493,
+      "productName": "HP 2026 옴니북 3 16 라이젠5 라이젠 40 시리즈, Glacier Silver, 16-by0045AU, 512GB, 16GB, Free DOS",
+      "productPrice": 1049000,
+      "priceLabel": "약 104만 9천원",
+      "productImage": "https://ads-partners.coupang.com/image1/d9wGloXpUWVsSBGjd5oulF2UFJF535f66QwFRr1xzh0Wju4LVc4anN1JuN6QYMXx0MZ2zZOvRA4ZEv8qjYs-vl0kdXyK7qYQoaTeBkJDlpDMWvSuZCVrn1F4GiAUke87PPe5wTFvw9CesAXWHVZ2Pf3Qpe2CakDN0carhfYKSJlK5_hl1bMWNaGbsgbNONF0IdOU60deOMUBmodQa17-UKfxBuo3nhdZB6qUwGFctRxroA5RS_a8uZKL8VqZ-r9apCWay-V8nEU4qxR4wWZ1wHMBwO-7Nhs6kxM_p1gFb_nh6bxCN2UhN0NRdtQWKlMyDJ43WOUYPTELIxU=",
+      "productUrl": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&subid=laptop-value&pageKey=9424963493&itemId=28015783485&vendorItemId=94973096620&traceid=V0-153-491a24b34a4ad0cc&clickBeacon=e191f740-9cfb-11f1-907b-6505e9f3617c%7E3&requestid=20260821100146015129758420&token=31850C%7CMIXED",
+      "categoryName": "가전디지털",
+      "impressionUrl": "",
+      "roleKeyword": "HP 2026 라이젠5 노트북 16GB 512GB"
+    },
+    {
+      "keyword": "에이수스 2026 비보북 16GB 512GB",
+      "rank": 1,
+      "isRocket": true,
+      "isFreeShipping": false,
+      "productId": 9523892766,
+      "productName": "에이수스 2026 비보북 15 코어5 코어 시리즈3, 콰이어트 블루, X1504MA-BQ089W, 512GB, 16GB, WIN11 Home",
+      "productPrice": 1599000,
+      "priceLabel": "약 159만 9천원",
+      "productImage": "https://ads-partners.coupang.com/image1/lKoBrm1Y6o9x2knPlNSY_ID9H66ufO7O2Q-Z7GC_KFsFZ4xWJnkygRC5ALuZ2xVXadEvXtwyxjCe4u2yXW6J5Wjw6RtTPx8-6QSAJsWFd2Wfn-IWZd8hP3x0Y47nM85jiTKHj4MOtWmncawH7_s8yodtKkmPSz2gzCThUwcL-PZpidwdCc7sm_NQecO4w0oXqaViBQCCStRK2GAoQia7yizzfG4EnNAWHNyLB8mRAi0Kc6jd8MaRrxsg4EDAFVKGcwnbYSgmK3jav5DXNx5QI9Mu6T-qT4xkcvhLYfQqp9XQ8yjdLHnUKFY3HghU4mNusYFB5M8Gx3m7uGk=",
+      "productUrl": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&subid=laptop-value&pageKey=9523892766&itemId=28393915327&vendorItemId=95345333139&traceid=V0-153-e88faad70dff2d90&clickBeacon=e19e5350-9cfb-11f1-be4d-d20e69ab1af2%7E3&requestid=20260821100146092135882572&token=31850C%7CMIXED",
+      "categoryName": "가전디지털",
+      "impressionUrl": "",
+      "roleKeyword": "에이수스 2026 비보북 16GB 512GB"
+    },
+    {
+      "keyword": "LG전자 2026 그램북 AI 16GB 256GB",
+      "rank": 2,
+      "isRocket": false,
+      "isFreeShipping": true,
+      "productId": 9509673683,
+      "productName": "LG전자 2026 그램북 AI 16 라이젠 AI 400 시리즈, 16UD55U-GX5JK, WIN11 Pro, 16GB, 256GB, 타이탄 블랙",
+      "productPrice": 1219000,
+      "priceLabel": "약 121만 9천원",
+      "productImage": "https://ads-partners.coupang.com/image1/Kd5MqziLHLlHb_IeKfhICz6BZX7k7VCyW5B2Iml-6KqQmfwxnUYxFMq5J32IxiwYmGnmk3GQrzCI-BELpyDUGr6n0xCeHVtDU5Xr9MbFH4rVgTDzsKQZhBByezkaS7KcaBkcC4T403eN4LI7akILUwhVd0zXPW79p-zuVQkh5In7CR6KSheXpg9dd89oyxxHguuyCo7UUHULfaDeqniG5XEieSossnQm385ucT09siMflroGfFTqA1vuGrD1EW7vI3yi1TmK6lsG-tn6LOaKo-1Jo-McKXhGgFHDJm7ceLRwoK_2l9JtI4gvmaKKbkzwcCM21W_J6TdCV9W1xn8yI_a4TV-ZJ3XWos_INbe9Ch7fVw==",
+      "productUrl": "https://link.coupang.com/re/AFFSDP?lptag=AF7523287&subid=laptop-value&pageKey=9509673683&itemId=28337988523&vendorItemId=95664687653&traceid=V0-153-8dfd602498559fd6&clickBeacon=e1b3b010-9cfb-11f1-a217-5314c5bff775%7E3&requestid=20260821100146187224948189&token=31850C%7CMIXED",
+      "categoryName": "가전디지털",
+      "impressionUrl": "",
+      "roleKeyword": "LG전자 2026 그램북 AI 16GB 256GB"
+    }
+  ]
+}
