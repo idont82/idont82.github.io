@@ -71,7 +71,8 @@ def fit_text(draw, text, font_path, max_width, max_height, start_size=86,
     if len(lines) <= max_lines and box[3] - box[1] <= max_height:
       return font, wrapped, spacing
   preview = str(text).replace("\n", " ")[:80]
-  raise ValueError(f"Text does not fit card in two lines: {preview}")
+  line_label = "line" if max_lines == 1 else "lines"
+  raise ValueError(f"Text does not fit card in {max_lines} {line_label}: {preview}")
 
 
 def open_source_image(url):
@@ -81,15 +82,15 @@ def open_source_image(url):
     images_root = (project_root / "images").resolve()
     if images_root not in local_path.parents:
       raise ValueError("Card image path leaves the images directory")
-    return Image.open(local_path).convert("RGB")
+    return Image.open(local_path).convert("RGBA")
   parsed = urlparse(url)
   if parsed.scheme == "file":
     local_path = Path(url2pathname(unquote(parsed.path)))
-    return Image.open(local_path).convert("RGB")
+    return Image.open(local_path).convert("RGBA")
   if parsed.scheme in ("http", "https"):
     request = Request(url, headers={"User-Agent": "Mozilla/5.0 CardRenderer/2.0"})
     with urlopen(request, timeout=15) as response:
-      return Image.open(BytesIO(response.read())).convert("RGB")
+      return Image.open(BytesIO(response.read())).convert("RGBA")
   raise ValueError("Unsupported card image URL")
 
 
@@ -107,7 +108,9 @@ def load_source_image(urls, description):
 
 def load_background(urls):
   source = load_source_image(urls, "card image")
-  return ImageOps.fit(source, (WIDTH, HEIGHT), method=Image.Resampling.LANCZOS)
+  return ImageOps.fit(
+      source, (WIDTH, HEIGHT), method=Image.Resampling.LANCZOS
+  ).convert("RGB")
 
 
 def require_text(slide, field, role):
@@ -233,11 +236,15 @@ def render_lifestyle_hook(slide, index, font_path, output_file):
   disclosure_font = ImageFont.truetype(font_path, 24)
   disclosure = slide["disclosure"]
   disclosure_width = text_width(draw, disclosure, disclosure_font)
-  disclosure_x = WIDTH - 22 - disclosure_width - 24
+  disclosure_x = WIDTH - SAFE_EDGE - disclosure_width - 24
   draw.rounded_rectangle(
-      (disclosure_x, 24, WIDTH - 22, 68), radius=22, fill=(0, 0, 0, 150)
+      (disclosure_x, SAFE_EDGE, WIDTH - SAFE_EDGE, SAFE_EDGE + 44),
+      radius=22, fill=(0, 0, 0, 150)
   )
-  draw.text((disclosure_x + 12, 31), disclosure, font=disclosure_font, fill="#ffffff")
+  draw.text(
+      (disclosure_x + 12, SAFE_EDGE + 7), disclosure,
+      font=disclosure_font, fill="#ffffff"
+  )
   draw_centered_fitted_text(
       draw, slide["headline"], font_path, (MARGIN, 932, WIDTH - MARGIN, 1018),
       "#ffffff", start_size=48, min_size=28, max_lines=2,

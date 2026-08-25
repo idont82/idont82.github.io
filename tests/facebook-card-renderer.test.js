@@ -79,6 +79,34 @@ function hasBrightPixel(file, left, top, right, bottom) {
   return false;
 }
 
+function hasDarkPixel(file, left, top, right, bottom) {
+  const image = pngImageData(file);
+  for (let y = top; y < bottom; y += 1) {
+    for (let x = left; x < right; x += 1) {
+      const offset = x * image.bytesPerPixel;
+      const pixel = image.rows[y];
+      if (pixel[offset] < 160 && pixel[offset + 1] < 160 && pixel[offset + 2] < 160) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function dominantColor(file, left, top, right, bottom) {
+  const image = pngImageData(file);
+  const counts = new Map();
+  for (let y = top; y < bottom; y += 1) {
+    for (let x = left; x < right; x += 1) {
+      const offset = x * image.bytesPerPixel;
+      const pixel = image.rows[y];
+      const color = `${pixel[offset]},${pixel[offset + 1]},${pixel[offset + 2]}`;
+      counts.set(color, (counts.get(color) || 0) + 1);
+    }
+  }
+  return [...counts].reduce((leading, entry) => entry[1] > leading[1] ? entry : leading)[0];
+}
+
 function solidImage(dir, name, color) {
   const file = path.join(dir, name);
   const pixels = Buffer.alloc(40 * 40 * 3);
@@ -86,6 +114,40 @@ function solidImage(dir, name, color) {
     [pixels[index], pixels[index + 1], pixels[index + 2]] = color;
   }
   fs.writeFileSync(file, Buffer.concat([Buffer.from('P6\n40 40\n255\n'), pixels]));
+  return pathToFileURL(file).href;
+}
+
+function pngChunk(type, data) {
+  let crc = 0xffffffff;
+  const bytes = Buffer.concat([Buffer.from(type, 'ascii'), data]);
+  for (const byte of bytes) {
+    crc ^= byte;
+    for (let bit = 0; bit < 8; bit += 1) {
+      crc = (crc >>> 1) ^ (crc & 1 ? 0xedb88320 : 0);
+    }
+  }
+  const chunk = Buffer.alloc(12 + data.length);
+  chunk.writeUInt32BE(data.length, 0);
+  Buffer.from(type, 'ascii').copy(chunk, 4);
+  data.copy(chunk, 8);
+  chunk.writeUInt32BE((crc ^ 0xffffffff) >>> 0, 8 + data.length);
+  return chunk;
+}
+
+function transparentImage(dir) {
+  const file = path.join(dir, 'transparent-product.png');
+  const header = Buffer.alloc(13);
+  header.writeUInt32BE(1, 0);
+  header.writeUInt32BE(1, 4);
+  header[8] = 8;
+  header[9] = 6;
+  const image = Buffer.concat([
+    Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]),
+    pngChunk('IHDR', header),
+    pngChunk('IDAT', zlib.deflateSync(Buffer.from([0, 255, 0, 0, 0]))),
+    pngChunk('IEND', Buffer.alloc(0)),
+  ]);
+  fs.writeFileSync(file, image);
   return pathToFileURL(file).href;
 }
 
@@ -117,10 +179,11 @@ function render(input, dir, env = process.env) {
 function writeLifestyleContent(dir, {
   disclosure = 'AI \uc5f0\ucd9c \uc774\ubbf8\uc9c0',
   lifestyleImageUrls,
+  productImageUrls,
 } = {}) {
   const input = path.join(dir, 'lifestyle-content.json');
   const scene = lifestyleImageUrls || ['/images/facebook-fictional-model/hana-laptop-document-scene.png'];
-  const product = '/images/facebook-fictional-model/hana-reference.png';
+  const product = productImageUrls || ['/images/facebook-fictional-model/hana-reference.png'];
   fs.writeFileSync(input, JSON.stringify({
     id: 'lifestyle-render-test',
     slides: [
@@ -130,7 +193,7 @@ function writeLifestyleContent(dir, {
         label: 'GOLD PICK',
         headline: '\ub9e4\uc77c \ub4e4\uace0 \ub2e4\ub2d0 \ubb38\uc11c\uc6a9 \ub178\ud2b8\ubd81',
         lifestyleImageUrls: scene,
-        productImageUrls: [product],
+        productImageUrls: product,
         productName: '\ud14c\uc2a4\ud2b8 \ub178\ud2b8\ubd81 16',
         priceBand: '100\ub9cc\uc6d0\ub300',
         disclosure,
@@ -138,7 +201,7 @@ function writeLifestyleContent(dir, {
       {
         template: 'lifestyle-hybrid',
         role: 'product-proof',
-        productImageUrls: [product],
+        productImageUrls: product,
         productName: '\ud14c\uc2a4\ud2b8 \ub178\ud2b8\ubd81 16',
         priceBand: '\uc791\uc131\uc77c \uae30\uc900 100\ub9cc\uc6d0\ub300',
         specs: ['Ryzen 5', '16GB \u00b7 512GB', 'Windows 11'],
@@ -147,7 +210,7 @@ function writeLifestyleContent(dir, {
       {
         template: 'lifestyle-hybrid',
         role: 'fit-action',
-        productImageUrls: [product],
+        productImageUrls: product,
         productName: '\ud14c\uc2a4\ud2b8 \ub178\ud2b8\ubd81 16',
         fits: ['\ubb38\uc11c \uc791\uc131', '\uba54\uc77c \u00b7 \uc6f9', '\ud654\uc0c1 \ud68c\uc758'],
         caution: '16\uc778\uce58 \ud734\ub300 \ubb34\uac8c\ub294 \ud655\uc778\ud558\uc138\uc694',
@@ -167,11 +230,10 @@ test('renderer creates three lifestyle-hybrid role cards with distinct hook regi
   for (const card of manifest.cards) {
     assert.deepEqual(pngSize(card), { width: 1080, height: 1350 });
   }
-  const headerSample = pngPixel(manifest.cards[0], 110, 100);
   const lowerPanelSample = pngPixel(manifest.cards[0], 960, 1120);
-  assert.ok(headerSample[0] > 220 && headerSample[1] > 160 && headerSample[2] < 130);
+  assert.equal(dominantColor(manifest.cards[0], 88, 92, 98, 108), '246,200,95');
   assert.ok(lowerPanelSample.every((channel) => channel > 230));
-  assert.notDeepEqual(headerSample, lowerPanelSample);
+  assert.notEqual(dominantColor(manifest.cards[0], 88, 92, 98, 108), lowerPanelSample.join(','));
 });
 
 test('renderer rejects a lifestyle hook without its AI image disclosure', () => {
@@ -188,6 +250,26 @@ test('renderer makes the lifestyle hook lower information region fully opaque', 
   assert.equal(result.status, 0, result.stderr);
   const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'manifest.json'), 'utf8'));
   assert.deepEqual(pngPixel(manifest.cards[0], 960, 930), [18, 24, 38]);
+});
+
+test('renderer keeps the full AI disclosure badge inside the 44px top and right safety edges', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'facebook-lifestyle-disclosure-safe-edge-'));
+  const scene = whiteImage(dir);
+  const result = render(writeLifestyleContent(dir, { lifestyleImageUrls: [scene] }), dir);
+  assert.equal(result.status, 0, result.stderr);
+  const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'manifest.json'), 'utf8'));
+  assert.equal(hasDarkPixel(manifest.cards[0], 700, 0, 1080, 44), false);
+  assert.equal(hasDarkPixel(manifest.cards[0], 1037, 0, 1080, 120), false);
+  assert.equal(hasDarkPixel(manifest.cards[0], 700, 44, 1036, 100), true);
+});
+
+test('renderer preserves transparent product pixels over the card background', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'facebook-lifestyle-transparent-'));
+  const product = transparentImage(dir);
+  const result = render(writeLifestyleContent(dir, { productImageUrls: [product] }), dir);
+  assert.equal(result.status, 0, result.stderr);
+  const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'manifest.json'), 'utf8'));
+  assert.deepEqual(pngPixel(manifest.cards[2], 750, 300), [18, 24, 32]);
 });
 
 test('renderer keeps lifestyle counters out of the 44px bottom safety edge', () => {
@@ -214,7 +296,18 @@ test('renderer rejects a phrase that cannot fit in two lines', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'facebook-overflow-'));
   const result = render(writeContent(dir, '가'.repeat(200)), dir);
   assert.notEqual(result.status, 0);
-  assert.match(result.stderr, /two lines|Text does not fit card/);
+  assert.match(result.stderr, /Text does not fit card in 2 lines/);
+});
+
+test('renderer identifies a product name that cannot fit in one line', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'facebook-product-name-overflow-'));
+  const input = writeLifestyleContent(dir);
+  const content = JSON.parse(fs.readFileSync(input, 'utf8'));
+  content.slides[1].productName = 'x'.repeat(200);
+  fs.writeFileSync(input, JSON.stringify(content));
+  const result = render(input, dir);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /Text does not fit card in 1 line/);
 });
 
 test('renderer uses the next image candidate when the primary image fails', () => {
@@ -239,6 +332,20 @@ test('renderer loads a root-relative checked-in image', () => {
   fs.writeFileSync(input, JSON.stringify(content));
   const result = render(input, dir);
   assert.equal(result.status, 0, result.stderr);
+});
+
+test('renderer rejects root-relative image traversal outside the images directory', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'facebook-image-traversal-'));
+  const input = writeContent(dir);
+  const content = JSON.parse(fs.readFileSync(input, 'utf8'));
+  for (const slide of content.slides) {
+    slide.imageUrl = '/images/../server.js';
+    slide.imageUrls = [slide.imageUrl];
+  }
+  fs.writeFileSync(input, JSON.stringify(content));
+  const result = render(input, dir);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /Card image path leaves the images directory/);
 });
 
 test('renderer falls back to an installed Korean font when override is missing', () => {
