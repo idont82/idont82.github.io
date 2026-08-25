@@ -79,11 +79,18 @@ function hasBrightPixel(file, left, top, right, bottom) {
   return false;
 }
 
-function whiteImage(dir) {
-  const file = path.join(dir, 'white.ppm');
-  const pixels = Buffer.alloc(40 * 40 * 3, 255);
+function solidImage(dir, name, color) {
+  const file = path.join(dir, name);
+  const pixels = Buffer.alloc(40 * 40 * 3);
+  for (let index = 0; index < pixels.length; index += 3) {
+    [pixels[index], pixels[index + 1], pixels[index + 2]] = color;
+  }
   fs.writeFileSync(file, Buffer.concat([Buffer.from('P6\n40 40\n255\n'), pixels]));
   return pathToFileURL(file).href;
+}
+
+function whiteImage(dir) {
+  return solidImage(dir, 'white.ppm', [255, 255, 255]);
 }
 
 function writeContent(dir, title = '상품 사진 위에 들어가는 큰 문구') {
@@ -107,9 +114,12 @@ function render(input, dir, env = process.env) {
   ], { encoding: 'utf8', env });
 }
 
-function writeLifestyleContent(dir, { disclosure = 'AI \uc5f0\ucd9c \uc774\ubbf8\uc9c0' } = {}) {
+function writeLifestyleContent(dir, {
+  disclosure = 'AI \uc5f0\ucd9c \uc774\ubbf8\uc9c0',
+  lifestyleImageUrls,
+} = {}) {
   const input = path.join(dir, 'lifestyle-content.json');
-  const scene = '/images/facebook-fictional-model/hana-laptop-document-scene.png';
+  const scene = lifestyleImageUrls || ['/images/facebook-fictional-model/hana-laptop-document-scene.png'];
   const product = '/images/facebook-fictional-model/hana-reference.png';
   fs.writeFileSync(input, JSON.stringify({
     id: 'lifestyle-render-test',
@@ -119,7 +129,7 @@ function writeLifestyleContent(dir, { disclosure = 'AI \uc5f0\ucd9c \uc774\ubbf8
         role: 'lifestyle-hook',
         label: 'GOLD PICK',
         headline: '\ub9e4\uc77c \ub4e4\uace0 \ub2e4\ub2d0 \ubb38\uc11c\uc6a9 \ub178\ud2b8\ubd81',
-        lifestyleImageUrls: [scene],
+        lifestyleImageUrls: scene,
         productImageUrls: [product],
         productName: '\ud14c\uc2a4\ud2b8 \ub178\ud2b8\ubd81 16',
         priceBand: '100\ub9cc\uc6d0\ub300',
@@ -169,6 +179,15 @@ test('renderer rejects a lifestyle hook without its AI image disclosure', () => 
   const result = render(writeLifestyleContent(dir, { disclosure: '' }), dir);
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /lifestyle hook missing disclosure/);
+});
+
+test('renderer makes the lifestyle hook lower information region fully opaque', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'facebook-lifestyle-opaque-'));
+  const scene = solidImage(dir, 'magenta.ppm', [255, 0, 255]);
+  const result = render(writeLifestyleContent(dir, { lifestyleImageUrls: [scene] }), dir);
+  assert.equal(result.status, 0, result.stderr);
+  const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'manifest.json'), 'utf8'));
+  assert.deepEqual(pngPixel(manifest.cards[0], 960, 930), [18, 24, 38]);
 });
 
 test('renderer keeps lifestyle counters out of the 44px bottom safety edge', () => {

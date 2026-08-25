@@ -226,7 +226,7 @@ def render_lifestyle_hook(slide, index, font_path, output_file):
   image = load_background(slide["lifestyleImageUrls"]).convert("RGBA")
   overlay = Image.new("RGBA", image.size, (0, 0, 0, 0))
   overlay_draw = ImageDraw.Draw(overlay)
-  overlay_draw.rectangle((0, 920, WIDTH, HEIGHT), fill=(18, 24, 38, 238))
+  overlay_draw.rectangle((0, 920, WIDTH, HEIGHT), fill=(18, 24, 38, 255))
   image = Image.alpha_composite(image, overlay)
   draw = ImageDraw.Draw(image)
   draw_gold_pick_badge(draw, font_path)
