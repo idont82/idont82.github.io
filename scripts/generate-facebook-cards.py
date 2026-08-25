@@ -153,6 +153,7 @@ def validate_lifestyle_slide(slide):
       raise ValueError("product-proof requires exactly 3 specs")
     require_text(slide, "disclaimer", role)
   else:
+    require_text(slide, "sectionTitle", "fit action")
     fits = slide.get("fits")
     if not isinstance(fits, list) or not 1 <= len(fits) <= 3 or any(
         not isinstance(fit, str) or not fit.strip() for fit in fits
@@ -303,9 +304,12 @@ def render_fit_action(slide, index, font_path, output_file):
   paste_contained_product(image, slide["productImageUrls"], (500, 116, 1000, 574))
   draw_centered_fitted_text(
       draw, slide["productName"], font_path, (MARGIN, 188, 510, 300), "#ffffff",
-      start_size=42, min_size=26, max_lines=2,
+      start_size=42, min_size=26, max_lines=1,
   )
-  draw.text((MARGIN, 640), "이런 분께", font=ImageFont.truetype(font_path, 34), fill="#f6c85f")
+  draw.text(
+      (MARGIN, 640), slide["sectionTitle"],
+      font=ImageFont.truetype(font_path, 34), fill="#f6c85f",
+  )
   for fit_index, fit in enumerate(slide["fits"]):
     top = 710 + fit_index * 104
     draw.rounded_rectangle((MARGIN, top, WIDTH - MARGIN, top + 74), radius=37,

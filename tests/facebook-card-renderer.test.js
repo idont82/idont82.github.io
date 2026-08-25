@@ -93,6 +93,20 @@ function hasDarkPixel(file, left, top, right, bottom) {
   return false;
 }
 
+function regionsDiffer(fileA, fileB, left, top, right, bottom) {
+  const first = pngImageData(fileA);
+  const second = pngImageData(fileB);
+  assert.equal(first.bytesPerPixel, second.bytesPerPixel);
+  for (let y = top; y < bottom; y += 1) {
+    const start = left * first.bytesPerPixel;
+    const end = right * first.bytesPerPixel;
+    if (!first.rows[y].subarray(start, end).equals(second.rows[y].subarray(start, end))) {
+      return true;
+    }
+  }
+  return false;
+}
+
 function dominantColor(file, left, top, right, bottom) {
   const image = pngImageData(file);
   const counts = new Map();
@@ -212,6 +226,7 @@ function writeLifestyleContent(dir, {
         role: 'fit-action',
         productImageUrls: product,
         productName: '\ud14c\uc2a4\ud2b8 \ub178\ud2b8\ubd81 16',
+        sectionTitle: '\uc774\ub7f0 \uc6a9\ub3c4\uc5d0 \uc798 \ub9de\uc544\uc694',
         fits: ['\ubb38\uc11c \uc791\uc131', '\uba54\uc77c \u00b7 \uc6f9', '\ud654\uc0c1 \ud68c\uc758'],
         caution: '16\uc778\uce58 \ud734\ub300 \ubb34\uac8c\ub294 \ud655\uc778\ud558\uc138\uc694',
         cta: '\uc790\uc138\ud55c \ube44\uad50\ub294 \ubcf8\ubb38\uc5d0\uc11c',
@@ -241,6 +256,52 @@ test('renderer rejects a lifestyle hook without its AI image disclosure', () => 
   const result = render(writeLifestyleContent(dir, { disclosure: '' }), dir);
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /lifestyle hook missing disclosure/);
+});
+
+test('renderer rejects a fit action without its section title', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'facebook-lifestyle-section-title-required-'));
+  const input = writeLifestyleContent(dir);
+  const content = JSON.parse(fs.readFileSync(input, 'utf8'));
+  delete content.slides[2].sectionTitle;
+  fs.writeFileSync(input, JSON.stringify(content), 'utf8');
+  const result = render(input, dir);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /fit action missing sectionTitle/);
+});
+
+test('renderer draws the configured fit action section title', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'facebook-lifestyle-section-title-rendered-'));
+  const input = writeLifestyleContent(dir);
+  const firstOutput = path.join(dir, 'first');
+  const firstResult = render(input, firstOutput);
+  assert.equal(firstResult.status, 0, firstResult.stderr);
+
+  const content = JSON.parse(fs.readFileSync(input, 'utf8'));
+  content.slides[2].sectionTitle = '\uc5c5\ubb34 \ud65c\uc6a9 \uc608\uc2dc';
+  const secondInput = path.join(dir, 'second-content.json');
+  fs.writeFileSync(secondInput, JSON.stringify(content), 'utf8');
+  const secondOutput = path.join(dir, 'second');
+  const secondResult = render(secondInput, secondOutput);
+  assert.equal(secondResult.status, 0, secondResult.stderr);
+
+  assert.equal(
+    regionsDiffer(
+      path.join(firstOutput, '03.png'), path.join(secondOutput, '03.png'),
+      76, 620, 490, 700,
+    ),
+    true,
+  );
+});
+
+test('renderer fits the pilot product name on one fit action line', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'facebook-lifestyle-action-name-'));
+  const input = writeLifestyleContent(dir);
+  const content = JSON.parse(fs.readFileSync(input, 'utf8'));
+  content.slides[2].productName = 'Basics BasicBook 16 Pro';
+  fs.writeFileSync(input, JSON.stringify(content), 'utf8');
+  const result = render(input, dir);
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(hasBrightPixel(path.join(dir, '03.png'), 76, 264, 490, 300), false);
 });
 
 test('renderer makes the lifestyle hook lower information region fully opaque', () => {
