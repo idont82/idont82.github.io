@@ -1,0 +1,62 @@
+[
+  {
+    "id": "20260821-laptop-value-top3",
+    "category": "laptop",
+    "article": "/blog/best-value-laptop-top3-guide.html",
+    "linkMode": "blog",
+    "scheduledAt": "2026-08-21T09:00:00+09:00",
+    "shortLinkId": 15,
+    "cardCopy": [
+      "가성비 노트북 TOP 3",
+      "가격 · 메모리 · 저장공간 비교",
+      "예산에 맞는 선택 기준"
+    ],
+    "status": "published",
+    "attempts": 1,
+    "facebookPostId": "1243431898854300_122110686801428837",
+    "facebookPermalink": "https://www.facebook.com/122104701477428837/posts/122110686801428837",
+    "publishedAt": "2026-08-21T05:07:25.262Z",
+    "lastError": null,
+    "trackingId": "20260821-laptop-value-top3"
+  },
+  {
+    "id": "20260821-laptop-performance-top3",
+    "category": "laptop",
+    "article": "/blog/highest-performance-laptop-top3-guide.html",
+    "linkMode": "blog",
+    "scheduledAt": "2026-08-21T09:01:00+09:00",
+    "shortLinkId": 16,
+    "cardCopy": [
+      "최고성능 노트북 TOP 3",
+      "RTX 5090 · 5080 · 5070 Ti",
+      "고사양 작업용 선택 기준"
+    ],
+    "status": "published",
+    "attempts": 0,
+    "facebookPostId": "1243431898854300_122110687095428837",
+    "facebookPermalink": "https://www.facebook.com/122104701477428837/posts/122110687095428837",
+    "publishedAt": "2026-08-21T05:07:37.165Z",
+    "lastError": null,
+    "trackingId": "20260821-laptop-performance-top3"
+  },
+  {
+    "id": "20260821-laptop-document-top3",
+    "category": "laptop",
+    "article": "/blog/document-work-laptop-top3-guide.html",
+    "linkMode": "blog",
+    "scheduledAt": "2026-08-21T09:02:00+09:00",
+    "shortLinkId": 17,
+    "cardCopy": [
+      "문서용 노트북 TOP 3",
+      "Windows · 저장공간 · 화면 비교",
+      "가벼운 업무용 선택 기준"
+    ],
+    "status": "published",
+    "attempts": 0,
+    "facebookPostId": "1243431898854300_122110687353428837",
+    "facebookPermalink": "https://www.facebook.com/122104701477428837/posts/122110687353428837",
+    "publishedAt": "2026-08-21T05:07:49.627Z",
+    "lastError": null,
+    "trackingId": "20260821-laptop-document-top3"
+  }
+]

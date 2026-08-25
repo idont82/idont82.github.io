@@ -47,6 +47,38 @@ function validateQueue(queue) {
         throw new Error(`${item.id} has invalid cardCopy`);
       }
     }
+    if (item.cardTemplate !== undefined && item.cardTemplate !== 'shopping-grid') {
+      throw new Error(`${item.id} has invalid cardTemplate`);
+    }
+    if (item.cardTemplate === 'shopping-grid') {
+      if (!Array.isArray(item.shoppingCards) || item.shoppingCards.length !== 3) {
+        throw new Error(`${item.id} shoppingCards must contain exactly three cards`);
+      }
+      for (const card of item.shoppingCards) {
+        for (const field of ['hook', 'productName', 'imageUrls', 'specs', 'uses', 'disclaimer']) {
+          if (card[field] === undefined || card[field] === null || card[field] === '') {
+            throw new Error(`${item.id} shopping card missing ${field}`);
+          }
+        }
+        for (const field of ['hook', 'productName', 'disclaimer']) {
+          if (typeof card[field] !== 'string' || !card[field].trim()) {
+            throw new Error(`${item.id} shopping card missing ${field}`);
+          }
+        }
+        if (!Array.isArray(card.imageUrls) || !card.imageUrls.length
+          || card.imageUrls.some((url) => typeof url !== 'string' || !url.trim())) {
+          throw new Error(`${item.id} shopping card imageUrls must contain images`);
+        }
+        if (!Array.isArray(card.specs) || card.specs.length < 1 || card.specs.length > 3
+          || card.specs.some((value) => typeof value !== 'string' || !value.trim())) {
+          throw new Error(`${item.id} shopping card specs must contain 1 to 3 items`);
+        }
+        if (!Array.isArray(card.uses) || card.uses.length < 1 || card.uses.length > 4
+          || card.uses.some((value) => typeof value !== 'string' || !value.trim())) {
+          throw new Error(`${item.id} shopping card uses must contain 1 to 4 items`);
+        }
+      }
+    }
     if (item.cardImageUrls !== undefined) {
       const safeImagePath = /^\/images\/facebook-card-news\/[a-z0-9-]+\.png$/;
       if (!Array.isArray(item.cardImageUrls) || item.cardImageUrls.length !== 3
@@ -76,7 +108,12 @@ function validateQueue(queue) {
       continue;
     }
     const previous = byArticle.get(item.article);
-    if (previous && Date.parse(item.scheduledAt) - Date.parse(previous.scheduledAt) < SIXTY_DAYS_MS) {
+    const replacesPublishedPost = previous
+      && item.replacesFacebookPostId
+      && previous.status === 'published'
+      && previous.facebookPostId === item.replacesFacebookPostId;
+    if (previous && !replacesPublishedPost
+      && Date.parse(item.scheduledAt) - Date.parse(previous.scheduledAt) < SIXTY_DAYS_MS) {
       throw new Error(`${item.article} repeats within 60 days`);
     }
     byArticle.set(item.article, item);

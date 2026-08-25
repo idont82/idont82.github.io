@@ -94,7 +94,7 @@ def open_source_image(url):
   raise ValueError("Unsupported card image URL")
 
 
-def load_source_image(urls, description):
+def load_source_image(urls, description="card image"):
   errors = []
   for url in urls:
     if not isinstance(url, str) or not url:
@@ -338,16 +338,116 @@ def render_fit_action(slide, index, font_path, output_file):
   image.convert("RGB").save(output_file, format="PNG", optimize=True)
 
 
-def render_slide(slide, index, font_path, output_file):
-  if slide.get("template") == "lifestyle-hybrid":
-    role = slide["role"]
-    if role == "lifestyle-hook":
-      return render_lifestyle_hook(slide, index, font_path, output_file)
-    if role == "product-proof":
-      return render_product_proof(slide, index, font_path, output_file)
-    if role == "fit-action":
-      return render_fit_action(slide, index, font_path, output_file)
-    raise ValueError(f"Invalid lifestyle-hybrid role: {role}")
+def draw_centered_text(draw, text, box, font_path, fill, start_size,
+                       min_size, max_lines, spacing_ratio=0.22):
+  left, top, right, bottom = box
+  font, wrapped, spacing = fit_text(
+      draw, text, font_path, right - left, bottom - top,
+      start_size=start_size, min_size=min_size, max_lines=max_lines,
+  )
+  spacing = max(8, round(font.size * spacing_ratio))
+  bounds = draw.multiline_textbbox(
+      (0, 0), wrapped, font=font, spacing=spacing, align="center"
+  )
+  width = bounds[2] - bounds[0]
+  height = bounds[3] - bounds[1]
+  x = left + (right - left - width) / 2 - bounds[0]
+  y = top + (bottom - top - height) / 2 - bounds[1]
+  draw.multiline_text(
+      (x, y), wrapped, font=font, fill=fill, spacing=spacing, align="center"
+  )
+
+
+def validate_shopping_slide(slide):
+  for field in ("hook", "productName", "imageUrls", "specs", "uses", "disclaimer"):
+    value = slide.get(field)
+    if value is None or value == "" or value == []:
+      raise ValueError(f"shopping card missing {field}")
+  if not isinstance(slide["specs"], list) or not 1 <= len(slide["specs"]) <= 3:
+    raise ValueError("shopping card specs must contain 1 to 3 items")
+  if not isinstance(slide["uses"], list) or not 1 <= len(slide["uses"]) <= 4:
+    raise ValueError("shopping card uses must contain 1 to 4 items")
+
+
+def render_shopping_slide(slide, index, font_path, output_file):
+  validate_shopping_slide(slide)
+  left_width = 720
+  image = Image.new("RGB", (WIDTH, HEIGHT), "#faf9f6")
+  draw = ImageDraw.Draw(image)
+
+  draw.rectangle((left_width, 0, WIDTH, 675), fill="#191b2c")
+  draw.rectangle((left_width, 675, WIDTH, HEIGHT), fill="#f1eee7")
+  draw.line((left_width, 0, left_width, HEIGHT), fill="#ddd7cc", width=3)
+  draw.line((left_width, 675, WIDTH, 675), fill="#d8d1c4", width=3)
+
+  label_font = ImageFont.truetype(font_path, 26)
+  small_font = ImageFont.truetype(font_path, 22)
+  section_font = ImageFont.truetype(font_path, 35)
+  draw.rounded_rectangle((44, 38, 258, 92), radius=27, fill="#f6c342")
+  draw.text((67, 49), "GOLD PICK", font=label_font, fill="#17130a")
+  draw.rounded_rectangle((WIDTH - 132, 34, WIDTH - 30, 82), radius=24, fill="#a7f3d0")
+  draw.text((WIDTH - 104, 45), f"{index + 1}/3", font=small_font, fill="#064e3b")
+
+  draw_centered_text(
+      draw, slide["hook"], (40, 112, left_width - 40, 265), font_path,
+      "#e56f00", 96, 54, 2,
+  )
+  draw_centered_text(
+      draw, slide["productName"], (58, 270, left_width - 58, 365), font_path,
+      "#34312d", 38, 24, 2,
+  )
+
+  source = load_source_image(slide.get("imageUrls") or [slide.get("imageUrl")])
+  product = ImageOps.contain(source, (650, 760), method=Image.Resampling.LANCZOS)
+  product_x = (left_width - product.width) // 2
+  product_y = 390 + (760 - product.height) // 2
+  image.paste(product, (product_x, product_y))
+
+  draw_centered_text(
+      draw, slide["disclaimer"], (48, 1235, left_width - 48, 1305), font_path,
+      "#6f6a63", 25, 18, 2,
+  )
+
+  draw.text((754, 112), "핵심 스펙", font=section_font, fill="#ffffff")
+  spec_top = 190
+  for position, spec in enumerate(slide["specs"]):
+    top = spec_top + position * 128
+    draw.rounded_rectangle((752, top, 1048, top + 96), radius=20, fill="#2d3047")
+    draw.ellipse((772, top + 29, 810, top + 67), fill="#a7f3d0")
+    marker = "+"
+    marker_width = text_width(draw, marker, small_font)
+    draw.text((791 - marker_width / 2, top + 29), marker, font=small_font, fill="#064e3b")
+    draw_centered_text(
+        draw, spec, (822, top + 12, 1032, top + 84), font_path,
+        "#ffffff", 31, 22, 2,
+    )
+
+  draw.text((754, 734), "추천 용도", font=section_font, fill="#24211c")
+  use_boxes = [
+    (752, 810, 894, 995), (906, 810, 1048, 995),
+    (752, 1008, 894, 1193), (906, 1008, 1048, 1193),
+  ]
+  for position, use in enumerate(slide["uses"]):
+    box = use_boxes[position]
+    draw.rounded_rectangle(box, radius=20, fill="#ffffff", outline="#ded7ca", width=2)
+    icon = str(position + 1)
+    icon_font = ImageFont.truetype(font_path, 42)
+    icon_width = text_width(draw, icon, icon_font)
+    draw.text(((box[0] + box[2] - icon_width) / 2, box[1] + 24), icon,
+              font=icon_font, fill="#dc7a00")
+    draw_centered_text(
+        draw, use, (box[0] + 10, box[1] + 86, box[2] - 10, box[3] - 14),
+        font_path, "#28241e", 25, 18, 2,
+    )
+
+  draw_centered_text(
+      draw, "제품 옵션과 최신 가격은 본문에서 확인",
+      (750, 1256, 1050, 1324), font_path, "#746d62", 20, 16, 2,
+  )
+  image.save(output_file, format="PNG", optimize=True)
+
+
+def render_classic_slide(slide, index, font_path, output_file):
   candidates = slide.get("imageUrls") or [slide.get("imageUrl")]
   image = load_background(candidates).convert("RGBA")
   overlay = Image.new("RGBA", image.size, (0, 0, 0, 0))
@@ -382,6 +482,21 @@ def render_slide(slide, index, font_path, output_file):
       font=footer_font, fill="#ffffff", stroke_width=1, stroke_fill="#000000",
   )
   image.convert("RGB").save(output_file, format="PNG", optimize=True)
+
+
+def render_slide(slide, index, font_path, output_file):
+  if slide.get("template") == "lifestyle-hybrid":
+    role = slide["role"]
+    if role == "lifestyle-hook":
+      return render_lifestyle_hook(slide, index, font_path, output_file)
+    if role == "product-proof":
+      return render_product_proof(slide, index, font_path, output_file)
+    if role == "fit-action":
+      return render_fit_action(slide, index, font_path, output_file)
+    raise ValueError(f"Invalid lifestyle-hybrid role: {role}")
+  if slide.get("template") == "shopping-grid":
+    return render_shopping_slide(slide, index, font_path, output_file)
+  return render_classic_slide(slide, index, font_path, output_file)
 
 
 def load_content(input_path):

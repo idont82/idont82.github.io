@@ -956,4 +956,24 @@
     <priority>0.8</priority>
   </url>
 <?AUTUMN-SITEMAP-END?>
+<?LAPTOP-SITEMAP-START?>
+  <url>
+    <loc>https://idont82.github.io/blog/best-value-laptop-top3-guide.html</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://idont82.github.io/blog/highest-performance-laptop-top3-guide.html</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://idont82.github.io/blog/document-work-laptop-top3-guide.html</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+<?LAPTOP-SITEMAP-END?>
 </urlset>
