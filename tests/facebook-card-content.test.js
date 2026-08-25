@@ -81,6 +81,10 @@ test('blog mode produces exactly three reviewed photo cards and one short public
   assert.equal(content.link, 'https://idont82.github.io/g/?n=4');
   assert.equal(content.duplicateMarker, content.link);
   assert.equal((content.caption.match(/https:\/\/idont82\.github\.io\/g\/\?n=4/g) || []).length, 1);
+  const blogLines = content.caption.split('\n');
+  assert.equal(blogLines[0], content.link);
+  assert.equal(blogLines[1], '');
+  assert.ok(blogLines.indexOf(queueItem.cardCopy[0]) > 0);
   assert.equal(content.caption.includes('utm_campaign'), false);
   assert.equal(new URL(content.destinationLink).searchParams.get('utm_content'), queueItem.id);
 });
@@ -110,7 +114,34 @@ test('tracking helpers remain stable and direct mode keeps its tracked Coupang d
   const direct = buildPostContent({ ...queueItem, linkMode: 'direct' }, html);
   assert.equal(direct.link, 'https://idont82.github.io/g/?n=4');
   assert.equal(new URL(direct.destinationLink).searchParams.get('subid'), buildSubid(queueItem.id));
+  assert.equal(direct.caption.split('\n')[0], queueItem.cardCopy[0]);
   assert.ok(direct.caption.includes(direct.link));
+});
+
+test('shopping-grid mode forwards reviewed product details to three renderer slides', () => {
+  const shoppingCards = [1, 2, 3].map((index) => ({
+    hook: `${100 + index}만원대`,
+    productName: `테스트 노트북 ${index}`,
+    imageUrls: [`https://example.com/shopping-${index}.jpg`],
+    specs: ['메모리 16GB', '저장공간 512GB'],
+    uses: ['문서 작업', '화상 회의'],
+    disclaimer: '작성일 기준 · 가격 변동 가능',
+  }));
+  const content = buildPostContent({
+    ...queueItem,
+    shortLinkId: 18,
+    cardTemplate: 'shopping-grid',
+    shoppingCards,
+  }, html);
+
+  assert.equal(content.slides.length, 3);
+  assert.deepEqual(content.slides.map((slide) => slide.template), [
+    'shopping-grid', 'shopping-grid', 'shopping-grid',
+  ]);
+  assert.deepEqual(content.slides.map((slide) => slide.hook), shoppingCards.map((card) => card.hook));
+  assert.deepEqual(content.slides.map((slide) => slide.imageUrl), shoppingCards.map((card) => card.imageUrls[0]));
+  assert.equal(content.caption.split('\n')[0], 'https://idont82.github.io/g/?n=18');
+  assert.ok(content.caption.includes('쿠팡 파트너스'));
 });
 
 test('real celebrity article produces three photo cards with a short link', () => {
