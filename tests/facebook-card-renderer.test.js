@@ -93,6 +93,20 @@ function hasDarkPixel(file, left, top, right, bottom) {
   return false;
 }
 
+function hasGoldPixel(file, left, top, right, bottom) {
+  const image = pngImageData(file);
+  for (let y = top; y < bottom; y += 1) {
+    for (let x = left; x < right; x += 1) {
+      const offset = x * image.bytesPerPixel;
+      const pixel = image.rows[y];
+      if (pixel[offset] > 200 && pixel[offset + 1] > 150 && pixel[offset + 2] < 150) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 function regionsDiffer(fileA, fileB, left, top, right, bottom) {
   const first = pngImageData(fileA);
   const second = pngImageData(fileB);
@@ -267,6 +281,32 @@ test('renderer rejects a fit action without its section title', () => {
   const result = render(input, dir);
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /fit action missing sectionTitle/);
+});
+
+test('renderer rejects lifestyle cards whose roles are not in hook to action order', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'facebook-lifestyle-role-order-'));
+  const input = writeLifestyleContent(dir);
+  const content = JSON.parse(fs.readFileSync(input, 'utf8'));
+  [content.slides[0], content.slides[1]] = [content.slides[1], content.slides[0]];
+  fs.writeFileSync(input, JSON.stringify(content), 'utf8');
+
+  const result = render(input, dir);
+
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /lifestyle cards must be ordered lifestyle-hook, product-proof, fit-action/);
+});
+
+test('renderer keeps a long Korean fit action section title inside the right safety edge', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'facebook-lifestyle-section-title-safe-edge-'));
+  const input = writeLifestyleContent(dir);
+  const content = JSON.parse(fs.readFileSync(input, 'utf8'));
+  content.slides[2].sectionTitle = '\uc5c5\ubb34\uc640 \ud559\uc2b5\uc744 \uc624\ub798 \ud3b8\uc548\ud558\uac8c \uc774\uc5b4\uac00\uace0 \uc2f6\uc740 \ubd84\ub4e4\uc5d0\uac8c \ud2b9\ud788 \uc798 \ub9de\uc544\uc694';
+  fs.writeFileSync(input, JSON.stringify(content), 'utf8');
+
+  const result = render(input, dir);
+
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(hasGoldPixel(path.join(dir, '03.png'), 1036, 610, 1080, 710), false);
 });
 
 test('renderer draws the configured fit action section title', () => {

@@ -175,6 +175,10 @@ def validate_content(content):
   roles = [slide.get("role") for slide in hybrid_slides]
   if set(roles) != set(HYBRID_ROLES) or len(set(roles)) != 3:
     raise ValueError("lifestyle-hybrid slides must use each required role exactly once")
+  if tuple(roles) != HYBRID_ROLES:
+    raise ValueError(
+        "lifestyle cards must be ordered lifestyle-hook, product-proof, fit-action"
+    )
 
 
 def draw_centered_fitted_text(draw, text, font_path, box, fill, start_size=58,
@@ -306,9 +310,9 @@ def render_fit_action(slide, index, font_path, output_file):
       draw, slide["productName"], font_path, (MARGIN, 188, 510, 300), "#ffffff",
       start_size=42, min_size=26, max_lines=1,
   )
-  draw.text(
-      (MARGIN, 640), slide["sectionTitle"],
-      font=ImageFont.truetype(font_path, 34), fill="#f6c85f",
+  draw_centered_fitted_text(
+      draw, slide["sectionTitle"], font_path, (MARGIN, 616, WIDTH - MARGIN, 690),
+      "#f6c85f", start_size=34, min_size=22, max_lines=2,
   )
   for fit_index, fit in enumerate(slide["fits"]):
     top = 710 + fit_index * 104
