@@ -8,6 +8,8 @@ Give HANA a more visibly curvy, attractive silhouette while preserving the trust
 
 Use the **natural balanced-curvy** approach. Increase overall body volume moderately across the shoulders, bust, waist-to-hip transition, and hips. Keep realistic adult proportions and a coherent full-body silhouette rather than emphasizing one body area.
 
+Pair the updated silhouette with a polished, moderately low V-neck blouse under the existing cardigan. The neckline may show the collarbones, upper-bust line, and slight natural cleavage. The result should read as confident adult fashion rather than lingerie or an erotic pose.
+
 The alternatives were rejected as defaults:
 
 - A strongly exaggerated hourglass figure would attract more attention but could overpower the product and make the post feel provocative.
@@ -17,8 +19,10 @@ The alternatives were rejected as defaults:
 
 - Preserve HANA's approved face, apparent late-twenties age, long dark-brown hair, natural makeup, and friendly expression.
 - Preserve the realistic Korean lifestyle-editorial photography style.
-- Keep the charcoal cardigan, light blouse, cafe setting, generic logo-free laptop, and current upper-frame product-use composition.
-- Keep clothing non-revealing and professionally styled. Do not add cleavage, lingerie styling, transparent fabric, or sexualized posing.
+- Keep the charcoal cardigan, cafe setting, generic logo-free laptop, and current upper-frame product-use composition.
+- Replace the light blouse with an opaque, fitted V-neck blouse that shows the collarbones, upper-bust line, and slight natural cleavage.
+- Keep the cardigan open enough for the neckline to remain visible without slipping off the shoulders.
+- Do not use a plunging neckline, exposed bra or underwear, transparent fabric, lingerie styling, wardrobe malfunction, breast exposure, or sexualized posing.
 - Preserve natural hands, wrists, seated posture, and realistic anatomy.
 - The resulting body must look physically coherent with the head, shoulders, arms, and chair rather than appearing locally enlarged or warped.
 
@@ -47,7 +51,8 @@ Cards 2 and 3 must remain pixel-identical unless deterministic image-download me
 - Compare the updated reference and cafe scene with the current committed versions.
 - Confirm the same face, hair, age, expression, clothing, and setting.
 - Confirm a clearly more curvy but realistic overall silhouette at normal mobile viewing size.
-- Reject exaggerated bust-only edits, anatomical distortion, sexualized framing, fabric warping, chair/body intersection, or loss of hand/laptop visibility.
+- Confirm that the V-neck and slight cleavage remain visible at mobile scale without becoming the dominant subject of the card.
+- Reject exaggerated bust-only edits, a plunging neckline, exposed underwear, transparent fabric, anatomical distortion, sexualized framing, fabric warping, chair/body intersection, or loss of hand/laptop visibility.
 - Verify both source PNGs decode successfully and retain an approximately 4:5 aspect ratio.
 - Rerender all three 1080-by-1350 cards and inspect them at original detail and mobile scale.
 - Run the existing HANA pilot and Facebook renderer regression suites.
