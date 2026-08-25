@@ -68,11 +68,12 @@ test('HANA laptop pilot keeps the reviewed lifestyle and product contract', () =
   }
 
   assert.equal(pilot.slides[0].headline, '매일 쓰기 편한 문서용 노트북');
-  assert.equal(pilot.slides[0].priceBand, '2026.08.24 기준 100만원대');
+  assert.equal(pilot.slides[0].priceBand, '2026.08.21 기준 100만원대');
   assert.deepEqual(pilot.slides[1].specs, ['Ryzen 5', '16GB · 512GB', 'Windows 11']);
-  assert.equal(pilot.slides[1].priceBand, '2026.08.24 기준 100만원대');
+  assert.equal(pilot.slides[1].priceBand, '2026.08.21 기준 100만원대');
   assert.equal(pilot.slides[1].disclaimer, '가격 변동 가능');
   assert.deepEqual(pilot.slides[2].fits, ['문서 작성', '메일 · 웹', '화상 회의']);
+  assert.equal(pilot.slides[2].sectionTitle, '이런 용도에 잘 맞아요');
   assert.equal(pilot.slides[2].caution, '16인치 크기와 휴대 무게는 확인하세요');
   assert.equal(pilot.slides[2].cta, '자세한 비교는 본문에서');
 });
