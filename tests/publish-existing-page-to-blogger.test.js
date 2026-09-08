@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 const {
   buildImportedPost,
   markerForSource,
+  publishExistingPage,
 } = require('../scripts/publish-existing-page-to-blogger');
 
 const sourceUrl = 'https://idont82.github.io/blog/sample-guide.html';
@@ -15,9 +16,9 @@ const sampleHtml = `<!doctype html>
   <p>소개 문단</p>
   <img src="/images/hero.png" alt="대표 이미지">
   <section class="laptop-products">
-    <article class="laptop-product-card"><h2>제품 1</h2><p class="laptop-price"><strong>1,000원</strong></p><a class="laptop-buy-button" href="/product-one">보기</a></article>
-    <article class="laptop-product-card"><h2>제품 2</h2><p class="laptop-price"><strong>2,000원</strong></p><a class="laptop-buy-button" href="/product-two">보기</a></article>
-    <article class="laptop-product-card"><h2>제품 3</h2><p class="laptop-price"><strong>3,000원</strong></p><a class="laptop-buy-button" href="/product-three">보기</a></article>
+    <article class="laptop-product-card"><img src="/images/one.png" alt="제품 1"><h2>제품 1</h2><p class="laptop-price"><strong>1,000원</strong></p><a class="laptop-buy-button" href="/product-one">보기</a></article>
+    <article class="laptop-product-card"><img src="/images/two.png" alt="제품 2"><h2>제품 2</h2><p class="laptop-price"><strong>2,000원</strong></p><a class="laptop-buy-button" href="/product-two">보기</a></article>
+    <article class="laptop-product-card"><img src="/images/three.png" alt="제품 3"><h2>제품 3</h2><p class="laptop-price"><strong>3,000원</strong></p><a class="laptop-buy-button" href="/product-three">보기</a></article>
   </section>
   <p class="laptop-disclosure">이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
   <footer>Gold Pick 안내</footer>
@@ -63,4 +64,46 @@ test('rejects pages without a main article or disclosure', () => {
     () => buildImportedPost('<title>x</title><main><article><p>본문</p></article></main>', sourceUrl),
     /Coupang disclosure/,
   );
+});
+
+test('updates a marker-matched post instead of inserting another', async () => {
+  const calls = { update: 0, insert: 0, write: 0 };
+  const expected = buildImportedPost(sampleHtml, sourceUrl);
+  const client = {
+    getBlogByUrl: async () => ({ id: 'blog1' }),
+    listPosts: async () => [{ id: 'post1', content: markerForSource(sourceUrl) }],
+    updatePost: async (blogId, postId, post) => {
+      calls.update += 1;
+      assert.equal(blogId, 'blog1');
+      assert.equal(postId, 'post1');
+      assert.equal(post.content, expected.content);
+      return { id: postId };
+    },
+    insertPost: async () => {
+      calls.insert += 1;
+      throw new Error('insert must not run');
+    },
+    getPost: async () => ({
+      id: 'post1',
+      url: 'https://example.test/post1',
+      ...expected,
+    }),
+  };
+
+  const result = await publishExistingPage({
+    file: 'sample.html',
+    sourceUrl,
+    dependencies: {
+      root: 'D:/site',
+      readFile: async () => sampleHtml,
+      getToken: async () => 'access',
+      createClient: () => client,
+      writePublication: async () => { calls.write += 1; },
+    },
+  });
+
+  assert.equal(result.status, 'updated');
+  assert.equal(calls.update, 1);
+  assert.equal(calls.insert, 0);
+  assert.equal(calls.write, 1);
 });

@@ -141,7 +141,28 @@ function verifyImportedPost(post, expected, sourceUrl) {
   if (!post.content.trim().endsWith(`${DISCLOSURE_TEXT}</p>`)) {
     throw new Error('Published Blogger disclosure is not at the bottom.');
   }
-  return { title: true, images: actualImages, disclosure: true };
+  const checks = { title: true, images: actualImages, disclosure: true };
+  if (expected.content.includes('laptop-product-card')) {
+    const requiredMarkers = [
+      ['product cards', 'data-blogger-product-card="styled"', 3],
+      ['prominent prices', 'data-blogger-price="prominent"', 3],
+      ['purchase buttons', 'data-blogger-buy-button="styled"', 3],
+    ];
+    for (const [label, marker, count] of requiredMarkers) {
+      const actualCount = post.content.split(marker).length - 1;
+      if (actualCount !== count) {
+        throw new Error(`Published Blogger ${label} count is invalid: ${actualCount}.`);
+      }
+    }
+    if (!post.content.includes('.goldpick-import .laptop-product-card') || !post.content.includes('@media (max-width:680px)')) {
+      throw new Error('Published Blogger responsive laptop styles are missing.');
+    }
+    checks.productCards = 3;
+    checks.prominentPrices = 3;
+    checks.purchaseButtons = 3;
+    checks.responsive = true;
+  }
+  return checks;
 }
 
 async function writePrivateJson(file, value) {
@@ -150,38 +171,52 @@ async function writePrivateJson(file, value) {
   await fs.chmod(file, 0o600);
 }
 
-async function publishExistingPage({ file, sourceUrl }) {
-  const root = path.resolve('.');
+async function publishExistingPage({ file, sourceUrl, dependencies = {} }) {
+  const root = path.resolve(dependencies.root || '.');
   const privatePaths = bloggerPaths(root);
-  const html = await fs.readFile(path.resolve(root, file), 'utf8');
+  const readFile = dependencies.readFile || fs.readFile;
+  const tokenProvider = dependencies.getToken || (() => getAccessToken(privatePaths));
+  const clientFactory = dependencies.createClient || ((token) => new BloggerClient({ token }));
+  const publicationWriter = dependencies.writePublication || ((record) => writePrivateJson(
+    path.join(privatePaths.privateRoot, 'imports', `${record.slug}.json`),
+    record,
+  ));
+  const html = await readFile(path.resolve(root, file), 'utf8');
   const expected = buildImportedPost(html, sourceUrl);
-  const token = await getAccessToken(privatePaths);
-  const client = new BloggerClient({ token });
+  const token = await tokenProvider();
+  const client = clientFactory(token);
   const blog = await client.getBlogByUrl(privatePaths.blogUrl);
   const marker = markerForSource(sourceUrl);
+  const slug = marker.slice('<!-- goldpick-source:'.length, -' -->'.length);
   const recentPosts = await client.listPosts(blog.id);
   const existing = recentPosts.find((post) => String(post.content || '').includes(marker));
 
   if (existing) {
+    await client.updatePost(blog.id, existing.id, expected);
     const remote = await client.getPost(blog.id, existing.id);
     const checks = verifyImportedPost(remote, expected, sourceUrl);
-    return { status: 'recovered', postId: remote.id, url: remote.url, checks };
+    await publicationWriter({
+      slug,
+      sourceUrl,
+      postId: remote.id,
+      url: remote.url,
+      updatedAt: new Date().toISOString(),
+      checks,
+    });
+    return { status: 'updated', postId: remote.id, url: remote.url, checks };
   }
 
   const inserted = await client.insertPost(blog.id, expected);
   const remote = await client.getPost(blog.id, inserted.id);
   const checks = verifyImportedPost(remote, expected, sourceUrl);
-  const slug = marker.slice('<!-- goldpick-source:'.length, -' -->'.length);
-  await writePrivateJson(
-    path.join(privatePaths.privateRoot, 'imports', `${slug}.json`),
-    {
-      sourceUrl,
-      postId: remote.id,
-      url: remote.url,
-      publishedAt: new Date().toISOString(),
-      checks,
-    },
-  );
+  await publicationWriter({
+    slug,
+    sourceUrl,
+    postId: remote.id,
+    url: remote.url,
+    publishedAt: new Date().toISOString(),
+    checks,
+  });
   return { status: 'published', postId: remote.id, url: remote.url, checks };
 }
 
