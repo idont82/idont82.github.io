@@ -47,6 +47,14 @@ test('adds scoped responsive styles and inline laptop fallbacks', () => {
   assert.ok(post.content.trim().endsWith('이에 따른 일정액의 수수료를 제공받습니다.</p>'));
 });
 
+test('fits the comparison table within a mobile viewport without horizontal scrolling', () => {
+  const post = buildImportedPost(sampleHtml, sourceUrl);
+
+  assert.match(post.content, /@media\s*\(max-width:680px\)[\s\S]*\.goldpick-import \.laptop-table-wrap\{overflow-x:visible!important\}/);
+  assert.match(post.content, /@media\s*\(max-width:680px\)[\s\S]*\.goldpick-import \.laptop-table\{[^}]*min-width:0!important;[^}]*table-layout:fixed/);
+  assert.match(post.content, /@media\s*\(max-width:680px\)[\s\S]*\.goldpick-import \.laptop-table th,.goldpick-import \.laptop-table td\{[^}]*overflow-wrap:anywhere/);
+});
+
 test('places a stable source marker and disclosure after the footer', () => {
   const post = buildImportedPost(sampleHtml, sourceUrl);
   const disclosureIndex = post.content.indexOf('이 게시물은 쿠팡 파트너스');
