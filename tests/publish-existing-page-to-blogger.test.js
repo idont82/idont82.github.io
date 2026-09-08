@@ -1,0 +1,51 @@
+const test = require('node:test');
+const assert = require('node:assert/strict');
+
+const {
+  buildImportedPost,
+  markerForSource,
+} = require('../scripts/publish-existing-page-to-blogger');
+
+const sourceUrl = 'https://idont82.github.io/blog/sample-guide.html';
+const sampleHtml = `<!doctype html>
+<html><head><title>샘플 가이드 | Gold Pick</title></head><body>
+<header>메뉴</header>
+<main class="wrap"><article class="blog-article">
+  <h1>샘플 가이드</h1>
+  <p>소개 문단</p>
+  <img src="/images/hero.png" alt="대표 이미지">
+  <section><article class="product-card"><h2>제품 1</h2><a href="/product-one">보기</a></article></section>
+  <p class="laptop-disclosure">이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+  <footer>Gold Pick 안내</footer>
+</article></main>
+<script src="/app.js"></script>
+</body></html>`;
+
+test('imports the complete main article and preserves nested product articles', () => {
+  const post = buildImportedPost(sampleHtml, sourceUrl);
+
+  assert.equal(post.title, '샘플 가이드');
+  assert.match(post.content, /<article class="product-card">/);
+  assert.match(post.content, /https:\/\/idont82\.github\.io\/images\/hero\.png/);
+  assert.match(post.content, /https:\/\/idont82\.github\.io\/product-one/);
+  assert.doesNotMatch(post.content, /<h1\b|<script\b|<header>메뉴/);
+});
+
+test('places a stable source marker and disclosure after the footer', () => {
+  const post = buildImportedPost(sampleHtml, sourceUrl);
+  const disclosureIndex = post.content.indexOf('이 게시물은 쿠팡 파트너스');
+  const footerIndex = post.content.indexOf('Gold Pick 안내');
+
+  assert.match(post.content, /<!-- goldpick-source:blog-sample-guide-html -->/);
+  assert.ok(disclosureIndex > footerIndex);
+  assert.ok(post.content.trim().endsWith('이에 따른 일정액의 수수료를 제공받습니다.</p>'));
+  assert.equal(markerForSource(sourceUrl), '<!-- goldpick-source:blog-sample-guide-html -->');
+});
+
+test('rejects pages without a main article or disclosure', () => {
+  assert.throws(() => buildImportedPost('<title>x</title>', sourceUrl), /main content/);
+  assert.throws(
+    () => buildImportedPost('<title>x</title><main><article><p>본문</p></article></main>', sourceUrl),
+    /Coupang disclosure/,
+  );
+});
