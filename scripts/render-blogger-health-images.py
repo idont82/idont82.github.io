@@ -133,24 +133,26 @@ def render_checklist(campaign):
   image = base_canvas()
   draw = ImageDraw.Draw(image)
   draw_header(draw, "REVIEW CHECK", "후기에서 볼 장점과 주의점")
-  left = (MARGIN, 300, 574, 828)
-  right = (626, 300, WIDTH - MARGIN, 828)
-  draw.rounded_rectangle(left, radius=34, fill=CARD)
-  draw.rounded_rectangle(right, radius=34, fill=CARD)
-  draw.text((112, 344), "자주 언급된 장점", font=font(34, True), fill=INK)
-  left_y = draw_bullet_list(
-    draw,
-    campaign["reviewPatterns"]["positive"],
-    112,
-    410,
-    414,
-    font(28),
-  )
-  draw.text((666, 344), "구매 전 확인", font=font(34, True), fill=INK)
-  right_items = campaign["reviewPatterns"]["caution"] + campaign["cautions"]
-  right_y = draw_bullet_list(draw, right_items, 666, 410, 414, font(28), "#d45656")
-  if max(left_y, right_y) > HEIGHT - 100:
-    raise ValueError("Review checklist overflows the image canvas.")
+
+  groups = [
+    ("자주 언급된 장점", campaign["reviewPatterns"]["positive"], ACCENT),
+    ("개인차가 큰 부분", campaign["reviewPatterns"]["caution"], "#d45656"),
+    ("구매 전 확인", campaign["cautions"], "#456f8a"),
+  ]
+  row_tops = [300, 480, 660]
+  for (label, items, color), top in zip(groups, row_tops):
+    bottom = top + 168
+    draw.rounded_rectangle((MARGIN, top, WIDTH - MARGIN, bottom), radius=30, fill=CARD)
+    draw.rounded_rectangle((MARGIN, top, 274, bottom), radius=30, fill=color)
+    draw_wrapped(draw, (102, top + 48), label, font(25, True), "white", 142, 8)
+    if len(items) > 3:
+      raise ValueError("Each checklist group may contain at most three items.")
+    for index, item in enumerate(items):
+      x = 306 + (index * 274)
+      draw.ellipse((x, top + 34, x + 12, top + 46), fill=color)
+      end = draw_wrapped(draw, (x + 24, top + 25), item, font(21), INK, 226, 8)
+      if end > bottom - 18:
+        raise ValueError("Review checklist item overflows the image canvas.")
   return image
 
 
