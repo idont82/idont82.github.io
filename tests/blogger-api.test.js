@@ -23,6 +23,22 @@ test('publishes with isDraft false', async () => {
   assert.equal(calls[0].init.headers.authorization, 'Bearer x');
 });
 
+test('updates an existing post by ID', async () => {
+  const calls = [];
+  const client = new BloggerClient({
+    token: 'x',
+    fetchImpl: async (url, init) => {
+      calls.push({ url, init });
+      return new Response('{"id":"post1"}', { status: 200 });
+    },
+  });
+
+  await client.updatePost('blog1', 'post1', { title: '제목', content: '<p>본문</p>' });
+
+  assert.match(calls[0].url, /\/blogs\/blog1\/posts\/post1$/);
+  assert.equal(calls[0].init.method, 'PUT');
+});
+
 test('URL-encodes blog address lookup', async () => {
   let requestedUrl;
   const client = new BloggerClient({

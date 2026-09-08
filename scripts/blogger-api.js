@@ -75,6 +75,13 @@ class BloggerClient {
     });
   }
 
+  updatePost(blogId, postId, post) {
+    return this.request(`/blogs/${encodeURIComponent(blogId)}/posts/${encodeURIComponent(postId)}`, {
+      method: 'PUT',
+      body: post,
+    });
+  }
+
   getPost(blogId, postId) {
     return this.request(`/blogs/${encodeURIComponent(blogId)}/posts/${encodeURIComponent(postId)}?fetchBody=true`);
   }
