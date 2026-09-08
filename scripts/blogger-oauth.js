@@ -10,6 +10,12 @@ const AUTH_URL = 'https://accounts.google.com/o/oauth2/v2/auth';
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
 const BLOGGER_SCOPE = 'https://www.googleapis.com/auth/blogger';
 
+function createPkcePair() {
+  const verifier = crypto.randomBytes(48).toString('base64url');
+  const challenge = crypto.createHash('sha256').update(verifier).digest('base64url');
+  return { verifier, challenge };
+}
+
 function parseInstalledClient(raw) {
   const installed = raw && raw.installed;
   if (!installed || !installed.client_id || !installed.client_secret) {
@@ -96,6 +102,7 @@ async function authorizeInteractive(paths, dependencies = {}) {
   const browserOpener = dependencies.openBrowser || openBrowser;
   const client = parseInstalledClient(await readJson(paths.oauthClient));
   const state = crypto.randomBytes(24).toString('hex');
+  const pkce = createPkcePair();
 
   let resolveCallback;
   let rejectCallback;
@@ -146,6 +153,8 @@ async function authorizeInteractive(paths, dependencies = {}) {
     access_type: 'offline',
     prompt: 'consent',
     state,
+    code_challenge: pkce.challenge,
+    code_challenge_method: 'S256',
   }).toString();
 
   try {
@@ -159,6 +168,7 @@ async function authorizeInteractive(paths, dependencies = {}) {
         client_id: client.clientId,
         client_secret: client.clientSecret,
         code,
+        code_verifier: pkce.verifier,
         grant_type: 'authorization_code',
         redirect_uri: redirectUri,
       }).toString(),
@@ -199,6 +209,7 @@ if (require.main === module) {
 
 module.exports = {
   authorizeInteractive,
+  createPkcePair,
   getAccessToken,
   parseInstalledClient,
   refreshAccessToken,

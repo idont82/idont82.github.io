@@ -2,9 +2,19 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 
 const {
+  createPkcePair,
   parseInstalledClient,
   refreshAccessToken,
 } = require('../scripts/blogger-oauth');
+
+test('creates an S256 PKCE verifier and matching challenge', () => {
+  const crypto = require('node:crypto');
+  const pair = createPkcePair();
+  const expected = crypto.createHash('sha256').update(pair.verifier).digest('base64url');
+
+  assert.match(pair.verifier, /^[A-Za-z0-9_-]{43,128}$/);
+  assert.equal(pair.challenge, expected);
+});
 
 test('accepts Google installed-app credentials', () => {
   const parsed = parseInstalledClient({
