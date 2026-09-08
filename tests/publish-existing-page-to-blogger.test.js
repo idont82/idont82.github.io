@@ -14,7 +14,11 @@ const sampleHtml = `<!doctype html>
   <h1>샘플 가이드</h1>
   <p>소개 문단</p>
   <img src="/images/hero.png" alt="대표 이미지">
-  <section><article class="product-card"><h2>제품 1</h2><a href="/product-one">보기</a></article></section>
+  <section class="laptop-products">
+    <article class="laptop-product-card"><h2>제품 1</h2><p class="laptop-price"><strong>1,000원</strong></p><a class="laptop-buy-button" href="/product-one">보기</a></article>
+    <article class="laptop-product-card"><h2>제품 2</h2><p class="laptop-price"><strong>2,000원</strong></p><a class="laptop-buy-button" href="/product-two">보기</a></article>
+    <article class="laptop-product-card"><h2>제품 3</h2><p class="laptop-price"><strong>3,000원</strong></p><a class="laptop-buy-button" href="/product-three">보기</a></article>
+  </section>
   <p class="laptop-disclosure">이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
   <footer>Gold Pick 안내</footer>
 </article></main>
@@ -25,10 +29,21 @@ test('imports the complete main article and preserves nested product articles', 
   const post = buildImportedPost(sampleHtml, sourceUrl);
 
   assert.equal(post.title, '샘플 가이드');
-  assert.match(post.content, /<article class="product-card">/);
+  assert.match(post.content, /<article class="laptop-product-card"/);
   assert.match(post.content, /https:\/\/idont82\.github\.io\/images\/hero\.png/);
   assert.match(post.content, /https:\/\/idont82\.github\.io\/product-one/);
   assert.doesNotMatch(post.content, /<h1\b|<script\b|<header>메뉴/);
+});
+
+test('adds scoped responsive styles and inline laptop fallbacks', () => {
+  const post = buildImportedPost(sampleHtml, sourceUrl);
+
+  assert.match(post.content, /\.goldpick-import \.laptop-product-card/);
+  assert.match(post.content, /@media\s*\(max-width:680px\)/);
+  assert.equal((post.content.match(/data-blogger-price="prominent"/g) || []).length, 3);
+  assert.equal((post.content.match(/data-blogger-product-card="styled"/g) || []).length, 3);
+  assert.equal((post.content.match(/data-blogger-buy-button="styled"/g) || []).length, 3);
+  assert.ok(post.content.trim().endsWith('이에 따른 일정액의 수수료를 제공받습니다.</p>'));
 });
 
 test('places a stable source marker and disclosure after the footer', () => {

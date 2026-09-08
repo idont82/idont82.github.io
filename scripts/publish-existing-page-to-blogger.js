@@ -6,6 +6,9 @@ const { getAccessToken } = require('./blogger-oauth');
 const { bloggerPaths } = require('./blogger-paths');
 
 const DISCLOSURE_TEXT = '이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.';
+const LAPTOP_SCOPED_CSS = `<style>
+.goldpick-import{font-family:Arial,'Malgun Gothic',sans-serif;line-height:1.75;color:#231d18;max-width:860px;margin:0 auto}.goldpick-import .laptop-kicker{font-weight:800;color:#7c4b23;letter-spacing:.05em}.goldpick-import .laptop-lead{font-size:1.08rem;line-height:1.85;color:#443d37}.goldpick-import .laptop-summary{margin:24px 0;padding:22px;border:1px solid #e4cda8;border-radius:18px;background:#fff7e8}.goldpick-import .laptop-hero{display:block;margin:24px 0;border-radius:24px;overflow:hidden;background:#f5f2ec}.goldpick-import .laptop-hero img{display:block;width:100%;max-height:520px;object-fit:contain}.goldpick-import .laptop-section{margin-top:48px}.goldpick-import .laptop-section h2{font-size:1.65rem;line-height:1.35}.goldpick-import .laptop-checklist{padding-left:1.4rem;line-height:1.85}.goldpick-import .laptop-table-wrap{overflow-x:auto}.goldpick-import .laptop-table{width:100%;min-width:620px;border-collapse:collapse}.goldpick-import .laptop-table th,.goldpick-import .laptop-table td{padding:14px;border-bottom:1px solid #ddd;text-align:left}.goldpick-import .laptop-products{display:grid;gap:24px}.goldpick-import .laptop-product-card{display:grid;grid-template-columns:minmax(220px,36%) 1fr;gap:24px;padding:20px;border:1px solid #e6ddcf;border-radius:22px;background:#fff}.goldpick-import .laptop-product-image img{width:100%;aspect-ratio:1;object-fit:contain}.goldpick-import .laptop-product-content{min-width:0;overflow-wrap:anywhere}.goldpick-import .laptop-role-label{display:inline-block;padding:6px 10px;border-radius:999px;background:#3e2d22;color:#fff;font-size:.82rem;font-weight:800}.goldpick-import .laptop-price{margin:12px 0;color:#6e3d18}.goldpick-import .laptop-price strong{display:block;color:#bd5c1c;font-size:1.8rem;line-height:1.25}.goldpick-import .laptop-notes div{margin-top:12px}.goldpick-import .laptop-notes dt{font-weight:800}.goldpick-import .laptop-notes dd{margin:4px 0 0;line-height:1.65}.goldpick-import .laptop-buy-button{display:inline-block;margin-top:14px;padding:12px 16px;border-radius:10px;background:#bd5c1c;color:#fff;text-decoration:none;font-weight:800}.goldpick-import .laptop-caution{padding:20px;border-left:5px solid #b84c2a;background:#fff4ef}.goldpick-import .laptop-faq details{padding:16px 0;border-bottom:1px solid #ddd}.goldpick-import .laptop-faq summary{cursor:pointer;font-weight:800}.goldpick-import .laptop-footer{margin-top:56px;padding-top:24px;border-top:1px solid #ddd;color:#666}@media (max-width:680px){.goldpick-import .laptop-product-card{display:block!important}.goldpick-import .laptop-product-content{margin-top:18px}.goldpick-import .laptop-product-image img{max-height:330px}.goldpick-import .laptop-table{font-size:.9rem}}
+</style>`;
 
 function decodeBasicEntities(value) {
   return String(value)
@@ -52,6 +55,44 @@ function addReadableImageStyles(html) {
   return html.replace(/<img\b(?![^>]*\bstyle=)([^>]*)>/gi, '<img style="max-width:100%;height:auto;display:block;margin:20px auto"$1>');
 }
 
+function decorateClass(html, tag, className, style, dataAttribute = '') {
+  const pattern = new RegExp(`<${tag}\\b([^>]*\\bclass=(["'])[^"']*\\b${className}\\b[^"']*\\2[^>]*)>`, 'gi');
+  return html.replace(pattern, (whole, attributes) => {
+    let decorated = attributes;
+    if (/\bstyle=(['"])/i.test(decorated)) {
+      decorated = decorated.replace(/\bstyle=(['"])(.*?)\1/i, (styleWhole, quote, current) => `style=${quote}${current};${style}${quote}`);
+    } else {
+      decorated += ` style="${style}"`;
+    }
+    if (dataAttribute && !decorated.includes(dataAttribute)) {
+      decorated += ` ${dataAttribute}`;
+    }
+    return `<${tag}${decorated}>`;
+  });
+}
+
+function decorateLaptopLayout(html) {
+  const decorations = [
+    ['div', 'laptop-summary', 'margin:24px 0;padding:22px;border:1px solid #e4cda8;border-radius:18px;background:#fff7e8'],
+    ['a', 'laptop-hero', 'display:block;margin:24px 0;border-radius:24px;overflow:hidden;background:#f5f2ec'],
+    ['div', 'laptop-table-wrap', 'overflow-x:auto;margin-top:18px'],
+    ['table', 'laptop-table', 'width:100%;min-width:620px;border-collapse:collapse'],
+    ['div', 'laptop-products', 'display:grid;gap:24px'],
+    ['article', 'laptop-product-card', 'display:grid;grid-template-columns:minmax(220px,36%) 1fr;gap:24px;padding:20px;border:1px solid #e6ddcf;border-radius:22px;background:#fff', 'data-blogger-product-card="styled"'],
+    ['a', 'laptop-product-image', 'display:block;text-decoration:none'],
+    ['div', 'laptop-product-content', 'min-width:0;overflow-wrap:anywhere'],
+    ['span', 'laptop-role-label', 'display:inline-block;padding:6px 10px;border-radius:999px;background:#3e2d22;color:#fff;font-size:13px;font-weight:800'],
+    ['p', 'laptop-price', 'margin:12px 0;color:#6e3d18;font-size:18px;font-weight:700', 'data-blogger-price="prominent"'],
+    ['a', 'laptop-buy-button', 'display:inline-block;margin-top:14px;padding:12px 16px;border-radius:10px;background:#bd5c1c;color:#fff;text-decoration:none;font-weight:800', 'data-blogger-buy-button="styled"'],
+    ['section', 'laptop-caution', 'margin-top:48px;padding:20px;border-left:5px solid #b84c2a;background:#fff4ef'],
+    ['footer', 'laptop-footer', 'margin-top:56px;padding-top:24px;border-top:1px solid #ddd;color:#666'],
+  ];
+  return decorations.reduce(
+    (result, [tag, className, style, dataAttribute]) => decorateClass(result, tag, className, style, dataAttribute),
+    html,
+  );
+}
+
 function buildImportedPost(html, sourceUrl) {
   const titleMatch = String(html).match(/<title\b[^>]*>([\s\S]*?)<\/title>/i);
   if (!titleMatch) {
@@ -70,16 +111,17 @@ function buildImportedPost(html, sourceUrl) {
   }
   body = body.replace(disclosurePattern, '');
   body = makeUrlsAbsolute(body, sourceUrl);
-  body = addReadableImageStyles(body).trim();
+  body = decorateLaptopLayout(addReadableImageStyles(body)).trim();
 
   return {
     title,
     content: [
       markerForSource(sourceUrl),
-      '<div style="font-family:Arial,\'Malgun Gothic\',sans-serif;line-height:1.75;color:#17202a;max-width:860px;margin:0 auto">',
+      LAPTOP_SCOPED_CSS,
+      '<div class="goldpick-import" style="font-family:Arial,\'Malgun Gothic\',sans-serif;line-height:1.75;color:#231d18;max-width:860px;margin:0 auto">',
       body,
       '</div>',
-      `<p>${DISCLOSURE_TEXT}</p>`,
+      `<p style="margin-top:48px;padding:16px;border-radius:12px;background:#f4f4f4;font-size:14px">${DISCLOSURE_TEXT}</p>`,
     ].join(''),
   };
 }
