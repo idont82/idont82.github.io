@@ -116,10 +116,10 @@ function buildImportedPost(html, sourceUrl) {
   let body = removeFixedEmbeds(extractArticleContent(html));
   body = body.replace(/<h1\b[^>]*>[\s\S]*?<\/h1>/i, '');
 
-  const disclosurePattern = /<p\b[^>]*class=(['"])[^'"]*disclosure[^'"]*\1[^>]*>[\s\S]*?<\/p>/i;
-  const disclosureMatch = body.match(disclosurePattern);
-  if (!disclosureMatch || !disclosureMatch[0].includes(DISCLOSURE_TEXT)) {
-    throw new Error('The exact Coupang disclosure is missing from the source page.');
+  const disclosurePattern = /<p\b[^>]*class=(['"])[^'"]*\bdisclosure\b[^'"]*\1[^>]*>[\s\S]*?<\/p>/gi;
+  const disclosures = body.match(disclosurePattern) || [];
+  if (!disclosures.some((notice) => notice.includes('쿠팡 파트너스'))) {
+    throw new Error('The Coupang disclosure is missing from the source page.');
   }
   body = body.replace(disclosurePattern, '');
   body = makeUrlsAbsolute(body, sourceUrl);

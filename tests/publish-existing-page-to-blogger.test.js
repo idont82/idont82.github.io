@@ -63,6 +63,19 @@ test('imports only the legacy article shell and removes fixed-width embeds', () 
   assert.doesNotMatch(post.content, /왼쪽 사이드바|오른쪽 사이드바|<iframe\b/i);
 });
 
+test('normalizes legacy Coupang disclosures to one notice at the bottom', () => {
+  const legacyDisclosureHtml = legacyHtml.replace(
+    DISCLOSURE_TEXT_FOR_TEST,
+    '쿠팡 파트너스 활동으로 일정액의 수수료를 제공받을 수 있습니다.',
+  );
+  const post = buildImportedPost(legacyDisclosureHtml, legacySourceUrl);
+  const count = post.content.split(DISCLOSURE_TEXT_FOR_TEST).length - 1;
+
+  assert.equal(count, 1);
+  assert.doesNotMatch(post.content, /class="blog-ad-disclosure"/);
+  assert.ok(post.content.trim().endsWith(`${DISCLOSURE_TEXT_FOR_TEST}</p>`));
+});
+
 test('adds scoped responsive styles and inline laptop fallbacks', () => {
   const post = buildImportedPost(sampleHtml, sourceUrl);
 
