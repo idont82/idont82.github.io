@@ -76,6 +76,31 @@ test('normalizes legacy Coupang disclosures to one notice at the bottom', () => 
   assert.ok(post.content.trim().endsWith(`${DISCLOSURE_TEXT_FOR_TEST}</p>`));
 });
 
+test('renders legacy product cards without mobile overflow', () => {
+  const post = buildImportedPost(legacyHtml, legacySourceUrl);
+
+  assert.equal((post.content.match(/data-blogger-product-card="styled"/g) || []).length, 3);
+  assert.equal((post.content.match(/data-blogger-price="prominent"/g) || []).length, 3);
+  assert.equal((post.content.match(/data-blogger-buy-button="styled"/g) || []).length, 3);
+  assert.match(post.content, /\.goldpick-import \.product-detail-card/);
+  assert.match(post.content, /@media\s*\(max-width:680px\)[\s\S]*\.product-detail-card\{display:block!important/);
+  assert.doesNotMatch(post.content, /<iframe\b/i);
+});
+
+test('requires responsive markers when verifying a legacy product post', () => {
+  const expected = buildImportedPost(legacyHtml, legacySourceUrl);
+  const remote = {
+    id: 'legacy-post',
+    title: expected.title,
+    content: expected.content.replace('data-blogger-product-card="styled"', ''),
+  };
+
+  assert.throws(
+    () => require('../scripts/publish-existing-page-to-blogger').verifyImportedPost(remote, expected, legacySourceUrl),
+    /product cards count/,
+  );
+});
+
 test('adds scoped responsive styles and inline laptop fallbacks', () => {
   const post = buildImportedPost(sampleHtml, sourceUrl);
 

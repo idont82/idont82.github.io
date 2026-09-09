@@ -8,6 +8,7 @@ const { bloggerPaths } = require('./blogger-paths');
 const DISCLOSURE_TEXT = '이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.';
 const LAPTOP_SCOPED_CSS = `<style>
 .goldpick-import{font-family:Arial,'Malgun Gothic',sans-serif;line-height:1.75;color:#231d18;max-width:860px;margin:0 auto}.goldpick-import .laptop-kicker{font-weight:800;color:#7c4b23;letter-spacing:.05em}.goldpick-import .laptop-lead{font-size:1.08rem;line-height:1.85;color:#443d37}.goldpick-import .laptop-summary{margin:24px 0;padding:22px;border:1px solid #e4cda8;border-radius:18px;background:#fff7e8}.goldpick-import .laptop-hero{display:block;margin:24px 0;border-radius:24px;overflow:hidden;background:#f5f2ec}.goldpick-import .laptop-hero img{display:block;width:100%;max-height:520px;object-fit:contain}.goldpick-import .laptop-section{margin-top:48px}.goldpick-import .laptop-section h2{font-size:1.65rem;line-height:1.35}.goldpick-import .laptop-checklist{padding-left:1.4rem;line-height:1.85}.goldpick-import .laptop-table-wrap{overflow-x:auto}.goldpick-import .laptop-table{width:100%;min-width:620px;border-collapse:collapse}.goldpick-import .laptop-table th,.goldpick-import .laptop-table td{padding:14px;border-bottom:1px solid #ddd;text-align:left}.goldpick-import .laptop-products{display:grid;gap:24px}.goldpick-import .laptop-product-card{display:grid;grid-template-columns:minmax(220px,36%) 1fr;gap:24px;padding:20px;border:1px solid #e6ddcf;border-radius:22px;background:#fff}.goldpick-import .laptop-product-image img{width:100%;aspect-ratio:1;object-fit:contain}.goldpick-import .laptop-product-content{min-width:0;overflow-wrap:anywhere}.goldpick-import .laptop-role-label{display:inline-block;padding:6px 10px;border-radius:999px;background:#3e2d22;color:#fff;font-size:.82rem;font-weight:800}.goldpick-import .laptop-price{margin:12px 0;color:#6e3d18}.goldpick-import .laptop-price strong{display:block;color:#bd5c1c;font-size:1.8rem;line-height:1.25}.goldpick-import .laptop-notes div{margin-top:12px}.goldpick-import .laptop-notes dt{font-weight:800}.goldpick-import .laptop-notes dd{margin:4px 0 0;line-height:1.65}.goldpick-import .laptop-buy-button{display:inline-block;margin-top:14px;padding:12px 16px;border-radius:10px;background:#bd5c1c;color:#fff;text-decoration:none;font-weight:800}.goldpick-import .laptop-caution{padding:20px;border-left:5px solid #b84c2a;background:#fff4ef}.goldpick-import .laptop-faq details{padding:16px 0;border-bottom:1px solid #ddd}.goldpick-import .laptop-faq summary{cursor:pointer;font-weight:800}.goldpick-import .laptop-footer{margin-top:56px;padding-top:24px;border-top:1px solid #ddd;color:#666}@media (max-width:680px){.goldpick-import .laptop-product-card{display:block!important}.goldpick-import .laptop-product-content{margin-top:18px}.goldpick-import .laptop-product-image img{max-height:330px}.goldpick-import .laptop-table-wrap{overflow-x:visible!important}.goldpick-import .laptop-table{width:100%!important;min-width:0!important;table-layout:fixed;font-size:.78rem;line-height:1.45}.goldpick-import .laptop-table th,.goldpick-import .laptop-table td{padding:9px 5px;overflow-wrap:anywhere;word-break:break-word}.goldpick-import .laptop-table th:nth-child(1),.goldpick-import .laptop-table td:nth-child(1){width:24%}.goldpick-import .laptop-table th:nth-child(2),.goldpick-import .laptop-table td:nth-child(2){width:56%}.goldpick-import .laptop-table th:nth-child(3),.goldpick-import .laptop-table td:nth-child(3){width:20%}}
+.goldpick-import .article-summary-box{margin:24px 0;padding:22px;border:1px solid #e4cda8;border-radius:18px;background:#fff7e8}.goldpick-import .article-hero{margin:24px 0;text-align:center}.goldpick-import .article-hero img{width:100%;max-height:560px;object-fit:contain}.goldpick-import .article-body{min-width:0;overflow-wrap:anywhere}.goldpick-import .article-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.goldpick-import .article-choice-card{padding:18px;border:1px solid #e6ddcf;border-radius:16px}.goldpick-import .article-product-detail-list{display:grid;gap:24px}.goldpick-import .product-detail-card,.goldpick-import .mobile-conversion-card{display:grid;grid-template-columns:minmax(200px,34%) 1fr;gap:22px;padding:20px;border:1px solid #e6ddcf;border-radius:22px;background:#fff}.goldpick-import .product-detail-media img,.goldpick-import .mobile-conversion-card img{width:100%;aspect-ratio:1;object-fit:contain}.goldpick-import .product-detail-info,.goldpick-import .mobile-conversion-card__body{min-width:0;overflow-wrap:anywhere}.goldpick-import .product-detail-badge,.goldpick-import .mobile-conversion-card__eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:#3e2d22;color:#fff;font-size:.82rem;font-weight:800}.goldpick-import .product-detail-price{margin:12px 0;color:#6e3d18;font-weight:700}.goldpick-import .product-detail-price strong{display:block;color:#bd5c1c;font-size:1.8rem;line-height:1.25}.goldpick-import .product-detail-btn,.goldpick-import .mobile-conversion-card__button{display:inline-block;margin-top:14px;padding:12px 16px;border-radius:10px;background:#bd5c1c;color:#fff;text-decoration:none;font-weight:800}@media (max-width:680px){.goldpick-import .article-choice-grid{display:block!important}.goldpick-import .article-choice-card+.article-choice-card{margin-top:14px}.goldpick-import .product-detail-card{display:block!important}.goldpick-import .mobile-conversion-card{display:block!important}.goldpick-import .product-detail-media img,.goldpick-import .mobile-conversion-card img{max-height:330px}.goldpick-import .product-detail-info,.goldpick-import .mobile-conversion-card__body{margin-top:18px}}
 </style>`;
 
 function decodeBasicEntities(value) {
@@ -98,6 +99,14 @@ function decorateLaptopLayout(html) {
     ['a', 'laptop-buy-button', 'display:inline-block;margin-top:14px;padding:12px 16px;border-radius:10px;background:#bd5c1c;color:#fff;text-decoration:none;font-weight:800', 'data-blogger-buy-button="styled"'],
     ['section', 'laptop-caution', 'margin-top:48px;padding:20px;border-left:5px solid #b84c2a;background:#fff4ef'],
     ['footer', 'laptop-footer', 'margin-top:56px;padding-top:24px;border-top:1px solid #ddd;color:#666'],
+    ['div', 'article-summary-box', 'margin:24px 0;padding:22px;border:1px solid #e4cda8;border-radius:18px;background:#fff7e8'],
+    ['figure', 'article-hero', 'margin:24px 0;text-align:center'],
+    ['div', 'article-choice-grid', 'display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px'],
+    ['div', 'article-product-detail-list', 'display:grid;gap:24px'],
+    ['section', 'product-detail-card', 'display:grid;grid-template-columns:minmax(200px,34%) 1fr;gap:22px;padding:20px;border:1px solid #e6ddcf;border-radius:22px;background:#fff', 'data-blogger-product-card="styled"'],
+    ['div', 'product-detail-info', 'min-width:0;overflow-wrap:anywhere'],
+    ['div', 'product-detail-price', 'margin:12px 0;color:#6e3d18;font-size:18px;font-weight:700', 'data-blogger-price="prominent"'],
+    ['a', 'product-detail-btn', 'display:inline-block;margin-top:14px;padding:12px 16px;border-radius:10px;background:#bd5c1c;color:#fff;text-decoration:none;font-weight:800', 'data-blogger-buy-button="styled"'],
   ];
   return decorations.reduce(
     (result, [tag, className, style, dataAttribute]) => decorateClass(result, tag, className, style, dataAttribute),
@@ -154,7 +163,9 @@ function verifyImportedPost(post, expected, sourceUrl) {
     throw new Error('Published Blogger disclosure is not at the bottom.');
   }
   const checks = { title: true, images: actualImages, disclosure: true };
-  if (expected.content.includes('laptop-product-card')) {
+  const hasLaptopCards = expected.content.includes('class="laptop-product-card');
+  const hasLegacyProductCards = expected.content.includes('class="product-detail-card');
+  if (hasLaptopCards || hasLegacyProductCards) {
     const requiredMarkers = [
       ['product cards', 'data-blogger-product-card="styled"', 3],
       ['prominent prices', 'data-blogger-price="prominent"', 3],
@@ -166,7 +177,10 @@ function verifyImportedPost(post, expected, sourceUrl) {
         throw new Error(`Published Blogger ${label} count is invalid: ${actualCount}.`);
       }
     }
-    if (!post.content.includes('.goldpick-import .laptop-product-card') || !post.content.includes('@media (max-width:680px)')) {
+    const responsiveSelector = hasLegacyProductCards
+      ? '.goldpick-import .product-detail-card'
+      : '.goldpick-import .laptop-product-card';
+    if (!post.content.includes(responsiveSelector) || !post.content.includes('@media (max-width:680px)')) {
       throw new Error('Published Blogger responsive laptop styles are missing.');
     }
     checks.productCards = 3;
