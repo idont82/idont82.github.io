@@ -26,6 +26,25 @@ const sampleHtml = `<!doctype html>
 <script src="/app.js"></script>
 </body></html>`;
 
+const legacySourceUrl = 'https://idont82.github.io/blog/lactofit-guide.html';
+const DISCLOSURE_TEXT_FOR_TEST = '이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.';
+const legacyHtml = `<!doctype html><html><head><title>락토핏 유산균 추천 | 골드픽 노트</title></head><body>
+  <main class="blog-layout">
+    <aside>왼쪽 사이드바</aside>
+    <section class="blog-main"><article class="blog-article-shell">
+      <h1>락토핏 유산균 추천</h1>
+      <p>가족용 유산균 선택 기준을 확인합니다.</p>
+      <iframe src="https://ads.example/widget" width="380"></iframe>
+      <div class="article-product-detail-list">
+        <section class="product-detail-card"><img src="/images/one.jpg"><div class="product-detail-price"><strong>10,000원</strong></div><a class="product-detail-btn" href="/one">비교하기</a><p class="blog-ad-disclosure">${DISCLOSURE_TEXT_FOR_TEST}</p></section>
+        <section class="product-detail-card"><img src="/images/two.jpg"><div class="product-detail-price"><strong>20,000원</strong></div><a class="product-detail-btn" href="/two">비교하기</a><p class="blog-ad-disclosure">쿠팡 파트너스 활동으로 일정액의 수수료를 제공받을 수 있습니다.</p></section>
+        <section class="product-detail-card"><img src="/images/three.jpg"><div class="product-detail-price"><strong>30,000원</strong></div><a class="product-detail-btn" href="/three">비교하기</a><p class="blog-ad-disclosure">쿠팡 파트너스 활동으로 일정액의 수수료를 제공받을 수 있습니다.</p></section>
+      </div>
+    </article></section>
+    <aside>오른쪽 사이드바</aside>
+  </main>
+</body></html>`;
+
 test('imports the complete main article and preserves nested product articles', () => {
   const post = buildImportedPost(sampleHtml, sourceUrl);
 
@@ -34,6 +53,14 @@ test('imports the complete main article and preserves nested product articles', 
   assert.match(post.content, /https:\/\/idont82\.github\.io\/images\/hero\.png/);
   assert.match(post.content, /https:\/\/idont82\.github\.io\/product-one/);
   assert.doesNotMatch(post.content, /<h1\b|<script\b|<header>메뉴/);
+});
+
+test('imports only the legacy article shell and removes fixed-width embeds', () => {
+  const post = buildImportedPost(legacyHtml, legacySourceUrl);
+
+  assert.equal(post.title, '락토핏 유산균 추천 | 골드픽 노트');
+  assert.match(post.content, /가족용 유산균 선택 기준/);
+  assert.doesNotMatch(post.content, /왼쪽 사이드바|오른쪽 사이드바|<iframe\b/i);
 });
 
 test('adds scoped responsive styles and inline laptop fallbacks', () => {

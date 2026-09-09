@@ -41,6 +41,18 @@ function extractMain(html) {
     .replace(/<\/article>\s*$/i, '');
 }
 
+function extractArticleContent(html) {
+  const legacy = String(html).match(/<article\b[^>]*class=(['"])[^'"]*\bblog-article-shell\b[^'"]*\1[^>]*>([\s\S]*?)<\/article>/i);
+  if (legacy) {
+    return legacy[2];
+  }
+  return extractMain(html);
+}
+
+function removeFixedEmbeds(html) {
+  return html.replace(/<iframe\b[\s\S]*?<\/iframe>/gi, '');
+}
+
 function makeUrlsAbsolute(html, sourceUrl) {
   return html.replace(/\b(href|src)=(['"])(.*?)\2/gi, (whole, attribute, quote, value) => {
     if (/^(?:data:|mailto:|tel:|javascript:)/i.test(value)) {
@@ -101,7 +113,7 @@ function buildImportedPost(html, sourceUrl) {
   const title = decodeBasicEntities(titleMatch[1])
     .replace(/\s*\|\s*Gold Pick\s*$/i, '')
     .trim();
-  let body = extractMain(html);
+  let body = removeFixedEmbeds(extractArticleContent(html));
   body = body.replace(/<h1\b[^>]*>[\s\S]*?<\/h1>/i, '');
 
   const disclosurePattern = /<p\b[^>]*class=(['"])[^'"]*disclosure[^'"]*\1[^>]*>[\s\S]*?<\/p>/i;
