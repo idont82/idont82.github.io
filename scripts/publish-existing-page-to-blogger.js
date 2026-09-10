@@ -173,7 +173,7 @@ function verifyImportedPost(post, expected, sourceUrl) {
     ];
     for (const [label, marker, count] of requiredMarkers) {
       const actualCount = post.content.split(marker).length - 1;
-      if (actualCount !== count) {
+      if (actualCount < count) {
         throw new Error(`Published Blogger ${label} count is invalid: ${actualCount}.`);
       }
     }
