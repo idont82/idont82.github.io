@@ -3,9 +3,19 @@
   "asOfDate": "2026-10-15",
   "items": [
     {
+      "char": "shin",
+      "name": "짱구",
+      "thumbnail": "shin.webp",
+      "productName": "[정품] 짱구는못말려 봉제 애착 인형",
+      "price": 16200,
+      "priceLabel": "16,200원",
+      "priceAsOf": "2026-10-15",
+      "rocket": false,
+      "link": "https://link.coupang.com/a/hRmASlRlRs?subId=clawgame"
+    },
+    {
       "char": "himawari",
       "name": "짱아",
-      "model": "himawari.glb",
       "thumbnail": "himawari.webp",
       "productName": "Sanei Boeki 산에이보에키 짱구는못말려 짱아 페탄코 마스코트 인형 10cm",
       "price": 22640,

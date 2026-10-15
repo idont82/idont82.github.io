@@ -5,7 +5,6 @@
     {
       "char": "loopy",
       "name": "루피",
-      "model": "loopy.glb",
       "thumbnail": "loopy.webp",
       "productName": "미미월드 루피 봉제인형 대",
       "price": 49800,
@@ -17,7 +16,6 @@
     {
       "char": "pororo",
       "name": "뽀로로",
-      "model": "pororo.glb",
       "thumbnail": "pororo.webp",
       "productName": "미미월드 봉제인형 뽀로로 대",
       "price": 17900,
