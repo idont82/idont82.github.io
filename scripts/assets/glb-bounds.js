@@ -2,8 +2,26 @@ const { parseGlb } = require('./glb-optimize');
 
 // 생성된 모델이 절차적 인형 자리에 들어갈 수 있는 비율인지 빌드 때 본다.
 // gpu3d 는 항상 heightM 만 맞춰 주므로 가로·세로가 퍼진 모델도 같은 높이로 돌아온다.
-// 게임은 높이를 기준으로 정규화하니, 가로가 높이의 이 배수를 넘으면 인형이 납작해 보인다.
-const MAX_SPREAD_RATIO = 1.8;
+//
+// 런타임은 절차적 인형(createPlushie)을 three.js Box3 로 직접 재서 그 상자에 모델을
+// 비율 그대로 끼운다(assets/plushie-model-utils.js 의 fitTransform). node 에는 three 가
+// 없으므로(의존성 없음) 빌드 게이트는 그 상자의 실측치를 적어 두고 비율만 비교한다.
+// 짱구(shin) 프로브를 s=1 로 잰 값 — createPlushie 의 지오메트리에서 그대로 나온다:
+//   x [-1.3625, +1.332] = 2.6945 (볼 ↔ 짱구 귀)
+//   y [-1.60,   +2.85 ] = 4.45   (신발 밑 -1.45-0.15 ↔ 앞머리 꼭대기 1.6+0.2+1.05)
+//   z [-1.15,   +1.21 ] = 2.36
+// 가로는 기계 안 무작위 회전 때문에 x/z 중 넓은 쪽 하나로 본다 → 2.6945.
+const PROCEDURAL_PLUSHIE_BOX = { width: 2.6945, height: 4.45 };
+
+// assets/plushie-model-utils.js 의 MIN_MODEL_HEIGHT_FRACTION 과 같은 값이어야 한다
+// (tests/glb-bounds.test.js 가 두 파일을 맞춰 본다).
+const MIN_MODEL_HEIGHT_FRACTION = 0.7;
+
+// 상자에 맞춘 높이는 min(H, W/r) 이므로 min(H, W/r) >= f*H ⟺ r <= W/(f*H).
+// 즉 런타임이 받아 줄 비율 상한이 그대로 게이트 한도다 — 2.6945/(4.45*0.7) = 0.865.
+// 이 선을 넘는 모델은 구워도 런타임이 거절하니 애초에 만들지 않는다.
+const MAX_SPREAD_RATIO = PROCEDURAL_PLUSHIE_BOX.width
+  / (PROCEDURAL_PLUSHIE_BOX.height * MIN_MODEL_HEIGHT_FRACTION);
 
 const IDENTITY = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
 
@@ -148,11 +166,20 @@ function checkProportion(bounds, limit = MAX_SPREAD_RATIO) {
     return {
       ok: false,
       ratio,
-      reason: `모델 비율 ${ratio.toFixed(2)} 가 한도 ${limit} 를 넘습니다`
-        + ` (가로 ${Math.max(size.x, size.z).toFixed(3)}m / 높이 ${size.y.toFixed(3)}m).`,
+      reason: `모델 비율 ${ratio.toFixed(2)} 가 한도 ${limit.toFixed(2)} 를 넘습니다`
+        + ` (가로 ${Math.max(size.x, size.z).toFixed(3)}m / 높이 ${size.y.toFixed(3)}m)`
+        + ` — 절차적 인형 상자 안에서 키가 ${(100 * Math.min(1, (PROCEDURAL_PLUSHIE_BOX.width
+          / PROCEDURAL_PLUSHIE_BOX.height) / ratio)).toFixed(0)}% 로 줄어듭니다.`,
     };
   }
   return { ok: true, ratio, reason: '' };
 }
 
-module.exports = { MAX_SPREAD_RATIO, checkProportion, glbBounds, spreadRatio };
+module.exports = {
+  MAX_SPREAD_RATIO,
+  MIN_MODEL_HEIGHT_FRACTION,
+  PROCEDURAL_PLUSHIE_BOX,
+  checkProportion,
+  glbBounds,
+  spreadRatio,
+};

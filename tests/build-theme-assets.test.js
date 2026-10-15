@@ -152,8 +152,8 @@ test('buildTheme skips and cleans up a character whose model is too sprawled', a
 test('buildTheme keeps a character whose model is within the proportion limit', async () => {
   const out = tempDir();
   const result = await buildTheme('dino', deps({
-    // 비율 1.75 — 한도 1.8 바로 아래는 통과한다.
-    measureBounds: () => ({ min: { x: 0, y: 0, z: 0 }, max: { x: 0.525, y: 0.3, z: 0.1 } }),
+    // 비율 0.85 — 한도 0.865 바로 아래는 통과한다.
+    measureBounds: () => ({ min: { x: 0, y: 0, z: 0 }, max: { x: 0.255, y: 0.3, z: 0.1 } }),
   }), { outDir: out, asOfDate: '2026-10-15' });
 
   assert.equal(result.skipped.length, 0);
