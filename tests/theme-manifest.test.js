@@ -35,6 +35,29 @@ test('pickProduct returns null when nothing matches', () => {
   assert.equal(pickProduct(ITEMS, { minPrice: 200000, maxPrice: 300000, requireKeyword: '인형' }), null);
 });
 
+test('requireAllKeywords passes only when every term is present', () => {
+  const band = { minPrice: 1000, maxPrice: 100000 };
+  assert.equal(pickProduct(ITEMS, { ...band, requireAllKeywords: ['도라에몽', '정품'] }).productId, 2);
+  assert.equal(pickProduct(ITEMS, { ...band, requireAllKeywords: ['도라에몽', '정품', '80cm'] }), null);
+});
+
+test('requireAllKeywords rejects an item missing any one term', () => {
+  const items = [{ rank: 1, productName: '도라에몽 인형', productPrice: 20000, productId: 1 }];
+  assert.equal(pickProduct(items, { requireAllKeywords: ['도라에몽', '정품'] }), null);
+  assert.equal(pickProduct(items, { requireAllKeywords: ['정품', '도라에몽'] }), null);
+});
+
+test('empty or absent requireAllKeywords behaves as before', () => {
+  const band = { minPrice: 8000, maxPrice: 60000, requireKeyword: '인형' };
+  assert.equal(pickProduct(ITEMS, band).productId, 2);
+  assert.equal(pickProduct(ITEMS, { ...band, requireAllKeywords: [] }).productId, 2);
+});
+
+test('requireAllKeywords combines with requireKeyword', () => {
+  const band = { minPrice: 1000, maxPrice: 100000, requireKeyword: '인형', requireAllKeywords: ['정품'] };
+  assert.equal(pickProduct(ITEMS, band).productId, 2);
+});
+
 test('pickProduct returns null for an empty list', () => {
   assert.equal(pickProduct([], { minPrice: 0, maxPrice: 1e9, requireKeyword: '' }), null);
 });

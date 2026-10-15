@@ -19,6 +19,7 @@ function pickProduct(items, {
   minPrice = 0,
   maxPrice = Infinity,
   requireKeyword = '',
+  requireAllKeywords = [],
   excludeKeywords = [],
   excludeProductIds = [],
 } = {}) {
@@ -32,6 +33,7 @@ function pickProduct(items, {
     const price = Number(item.productPrice);
     if (price < minPrice || price > maxPrice) return false;
     if (requireKeyword && !item.productName.includes(requireKeyword)) return false;
+    if (Array.isArray(requireAllKeywords) && requireAllKeywords.some((term) => term && !item.productName.includes(term))) return false;
     return true;
   });
 
