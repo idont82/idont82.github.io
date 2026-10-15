@@ -1,5 +1,34 @@
 
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { createThemeLoader } from './assets/plushie-loader.js';
+import { createModelLoader, swapPlushieMesh } from './assets/plushie-three.js';
+import { findEntry } from './assets/plushie-model-utils.js';
+
+let themeManifest = null;
+const themeModels = new Map();
+
+const themeLoader = createThemeLoader({
+  loadModel: createModelLoader(THREE, GLTFLoader),
+  onError: (error) => console.warn('[plushie] 모델 로딩 건너뜀:', error.message),
+});
+
+// 게임은 로딩을 기다리지 않는다. 도착하면 그때 메시만 바꾼다.
+function applyLoadedTheme(result) {
+  if (!result || result.theme !== currentTheme) return;
+  themeManifest = result.manifest;
+  themeModels.clear();
+  for (const [char, model] of result.models) themeModels.set(char, model);
+
+  for (const plushie of plushies) {
+    const model = themeModels.get(plushie.userData.char);
+    if (model) swapPlushieMesh(THREE, plushie, model, plushieScale * 2.4);
+  }
+}
+
+function requestThemeModels() {
+  themeLoader.load(currentTheme).then(applyLoadedTheme).catch(() => {});
+}
 
 // ─── State ───
 const State = {
@@ -1259,6 +1288,9 @@ function createPlushie(type, position, rotation, customScale){
   // Bounding for grab detection
   g.userData = {type: t.name, char: t.char, theme: currentTheme, grabbed: false, radius: s*1.2};
 
+  const loadedModel = themeModels.get(t.char);
+  if (loadedModel) swapPlushieMesh(THREE, g, loadedModel, s * 2.4);
+
   return g;
 }
 
@@ -1441,6 +1473,7 @@ function spawnPlushies(){
   }
 }
 spawnPlushies();
+requestThemeModels();
 
 // ─── Theme Selector ───
 document.querySelectorAll('#charSelector button').forEach(btn=>{
@@ -1453,6 +1486,7 @@ document.querySelectorAll('#charSelector button').forEach(btn=>{
     document.querySelectorAll('#charSelector button').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     spawnPlushies();
+    requestThemeModels();
   });
 });
 
