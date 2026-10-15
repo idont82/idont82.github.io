@@ -36,6 +36,24 @@ test('the page still carries its SEO head and the partners disclosure', () => {
   assert.match(source, /쿠팡 파트너스 활동의 일환으로 수수료를 제공받습니다/);
 });
 
+test('requestThemeModels drops the previous theme before asking the loader', () => {
+  // 매니페스트가 없는 테마는 null 을 돌려받아 applyLoadedTheme 에서 일찍 끝난다.
+  // 그때 이전 테마의 상품·모델이 남지 않으려면 로더 호출보다 먼저 비워야 한다.
+  const match = js().match(/function requestThemeModels\(\)\s*\{([\s\S]*?)\n\}/);
+  assert.ok(match, 'requestThemeModels not found');
+  const body = match[1];
+  const loadAt = body.indexOf('themeLoader.load(');
+  const manifestAt = body.search(/^\s*themeManifest\s*=\s*null;/m);
+  const modelsAt = body.search(/^\s*themeModels\.clear\(\);/m);
+  assert.ok(loadAt >= 0, 'loader call missing');
+  assert.ok(manifestAt >= 0 && manifestAt < loadAt, 'themeManifest must be reset before the load');
+  assert.ok(modelsAt >= 0 && modelsAt < loadAt, 'themeModels must be cleared before the load');
+});
+
+test('applyLoadedTheme keeps its stale-response guard', () => {
+  assert.match(js(), /result\.theme\s*!==\s*currentTheme/);
+});
+
 test('no banner image markup is left behind once cards replace it', () => {
   // Task 9 에서 카드로 바뀐 뒤에도 이 테스트가 지켜 준다.
   assert.doesNotMatch(html(), /image\d*\.coupangcdn\.com\/image\/affiliate\/banner/);

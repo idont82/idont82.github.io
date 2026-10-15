@@ -28,6 +28,10 @@ function applyLoadedTheme(result) {
 }
 
 function requestThemeModels() {
+  // 매니페스트가 없는 테마는 로더가 null 을 돌려줘 applyLoadedTheme 이 일찍 끝난다.
+  // 이전 테마의 상품·모델이 남지 않도록 요청 전에 먼저 비운다.
+  themeManifest = null;
+  themeModels.clear();
   themeLoader.load(currentTheme).then(applyLoadedTheme).catch(() => {});
 }
 
