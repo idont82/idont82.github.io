@@ -1668,7 +1668,7 @@ function showSuccessCard(char){
 }
 
 const FOOTER_IFRAME_BANNER_HTML = `
-  <div class="q-banner-iframe-wrap" data-coupang-placement="game_coin">
+  <div class="q-banner-iframe-wrap">
     <iframe
       src="https://ads-partners.coupang.com/widgets.html?id=989908&amp;template=carousel&amp;trackingCode=AF7523287&amp;subId=clawwidget&amp;width=300&amp;height=250&amp;tsource="
       width="300"

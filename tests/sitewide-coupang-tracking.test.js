@@ -60,11 +60,16 @@ test('claw game and guide Coupang links expose useful placement metadata', () =>
   const gameHtml = fs.readFileSync(path.join(root, 'claw-machine.html'), 'utf8');
   const gameJs = fs.readFileSync(path.join(root, 'claw-machine.js'), 'utf8');
   const guideHtml = fs.readFileSync(path.join(root, 'claw-machine-guide.html'), 'utf8');
+  const productCardJs = fs.readFileSync(path.join(root, 'assets/product-card.js'), 'utf8');
 
   assert.match(gameHtml, /id="coinStatus"/);
-  assert.match(gameHtml, /data-coupang-placement="game_coin"/);
+  // 코인 푸터의 링크는 JS 가 주입하므로, 정적 HTML 은 주입 대상 컨테이너와 추적 스크립트를 가진다.
+  assert.match(gameHtml, /id="bannerContainer"/);
+  assert.match(gameHtml, /\/assets\/coupang-tracking\.js/);
   assert.match(gameJs, /coinStatus/);
-  assert.match(gameJs, /data-coupang-placement="game_coin"/);
+  // 게임은 game_coin 배치를 요청하고, 카드 모듈이 각 앵커에 그 속성을 찍는다.
+  assert.match(gameJs, /placement:\s*'game_coin'/);
+  assert.match(productCardJs, /data-coupang-placement="\$\{escapeHtml\(placement\)\}"/);
   assert.match(guideHtml, /data-coupang-placement="\$\{item\.placement \|\| 'guide_area_middle'\}"/);
 });
 
