@@ -64,6 +64,9 @@ function requestJson(body) {
 }
 
 async function createDeeplinks(urls, subId, requestImpl = requestJson) {
+  if (typeof subId !== 'string' || subId.trim() === '') {
+    throw new Error('subId가 필요합니다. 빈 subId로는 제휴 링크의 수익을 구분할 수 없습니다.');
+  }
   if (!urls || urls.length === 0) return [];
 
   const data = await requestImpl(JSON.stringify({ coupangUrls: urls }));
@@ -71,10 +74,19 @@ async function createDeeplinks(urls, subId, requestImpl = requestJson) {
     throw new Error(`딥링크 생성 실패: ${(data && data.rMessage) || JSON.stringify(data)}`);
   }
 
-  return (data.data || []).map((entry) => ({
-    originalUrl: entry.originalUrl,
-    shortenUrl: appendSubId(entry.shortenUrl, subId),
-  }));
+  return (data.data || []).map((entry) => {
+    try {
+      if (typeof entry.shortenUrl !== 'string') {
+        throw new Error('shortenUrl이 문자열이 아닙니다.');
+      }
+      return {
+        originalUrl: entry.originalUrl,
+        shortenUrl: appendSubId(entry.shortenUrl, subId),
+      };
+    } catch (error) {
+      throw new Error(`딥링크 변환 실패: ${entry.originalUrl} 의 shortenUrl이 올바르지 않습니다.`);
+    }
+  });
 }
 
 module.exports = { appendSubId, createDeeplinks };

@@ -68,3 +68,30 @@ test('createDeeplinks returns an empty list without calling the API', async () =
   const requestImpl = async () => { throw new Error('호출되면 안 됨'); };
   assert.deepEqual(await createDeeplinks([], 'clawgame', requestImpl), []);
 });
+
+test('createDeeplinks rejects an empty subId before calling the API', async () => {
+  const requestImpl = async () => { throw new Error('호출되면 안 됨'); };
+  await assert.rejects(
+    () => createDeeplinks(['https://www.coupang.com/vp/products/1'], '', requestImpl),
+    /subId가 필요합니다/,
+  );
+});
+
+test('createDeeplinks rejects a missing subId before calling the API', async () => {
+  const requestImpl = async () => { throw new Error('호출되면 안 됨'); };
+  await assert.rejects(
+    () => createDeeplinks(['https://www.coupang.com/vp/products/1'], undefined, requestImpl),
+    /subId가 필요합니다/,
+  );
+});
+
+test('createDeeplinks names the offending originalUrl when a shortenUrl is missing', async () => {
+  const requestImpl = async () => ({
+    rCode: '0',
+    data: [{ originalUrl: 'https://www.coupang.com/vp/products/1' }],
+  });
+  await assert.rejects(
+    () => createDeeplinks(['https://www.coupang.com/vp/products/1'], 'clawgame', requestImpl),
+    /딥링크 변환 실패: https:\/\/www\.coupang\.com\/vp\/products\/1 의 shortenUrl/,
+  );
+});
