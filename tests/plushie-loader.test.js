@@ -107,6 +107,51 @@ test('a stale theme load resolves to null after a newer load starts', async () =
   assert.equal(loader.current(), 'loopy');
 });
 
+test('load requests every model in parallel, not one after another', async () => {
+  const { createThemeLoader } = await load();
+  const releases = [];
+  let inFlight = 0;
+  let peak = 0;
+
+  const loader = createThemeLoader({
+    fetchImpl: okFetch(),
+    loadModel: async (url) => {
+      inFlight += 1;
+      peak = Math.max(peak, inFlight);
+      await new Promise((resolve) => releases.push(resolve));
+      inFlight -= 1;
+      return { url };
+    },
+  });
+
+  const pending = loader.load('dino');
+  for (let i = 0; i < 50 && releases.length < 2; i += 1) {
+    await new Promise((resolve) => setImmediate(resolve));
+  }
+  assert.equal(releases.length, 2, '두 모델 요청이 동시에 떠 있어야 한다');
+
+  for (const release of releases) release();
+  const result = await pending;
+  assert.equal(peak, 2);
+  assert.equal(result.models.size, 2);
+});
+
+test('load reports every model failure, not just the first', async () => {
+  const { createThemeLoader } = await load();
+  const errors = [];
+  const loader = createThemeLoader({
+    fetchImpl: okFetch(),
+    loadModel: async (url) => { throw new Error(`깨짐 ${url}`); },
+    onError: (error) => errors.push(error.message),
+  });
+
+  const result = await loader.load('dino');
+  assert.equal(result.models.size, 0);
+  assert.equal(errors.length, 2);
+  // 매니페스트는 그대로 남아 상품 카드는 계속 뜬다.
+  assert.equal(result.manifest.items.length, 2);
+});
+
 test('current reports the active theme', async () => {
   const { createThemeLoader } = await load();
   const loader = createThemeLoader({ fetchImpl: okFetch(), loadModel: async () => ({}) });
