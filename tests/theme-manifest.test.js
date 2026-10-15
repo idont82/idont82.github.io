@@ -115,16 +115,70 @@ test('every manifest link carries subId=clawgame', () => {
   }
 });
 
-test('themes.json maps every PLUSHIE_THEMES char to a search keyword', () => {
-  const themes = JSON.parse(fs.readFileSync(path.join(root, 'scripts', 'assets', 'themes.json'), 'utf8'));
+function gameChars() {
   const game = fs.readFileSync(path.join(root, 'claw-machine.js'), 'utf8');
-  const chars = [...game.matchAll(/char:\s*'([^']+)'/g)].map((m) => m[1]);
+  return [...game.matchAll(/char:\s*'([^']+)'/g)].map((m) => m[1]);
+}
 
+function themesJson() {
+  return JSON.parse(fs.readFileSync(path.join(root, 'scripts', 'assets', 'themes.json'), 'utf8'));
+}
+
+test('themes.json maps every PLUSHIE_THEMES char to a search keyword', () => {
+  const chars = gameChars();
   assert.ok(chars.length >= 16);
-  const mapped = new Set(Object.values(themes).flatMap((list) => list.map((entry) => entry.char)));
+
+  const mapped = new Set(Object.values(themesJson()).flatMap((list) => list.map((entry) => entry.char)));
   for (const char of chars) {
     assert.ok(mapped.has(char), `themes.json 에 ${char} 가 없습니다.`);
   }
+});
+
+test('themes.json has no entry the game does not spawn', () => {
+  // 역방향이 비면 themes.json 에 남은 옛 캐릭터가 ~200KB 모델과 COIN 푸터
+  // 상품 카드까지 만들어 낸다. 기계에 없는 인형을 파는 카드가 된다.
+  const chars = new Set(gameChars());
+  for (const [theme, list] of Object.entries(themesJson())) {
+    for (const entry of list) {
+      assert.ok(chars.has(entry.char), `claw-machine.js 에 없는 캐릭터: ${theme}/${entry.char}`);
+    }
+  }
+});
+
+test('themes.json and the game agree on which theme each char belongs to', () => {
+  const game = fs.readFileSync(path.join(root, 'claw-machine.js'), 'utf8');
+  const block = game.match(/const PLUSHIE_THEMES = \{([\s\S]*?)\n\};/);
+  assert.ok(block, 'PLUSHIE_THEMES not found');
+
+  const gameThemes = new Map();
+  let current = null;
+  for (const line of block[1].split('\n')) {
+    const header = line.match(/^\s{2}([A-Za-z_]\w*):\s*\[/);
+    if (header) current = header[1];
+    const char = line.match(/char:\s*'([^']+)'/);
+    if (char && current) gameThemes.set(char[1], current);
+  }
+
+  for (const [theme, list] of Object.entries(themesJson())) {
+    for (const entry of list) {
+      assert.equal(gameThemes.get(entry.char), theme, `${entry.char} 의 테마가 어긋납니다.`);
+    }
+  }
+});
+
+test('char keys are globally unique across every theme', () => {
+  // 매니페스트 조회(findEntry)와 themeModels 는 테마 없이 char 만으로 찾는다.
+  // 두 테마가 같은 char 를 쓰면 엉뚱한 모델과 엉뚱한 상품이 붙는다.
+  const seen = new Map();
+  for (const [theme, list] of Object.entries(themesJson())) {
+    for (const entry of list) {
+      assert.ok(!seen.has(entry.char), `${entry.char} 가 ${seen.get(entry.char)} 와 ${theme} 에 중복됩니다.`);
+      seen.set(entry.char, theme);
+    }
+  }
+
+  const chars = gameChars();
+  assert.equal(new Set(chars).size, chars.length, `claw-machine.js 의 char 가 중복됩니다: ${chars.join(', ')}`);
 });
 
 const GOOD_ENTRY = buildManifestEntry({

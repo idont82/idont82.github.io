@@ -20,7 +20,42 @@ test('the game imports the theme loader and the three glue', () => {
 });
 
 test('procedural createPlushie is kept as the fallback', () => {
-  assert.match(js(), /function createPlushie\(/);
+  // 예전 단정은 `function createPlushie(` 하나뿐이어서 교체 전에도 통과했다 —
+  // 즉 절대 빨개질 수 없었다. 이제 절차적 경로가 진짜로 남아 있는지를 본다.
+  const source = js();
+  const body = source.match(/function createPlushie\(type, position, rotation, customScale\)\{([\s\S]*?)\n  return g;\n\}/);
+  assert.ok(body, 'createPlushie not found');
+
+  const text = body[1];
+  const swapAt = text.search(/if \(loadedModel\) swapPlushieMesh\(/);
+  assert.ok(swapAt > 0, '모델 교체가 createPlushie 안에 있어야 한다');
+
+  // 절차적 지오메트리는 모델 교체와 무관하게 언제나 만들어진다. 교체는 그 뒤에 온다.
+  const procedural = [...text.matchAll(/new THREE\.(Sphere|Capsule|Cone|Torus|Box|Cylinder)Geometry\(/g)];
+  assert.ok(procedural.length > 20, `절차적 지오메트리가 ${procedural.length}개뿐이다`);
+  assert.ok(procedural.every((m) => m.index < swapAt), '모델 교체가 절차적 생성보다 앞에 올 수 없다');
+
+  // 모델이 있을 때만 바꾼다. 조건이 사라지면 모델 없는 7개 캐릭터가 사라진다.
+  assert.match(text, /const loadedModel = themeModels\.get\(t\.char\);/);
+});
+
+test('the theme switch clears the old models before building the new plushies', () => {
+  // createPlushie 는 themeModels 를 읽는다. spawnPlushies 가 먼저 돌면
+  // 새 테마의 인형에 이전 테마의 모델이 끼워진다.
+  const handler = js().match(/#charSelector button'\)\.forEach\(btn=>\{([\s\S]*?)\n\}\);/);
+  assert.ok(handler, 'theme selector handler not found');
+
+  const requestAt = handler[1].indexOf('requestThemeModels()');
+  const spawnAt = handler[1].indexOf('spawnPlushies()');
+  assert.ok(requestAt >= 0 && spawnAt >= 0, '두 호출이 모두 있어야 한다');
+  assert.ok(requestAt < spawnAt, 'requestThemeModels 가 spawnPlushies 보다 먼저여야 한다');
+});
+
+test('the dev server serves the new asset types with real MIME types', () => {
+  // 브라우저 확인에서 썸네일이 멀쩡한지 보려면 .webp 가 image/webp 로 나가야 한다.
+  const source = fs.readFileSync(path.join(root, 'server.js'), 'utf8');
+  assert.match(source, /'\.glb':\s*'model\/gltf-binary'/);
+  assert.match(source, /'\.webp':\s*'image\/webp'/);
 });
 
 test('model swapping preserves userData used by the physics code', () => {

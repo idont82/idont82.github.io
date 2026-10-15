@@ -1481,8 +1481,10 @@ function spawnPlushies(){
     plushieGroup.add(p);
   }
 }
-spawnPlushies();
+// 비우기 → 절차적 생성 → 도착하면 교체. 순서가 뒤집히면 createPlushie 가
+// 이전 테마의 themeModels 를 읽어 엉뚱한 모델을 끼운다.
 requestThemeModels();
+spawnPlushies();
 
 // ─── Theme Selector ───
 document.querySelectorAll('#charSelector button').forEach(btn=>{
@@ -1494,8 +1496,8 @@ document.querySelectorAll('#charSelector button').forEach(btn=>{
     PLUSHIE_TYPES = PLUSHIE_THEMES[currentTheme];
     document.querySelectorAll('#charSelector button').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    spawnPlushies();
     requestThemeModels();
+    spawnPlushies();
   });
 });
 

@@ -67,8 +67,11 @@ test('claw game and guide Coupang links expose useful placement metadata', () =>
   assert.match(gameHtml, /id="bannerContainer"/);
   assert.match(gameHtml, /\/assets\/coupang-tracking\.js/);
   assert.match(gameJs, /coinStatus/);
-  // 게임은 game_coin 배치를 요청하고, 카드 모듈이 각 앵커에 그 속성을 찍는다.
+  // 게임은 세 배치를 각각 요청하고, 카드 모듈이 각 앵커에 그 속성을 찍는다.
+  // 세 surface(코인 푸터·뽑기 성공 카드·수집함)는 따로 집계돼야 한다.
   assert.match(gameJs, /placement:\s*'game_coin'/);
+  assert.match(gameJs, /placement:\s*'game_success'/);
+  assert.match(gameJs, /placement:\s*'game_collection'/);
   assert.match(productCardJs, /data-coupang-placement="\$\{escapeHtml\(placement\)\}"/);
   assert.match(guideHtml, /data-coupang-placement="\$\{item\.placement \|\| 'guide_area_middle'\}"/);
 });
