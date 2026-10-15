@@ -1,6 +1,15 @@
-import { isUsableManifest, manifestUrl, modelUrl } from './plushie-model-utils.js';
+import { isUsableManifest, manifestUrl } from './plushie-model-utils.js';
 
-export function createThemeLoader({ fetchImpl = fetch, loadModel, onError = () => {} } = {}) {
+// 테마의 상품 매니페스트만 받아 온다. 예전에는 매니페스트에 적힌 GLB 모델까지 내려받아
+// 절차적 인형의 메시를 갈아 끼웠지만, 생성된 모델이 손으로 만든 절차적 인형보다
+// 못생겨서 모델 경로를 걷어냈다. 매니페스트는 그대로 필요하다 — 상품명·가격·쿠팡
+// 링크가 전부 여기서 온다.
+//
+// 지키는 성질 세 가지:
+//  - 세대(generation) 가드: 늦게 끝난 이전 테마의 응답은 null 로 버린다.
+//  - 실패는 null: 404·오프라인·형식 오류 모두 onError 로 알리고 null 을 돌려준다.
+//  - 매니페스트가 없어도 게임은 그대로 돈다(테마 3개는 애초에 매니페스트가 없다).
+export function createThemeLoader({ fetchImpl = fetch, onError = () => {} } = {}) {
   let generation = 0;
   let activeTheme = null;
 
@@ -24,21 +33,7 @@ export function createThemeLoader({ fetchImpl = fetch, loadModel, onError = () =
     }
     if (mine !== generation) return null;
 
-    // 직렬로 받으면 기본 테마가 왕복 2번, dino 는 5번이다. 모바일 콜드 캐시에서는
-    // 그 차이가 "모델이 보인다" 와 "한 판 끝나도 안 온다" 의 차이가 된다.
-    // allSettled 라서 하나가 깨져도 나머지는 그대로 들어온다.
-    const settled = await Promise.allSettled(
-      manifest.items.map((entry) => loadModel(modelUrl(theme, entry))),
-    );
-    if (mine !== generation) return null;
-
-    const models = new Map();
-    settled.forEach((outcome, index) => {
-      if (outcome.status === 'fulfilled') models.set(manifest.items[index].char, outcome.value);
-      else onError(outcome.reason);
-    });
-
-    return { theme, manifest, models };
+    return { theme, manifest };
   }
 
   return { load, current: () => activeTheme };

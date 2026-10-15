@@ -1,41 +1,32 @@
 
 import * as THREE from 'three';
 import { createThemeLoader } from './assets/plushie-loader.js';
-import { createModelLoader, disposePlushieTree, measureBox, swapPlushieMesh } from './assets/plushie-three.js';
-import { findEntry, modelPlacement } from './assets/plushie-model-utils.js';
+import { findEntry } from './assets/plushie-model-utils.js';
 import { cardHtml, cardsHtml, markSuccessCardShown, priceLinkHtml } from './assets/product-card.js';
 
+// 인형은 전부 절차적으로 만든다(createPlushie). 사진에서 구운 GLB 모델을 끼워 보는
+// 길도 있었지만, 생성된 모델이 손으로 만든 절차적 인형보다 못생겼다는 판단으로 걷어냈다.
+// 테마 매니페스트는 남는다 — 거기에 상품명·가격·쿠팡 링크가 들어 있고, 코인 푸터 카드,
+// 성공 카드, 수집함 가격 줄이 모두 그 데이터만 읽는다(메시가 무엇인지는 아무도 안 본다).
 let themeManifest = null;
-const themeModels = new Map();
 
 const themeLoader = createThemeLoader({
-  // GLTFLoader 는 three/addons/ CDN 경로에서 첫 모델을 받을 때 동적으로 가져온다.
-  // 정적 import 였을 때는 그 URL 하나가 실패하면 이 파일 전체가 실행되지 않았다.
-  loadModel: createModelLoader(THREE, () => import('three/addons/loaders/GLTFLoader.js')),
-  onError: (error) => console.warn('[plushie] 모델 로딩 건너뜀:', error.message),
+  onError: (error) => console.warn('[plushie] 상품 매니페스트 건너뜀:', error.message),
 });
 
-// 게임은 로딩을 기다리지 않는다. 도착하면 그때 메시만 바꾼다.
+// 게임은 로딩을 기다리지 않는다. 도착하면 그때 상품 정보만 붙는다.
 function applyLoadedTheme(result) {
   if (!result || result.theme !== currentTheme) return;
   themeManifest = result.manifest;
-  themeModels.clear();
-  for (const [char, model] of result.models) themeModels.set(char, model);
-
-  for (const plushie of plushies) {
-    const model = themeModels.get(plushie.userData.char);
-    if (model) swapPlushieMesh(THREE, plushie, model, modelPlacement(plushieScale, proceduralPlushieBox()));
-  }
 
   // 매니페스트가 늦게 도착하면 수집함의 가격·링크도 그때 붙는다.
   renderCollection();
 }
 
-function requestThemeModels() {
+function requestThemeManifest() {
   // 매니페스트가 없는 테마는 로더가 null 을 돌려줘 applyLoadedTheme 이 일찍 끝난다.
-  // 이전 테마의 상품·모델이 남지 않도록 요청 전에 먼저 비운다.
+  // 이전 테마의 상품이 남지 않도록 요청 전에 먼저 비운다.
   themeManifest = null;
-  themeModels.clear();
   themeLoader.load(currentTheme).then(applyLoadedTheme).catch(() => {});
 }
 
@@ -466,35 +457,6 @@ const PLUSHIE_THEMES = {
 };
 let currentTheme = 'shinchan';
 let PLUSHIE_TYPES = PLUSHIE_THEMES[currentTheme];
-
-// ─── 절차적 인형의 실측 바운딩 ───
-// 모델이 들어갈 자리의 크기는 적어 두지 않고 three.js 로 직접 잰다. 숫자를 적어 두면
-// 절차적 조형이 바뀌는 순간 조용히 틀어진다(실제로 이번 결함이 그랬다: 적어 둔 상자가
-// 3.25s 였는데 실제는 4.45s 라 모델이 28% 작고 바닥에서 0.6s 떠 있었다).
-// 짱구를 재는 이유: 모델이 없어 언제나 절차적이고, 모델 자리의 기준이 되는 체형이다.
-// s=1 로 한 번 재서 캐시하므로 modelPlacement 가 어떤 plushieScale 에도 곱해 쓸 수 있다.
-const PROBE_CHAR = 'shin';
-let proceduralBoxCache = null;
-
-function proceduralPlushieBox(){
-  if (proceduralBoxCache) return proceduralBoxCache;
-
-  const type = PLUSHIE_THEMES.shinchan.find(t => t.char === PROBE_CHAR);
-  if (!type) return null;
-
-  // createPlushie 는 themeModels 에 모델이 있으면 메시를 갈아 끼운다.
-  // 프로브는 반드시 절차적이어야 하므로 재는 동안만 맵을 비운다.
-  const saved = [...themeModels];
-  themeModels.clear();
-  try {
-    const probe = createPlushie(type, new THREE.Vector3(0, 0, 0), {x:0, y:0, z:0}, 1);
-    proceduralBoxCache = measureBox(THREE, probe);
-    disposePlushieTree(probe);
-  } finally {
-    for (const [char, model] of saved) themeModels.set(char, model);
-  }
-  return proceduralBoxCache;
-}
 
 function createPlushie(type, position, rotation, customScale){
   const g = new THREE.Group();
@@ -1326,9 +1288,6 @@ function createPlushie(type, position, rotation, customScale){
   // Bounding for grab detection
   g.userData = {type: t.name, char: t.char, theme: currentTheme, grabbed: false, radius: s*1.2};
 
-  const loadedModel = themeModels.get(t.char);
-  if (loadedModel) swapPlushieMesh(THREE, g, loadedModel, modelPlacement(s, proceduralPlushieBox()));
-
   return g;
 }
 
@@ -1510,9 +1469,8 @@ function spawnPlushies(){
     plushieGroup.add(p);
   }
 }
-// 비우기 → 절차적 생성 → 도착하면 교체. 순서가 뒤집히면 createPlushie 가
-// 이전 테마의 themeModels 를 읽어 엉뚱한 모델을 끼운다.
-requestThemeModels();
+// 인형은 매니페스트를 기다리지 않는다. 상품 정보는 도착한 뒤 카드·수집함에만 붙는다.
+requestThemeManifest();
 spawnPlushies();
 
 // ─── Theme Selector ───
@@ -1525,7 +1483,7 @@ document.querySelectorAll('#charSelector button').forEach(btn=>{
     PLUSHIE_TYPES = PLUSHIE_THEMES[currentTheme];
     document.querySelectorAll('#charSelector button').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    requestThemeModels();
+    requestThemeManifest();
     spawnPlushies();
     // 이전 테마의 가격 줄을 바로 지운다. 새 매니페스트가 오면 applyLoadedTheme 이 다시 그린다.
     // (초기화 때는 collection 선언보다 먼저라 여기서만 부른다.)
@@ -1626,7 +1584,7 @@ function renderCollection(){
   }
 
   // 매니페스트는 지금 깔린 테마의 것만 들고 있다. 다른 테마에서 뽑은 인형과
-  // 모델이 없는 7개 캐릭터는 entryForCard 가 null 을 주고, 가격 줄은 아예 그려지지 않는다.
+  // 매니페스트 항목이 없는 7개 캐릭터는 entryForCard 가 null 을 주고, 가격 줄은 아예 그려지지 않는다.
   // (char 키는 테마 전체에서 유일하다 — tests/theme-manifest.test.js 가 지킨다.)
   let buyLinks = 0;
   const items = collection.map((c, i) => {
@@ -1686,7 +1644,7 @@ function footerCardsHtml(){
   return cardsHtml(themeManifest.items, { placement: 'game_coin', theme: currentTheme, limit: 3 });
 }
 
-// 지금 화면에 깔린 테마의 매니페스트 항목. 모델이 없는 캐릭터는 null 이다.
+// 지금 화면에 깔린 테마의 매니페스트 항목. 등록된 상품이 없는 캐릭터는 null 이다.
 function entryForCard(char){
   return findEntry(themeManifest, char);
 }

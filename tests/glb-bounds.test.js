@@ -1,12 +1,8 @@
 const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
 const test = require('node:test');
 
 const { MAX_SPREAD_RATIO, checkProportion, glbBounds, spreadRatio } = require('../scripts/assets/glb-bounds');
 const { buildGlb } = require('../scripts/assets/glb-optimize');
-
-const root = path.join(__dirname, '..');
 
 // POSITION accessor 의 min/max 만 있으면 바운딩을 읽을 수 있다. BIN 은 필요 없다.
 function glbWithBox({ min, max, node = {} }) {
@@ -64,42 +60,10 @@ test('the gate limit is derived from the measured box, not written down', () => 
   assert.ok(Math.abs(MAX_SPREAD_RATIO - 0.86501) < 1e-5, `0.865 가 아니라 ${MAX_SPREAD_RATIO}`);
 });
 
-test('the build gate and the runtime fit agree on every committed model', async () => {
-  // 게이트가 런타임보다 느슨하면 받아 줄 수 없는 모델을 계속 구워 낸다(= 죽은 다운로드).
-  // 빡세면 멀쩡한 모델을 안 만든다. 두 규칙이 같은 답을 내는지 실제 파일로 확인한다.
-  const { MIN_MODEL_HEIGHT_FRACTION, PROCEDURAL_PLUSHIE_BOX } = require('../scripts/assets/glb-bounds');
-  const { pathToFileURL } = require('node:url');
-  const utils = await import(
-    pathToFileURL(path.join(root, 'assets', 'plushie-model-utils.js')).href
-  );
-
-  assert.equal(utils.MIN_MODEL_HEIGHT_FRACTION, MIN_MODEL_HEIGHT_FRACTION, '두 파일의 비율이 어긋난다');
-
-  const modelsRoot = path.join(root, 'assets', 'models');
-  const placement = {
-    height: PROCEDURAL_PLUSHIE_BOX.height,
-    width: PROCEDURAL_PLUSHIE_BOX.width,
-    bottomY: -1.6,
-  };
-  assert.ok(
-    Math.abs(utils.maxSpreadRatio(placement) - MAX_SPREAD_RATIO) < 1e-12,
-    'maxSpreadRatio 와 게이트 한도가 어긋난다',
-  );
-
-  let checked = 0;
-  for (const theme of fs.readdirSync(modelsRoot)) {
-    const dir = path.join(modelsRoot, theme);
-    if (!fs.statSync(dir).isDirectory()) continue;
-    for (const name of fs.readdirSync(dir).filter((file) => file.endsWith('.glb'))) {
-      const bounds = glbBounds(fs.readFileSync(path.join(dir, name)));
-      const gate = checkProportion(bounds, MAX_SPREAD_RATIO).ok;
-      const fitted = utils.fitTransform(bounds, placement) !== null;
-      assert.equal(gate, fitted, `${theme}/${name}: 게이트 ${gate} / 런타임 ${fitted}`);
-      checked += 1;
-    }
-  }
-  assert.ok(checked > 0, '검사한 모델이 없습니다.');
-});
+// 예전에는 여기서 빌드 게이트와 런타임 fitTransform 이 같은 답을 내는지 커밋된 .glb 로
+// 맞춰 봤다. 게임이 모델을 읽지 않게 되면서 런타임 쪽 계산과 커밋된 .glb 가 둘 다 사라졌다.
+// 게이트 규칙 자체는 scripts/assets/glb-bounds.js 안에서 자족적으로 남아, 더 나은 원본
+// 사진이 생기는 날 파이프라인이 그대로 다시 쓸 수 있다.
 
 test('checkProportion treats the limit itself as passing', () => {
   const bounds = { min: { x: 0, y: 0, z: 0 }, max: { x: 0.18, y: 0.1, z: 0.1 } };
@@ -164,10 +128,6 @@ test('glbBounds returns null when no primitive carries min/max', () => {
   assert.equal(checkProportion(glbBounds(buffer)).ok, false);
 });
 
-test('glbBounds measures a real committed model at the pipeline height', () => {
-  const buffer = fs.readFileSync(path.join(root, 'assets', 'models', 'shinchan', 'himawari.glb'));
-  const bounds = glbBounds(buffer);
-  const height = bounds.max.y - bounds.min.y;
-  // gpu3d 는 heightM=0.3 으로 굽는다. 그래서 비율 게이트가 높이를 분모로 쓸 수 있다.
-  assert.ok(Math.abs(height - 0.3) < 0.01, `높이가 0.3m 가 아니라 ${height}`);
-});
+// 커밋된 실제 모델로 "gpu3d 는 heightM=0.3 으로 굽는다"를 확인하던 테스트가 여기 있었다.
+// 게임이 모델을 읽지 않게 되면서 저장소에 .glb 가 한 개도 남지 않아 읽을 대상이 없다.
+// glbBounds 자체는 위의 합성 GLB 테스트들(접근자 min/max, 이동·배율·회전)이 덮는다.
