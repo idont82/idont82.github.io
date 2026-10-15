@@ -74,7 +74,7 @@ async function buildTheme(theme, deps = {}, options = {}) {
   for (const entry of entries) {
     try {
       // buildQueryString 이 limit 과 imageSize 를 항상 읽으므로 둘 다 준다.
-      const found = await search({ keyword: entry.keyword, limit: 20, imageSize: '512x512' });
+      const found = await search({ keyword: entry.keyword, limit: 10, imageSize: '512x512' });
       const product = pickProduct(found.items, entry);
       if (!product) {
         skipped.push({ char: entry.char, reason: '조건에 맞는 상품 없음' });
@@ -109,13 +109,18 @@ async function buildTheme(theme, deps = {}, options = {}) {
 
   if (picked.length === 0) return emptyResult();
 
-  const links = await deeplinks(picked.map(({ product }) => product.productUrl));
+  // 검색 API 의 productUrl 은 이미 link.coupang.com 제휴 링크라 딥링크 API 가 "url convert failed" 로 거부한다.
+  // 상품 ID 로 만든 정규 URL 로 변환을 요청한다.
+  const canonicalUrl = (product) => (/^https:\/\/www\.coupang\.com\//.test(product.productUrl)
+    ? product.productUrl
+    : `https://www.coupang.com/vp/products/${product.productId}`);
+  const links = await deeplinks(picked.map(({ product }) => canonicalUrl(product)));
   const byOriginal = new Map(links.map((link) => [link.originalUrl, link.shortenUrl]));
 
   // 딥링크가 없는 상품은 조용히 사라지지 않게 건너뜀 목록으로 옮기고 파일도 지운다.
   for (let i = picked.length - 1; i >= 0; i -= 1) {
     const { entry, product } = picked[i];
-    if (byOriginal.get(product.productUrl)) continue;
+    if (byOriginal.get(canonicalUrl(product))) continue;
     picked.splice(i, 1);
     fs.rmSync(path.join(outDir, `${entry.char}.glb`), { force: true });
     fs.rmSync(path.join(outDir, `${entry.char}.webp`), { force: true });
@@ -132,7 +137,7 @@ async function buildTheme(theme, deps = {}, options = {}) {
       char: entry.char,
       name: entry.name,
       product,
-      deeplink: byOriginal.get(product.productUrl),
+      deeplink: byOriginal.get(canonicalUrl(product)),
       asOfDate: options.asOfDate,
     })),
   });

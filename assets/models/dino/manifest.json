@@ -1,0 +1,78 @@
+{
+  "theme": "dino",
+  "asOfDate": "2026-10-15",
+  "items": [
+    {
+      "char": "trex",
+      "name": "티라노",
+      "model": "trex.glb",
+      "thumbnail": "trex.webp",
+      "productName": "라푸유 관절 스켈레톤 공룡피규어 해골 인형 쥬라기월드 공룡화석 구체관절 완구 인테리어 장식품 3D프린팅 액션피규어, 티라노사우루스",
+      "price": 23300,
+      "priceLabel": "23,300원",
+      "priceAsOf": "2026-10-15",
+      "rocket": true,
+      "link": "https://link.coupang.com/a/hRjTvuLMe4?subId=clawgame"
+    },
+    {
+      "char": "trice",
+      "name": "트리케라",
+      "model": "trice.glb",
+      "thumbnail": "trice.webp",
+      "productName": "펫카 강아지 대형 삑삑이 공룡 인형 트리케라톱스 + 브라키오사우르스 세트, 1세트, 그린(브라키오사우르스), 퍼플(트리케라톱스 )",
+      "price": 14900,
+      "priceLabel": "14,900원",
+      "priceAsOf": "2026-10-15",
+      "rocket": true,
+      "link": "https://link.coupang.com/a/hRjTvEau0y?subId=clawgame"
+    },
+    {
+      "char": "brachi",
+      "name": "브라키오",
+      "model": "brachi.glb",
+      "thumbnail": "brachi.webp",
+      "productName": "펫카 강아지 대형 삑삑이 공룡 인형 트리케라톱스 + 브라키오사우르스 세트, 1세트, 그린(브라키오사우르스), 퍼플(트리케라톱스 )",
+      "price": 14900,
+      "priceLabel": "14,900원",
+      "priceAsOf": "2026-10-15",
+      "rocket": true,
+      "link": "https://link.coupang.com/a/hRjTvEau0y?subId=clawgame"
+    },
+    {
+      "char": "stego",
+      "name": "스테고",
+      "model": "stego.glb",
+      "thumbnail": "stego.webp",
+      "productName": "메리메이어 스무디 다이노 애착 인형, 10cm, 스테고사우루스, 1개",
+      "price": 27500,
+      "priceLabel": "27,500원",
+      "priceAsOf": "2026-10-15",
+      "rocket": true,
+      "link": "https://link.coupang.com/a/hRjTvRd2Zw?subId=clawgame"
+    },
+    {
+      "char": "ptera",
+      "name": "프테라",
+      "model": "ptera.glb",
+      "thumbnail": "ptera.webp",
+      "productName": "공룡 인형 티라노사우루스 트리케라톱스 프테라노돈 랩터 장난감 애착인형 어린이 선물 소품",
+      "price": 18400,
+      "priceLabel": "18,400원",
+      "priceAsOf": "2026-10-15",
+      "rocket": false,
+      "link": "https://link.coupang.com/a/hRjTvN5SkC?subId=clawgame"
+    },
+    {
+      "char": "baby",
+      "name": "아기공룡",
+      "model": "baby.glb",
+      "thumbnail": "baby.webp",
+      "productName": "메리메이어 스무디 다이노 애착 인형, 10cm, 스테고사우루스, 1개",
+      "price": 27500,
+      "priceLabel": "27,500원",
+      "priceAsOf": "2026-10-15",
+      "rocket": true,
+      "link": "https://link.coupang.com/a/hRjTvRd2Zw?subId=clawgame"
+    }
+  ]
+}
