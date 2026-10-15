@@ -85,8 +85,10 @@ async function buildTheme(theme, deps = {}, options = {}) {
       const raw = await generate(image, entry);
       const optimized = optimize(raw);
 
+      // 두 버퍼가 모두 만들어진 뒤에만 쓴다. 썸네일 실패가 .glb 고아를 남기지 않게 한다.
+      const thumb = await thumbnail(image);
       fs.writeFileSync(path.join(outDir, `${entry.char}.glb`), optimized.buffer);
-      fs.writeFileSync(path.join(outDir, `${entry.char}.webp`), await thumbnail(image));
+      fs.writeFileSync(path.join(outDir, `${entry.char}.webp`), thumb);
       picked.push({ entry, product });
     } catch (error) {
       skipped.push({ char: entry.char, reason: error.message });
@@ -96,17 +98,31 @@ async function buildTheme(theme, deps = {}, options = {}) {
   const manifestPath = path.join(outDir, 'manifest.json');
 
   // 빈 매니페스트는 게임 로더가 그대로 믿고 쓰므로, 고른 상품이 없으면 쓰지 않고 이전 것도 지운다.
-  if (picked.length === 0) {
+  const emptyResult = () => {
     fs.rmSync(manifestPath, { force: true });
     return {
       manifest: buildManifest({ theme, entries: [], asOfDate: options.asOfDate }),
       skipped,
       written: [],
     };
-  }
+  };
+
+  if (picked.length === 0) return emptyResult();
 
   const links = await deeplinks(picked.map(({ product }) => product.productUrl));
   const byOriginal = new Map(links.map((link) => [link.originalUrl, link.shortenUrl]));
+
+  // 딥링크가 없는 상품은 조용히 사라지지 않게 건너뜀 목록으로 옮기고 파일도 지운다.
+  for (let i = picked.length - 1; i >= 0; i -= 1) {
+    const { entry, product } = picked[i];
+    if (byOriginal.get(product.productUrl)) continue;
+    picked.splice(i, 1);
+    fs.rmSync(path.join(outDir, `${entry.char}.glb`), { force: true });
+    fs.rmSync(path.join(outDir, `${entry.char}.webp`), { force: true });
+    skipped.push({ char: entry.char, reason: '딥링크 생성 실패' });
+  }
+
+  if (picked.length === 0) return emptyResult();
 
   // buildManifest 가 subId 나 가격 기준일이 빠진 항목에서 던지는 오류는 삼키지 않는다.
   const manifest = buildManifest({
@@ -116,7 +132,7 @@ async function buildTheme(theme, deps = {}, options = {}) {
       char: entry.char,
       name: entry.name,
       product,
-      deeplink: byOriginal.get(product.productUrl) || '',
+      deeplink: byOriginal.get(product.productUrl),
       asOfDate: options.asOfDate,
     })),
   });

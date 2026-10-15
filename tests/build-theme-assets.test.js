@@ -107,6 +107,66 @@ test('buildTheme writes no manifest and removes a stale one when every character
   assert.ok(!fs.existsSync(manifestPath));
 });
 
+test('buildTheme skips and cleans up a character whose deeplink is missing', async () => {
+  const out = tempDir();
+  const result = await buildTheme('dino', deps({
+    searchProducts: async ({ keyword }) => ({
+      items: [{
+        rank: 1,
+        productName: `${keyword} 봉제`,
+        productPrice: 25000,
+        isRocket: true,
+        productId: keyword,
+        productImage: 'https://img.test/a.jpg',
+        productUrl: `https://www.coupang.com/vp/products/${encodeURIComponent(keyword)}`,
+      }],
+    }),
+    createDeeplinks: async (urls) => urls
+      .filter((url) => url.includes(encodeURIComponent('스테고')))
+      .map((url) => ({ originalUrl: url, shortenUrl: 'https://link.coupang.com/a/s?subId=clawgame' })),
+  }), { outDir: out, asOfDate: '2026-10-15' });
+
+  // trex 의 딥링크만 응답에서 빠진다.
+  assert.deepEqual(result.skipped, [{ char: 'trex', reason: '딥링크 생성 실패' }]);
+  assert.ok(!fs.existsSync(path.join(out, 'dino', 'trex.glb')));
+  assert.ok(!fs.existsSync(path.join(out, 'dino', 'trex.webp')));
+  assert.ok(fs.existsSync(path.join(out, 'dino', 'stego.glb')));
+  assert.deepEqual(result.manifest.items.map((item) => item.char), ['stego']);
+  assert.ok(result.written.every((file) => !file.includes('trex')));
+  const onDisk = JSON.parse(fs.readFileSync(path.join(out, 'dino', 'manifest.json'), 'utf8'));
+  assert.deepEqual(onDisk.items.map((item) => item.char), ['stego']);
+});
+
+test('buildTheme writes no manifest and removes a stale one when every deeplink is empty', async () => {
+  const out = tempDir();
+  const manifestPath = path.join(out, 'dino', 'manifest.json');
+  fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
+  fs.writeFileSync(manifestPath, '{"theme":"dino","items":[{"char":"old"}]}', 'utf8');
+
+  const result = await buildTheme('dino', deps({
+    createDeeplinks: async () => [],
+  }), { outDir: out, asOfDate: '2026-10-15' });
+
+  assert.ok(!fs.existsSync(manifestPath));
+  assert.deepEqual(result.manifest.items, []);
+  assert.deepEqual(result.written, []);
+  assert.deepEqual(result.skipped.map((entry) => entry.char).sort(), ['stego', 'trex']);
+  assert.ok(result.skipped.every((entry) => entry.reason === '딥링크 생성 실패'));
+  assert.deepEqual(fs.readdirSync(path.join(out, 'dino')), []);
+});
+
+test('buildTheme leaves no glb behind when the thumbnail step throws', async () => {
+  const out = tempDir();
+  const result = await buildTheme('dino', deps({
+    makeThumbnail: async (_image) => { throw new Error('썸네일 실패'); },
+  }), { outDir: out, asOfDate: '2026-10-15' });
+
+  assert.equal(result.skipped.length, 2);
+  assert.match(result.skipped[0].reason, /썸네일 실패/);
+  assert.ok(!fs.existsSync(path.join(out, 'dino', 'trex.glb')));
+  assert.ok(!fs.existsSync(path.join(out, 'dino', 'stego.glb')));
+});
+
 test('buildTheme throws for an unknown theme', async () => {
   await assert.rejects(
     () => buildTheme('nope', deps(), { outDir: tempDir(), asOfDate: '2026-10-15' }),
