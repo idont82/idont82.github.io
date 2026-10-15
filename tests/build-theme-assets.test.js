@@ -26,9 +26,9 @@ function deps(overrides = {}) {
         productName: `${keyword} 봉제`,
         productPrice: 25000,
         isRocket: true,
-        productId: keyword.length,
+        productId: keyword.charCodeAt(0),
         productImage: `https://img.test/${keyword}.jpg`,
-        productUrl: `https://www.coupang.com/vp/products/${keyword.length}`,
+        productUrl: `https://www.coupang.com/vp/products/${keyword.charCodeAt(0)}`,
       }],
     }),
     downloadImage: async () => Buffer.from('png'),
@@ -89,6 +89,55 @@ test('buildTheme skips a character whose model generation fails', async () => {
   assert.equal(result.manifest.items[0].char, 'stego');
   assert.equal(result.skipped[0].char, 'trex');
   assert.match(result.skipped[0].reason, /OOM/);
+});
+
+test('buildTheme never assigns the same product to two characters', async () => {
+  const out = tempDir();
+  const product = (id, rank) => ({
+    rank, productName: `공룡 인형 ${id}`, productPrice: 25000, isRocket: true, productId: id,
+    productImage: `https://img.test/${id}.jpg`, productUrl: `https://www.coupang.com/vp/products/${id}`,
+  });
+  const result = await buildTheme('dino', deps({
+    // 두 검색 모두 상품 7 을 1순위로 돌려주고, 8 은 2순위로만 있다.
+    searchProducts: async () => ({ items: [product(7, 1), product(8, 2)] }),
+  }), { outDir: out, asOfDate: '2026-10-15' });
+
+  const names = result.manifest.items.map((item) => item.productName);
+  assert.equal(new Set(names).size, names.length);
+  assert.deepEqual([...names].sort(), ['공룡 인형 7', '공룡 인형 8']);
+});
+
+test('buildTheme skips a character whose only match was already taken', async () => {
+  const out = tempDir();
+  const result = await buildTheme('dino', deps({
+    searchProducts: async () => ({
+      items: [{
+        rank: 1, productName: '공룡 인형', productPrice: 25000, isRocket: true, productId: 7,
+        productImage: 'https://img.test/7.jpg', productUrl: 'https://www.coupang.com/vp/products/7',
+      }],
+    }),
+  }), { outDir: out, asOfDate: '2026-10-15' });
+
+  assert.equal(result.manifest.items.length, 1);
+  assert.equal(result.skipped.length, 1);
+  assert.ok(!fs.existsSync(path.join(out, 'dino', `${result.skipped[0].char}.glb`)));
+});
+
+test('buildTheme honours excludeKeywords from the theme entry', async () => {
+  const out = tempDir();
+  const themes = { dino: [{ ...THEMES.dino[0], excludeKeywords: ['해골'] }] };
+  const result = await buildTheme('dino', deps({
+    themes,
+    searchProducts: async () => ({
+      items: [{
+        rank: 1, productName: '해골 인형', productPrice: 25000, isRocket: true, productId: 9,
+        productImage: 'https://img.test/9.jpg', productUrl: 'https://www.coupang.com/vp/products/9',
+      }],
+    }),
+  }), { outDir: out, asOfDate: '2026-10-15' });
+
+  assert.equal(result.manifest.items.length, 0);
+  assert.equal(result.skipped[0].char, 'trex');
 });
 
 test('buildTheme writes no manifest and removes a stale one when every character is skipped', async () => {

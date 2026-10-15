@@ -167,3 +167,23 @@ test('pickProduct rejects items without a productName', () => {
   ];
   assert.equal(pickProduct(items).productId, 42);
 });
+
+test('pickProduct rejects a product whose id is excluded and falls through to the next', () => {
+  const items = [
+    { rank: 1, productName: '공룡 인형 A', productPrice: 20000, productId: 100 },
+    { rank: 2, productName: '공룡 인형 B', productPrice: 20000, productId: 101 },
+  ];
+  assert.equal(pickProduct(items, { excludeProductIds: [100] }).productId, 101);
+  assert.equal(pickProduct(items, { excludeProductIds: new Set(['100']) }).productId, 101);
+  assert.equal(pickProduct(items, { excludeProductIds: [100, 101] }), null);
+});
+
+test('pickProduct rejects a product whose name contains an excluded keyword', () => {
+  const items = [
+    { rank: 1, productName: '공룡 해골 인형', productPrice: 20000, productId: 110 },
+    { rank: 2, productName: '강아지 삑삑이 공룡 인형', productPrice: 20000, productId: 111 },
+    { rank: 3, productName: '말랑 공룡 인형', productPrice: 20000, productId: 112 },
+  ];
+  assert.equal(pickProduct(items, { excludeKeywords: ['해골', '강아지'] }).productId, 112);
+  assert.equal(pickProduct(items, { excludeKeywords: ['공룡'] }), null);
+});

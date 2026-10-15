@@ -1,32 +1,32 @@
 {
   "shinchan": [
-    { "char": "shin", "name": "짱구", "keyword": "짱구 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 },
-    { "char": "himawari", "name": "짱아", "keyword": "짱구는 못말려 짱아 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 }
+    {"char": "shin", "name": "짱구", "keyword": "짱구 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000},
+    {"char": "himawari", "name": "짱아", "keyword": "짱구는 못말려 짱아 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000}
   ],
   "cinnamoroll": [
-    { "char": "cinna", "name": "시나모롤", "keyword": "산리오 시나모롤 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 },
-    { "char": "mocha", "name": "모카", "keyword": "산리오 모카 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 },
-    { "char": "espresso", "name": "에스프레소", "keyword": "산리오 에스프레소 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 }
+    {"char": "cinna", "name": "시나모롤", "keyword": "산리오 시나모롤 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000},
+    {"char": "mocha", "name": "모카", "keyword": "산리오 모카 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000},
+    {"char": "espresso", "name": "에스프레소", "keyword": "산리오 에스프레소 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000}
   ],
   "dino": [
-    { "char": "trex", "name": "티라노", "keyword": "티라노사우루스 공룡 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 },
-    { "char": "trice", "name": "트리케라", "keyword": "트리케라톱스 공룡 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 },
-    { "char": "brachi", "name": "브라키오", "keyword": "브라키오사우루스 공룡 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 },
-    { "char": "stego", "name": "스테고", "keyword": "스테고사우루스 공룡 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 },
-    { "char": "ptera", "name": "프테라", "keyword": "프테라노돈 공룡 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 },
-    { "char": "baby", "name": "아기공룡", "keyword": "아기 공룡 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 }
+    {"char": "trex", "name": "티라노", "keyword": "티라노사우루스 공룡 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "둘리", "트리케라", "브라키오", "스테고", "프테라"]},
+    {"char": "trice", "name": "트리케라", "keyword": "트리케라톱스 공룡 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "둘리", "티라노", "브라키오", "스테고", "프테라"]},
+    {"char": "brachi", "name": "브라키오", "keyword": "브라키오사우루스 공룡 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "둘리", "티라노", "트리케라", "스테고", "프테라"]},
+    {"char": "stego", "name": "스테고", "keyword": "스테고사우루스 공룡 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "둘리", "티라노", "트리케라", "브라키오", "프테라"]},
+    {"char": "ptera", "name": "프테라", "keyword": "프테라노돈 공룡 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "둘리", "티라노", "트리케라", "브라키오", "스테고"]},
+    {"char": "baby", "name": "아기공룡", "keyword": "아기 공룡 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "둘리", "티라노", "트리케라", "브라키오", "스테고", "프테라"]}
   ],
   "maenggu": [
-    { "char": "maenggu", "name": "맹구", "keyword": "짱구는 못말려 맹구 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 }
+    {"char": "maenggu", "name": "맹구", "keyword": "짱구는 못말려 맹구 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000}
   ],
   "hangyodon": [
-    { "char": "hangyodon", "name": "한교동", "keyword": "산리오 한교동 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 }
+    {"char": "hangyodon", "name": "한교동", "keyword": "산리오 한교동 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000}
   ],
   "doraemon": [
-    { "char": "doraemon", "name": "도라에몽", "keyword": "도라에몽 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 }
+    {"char": "doraemon", "name": "도라에몽", "keyword": "도라에몽 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000}
   ],
   "loopy": [
-    { "char": "loopy", "name": "루피", "keyword": "뽀로로 루피 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 },
-    { "char": "pororo", "name": "뽀로로", "keyword": "뽀로로 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 }
+    {"char": "loopy", "name": "루피", "keyword": "뽀로로 루피 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000},
+    {"char": "pororo", "name": "뽀로로", "keyword": "뽀로로 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000}
   ]
 }

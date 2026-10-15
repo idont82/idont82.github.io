@@ -15,9 +15,18 @@ function rankOf(item) {
   return item.rank === null || item.rank === undefined || !Number.isFinite(rank) ? Infinity : rank;
 }
 
-function pickProduct(items, { minPrice = 0, maxPrice = Infinity, requireKeyword = '' } = {}) {
+function pickProduct(items, {
+  minPrice = 0,
+  maxPrice = Infinity,
+  requireKeyword = '',
+  excludeKeywords = [],
+  excludeProductIds = [],
+} = {}) {
+  const excludedIds = new Set([...excludeProductIds].map(String));
   const candidates = (items || []).filter((item) => {
     if (!item) return false;
+    if (excludedIds.has(String(item.productId))) return false;
+    if (excludeKeywords.some((term) => term && String(item.productName || '').includes(term))) return false;
     if (typeof item.productName !== 'string' || item.productName === '') return false;
     if (!hasUsablePrice(item.productPrice)) return false;
     const price = Number(item.productPrice);

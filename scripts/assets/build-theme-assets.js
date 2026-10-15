@@ -70,16 +70,19 @@ async function buildTheme(theme, deps = {}, options = {}) {
 
   const picked = [];
   const skipped = [];
+  // 한 상품이 같은 테마의 두 캐릭터에 배정되지 않게 이미 고른 상품 ID 를 기억한다.
+  const takenIds = new Set();
 
   for (const entry of entries) {
     try {
       // buildQueryString 이 limit 과 imageSize 를 항상 읽으므로 둘 다 준다.
       const found = await search({ keyword: entry.keyword, limit: 10, imageSize: '512x512' });
-      const product = pickProduct(found.items, entry);
+      const product = pickProduct(found.items, { ...entry, excludeProductIds: [...takenIds] });
       if (!product) {
         skipped.push({ char: entry.char, reason: '조건에 맞는 상품 없음' });
         continue;
       }
+      takenIds.add(String(product.productId));
 
       const image = await download(product.productImage);
       const raw = await generate(image, entry);
