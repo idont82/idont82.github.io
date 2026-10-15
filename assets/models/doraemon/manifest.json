@@ -1,0 +1,18 @@
+{
+  "theme": "doraemon",
+  "asOfDate": "2026-10-15",
+  "items": [
+    {
+      "char": "doraemon",
+      "name": "도라에몽",
+      "model": "doraemon.glb",
+      "thumbnail": "doraemon.webp",
+      "productName": "대형 도라에몽 인형 안고자는 캐릭터 생일 선물 봉제",
+      "price": 30400,
+      "priceLabel": "30,400원",
+      "priceAsOf": "2026-10-15",
+      "rocket": false,
+      "link": "https://link.coupang.com/a/hRmSEjf83w?subId=clawgame"
+    }
+  ]
+}
