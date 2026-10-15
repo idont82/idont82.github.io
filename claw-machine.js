@@ -1811,7 +1811,7 @@ function insertCoin(){
   credits += 3;
   updateUI();
   if(coinStatus){
-    coinStatus.textContent = '+3 CREDIT 충전됨 · 아래 추천도 확인';
+    coinStatus.textContent = '+3 CREDIT 충전!';
     coinStatus.classList.remove('coin-status-active');
     void coinStatus.offsetWidth;
     coinStatus.classList.add('coin-status-active');
