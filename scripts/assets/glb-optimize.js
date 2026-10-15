@@ -83,6 +83,28 @@ function convertImageBuffer(buffer, { maxSize = 512, quality = 80, pythonBin = '
   });
 }
 
+const WEBP_EXTENSION = 'EXT_texture_webp';
+
+// WebP 로 바뀐 이미지를 가리키는 텍스처를 EXT_texture_webp 로 옮긴다.
+// core glTF 는 image.mimeType 으로 png/jpeg 만 허용하므로 확장으로 선언해야 한다.
+// extensionsRequired 에 올리면 core texture.source 는 생략해도 된다.
+function markWebpTextures(json, convertedImages) {
+  let wired = false;
+  for (const texture of json.textures || []) {
+    if (!convertedImages.has(texture.source)) continue;
+    texture.extensions = { ...texture.extensions, [WEBP_EXTENSION]: { source: texture.source } };
+    delete texture.source;
+    wired = true;
+  }
+  if (!wired) return;
+
+  for (const key of ['extensionsUsed', 'extensionsRequired']) {
+    const list = Array.isArray(json[key]) ? json[key] : [];
+    if (!list.includes(WEBP_EXTENSION)) list.push(WEBP_EXTENSION);
+    json[key] = list;
+  }
+}
+
 function optimizeGlb(buffer, options = {}) {
   const convert = options.convert
     || ((bytes) => convertImageBuffer(bytes, options));
@@ -92,7 +114,8 @@ function optimizeGlb(buffer, options = {}) {
   if (images.length === 0) return { buffer: buildGlb({ json, bin }), images: 0 };
 
   const replacements = new Map();
-  for (const image of images) {
+  const convertedImages = new Set();
+  for (const [imageIndex, image] of images.entries()) {
     if (typeof image.bufferView !== 'number') {
       throw new Error('bufferView 가 아닌 이미지(data URI 등)는 지원하지 않습니다.');
     }
@@ -100,7 +123,9 @@ function optimizeGlb(buffer, options = {}) {
     const bytes = bin.subarray(view.byteOffset || 0, (view.byteOffset || 0) + view.byteLength);
     replacements.set(image.bufferView, convert(Buffer.from(bytes)));
     image.mimeType = 'image/webp';
+    convertedImages.add(imageIndex);
   }
+  markWebpTextures(json, convertedImages);
 
   // BIN 을 처음부터 다시 쌓는다. 이미지가 줄어든 만큼 뒤쪽 bufferView 의 offset 이 전부 바뀐다.
   const chunks = [];

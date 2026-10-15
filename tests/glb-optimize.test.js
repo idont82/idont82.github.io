@@ -142,3 +142,95 @@ test('convertImageBuffer produces a real WebP smaller than the PNG', () => {
   assert.equal(webp.subarray(8, 12).toString('ascii'), 'WEBP');
   assert.ok(webp.length < png.length);
 });
+
+test('optimizeGlb moves converted texture sources under EXT_texture_webp', () => {
+  const mesh = Buffer.from([1, 2, 3, 4, 5, 6, 7, 8]);
+  const image = Buffer.from('ORIGINAL-PNG-BYTES');
+  const bin = Buffer.concat([mesh, image, Buffer.alloc(pad4(mesh.length + image.length), 0)]);
+  const source = makeGlb({
+    asset: { version: '2.0' },
+    buffers: [{ byteLength: bin.length }],
+    bufferViews: [
+      { buffer: 0, byteOffset: 0, byteLength: mesh.length },
+      { buffer: 0, byteOffset: mesh.length, byteLength: image.length },
+    ],
+    images: [{ bufferView: 1, mimeType: 'image/png' }],
+    textures: [{ source: 0 }],
+    meshes: [],
+  }, bin);
+
+  const result = optimizeGlb(source, { maxSize: 512, quality: 80, convert: () => Buffer.from('TINY-WEBP') });
+  const parsed = parseGlb(result.buffer);
+  const texture = parsed.json.textures[0];
+  assert.equal('source' in texture, false);
+  assert.equal(texture.extensions.EXT_texture_webp.source, 0);
+  assert.deepEqual(parsed.json.extensionsUsed, ['EXT_texture_webp']);
+  assert.deepEqual(parsed.json.extensionsRequired, ['EXT_texture_webp']);
+});
+
+test('optimizeGlb keeps existing extensionsUsed entries and does not duplicate EXT_texture_webp', () => {
+  const mesh = Buffer.from([1, 2, 3, 4, 5, 6, 7, 8]);
+  const image = Buffer.from('ORIGINAL-PNG-BYTES');
+  const bin = Buffer.concat([mesh, image, Buffer.alloc(pad4(mesh.length + image.length), 0)]);
+  const source = makeGlb({
+    asset: { version: '2.0' },
+    buffers: [{ byteLength: bin.length }],
+    bufferViews: [
+      { buffer: 0, byteOffset: 0, byteLength: mesh.length },
+      { buffer: 0, byteOffset: mesh.length, byteLength: image.length },
+    ],
+    images: [{ bufferView: 1, mimeType: 'image/png' }],
+    textures: [{ source: 0 }],
+    extensionsUsed: ['KHR_materials_unlit', 'EXT_texture_webp'],
+    meshes: [],
+  }, bin);
+
+  const result = optimizeGlb(source, { maxSize: 512, quality: 80, convert: () => Buffer.from('TINY-WEBP') });
+  const parsed = parseGlb(result.buffer);
+  assert.deepEqual(parsed.json.extensionsUsed, ['KHR_materials_unlit', 'EXT_texture_webp']);
+  assert.deepEqual(parsed.json.extensionsRequired, ['EXT_texture_webp']);
+});
+
+test('optimizeGlb adds no extension arrays when no texture references a converted image', () => {
+  const result = optimizeGlb(fixtureGlb(), { maxSize: 512, quality: 80, convert: () => Buffer.from('TINY-WEBP') });
+  const parsed = parseGlb(result.buffer);
+  assert.equal(parsed.json.extensionsUsed, undefined);
+  assert.equal(parsed.json.extensionsRequired, undefined);
+});
+
+test('optimizeGlb moves later bufferViews when a converted image shrinks', () => {
+  const mesh = Buffer.from([1, 2, 3, 4, 5, 6, 7, 8]);
+  const image = Buffer.from('ORIGINAL-PNG-BYTES'); // 18 bytes, at offset 8, ends at 26
+  const trailing = Buffer.from([0xde, 0xad, 0xbe, 0xef, 1, 2, 3, 4]);
+  // 26 은 4의 배수가 아니므로 2바이트 패딩 후 offset 28 에 trailing 이 놓인다.
+  const bin = Buffer.concat([mesh, image, Buffer.alloc(2, 0), trailing]);
+  assert.equal(bin.length, 36);
+  const source = makeGlb({
+    asset: { version: '2.0' },
+    buffers: [{ byteLength: bin.length }],
+    bufferViews: [
+      { buffer: 0, byteOffset: 0, byteLength: mesh.length },
+      { buffer: 0, byteOffset: 8, byteLength: image.length },
+      { buffer: 0, byteOffset: 28, byteLength: trailing.length },
+    ],
+    images: [{ bufferView: 1, mimeType: 'image/png' }],
+    meshes: [],
+  }, bin);
+
+  // 원본 18바이트 이미지를 9바이트 WebP 로 줄인다.
+  const result = optimizeGlb(source, { maxSize: 512, quality: 80, convert: () => Buffer.from('TINY-WEBP') });
+  const parsed = parseGlb(result.buffer);
+  const imageView = parsed.json.bufferViews[1];
+  const trailingView = parsed.json.bufferViews[2];
+
+  // mesh 0..8, webp 8..17, 4바이트 정렬 -> trailing 은 20 에 와야 한다.
+  assert.equal(imageView.byteOffset, 8);
+  assert.equal(imageView.byteLength, 9);
+  assert.equal(trailingView.byteOffset, 20);
+  assert.equal(trailingView.byteLength, trailing.length);
+  assert.deepEqual(
+    [...parsed.bin.subarray(trailingView.byteOffset, trailingView.byteOffset + trailingView.byteLength)],
+    [...trailing],
+  );
+  assert.equal(parsed.json.buffers[0].byteLength, parsed.bin.length);
+});
