@@ -103,3 +103,67 @@ test('themes.json maps every PLUSHIE_THEMES char to a search keyword', () => {
     assert.ok(mapped.has(char), `themes.json 에 ${char} 가 없습니다.`);
   }
 });
+
+const GOOD_ENTRY = buildManifestEntry({
+  char: 'a', name: 'A', product: ITEMS[1],
+  deeplink: 'https://link.coupang.com/a/1?subId=clawgame', asOfDate: '2026-10-15',
+});
+
+test('buildManifest rejects a link with no subId', () => {
+  assert.throws(
+    () => buildManifest({ theme: 't', asOfDate: '2026-10-15', entries: [{ ...GOOD_ENTRY, link: 'https://coupang.com/raw-url' }] }),
+    { message: 'a 링크에 subId=clawgame 이 없습니다.' },
+  );
+});
+
+test('buildManifest rejects a link with a different subId', () => {
+  assert.throws(
+    () => buildManifest({ theme: 't', asOfDate: '2026-10-15', entries: [{ ...GOOD_ENTRY, link: 'https://link.coupang.com/a/1?subId=other' }] }),
+    { message: 'a 링크에 subId=clawgame 이 없습니다.' },
+  );
+});
+
+test('buildManifestEntry throws when asOfDate is missing', () => {
+  assert.throws(
+    () => buildManifestEntry({ char: 'a', name: 'A', product: ITEMS[1], deeplink: 'x?subId=clawgame' }),
+    { message: 'a 항목에 가격 기준일(asOfDate)이 없습니다.' },
+  );
+});
+
+test('buildManifest rejects an entry with no priceAsOf', () => {
+  const { priceAsOf, ...undated } = GOOD_ENTRY;
+  assert.throws(
+    () => buildManifest({ theme: 't', asOfDate: '2026-10-15', entries: [undated] }),
+    { message: 'a 항목에 가격 기준일(priceAsOf)이 없습니다.' },
+  );
+});
+
+test('pickProduct sorts unranked items last and breaks ties by rocket', () => {
+  const items = [
+    { productName: '인형 무순위', productPrice: 20000, isRocket: true, productId: 20 },
+    { rank: 9, productName: '인형 순위', productPrice: 20000, isRocket: false, productId: 21 },
+  ];
+  assert.equal(pickProduct(items, { requireKeyword: '인형' }).productId, 21);
+
+  const unranked = [
+    { productName: '인형 A', productPrice: 20000, isRocket: false, productId: 30 },
+    { productName: '인형 B', productPrice: 20000, isRocket: true, productId: 31 },
+  ];
+  assert.equal(pickProduct(unranked, { requireKeyword: '인형' }).productId, 31);
+});
+
+test('pickProduct rejects null, empty, and non-positive prices', () => {
+  const items = [null, '', undefined, 0, -5].map((productPrice, i) => (
+    { rank: 1, productName: '인형', productPrice, productId: i }
+  ));
+  assert.equal(pickProduct(items), null);
+});
+
+test('pickProduct rejects items without a productName', () => {
+  const items = [
+    { rank: 1, productPrice: 20000, productId: 40 },
+    { rank: 2, productName: '', productPrice: 20000, productId: 41 },
+    { rank: 3, productName: '인형', productPrice: 20000, productId: 42 },
+  ];
+  assert.equal(pickProduct(items).productId, 42);
+});
