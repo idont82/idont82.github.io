@@ -1,0 +1,30 @@
+{
+  "theme": "loopy",
+  "asOfDate": "2026-10-15",
+  "items": [
+    {
+      "char": "loopy",
+      "name": "루피",
+      "model": "loopy.glb",
+      "thumbnail": "loopy.webp",
+      "productName": "미미월드 루피 봉제인형 대",
+      "price": 49800,
+      "priceLabel": "49,800원",
+      "priceAsOf": "2026-10-15",
+      "rocket": true,
+      "link": "https://link.coupang.com/a/hRmVOLVuay?subId=clawgame"
+    },
+    {
+      "char": "pororo",
+      "name": "뽀로로",
+      "model": "pororo.glb",
+      "thumbnail": "pororo.webp",
+      "productName": "미미월드 봉제인형 뽀로로 대",
+      "price": 17900,
+      "priceLabel": "17,900원",
+      "priceAsOf": "2026-10-15",
+      "rocket": true,
+      "link": "https://link.coupang.com/a/hRmVOSaKmi?subId=clawgame"
+    }
+  ]
+}
