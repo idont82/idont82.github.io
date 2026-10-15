@@ -1,12 +1,12 @@
 {
   "shinchan": [
-    { "char": "shin", "name": "짱구", "keyword": "짱구 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 },
-    { "char": "himawari", "name": "짱아", "keyword": "짱구는 못말려 짱아 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 }
+    { "char": "shin", "name": "짱구", "keyword": "짱구 인형 정품", "requireKeyword": "짱구", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "장난감", "짱아", "맹구", "흰둥이", "철수", "훈이", "유리", "도라에몽", "산리오", "파자마", "후드티", "코끼리", "굿즈", "피겨", "쿠션"] },
+    { "char": "himawari", "name": "짱아", "keyword": "짱구는 못말려 짱아 인형", "requireKeyword": "짱아", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "장난감", "맹구", "흰둥이", "철수", "훈이", "유리", "도라에몽", "산리오"] }
   ],
   "cinnamoroll": [
-    { "char": "cinna", "name": "시나모롤", "keyword": "산리오 시나모롤 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 },
-    { "char": "mocha", "name": "모카", "keyword": "산리오 모카 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 },
-    { "char": "espresso", "name": "에스프레소", "keyword": "산리오 에스프레소 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 }
+    { "char": "cinna", "name": "시나모롤", "keyword": "산리오 시나모롤 인형 정품", "requireKeyword": "시나모롤", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "장난감", "모카", "에스프레소", "캐릭터즈", "마이멜로디", "쿠로미", "한교동", "폼폼푸린", "헬로키티", "포차코"] },
+    { "char": "mocha", "name": "모카", "keyword": "산리오 시나모롤 모카 인형", "requireKeyword": "모카", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "장난감", "시나모롤", "에스프레소", "캐릭터즈", "마이멜로디", "쿠로미", "한교동", "폼폼푸린", "헬로키티", "포차코", "커피", "머그"] },
+    { "char": "espresso", "name": "에스프레소", "keyword": "산리오 시나모롤 에스프레소 인형", "requireKeyword": "에스프레소", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "장난감", "시나모롤", "모카", "캐릭터즈", "마이멜로디", "쿠로미", "한교동", "폼폼푸린", "헬로키티", "포차코", "커피", "머그"] }
   ],
   "dino": [
     { "char": "trex", "name": "티라노", "keyword": "티라노사우루스 공룡 인형", "requireKeyword": "티라노", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "둘리", "장난감", "트리케라", "브라키오", "스테고", "프테라"] },
@@ -17,16 +17,16 @@
     { "char": "baby", "name": "아기공룡", "keyword": "아기 공룡 인형", "requireKeyword": "아기공룡", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "둘리", "장난감", "티라노", "트리케라", "브라키오", "스테고", "프테라"] }
   ],
   "maenggu": [
-    { "char": "maenggu", "name": "맹구", "keyword": "짱구는 못말려 맹구 인형", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 }
+    { "char": "maenggu", "name": "맹구", "keyword": "짱구는 못말려 맹구 인형", "requireKeyword": "맹구", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "장난감", "짱구", "짱아", "흰둥이", "철수", "훈이", "유리"] }
   ],
   "hangyodon": [
-    { "char": "hangyodon", "name": "한교동", "keyword": "산리오 한교동 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 }
+    { "char": "hangyodon", "name": "한교동", "keyword": "산리오 한교동 인형 정품", "requireKeyword": "한교동", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "장난감", "캐릭터즈", "시나모롤", "마이멜로디", "쿠로미", "폼폼푸린", "헬로키티", "포차코"] }
   ],
   "doraemon": [
-    { "char": "doraemon", "name": "도라에몽", "keyword": "도라에몽 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 }
+    { "char": "doraemon", "name": "도라에몽", "keyword": "도라에몽 인형 정품", "requireKeyword": "도라에몽", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "장난감", "도라미", "노진구", "짱구", "산리오", "캐릭터즈"] }
   ],
   "loopy": [
-    { "char": "loopy", "name": "루피", "keyword": "뽀로로 루피 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 },
-    { "char": "pororo", "name": "뽀로로", "keyword": "뽀로로 인형 정품", "requireKeyword": "인형", "minPrice": 8000, "maxPrice": 80000 }
+    { "char": "loopy", "name": "루피", "keyword": "뽀로로 루피 인형 정품", "requireKeyword": "루피", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "장난감", "뽀로로", "크롱", "에디", "포비", "패티", "통통이", "해리"] },
+    { "char": "pororo", "name": "뽀로로", "keyword": "뽀로로 인형 정품", "requireKeyword": "뽀로로", "minPrice": 8000, "maxPrice": 80000, "excludeKeywords": ["피규어", "해골", "스켈레톤", "화석", "프린팅", "강아지", "반려견", "삑삑이", "세트", "3종", "장난감", "루피", "크롱", "에디", "포비", "패티", "통통이", "해리"] }
   ]
 }
