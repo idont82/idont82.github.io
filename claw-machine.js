@@ -1,6 +1,5 @@
 
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { createThemeLoader } from './assets/plushie-loader.js';
 import { createModelLoader, swapPlushieMesh } from './assets/plushie-three.js';
 import { findEntry, modelPlacement, thumbnailUrl } from './assets/plushie-model-utils.js';
@@ -10,7 +9,9 @@ let themeManifest = null;
 const themeModels = new Map();
 
 const themeLoader = createThemeLoader({
-  loadModel: createModelLoader(THREE, GLTFLoader),
+  // GLTFLoader 는 three/addons/ CDN 경로에서 첫 모델을 받을 때 동적으로 가져온다.
+  // 정적 import 였을 때는 그 URL 하나가 실패하면 이 파일 전체가 실행되지 않았다.
+  loadModel: createModelLoader(THREE, () => import('three/addons/loaders/GLTFLoader.js')),
   onError: (error) => console.warn('[plushie] 모델 로딩 건너뜀:', error.message),
 });
 

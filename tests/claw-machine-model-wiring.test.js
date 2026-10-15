@@ -30,6 +30,18 @@ test('model swapping preserves userData used by the physics code', () => {
   assert.match(source, /normalizeTransform/);
 });
 
+test('the game never statically imports the addons CDN path', () => {
+  // ES 모듈 그래프는 어떤 모듈 본문보다 먼저 해석된다. three 는 받아지는데
+  // three/addons/ 하나만 실패하면 정적 import 는 이 파일을 아예 실행하지 못하게 만들고,
+  // 그 결과는 절차적 인형이 아니라 빈 캔버스다. 그래서 동적 import 로만 닿는다.
+  const source = js();
+  assert.doesNotMatch(source, /^\s*import\s[^;]*?from\s*['"]three\/addons\//m);
+  assert.match(source, /import\(\s*['"]three\/addons\/loaders\/GLTFLoader\.js['"]\s*\)/);
+
+  const glue = fs.readFileSync(path.join(root, 'assets', 'plushie-three.js'), 'utf8');
+  assert.doesNotMatch(glue, /from\s*['"]three/);
+});
+
 test('models are seated with the procedural plushie placement, not the longest axis', () => {
   const source = js();
   // 가장 긴 축을 목표 크기에 맞추면 z 로 퍼진 모델이 납작해지고 바닥도 절차적 인형과 어긋난다.
