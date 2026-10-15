@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import { createThemeLoader } from './assets/plushie-loader.js';
 import { createModelLoader, swapPlushieMesh } from './assets/plushie-three.js';
-import { findEntry, modelPlacement, thumbnailUrl } from './assets/plushie-model-utils.js';
+import { findEntry, modelPlacement } from './assets/plushie-model-utils.js';
 import { cardHtml, cardsHtml, markSuccessCardShown } from './assets/product-card.js';
 
 let themeManifest = null;
@@ -1632,17 +1632,13 @@ const joyStick = document.getElementById('joyStick');
 let adFooterFlyCleanup = null;
 function footerCardsHtml(){
   if(!themeManifest) return '';
-  const items = themeManifest.items.map((entry) => ({
-    ...entry,
-    thumbnail: thumbnailUrl(currentTheme, entry),
-  }));
-  return cardsHtml(items, { placement: 'game_coin', limit: 3 });
+  // 카드가 테마를 받아 썸네일 경로를 직접 푼다. 매니페스트 항목은 그대로 넘긴다.
+  return cardsHtml(themeManifest.items, { placement: 'game_coin', theme: currentTheme, limit: 3 });
 }
 
+// 지금 화면에 깔린 테마의 매니페스트 항목. 모델이 없는 캐릭터는 null 이다.
 function entryForCard(char){
-  const entry = findEntry(themeManifest, char);
-  if(!entry) return null;
-  return { ...entry, thumbnail: thumbnailUrl(currentTheme, entry) };
+  return findEntry(themeManifest, char);
 }
 
 function sessionStorageSafe(){
@@ -1665,7 +1661,7 @@ function showSuccessCard(char){
     if(!adFooter || !bannerContainer) return;
 
     bannerContainer.dataset.bannerMode = 'success';
-    bannerContainer.innerHTML = cardHtml(entry, { placement: 'game_success' });
+    bannerContainer.innerHTML = cardHtml(entry, { placement: 'game_success', theme: currentTheme });
     triggerAdFooterFlyIn(adFooter);
   } catch {
     // 카드는 부가 기능이다. 실패해도 게임은 계속된다.

@@ -1,3 +1,5 @@
+import { thumbnailUrl } from './plushie-model-utils.js';
+
 const SESSION_KEY = 'clawSuccessCardShown';
 
 function escapeHtml(value) {
@@ -21,15 +23,23 @@ export function markSuccessCardShown(storage) {
   }
 }
 
-export function cardHtml(entry, { placement }) {
+// entry 는 매니페스트 항목 그대로다. entry.thumbnail 은 파일 이름뿐이라
+// 테마를 알아야 경로가 된다. 호출자가 미리 바꿔 넣는 대신 여기서 푼다.
+export function cardHtml(entry, { placement, theme }) {
   if (!entry || !entry.link) return '';
 
   const rocket = entry.rocket ? '<span class="pc-rocket">로켓배송</span>' : '';
+  // 테마가 없으면 깨진 이미지를 그리는 대신 썸네일만 뺀다. 링크와 가격은 남는다.
+  const src = theme && entry.thumbnail ? thumbnailUrl(theme, entry) : '';
+  const thumb = src
+    ? `<img class="pc-thumb" src="${escapeHtml(src)}" alt="${escapeHtml(entry.name)}" loading="lazy">`
+    : '';
+
   return [
     `<a class="pc-card" href="${escapeHtml(entry.link)}" target="_blank"`,
     ' rel="nofollow sponsored noopener" referrerpolicy="unsafe-url" data-coupang-link',
     ` data-coupang-placement="${escapeHtml(placement)}" data-coupang-product-type="mini_claw">`,
-    `<img class="pc-thumb" src="${escapeHtml(entry.thumbnail)}" alt="${escapeHtml(entry.name)}" loading="lazy">`,
+    thumb,
     `<span class="pc-name">${escapeHtml(entry.productName)}</span>`,
     `<span class="pc-price">${escapeHtml(entry.priceLabel)}</span>`,
     `<span class="pc-asof">${escapeHtml(entry.priceAsOf)} 기준</span>`,
@@ -39,11 +49,11 @@ export function cardHtml(entry, { placement }) {
   ].join('');
 }
 
-export function cardsHtml(items, { placement, limit = 3 }) {
+export function cardsHtml(items, { placement, theme, limit = 3 }) {
   if (!Array.isArray(items)) return '';
   return items
     .filter((entry) => entry && entry.link)
     .slice(0, limit)
-    .map((entry) => cardHtml(entry, { placement }))
+    .map((entry) => cardHtml(entry, { placement, theme }))
     .join('');
 }
