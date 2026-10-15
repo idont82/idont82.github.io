@@ -30,7 +30,7 @@ Search Console 실측(2026-07-13 ~ 10-12)에서 `idont82.github.io` 전체 클�
 
 에셋 제작은 오프라인 1회성 작업이며 게임 런타임과 분리된다. `scripts/assets/build-plushie.js`가 테마 단위로 다음을 수행한다.
 
-쿠팡 검색 API로 해당 캐릭터의 정품 봉제인형 상품을 조회해 상품명, 가격, 로켓배송 여부, 상품 이미지 URL을 얻는다. 상품 이미지를 `assets/src/<theme>/<char>.png`로 내려받는다. 사내 GPU 서버 gpu3d에 `POST /jobs`로 `kind=prop`, `polycount=8000`, `heightM=0.3`을 주어 작업을 만들고, `GET /jobs/{id}`를 폴링한 뒤 `GET /jobs/{id}/result`로 GLB를 받는다. 받은 GLB를 Draco 메시 압축과 512px WebP 텍스처로 줄이고, 160px 썸네일 PNG를 굽는다. 결과를 `assets/models/<theme>/<char>.glb`와 `<char>.webp`로 저장하고 테마 매니페스트를 갱신한다.
+쿠팡 검색 API로 해당 캐릭터의 정품 봉제인형 상품을 조회해 상품명, 가격, 로켓배송 여부, 상품 이미지 URL을 얻는다. 상품 이미지를 `assets/src/<theme>/<char>.png`로 내려받는다. 사내 GPU 서버 gpu3d에 `POST /jobs`로 `kind=prop`, `polycount=8000`, `heightM=0.3`을 주어 작업을 만들고, `GET /jobs/{id}`를 폴링한 뒤 `GET /jobs/{id}/result`로 GLB를 받는다. 받은 GLB의 텍스처를 512px WebP로 바꿔 용량을 줄이고, 160px WebP 썸네일을 따로 굽는다. 메시는 gpu3d에 요청한 polycount로 이미 줄어 있으므로 Draco 압축은 쓰지 않는다. 브라우저에 디코더를 하나 더 얹지 않고도 예산을 맞출 수 있고, 맞지 않으면 polycount를 낮추는 쪽이 먼저다. 결과를 `assets/models/<theme>/<char>.glb`와 `<char>.webp`로 저장하고 테마 매니페스트를 갱신한다.
 
 gpu3d의 주소와 토큰은 `gpu3d/api.txt`에서 읽으며 이 파일은 `.gitignore`에 추가한다. 사내 서버 주소와 토큰은 어느 커밋 대상 파일에도 적지 않는다. 게임은 커밋된 GLB만 읽으므로 런타임에 사내망 의존이 없다.
 
