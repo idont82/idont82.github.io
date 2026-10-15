@@ -8,9 +8,17 @@ const { searchProducts } = require('../coupang-search-products');
 const { buildManifest, buildManifestEntry, pickProduct } = require('./theme-manifest');
 
 const SUB_ID = 'clawgame';
-const POLYCOUNT = 8000;
+const POLYCOUNT = 6000;
 const HEIGHT_M = 0.3;
 const DEFAULT_OUT = path.join(__dirname, '..', '..', 'assets', 'models');
+
+// 검색 API 의 productUrl 은 보통 link.coupang.com 제휴 링크라 딥링크 API 가 "url convert failed" 로 거부한다.
+// www.coupang.com 주소만 그대로 두고, 나머지는 상품 ID 로 만든 정규 URL 로 변환을 요청한다.
+function canonicalUrl(product) {
+  return /^https:\/\/www\.coupang\.com\//.test(product.productUrl || '')
+    ? product.productUrl
+    : `https://www.coupang.com/vp/products/${product.productId}`;
+}
 
 function checkBudget(sizes, limits) {
   const violations = [];
@@ -61,7 +69,7 @@ async function buildTheme(theme, deps = {}, options = {}) {
   const search = deps.searchProducts || searchProducts;
   const download = deps.downloadImage || downloadImageDefault;
   const generate = deps.generateModel || generateModelDefault;
-  const optimize = deps.optimizeGlb || ((buffer) => optimizeGlb(buffer, { maxSize: 512, quality: 80 }));
+  const optimize = deps.optimizeGlb || ((buffer) => optimizeGlb(buffer, { maxSize: 384, quality: 80 }));
   const thumbnail = deps.makeThumbnail || makeThumbnailDefault;
   const deeplinks = deps.createDeeplinks || ((urls) => createDeeplinks(urls, SUB_ID));
 
@@ -112,11 +120,6 @@ async function buildTheme(theme, deps = {}, options = {}) {
 
   if (picked.length === 0) return emptyResult();
 
-  // 검색 API 의 productUrl 은 이미 link.coupang.com 제휴 링크라 딥링크 API 가 "url convert failed" 로 거부한다.
-  // 상품 ID 로 만든 정규 URL 로 변환을 요청한다.
-  const canonicalUrl = (product) => (/^https:\/\/www\.coupang\.com\//.test(product.productUrl)
-    ? product.productUrl
-    : `https://www.coupang.com/vp/products/${product.productId}`);
   const links = await deeplinks(picked.map(({ product }) => canonicalUrl(product)));
   const byOriginal = new Map(links.map((link) => [link.originalUrl, link.shortenUrl]));
 
@@ -188,4 +191,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { buildTheme, checkBudget };
+module.exports = { buildTheme, canonicalUrl, checkBudget };

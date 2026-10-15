@@ -4,7 +4,7 @@ const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
 
-const { buildTheme, checkBudget } = require('../scripts/assets/build-theme-assets');
+const { buildTheme, canonicalUrl, checkBudget } = require('../scripts/assets/build-theme-assets');
 
 function tempDir() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'claw-assets-'));
@@ -121,6 +121,57 @@ test('buildTheme skips a character whose only match was already taken', async ()
   assert.equal(result.manifest.items.length, 1);
   assert.equal(result.skipped.length, 1);
   assert.ok(!fs.existsSync(path.join(out, 'dino', `${result.skipped[0].char}.glb`)));
+});
+
+test('canonicalUrl keeps www.coupang.com urls and rebuilds everything else from the product id', () => {
+  const www = 'https://www.coupang.com/vp/products/55?itemId=1';
+  assert.equal(canonicalUrl({ productId: 55, productUrl: www }), www);
+  assert.equal(
+    canonicalUrl({ productId: 55, productUrl: 'https://link.coupang.com/re/AFFSDP?lptag=x&pageKey=55' }),
+    'https://www.coupang.com/vp/products/55',
+  );
+  assert.equal(canonicalUrl({ productId: 55, productUrl: '' }), 'https://www.coupang.com/vp/products/55');
+  assert.equal(canonicalUrl({ productId: 55 }), 'https://www.coupang.com/vp/products/55');
+});
+
+test('buildTheme sends the deeplink API canonical urls even when search returns affiliate links', async () => {
+  const out = tempDir();
+  const received = [];
+  const result = await buildTheme('dino', deps({
+    searchProducts: async ({ keyword }) => ({
+      items: [{
+        rank: 1, productName: `${keyword} 봉제`, productPrice: 25000, isRocket: true,
+        productId: keyword.charCodeAt(0),
+        productImage: 'https://img.test/a.jpg',
+        productUrl: `https://link.coupang.com/re/AFFSDP?pageKey=${keyword.charCodeAt(0)}`,
+      }],
+    }),
+    createDeeplinks: async (urls) => {
+      received.push(...urls);
+      for (const url of urls) {
+        assert.match(url, /^https:\/\/www\.coupang\.com\/vp\/products\/\d+$/);
+      }
+      return urls.map((url, i) => ({ originalUrl: url, shortenUrl: `https://link.coupang.com/a/s${i}?subId=clawgame` }));
+    },
+  }), { outDir: out, asOfDate: '2026-10-15' });
+
+  assert.equal(received.length, 2);
+  assert.equal(result.manifest.items.length, 2);
+  assert.equal(result.skipped.length, 0);
+});
+
+test('buildTheme asks the search API for at most 10 results', async () => {
+  const out = tempDir();
+  const calls = [];
+  await buildTheme('dino', deps({
+    searchProducts: async (params) => {
+      calls.push(params);
+      return { items: [] };
+    },
+  }), { outDir: out, asOfDate: '2026-10-15' });
+
+  assert.ok(calls.length > 0);
+  for (const params of calls) assert.equal(params.limit, 10);
 });
 
 test('buildTheme honours excludeKeywords from the theme entry', async () => {
