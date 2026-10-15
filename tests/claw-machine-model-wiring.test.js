@@ -36,7 +36,7 @@ test('the page still carries its SEO head and the partners disclosure', () => {
   assert.match(source, /쿠팡 파트너스 활동의 일환으로 수수료를 제공받습니다/);
 });
 
-test('no banner image markup is left behind once cards replace it', { skip: 'Task 9 에서 켠다' }, () => {
+test('no banner image markup is left behind once cards replace it', () => {
   // Task 9 에서 카드로 바뀐 뒤에도 이 테스트가 지켜 준다.
   assert.doesNotMatch(html(), /image\d*\.coupangcdn\.com\/image\/affiliate\/banner/);
 });

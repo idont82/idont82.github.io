@@ -3,7 +3,8 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { createThemeLoader } from './assets/plushie-loader.js';
 import { createModelLoader, swapPlushieMesh } from './assets/plushie-three.js';
-import { findEntry } from './assets/plushie-model-utils.js';
+import { findEntry, thumbnailUrl } from './assets/plushie-model-utils.js';
+import { cardHtml, cardsHtml, markSuccessCardShown } from './assets/product-card.js';
 
 let themeManifest = null;
 const themeModels = new Map();
@@ -1624,21 +1625,52 @@ const coinStatus = document.getElementById('coinStatus');
 const msgOverlay = document.getElementById('msgOverlay');
 const joyStick = document.getElementById('joyStick');
 let adFooterFlyCleanup = null;
-const FOOTER_TRIPLE_BANNERS_HTML = `
-  <a href="https://link.coupang.com/a/ek4gDo" target="_blank" referrerpolicy="unsafe-url" class="q-banner" data-coupang-link data-coupang-placement="game_coin" data-coupang-product-type="mini_claw">
-    <img src="https://image1.coupangcdn.com/image/affiliate/banner/e862e13c7284f83115bf1e796a0c81f8@2x.jpg" alt="미니 인형뽑기">
-  </a>
-  <a href="https://link.coupang.com/a/ek4rgW" target="_blank" referrerpolicy="unsafe-url" class="q-banner" data-coupang-link data-coupang-placement="game_coin" data-coupang-product-type="mini_claw">
-    <img src="https://image13.coupangcdn.com/image/affiliate/banner/a5ea46c9cfa6c620061e5de6d74733cf@2x.jpg" alt="캐치핑 인형뽑기">
-  </a>
-  <a href="https://link.coupang.com/a/ek6ZFc" target="_blank" referrerpolicy="unsafe-url" class="q-banner" data-coupang-link data-coupang-placement="game_coin" data-coupang-product-type="mini_claw">
-    <img src="https://image13.coupangcdn.com/image/affiliate/banner/6ec5c3d390e8b7a962b8b7cc32f7390e@2x.jpg" alt="유니콘 인형뽑기">
-  </a>
-`;
+function footerCardsHtml(){
+  if(!themeManifest) return '';
+  const items = themeManifest.items.map((entry) => ({
+    ...entry,
+    thumbnail: thumbnailUrl(currentTheme, entry),
+  }));
+  return cardsHtml(items, { placement: 'game_coin', limit: 3 });
+}
+
+function entryForCard(char){
+  const entry = findEntry(themeManifest, char);
+  if(!entry) return null;
+  return { ...entry, thumbnail: thumbnailUrl(currentTheme, entry) };
+}
+
+function sessionStorageSafe(){
+  try {
+    return window.sessionStorage;
+  } catch {
+    return null;
+  }
+}
+
+// 승리 경로 안에서 불리므로 어떤 경우에도 던지지 않는다.
+function showSuccessCard(char){
+  try {
+    const entry = entryForCard(char);
+    if(!entry) return;
+    if(!markSuccessCardShown(sessionStorageSafe())) return;
+
+    const adFooter = document.getElementById('gameAdFooter');
+    const bannerContainer = document.getElementById('bannerContainer');
+    if(!adFooter || !bannerContainer) return;
+
+    bannerContainer.dataset.bannerMode = 'success';
+    bannerContainer.innerHTML = cardHtml(entry, { placement: 'game_success' });
+    triggerAdFooterFlyIn(adFooter);
+  } catch {
+    // 카드는 부가 기능이다. 실패해도 게임은 계속된다.
+  }
+}
+
 const FOOTER_IFRAME_BANNER_HTML = `
-  <div class="q-banner-iframe-wrap">
+  <div class="q-banner-iframe-wrap" data-coupang-placement="game_coin">
     <iframe
-      src="https://ads-partners.coupang.com/widgets.html?id=989908&amp;template=carousel&amp;trackingCode=AF7523287&amp;subId=&amp;width=300&amp;height=250&amp;tsource="
+      src="https://ads-partners.coupang.com/widgets.html?id=989908&amp;template=carousel&amp;trackingCode=AF7523287&amp;subId=clawwidget&amp;width=300&amp;height=250&amp;tsource="
       width="300"
       height="250"
       frameborder="0"
@@ -1702,9 +1734,10 @@ function triggerAdFooterFlyIn(adFooter){
 function setRandomFooterBanner(bannerContainer){
   if(!bannerContainer) return;
 
-  const useIframeBanner = Math.random() < 0.5;
+  const cards = footerCardsHtml();
+  const useIframeBanner = !cards;
   bannerContainer.dataset.bannerMode = useIframeBanner ? 'iframe' : 'triple';
-  bannerContainer.innerHTML = useIframeBanner ? FOOTER_IFRAME_BANNER_HTML : FOOTER_TRIPLE_BANNERS_HTML;
+  bannerContainer.innerHTML = useIframeBanner ? FOOTER_IFRAME_BANNER_HTML : cards;
 
   if(!useIframeBanner){
     const banners = Array.from(bannerContainer.children);
@@ -2327,6 +2360,7 @@ function animate(){
       score++;
       updateUI();
       addToCollection(p.userData.type, p.userData.char, p.userData.theme);
+      showSuccessCard(p.userData.char);
       plushieGroup.remove(p);
       plushies.splice(i, 1);
     }
