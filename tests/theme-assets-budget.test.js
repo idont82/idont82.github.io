@@ -55,7 +55,8 @@ test('asset sizes stay inside the budget', () => {
   for (const theme of themeDirs()) {
     let themeTotal = 0;
     const dir = path.join(modelsRoot, theme);
-    for (const name of fs.readdirSync(dir)) {
+    // CLI(build-theme-assets.js)의 checkBudget 과 같은 집합만 센다.
+    for (const name of fs.readdirSync(dir).filter((file) => /\.(glb|webp)$/i.test(file))) {
       const bytes = fs.statSync(path.join(dir, name)).size;
       themeTotal += bytes;
       if (name.endsWith('.glb')) {
@@ -67,6 +68,40 @@ test('asset sizes stay inside the budget', () => {
   }
 
   assert.ok(total <= TOTAL, `전체 ${Math.round(total / 1024)}KB > ${Math.round(TOTAL / 1024)}KB`);
+});
+
+test('the CLI budget check and this suite measure the same bytes', () => {
+  const { checkBudget, totalAssetBytes } = require('../scripts/assets/build-theme-assets');
+
+  let suiteTotal = 0;
+  for (const theme of themeDirs()) {
+    const dir = path.join(modelsRoot, theme);
+    for (const name of fs.readdirSync(dir).filter((file) => /\.(glb|webp)$/i.test(file))) {
+      suiteTotal += fs.statSync(path.join(dir, name)).size;
+    }
+  }
+  assert.equal(totalAssetBytes(modelsRoot), suiteTotal);
+
+  const budget = checkBudget([], {
+    perModel: PER_MODEL,
+    perTheme: PER_THEME,
+    total: TOTAL,
+    overallBytes: suiteTotal,
+  });
+  assert.deepEqual(budget, { ok: true, violations: [] });
+});
+
+test('every committed model is height-dominant enough for the procedural slot', () => {
+  const { MAX_SPREAD_RATIO, checkProportion, glbBounds } = require('../scripts/assets/glb-bounds');
+
+  for (const theme of themeDirs()) {
+    const manifest = JSON.parse(fs.readFileSync(path.join(modelsRoot, theme, 'manifest.json'), 'utf8'));
+    for (const item of manifest.items) {
+      const buffer = fs.readFileSync(path.join(modelsRoot, theme, item.model));
+      const result = checkProportion(glbBounds(buffer), MAX_SPREAD_RATIO);
+      assert.ok(result.ok, `${theme}/${item.model}: ${result.reason}`);
+    }
+  }
 });
 
 test('no gpu3d credential file is tracked by git', () => {

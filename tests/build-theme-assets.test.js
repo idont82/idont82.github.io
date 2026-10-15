@@ -39,6 +39,8 @@ function deps(overrides = {}) {
       originalUrl: url,
       shortenUrl: `https://link.coupang.com/a/s${i}?subId=clawgame`,
     })),
+    // 비율 게이트는 실제 GLB 를 읽는다. 가짜 버퍼를 쓰는 테스트는 측정만 주입한다.
+    measureBounds: () => ({ min: { x: -0.1, y: 0, z: -0.1 }, max: { x: 0.1, y: 0.3, z: 0.1 } }),
     ...overrides,
   };
 }
@@ -121,6 +123,66 @@ test('buildTheme skips a character whose only match was already taken', async ()
   assert.equal(result.manifest.items.length, 1);
   assert.equal(result.skipped.length, 1);
   assert.ok(!fs.existsSync(path.join(out, 'dino', `${result.skipped[0].char}.glb`)));
+});
+
+test('buildTheme skips and cleans up a character whose model is too sprawled', async () => {
+  const out = tempDir();
+  const sprawled = { min: { x: -0.2, y: 0, z: -0.45 }, max: { x: 0.2, y: 0.3, z: 0.45 } };
+  const upright = { min: { x: -0.1, y: 0, z: -0.1 }, max: { x: 0.1, y: 0.3, z: 0.1 } };
+
+  // 이전 빌드가 남긴 파일이 있어도 건너뛴 캐릭터의 잔재는 지워져야 한다.
+  fs.mkdirSync(path.join(out, 'dino'), { recursive: true });
+  fs.writeFileSync(path.join(out, 'dino', 'trex.glb'), 'stale');
+  fs.writeFileSync(path.join(out, 'dino', 'trex.webp'), 'stale');
+
+  const result = await buildTheme('dino', deps({
+    generateModel: async (_image, entry) => Buffer.from(entry.char),
+    measureBounds: (buffer) => (buffer.toString().startsWith('trex') ? sprawled : upright),
+  }), { outDir: out, asOfDate: '2026-10-15' });
+
+  assert.deepEqual(result.manifest.items.map((item) => item.char), ['stego']);
+  assert.equal(result.skipped.length, 1);
+  assert.equal(result.skipped[0].char, 'trex');
+  assert.match(result.skipped[0].reason, /비율/);
+  assert.ok(!fs.existsSync(path.join(out, 'dino', 'trex.glb')));
+  assert.ok(!fs.existsSync(path.join(out, 'dino', 'trex.webp')));
+  assert.ok(fs.existsSync(path.join(out, 'dino', 'stego.glb')));
+});
+
+test('buildTheme keeps a character whose model is within the proportion limit', async () => {
+  const out = tempDir();
+  const result = await buildTheme('dino', deps({
+    // 비율 1.75 — 한도 1.8 바로 아래는 통과한다.
+    measureBounds: () => ({ min: { x: 0, y: 0, z: 0 }, max: { x: 0.525, y: 0.3, z: 0.1 } }),
+  }), { outDir: out, asOfDate: '2026-10-15' });
+
+  assert.equal(result.skipped.length, 0);
+  assert.deepEqual(result.manifest.items.map((item) => item.char), ['trex', 'stego']);
+});
+
+test('buildTheme skips a character whose model bounds cannot be read', async () => {
+  const out = tempDir();
+  const result = await buildTheme('dino', deps({
+    measureBounds: () => null,
+  }), { outDir: out, asOfDate: '2026-10-15' });
+
+  assert.equal(result.manifest.items.length, 0);
+  assert.equal(result.skipped.length, 2);
+  assert.ok(result.skipped.every((entry) => /바운딩/.test(entry.reason)));
+});
+
+test('buildTheme measures the optimized buffer, not the raw one', async () => {
+  const out = tempDir();
+  const seen = [];
+  await buildTheme('dino', deps({
+    measureBounds: (buffer) => {
+      seen.push(buffer.toString());
+      return { min: { x: -0.1, y: 0, z: -0.1 }, max: { x: 0.1, y: 0.3, z: 0.1 } };
+    },
+  }), { outDir: out, asOfDate: '2026-10-15' });
+
+  assert.equal(seen.length, 2);
+  assert.ok(seen.every((text) => text.endsWith('-opt')), `측정 대상: ${seen.join(', ')}`);
 });
 
 test('canonicalUrl keeps www.coupang.com urls and rebuilds everything else from the product id', () => {
@@ -289,6 +351,26 @@ test('checkBudget reports a model over the per-file limit', () => {
   );
   assert.equal(result.ok, false);
   assert.match(result.violations[0], /dino\/trex\.glb/);
+});
+
+test('checkBudget counts webp thumbnails toward the theme total, like the suite does', () => {
+  const result = checkBudget(
+    [{ name: 'trex.glb', bytes: 1.7 * 1024 * 1024 }, { name: 'trex.webp', bytes: 200 * 1024 }],
+    { perModel: 2 * 1024 * 1024, perTheme: 1.8 * 1024 * 1024 },
+  );
+  assert.equal(result.ok, false);
+  assert.ok(result.violations.some((line) => /합계/.test(line)));
+  // 300KB 한도는 모델에만 걸린다. 썸네일은 합계에만 들어간다.
+  assert.ok(result.violations.every((line) => !/trex\.webp/.test(line)));
+});
+
+test('checkBudget reports the cross-theme total when it is given one', () => {
+  const limits = { perModel: 300 * 1024, perTheme: 1.8 * 1024 * 1024, total: 4.8 * 1024 * 1024 };
+  assert.equal(checkBudget([], { ...limits, overallBytes: 4.7 * 1024 * 1024 }).ok, true);
+
+  const over = checkBudget([], { ...limits, overallBytes: 5 * 1024 * 1024 });
+  assert.equal(over.ok, false);
+  assert.ok(over.violations.some((line) => /전체 합계/.test(line)), over.violations.join(' | '));
 });
 
 test('checkBudget reports a theme over the total limit', () => {
