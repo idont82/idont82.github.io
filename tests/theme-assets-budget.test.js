@@ -15,8 +15,10 @@ function themeDirs() {
   return fs.readdirSync(modelsRoot).filter((name) => fs.statSync(path.join(modelsRoot, name)).isDirectory());
 }
 
-test('at least the dino theme has been built', () => {
-  assert.ok(themeDirs().includes('dino'), 'assets/models/dino 가 없습니다.');
+test('at least the default theme has been built', () => {
+  // 공룡 테마는 비율 게이트(0.865)를 통과하는 모델이 하나도 없어 전부 내려갔다.
+  // 처음 켰을 때 보이는 테마에는 모델이 있어야 한다 — 없으면 파이프라인이 죽은 것이다.
+  assert.ok(themeDirs().includes('shinchan'), 'assets/models/shinchan 이 없습니다.');
 });
 
 test('every manifest is well formed and links carry subId=clawgame', () => {
