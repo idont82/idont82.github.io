@@ -1498,6 +1498,9 @@ document.querySelectorAll('#charSelector button').forEach(btn=>{
     btn.classList.add('active');
     requestThemeModels();
     spawnPlushies();
+    // 이전 테마의 가격 줄을 바로 지운다. 새 매니페스트가 오면 applyLoadedTheme 이 다시 그린다.
+    // (초기화 때는 collection 선언보다 먼저라 여기서만 부른다.)
+    renderCollection();
   });
 });
 
