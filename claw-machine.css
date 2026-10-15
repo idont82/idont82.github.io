@@ -229,6 +229,14 @@ body{
 .plushie-3d-canvas { width: 70px; height: 70px; margin: 0 auto; }
 .coll-del { position: absolute; top: 2px; right: 5px; background: none; border: none; color: #555; cursor: pointer; }
 
+/* 수집함 가격·링크 (assets/product-card.js priceLinkHtml) */
+.coll-buy{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:6px;padding:6px 4px;
+  background:#15151f;border:1px solid #333;border-radius:8px;color:#eee;text-decoration:none}
+.coll-price{color:#ff9900;font-weight:700;font-size:13px}
+.coll-asof{color:#888;font-size:9px}
+.coll-cta{padding:4px 8px;background:#ff5722;border-radius:5px;font-size:10px;font-weight:700}
+.coll-disclosure{width:100%;color:#7a88a8;font-size:10px;line-height:1.4;text-align:center;padding:4px 2px}
+
 #collectionBackdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 140; display: none; }
 #collectionBackdrop.open { display: block; }
 

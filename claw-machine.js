@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { createThemeLoader } from './assets/plushie-loader.js';
 import { createModelLoader, swapPlushieMesh } from './assets/plushie-three.js';
 import { findEntry, modelPlacement } from './assets/plushie-model-utils.js';
-import { cardHtml, cardsHtml, markSuccessCardShown } from './assets/product-card.js';
+import { cardHtml, cardsHtml, markSuccessCardShown, priceLinkHtml } from './assets/product-card.js';
 
 let themeManifest = null;
 const themeModels = new Map();
@@ -26,6 +26,9 @@ function applyLoadedTheme(result) {
     const model = themeModels.get(plushie.userData.char);
     if (model) swapPlushieMesh(THREE, plushie, model, modelPlacement(plushieScale));
   }
+
+  // 매니페스트가 늦게 도착하면 수집함의 가격·링크도 그때 붙는다.
+  renderCollection();
 }
 
 function requestThemeModels() {
@@ -1588,8 +1591,14 @@ function renderCollection(){
     return;
   }
 
-  list.innerHTML = collection.map((c, i) => {
+  // 매니페스트는 지금 깔린 테마의 것만 들고 있다. 다른 테마에서 뽑은 인형과
+  // 모델이 없는 7개 캐릭터는 entryForCard 가 null 을 주고, 가격 줄은 아예 그려지지 않는다.
+  // (char 키는 테마 전체에서 유일하다 — tests/theme-manifest.test.js 가 지킨다.)
+  let buyLinks = 0;
+  const items = collection.map((c, i) => {
     const imgUrl = getPlushieThumbnail(c.char, c.theme);
+    const buy = priceLinkHtml(entryForCard(c.char), { placement: 'game_collection' });
+    if(buy) buyLinks += 1;
     return `
       <div class="coll-item">
         <button class="coll-del" data-idx="${i}">&times;</button>
@@ -1599,9 +1608,16 @@ function renderCollection(){
         <span class="coll-name">${c.name}</span>
         <span class="coll-theme">${THEME_NAMES[c.theme] || ''}</span>
         <span class="coll-count">x${c.count}</span>
+        ${buy}
       </div>
     `;
   }).join('');
+
+  // 수집함은 광고 푸터를 덮는 패널이라, 링크가 실제로 뜰 때만 같은 고지를 함께 띄운다.
+  const disclosure = buyLinks > 0
+    ? '<div class="coll-disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로 수수료를 제공받습니다</div>'
+    : '';
+  list.innerHTML = items + disclosure;
 
   list.querySelectorAll('.coll-del').forEach(btn => {
     btn.addEventListener('click', e => {

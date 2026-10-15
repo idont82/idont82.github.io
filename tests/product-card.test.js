@@ -105,6 +105,38 @@ test('cardHtml returns an empty string for a missing entry or link', async () =>
   assert.equal(cardHtml({ ...ENTRY, link: '' }, { placement: 'game_success', theme: 'dino' }), '');
 });
 
+test('priceLinkHtml shows the price and a tracked coupang link', async () => {
+  const { priceLinkHtml } = await load();
+  const html = priceLinkHtml(ENTRY, { placement: 'game_collection' });
+
+  assert.match(html, /25,000원/);
+  assert.match(html, /2026-10-15 기준/);
+  assert.match(html, /href="https:\/\/link\.coupang\.com\/a\/one\?subId=clawgame"/);
+  assert.match(html, /data-coupang-placement="game_collection"/);
+  assert.match(html, /rel="[^"]*nofollow[^"]*sponsored[^"]*"/);
+  assert.match(html, /target="_blank"/);
+  assert.match(html, /data-coupang-link/);
+});
+
+test('priceLinkHtml renders nothing at all without an entry, link or price', async () => {
+  const { priceLinkHtml } = await load();
+  // 모델이 없는 캐릭터는 수집함에서 지금과 똑같이 보여야 한다. 빈 자리도 남지 않는다.
+  assert.equal(priceLinkHtml(null, { placement: 'game_collection' }), '');
+  assert.equal(priceLinkHtml(undefined, { placement: 'game_collection' }), '');
+  assert.equal(priceLinkHtml({ ...ENTRY, link: '' }, { placement: 'game_collection' }), '');
+  assert.equal(priceLinkHtml({ ...ENTRY, priceLabel: '' }, { placement: 'game_collection' }), '');
+});
+
+test('priceLinkHtml escapes what it is given', async () => {
+  const { priceLinkHtml } = await load();
+  const html = priceLinkHtml(
+    { ...ENTRY, priceLabel: '<script>alert(1)</script>' },
+    { placement: 'game_collection' },
+  );
+  assert.doesNotMatch(html, /<script>/);
+  assert.match(html, /&lt;script&gt;/);
+});
+
 test('cardsHtml renders up to the limit and drops unusable entries', async () => {
   const { cardsHtml } = await load();
   const items = [ENTRY, { ...ENTRY, char: 'b' }, { ...ENTRY, char: 'c' }, { ...ENTRY, char: 'd', link: '' }];

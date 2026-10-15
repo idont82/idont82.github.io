@@ -55,6 +55,27 @@ test('models are seated with the procedural plushie placement, not the longest a
   assert.match(glue, /bottomY:\s*placement\.bottomY/);
 });
 
+test('the collection shows a price and a link under each plushie that has one', () => {
+  const source = js();
+  const match = source.match(/function renderCollection\(\)\s*\{([\s\S]*?)\n\}/);
+  assert.ok(match, 'renderCollection not found');
+  const body = match[1];
+
+  // 가격 줄은 매니페스트 항목이 있을 때만 그려진다. 없으면 priceLinkHtml 이 빈 문자열이다.
+  assert.match(body, /priceLinkHtml\(entryForCard\(c\.char\), \{ placement: 'game_collection' \}\)/);
+  assert.match(body, /\$\{buy\}/);
+  // 수집함 배치는 코인 푸터·성공 카드와 따로 집계돼야 한다.
+  assert.doesNotMatch(body, /game_coin|game_success/);
+
+  // 매니페스트가 늦게 와도 가격 줄이 붙도록 다시 그린다.
+  const applied = source.match(/function applyLoadedTheme\(result\)\s*\{([\s\S]*?)\n\}/);
+  assert.ok(applied, 'applyLoadedTheme not found');
+  assert.match(applied[1], /renderCollection\(\)/);
+
+  const css = fs.readFileSync(path.join(root, 'claw-machine.css'), 'utf8');
+  assert.match(css, /\.coll-buy\{/);
+});
+
 test('the page still carries its SEO head and the partners disclosure', () => {
   const source = html();
   assert.match(source, /<title>[^<]*인형뽑기[^<]*<\/title>/);

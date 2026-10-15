@@ -49,6 +49,21 @@ export function cardHtml(entry, { placement, theme }) {
   ].join('');
 }
 
+// 수집함처럼 카드 한 장을 다 둘 자리가 없는 곳을 위한 한 줄짜리 가격·링크.
+// 이스케이프와 추적 속성은 카드와 같은 코드를 쓴다.
+export function priceLinkHtml(entry, { placement }) {
+  if (!entry || !entry.link || !entry.priceLabel) return '';
+  return [
+    `<a class="coll-buy" href="${escapeHtml(entry.link)}" target="_blank"`,
+    ' rel="nofollow sponsored noopener" referrerpolicy="unsafe-url" data-coupang-link',
+    ` data-coupang-placement="${escapeHtml(placement)}" data-coupang-product-type="mini_claw">`,
+    `<span class="coll-price">${escapeHtml(entry.priceLabel)}</span>`,
+    `<span class="coll-asof">${escapeHtml(entry.priceAsOf)} 기준</span>`,
+    '<span class="coll-cta">쿠팡에서 보기</span>',
+    '</a>',
+  ].join('');
+}
+
 export function cardsHtml(items, { placement, theme, limit = 3 }) {
   if (!Array.isArray(items)) return '';
   return items
