@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { createThemeLoader } from './assets/plushie-loader.js';
 import { createModelLoader, swapPlushieMesh } from './assets/plushie-three.js';
-import { findEntry, thumbnailUrl } from './assets/plushie-model-utils.js';
+import { findEntry, modelPlacement, thumbnailUrl } from './assets/plushie-model-utils.js';
 import { cardHtml, cardsHtml, markSuccessCardShown } from './assets/product-card.js';
 
 let themeManifest = null;
@@ -23,7 +23,7 @@ function applyLoadedTheme(result) {
 
   for (const plushie of plushies) {
     const model = themeModels.get(plushie.userData.char);
-    if (model) swapPlushieMesh(THREE, plushie, model, plushieScale * 2.4);
+    if (model) swapPlushieMesh(THREE, plushie, model, modelPlacement(plushieScale));
   }
 }
 
@@ -1294,7 +1294,7 @@ function createPlushie(type, position, rotation, customScale){
   g.userData = {type: t.name, char: t.char, theme: currentTheme, grabbed: false, radius: s*1.2};
 
   const loadedModel = themeModels.get(t.char);
-  if (loadedModel) swapPlushieMesh(THREE, g, loadedModel, s * 2.4);
+  if (loadedModel) swapPlushieMesh(THREE, g, loadedModel, modelPlacement(s));
 
   return g;
 }

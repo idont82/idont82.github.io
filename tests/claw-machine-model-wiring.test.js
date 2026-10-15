@@ -30,6 +30,19 @@ test('model swapping preserves userData used by the physics code', () => {
   assert.match(source, /normalizeTransform/);
 });
 
+test('models are seated with the procedural plushie placement, not the longest axis', () => {
+  const source = js();
+  // 가장 긴 축을 목표 크기에 맞추면 z 로 퍼진 모델이 납작해지고 바닥도 절차적 인형과 어긋난다.
+  assert.doesNotMatch(source, /swapPlushieMesh\([^;]*\*\s*2\.4\s*\)/);
+  const calls = [...source.matchAll(/swapPlushieMesh\(THREE,[^;]*?\)\)/g)].map(([call]) => call);
+  assert.equal(calls.length, 2, `swapPlushieMesh 호출이 2개가 아니다: ${calls.length}`);
+  for (const call of calls) assert.match(call, /modelPlacement\(/);
+
+  const glue = fs.readFileSync(path.join(root, 'assets', 'plushie-three.js'), 'utf8');
+  assert.match(glue, /axis:\s*'height'/);
+  assert.match(glue, /bottomY:\s*placement\.bottomY/);
+});
+
 test('the page still carries its SEO head and the partners disclosure', () => {
   const source = html();
   assert.match(source, /<title>[^<]*인형뽑기[^<]*<\/title>/);
