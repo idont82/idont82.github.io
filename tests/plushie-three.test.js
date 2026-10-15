@@ -92,3 +92,135 @@ test('a rejected model load leaves the theme loader on procedural plushies', asy
   assert.equal(result.models.size, 0, '모델이 하나도 안 붙어야 절차적 인형이 남는다');
   assert.equal(errors.length, 1);
 });
+
+// ── swapPlushieMesh: three.js 없이 Box3/Group 규약만 흉내낸다 ──
+function fakeTHREE() {
+  class Box3 {
+    setFromObject(object) {
+      const box = object && object.__box;
+      this.min = box ? { ...box.min } : { x: 0, y: 0, z: 0 };
+      this.max = box ? { ...box.max } : { x: 0, y: 0, z: 0 };
+      this.__empty = !box;
+      return this;
+    }
+
+    isEmpty() { return this.__empty; }
+  }
+
+  class Group {
+    constructor() {
+      this.children = [];
+      this.position = { x: 0, y: 0, z: 0, set(x, y, z) { this.x = x; this.y = y; this.z = z; } };
+      this.scale = { value: 1, setScalar(v) { this.value = v; } };
+    }
+
+    add(child) { this.children.push(child); }
+
+    remove(child) {
+      const at = this.children.indexOf(child);
+      if (at >= 0) this.children.splice(at, 1);
+    }
+
+    traverse(fn) {
+      fn(this);
+      for (const child of this.children) {
+        if (child.traverse) child.traverse(fn);
+        else fn(child);
+      }
+    }
+  }
+
+  return { Box3, Group };
+}
+
+function fakeModel(box, stats = { clones: 0 }) {
+  const node = {
+    __box: box,
+    stats,
+    position: { x: 0, y: 0, z: 0, set(x, y, z) { this.x = x; this.y = y; this.z = z; } },
+    scale: { value: 1, setScalar(v) { this.value = v; } },
+  };
+  node.clone = () => { stats.clones += 1; return fakeModel(box, stats); };
+  return node;
+}
+
+// 짱구 프로브(s=1) 를 plushieScale 0.35 로 잰 목표 상자.
+const PLACEMENT = { height: 4.45 * 0.35, width: 2.6945 * 0.35, bottomY: -1.6 * 0.35 };
+const HIMAWARI = { min: { x: 0, y: 0, z: 0 }, max: { x: 0.1054, y: 0.3, z: 0.184 } };
+const STEGO = { min: { x: 0, y: 0, z: 0 }, max: { x: 0.1968, y: 0.2998, z: 0.4952 } };
+
+function proceduralGroup(THREE, disposed) {
+  const group = new THREE.Group();
+  const mesh = {
+    geometry: { dispose() { disposed.push('geometry'); } },
+    material: { dispose() { disposed.push('material'); } },
+    traverse(fn) { fn(this); },
+  };
+  group.add(mesh);
+  group.userData = { char: 'himawari', radius: 0.42, grabbed: false };
+  return { group, mesh };
+}
+
+test('swapPlushieMesh fits the model into the box and stands it on the box floor', async () => {
+  const { swapPlushieMesh } = await load();
+  const THREE = fakeTHREE();
+  const disposed = [];
+  const { group, mesh } = proceduralGroup(THREE, disposed);
+  const prototype = fakeModel(HIMAWARI);
+
+  assert.equal(swapPlushieMesh(THREE, group, prototype, PLACEMENT), true);
+
+  // 절차적 메시는 떨어져 나가고 자원도 돌려준다.
+  assert.ok(!group.children.includes(mesh));
+  assert.deepEqual(disposed, ['geometry', 'material']);
+  assert.equal(group.children.length, 1);
+
+  const clone = group.children[0].children[0];
+  const expectedScale = PLACEMENT.width / 0.184; // 가로가 먼저 걸린다
+  assert.ok(Math.abs(clone.scale.value - expectedScale) < 1e-9);
+
+  // 바닥이 상자 바닥에 앉는다 — 절차적 인형과 같은 발높이.
+  const bottom = clone.position.y + HIMAWARI.min.y * clone.scale.value;
+  assert.ok(Math.abs(bottom - PLACEMENT.bottomY) < 1e-9, `바닥이 ${PLACEMENT.bottomY} 가 아니라 ${bottom}`);
+  // 가로는 상자를 넘지 않는다.
+  assert.ok(Math.abs(0.184 * clone.scale.value - PLACEMENT.width) < 1e-9);
+  // userData 는 호출자 것으로 남는다(물리와 수집함이 읽는다).
+  assert.equal(group.userData.radius, 0.42);
+});
+
+test('swapPlushieMesh leaves the procedural mesh alone when the model fits too small', async () => {
+  const { swapPlushieMesh } = await load();
+  const THREE = fakeTHREE();
+  const disposed = [];
+  const { group, mesh } = proceduralGroup(THREE, disposed);
+  const prototype = fakeModel(STEGO);
+
+  assert.equal(swapPlushieMesh(THREE, group, prototype, PLACEMENT), false);
+  assert.deepEqual(group.children, [mesh], '절차적 메시가 그대로 남아야 한다');
+  assert.deepEqual(disposed, [], '절차적 지오메트리를 버리면 인형이 사라진다');
+  assert.equal(prototype.stats.clones, 0, '거절될 모델은 복제하지 않는다');
+});
+
+test('swapPlushieMesh returns false instead of touching the group on bad input', async () => {
+  const { swapPlushieMesh } = await load();
+  const THREE = fakeTHREE();
+  const disposed = [];
+  const { group, mesh } = proceduralGroup(THREE, disposed);
+
+  assert.equal(swapPlushieMesh(THREE, null, fakeModel(HIMAWARI), PLACEMENT), false);
+  assert.equal(swapPlushieMesh(THREE, group, null, PLACEMENT), false);
+  assert.equal(swapPlushieMesh(THREE, group, fakeModel(HIMAWARI), null), false);
+  // 지오메트리가 없는 모델은 빈 상자를 주고, 그러면 교체하지 않는다.
+  assert.equal(swapPlushieMesh(THREE, group, fakeModel(null), PLACEMENT), false);
+  assert.deepEqual(group.children, [mesh]);
+  assert.deepEqual(disposed, []);
+});
+
+test('measureBox copies the Box3 and reports an empty object as null', async () => {
+  const { measureBox } = await load();
+  const THREE = fakeTHREE();
+
+  assert.deepEqual(measureBox(THREE, fakeModel(HIMAWARI)), { min: HIMAWARI.min, max: HIMAWARI.max });
+  assert.equal(measureBox(THREE, fakeModel(null)), null);
+  assert.equal(measureBox(THREE, null), null);
+});

@@ -62,7 +62,7 @@ test('model swapping preserves userData used by the physics code', () => {
   const source = fs.readFileSync(path.join(root, 'assets', 'plushie-three.js'), 'utf8');
   // userData 를 다시 대입하거나 지우면 radius/char/theme 이 사라져 물리와 수집함이 깨진다.
   assert.doesNotMatch(source, /\.userData\s*=\s*\{/);
-  assert.match(source, /normalizeTransform/);
+  assert.match(source, /fitTransform/);
 });
 
 test('the game never statically imports the addons CDN path', () => {
@@ -83,11 +83,42 @@ test('models are seated with the procedural plushie placement, not the longest a
   assert.doesNotMatch(source, /swapPlushieMesh\([^;]*\*\s*2\.4\s*\)/);
   const calls = [...source.matchAll(/swapPlushieMesh\(THREE,[^;]*?\)\)/g)].map(([call]) => call);
   assert.equal(calls.length, 2, `swapPlushieMesh 호출이 2개가 아니다: ${calls.length}`);
-  for (const call of calls) assert.match(call, /modelPlacement\(/);
+  // 두 호출 모두 실측 상자로 만든 placement 를 넘긴다. 하나라도 빠지면 그 자리의
+  // 모델만 옛 크기로 돌아가 같은 줄에서 키가 어긋난다.
+  for (const call of calls) {
+    assert.match(call, /modelPlacement\(/);
+    assert.match(call, /proceduralPlushieBox\(\)/);
+  }
 
   const glue = fs.readFileSync(path.join(root, 'assets', 'plushie-three.js'), 'utf8');
-  assert.match(glue, /axis:\s*'height'/);
-  assert.match(glue, /bottomY:\s*placement\.bottomY/);
+  assert.match(glue, /fitTransform\(measureBox\(THREE, prototype\), placement\)/);
+  // 상자를 못 맞추면 절차적 인형을 건드리지 않고 돌아간다.
+  assert.match(glue, /if \(!transform\) return false;/);
+});
+
+test('the procedural plushie box is measured at runtime, never written down', () => {
+  // 이번 결함의 원인이 적어 둔 상자였다: 3.25s 라고 적혀 있었지만 실제는 4.45s 라
+  // 모델이 28% 작고 바닥에서 0.6s 떠 있었다. 숫자는 순수 모듈에서 사라져야 한다.
+  const utils = fs.readFileSync(path.join(root, 'assets', 'plushie-model-utils.js'), 'utf8');
+  assert.doesNotMatch(utils, /PROCEDURAL_PLUSHIE_BOUNDS/);
+  assert.match(utils, /export function boxTarget\(box\)/);
+
+  const source = js();
+  const match = source.match(/function proceduralPlushieBox\(\)\{([\s\S]*?)\n\}/);
+  assert.ok(match, 'proceduralPlushieBox not found');
+  const body = match[1];
+
+  // 프로브는 반드시 절차적이어야 한다. createPlushie 는 themeModels 에 모델이 있으면
+  // 메시를 갈아 끼우므로, 비우지 않으면 "모델에 맞춘 모델"을 재게 된다.
+  const clearAt = body.indexOf('themeModels.clear()');
+  const buildAt = body.indexOf('createPlushie(');
+  assert.ok(clearAt >= 0 && buildAt >= 0, '두 호출이 모두 있어야 한다');
+  assert.ok(clearAt < buildAt, 'themeModels 를 비운 뒤에 프로브를 만들어야 한다');
+  // 재고 나서 되돌려 놓는다. 안 그러면 로딩된 모델이 통째로 사라진다.
+  assert.match(body, /finally \{\s*\n\s*for \(const \[char, model\] of saved\) themeModels\.set\(char, model\);/);
+  // s=1 로 재서 어떤 plushieScale 에도 곱해 쓸 수 있게 캐시한다.
+  assert.match(body, /measureBox\(THREE, probe\)/);
+  assert.match(body, /\{x:0, y:0, z:0\}, 1\)/);
 });
 
 test('the collection shows a price and a link under each plushie that has one', () => {
