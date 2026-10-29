@@ -46,8 +46,8 @@ const WINTER_POSTS = [
     slug: 'winter-electric-blanket',
     subId: 'winter-blanket',
     dataFile: 'coupang-winter-blanket.json',
-    keyword: '전기요',
-    title: '전기요 고르는 법, 온도 편차·과열 걱정·세탁 문제를 먼저 정리하기',
+    keyword: '전기장판',
+    title: '전기장판 전기요 고르는 기준, 온도 편차·과열·세탁 먼저 확인하기',
     labels: ['겨울', '난방', '생활가전', '구매 가이드'],
     lead: '전기요는 난방비를 줄이려고 찾는 경우가 많지만, 후기에서 반복되는 불만은 보온력보다 사용 중의 불편에 몰려 있습니다. 사기 전에 그 불편을 먼저 확인하면 고르는 기준이 단순해집니다.',
     complaints: [
@@ -83,8 +83,8 @@ const WINTER_POSTS = [
     slug: 'winter-thermal-underwear',
     subId: 'winter-thermal',
     dataFile: 'coupang-winter-thermal.json',
-    keyword: '기모 내의',
-    title: '기모 내의 고르는 법, 땀 차면 더 추운 문제와 수축·정전기 기준',
+    keyword: '기모 내복',
+    title: '기모 내복 고르기, 땀 차면 더 추운 이유와 수축·정전기 기준',
     labels: ['겨울', '내의', '의류', '구매 가이드'],
     lead: '기모 내의는 싸고 따뜻해 보여서 고민 없이 담기 쉬운 품목입니다. 그런데 후기에서 반복되는 불만은 보온이 부족하다는 쪽이 아니라, 입고 움직인 다음에 생기는 문제들입니다.',
     complaints: [
