@@ -4,7 +4,8 @@ const path = require('node:path');
 const test = require('node:test');
 
 const root = path.resolve(__dirname, '..');
-const ignoredDirs = new Set(['.git', '.worktrees', '.antigravitycli', 'node_modules']);
+// 배포되지 않는 로컬 작업 폴더는 검사 대상이 아니다.
+const ignoredDirs = new Set(['.git', '.worktrees', '.antigravitycli', 'node_modules', '.blogger-artifacts', '.superpowers']);
 const coupangPattern = /(?:link|www|ads-partners)\.coupang\.com/;
 const trackingScriptPattern = /\/assets\/coupang-tracking\.js|blog\/assets\/blog\.js|assets\/blog\.js/;
 
