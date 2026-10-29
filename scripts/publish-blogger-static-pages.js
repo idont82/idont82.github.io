@@ -10,6 +10,7 @@ const path = require('node:path');
 const { BloggerClient } = require('./blogger-api');
 const { getAccessToken } = require('./blogger-oauth');
 const { bloggerPaths } = require('./blogger-paths');
+const { buildArchivePage } = require('./blogger-archive-page');
 
 const root = path.resolve(__dirname, '..');
 const outputDir = path.join(root, '.blogger-artifacts', 'pages');
@@ -41,7 +42,7 @@ function wrap(marker, body) {
   return `${marker}<div style="max-width:760px;margin:0 auto;font-family:Arial,'Malgun Gothic',sans-serif;color:#182538;font-size:16px;line-height:1.85;overflow-wrap:anywhere">${body}</div>`;
 }
 
-function aboutPage() {
+function aboutPage(archiveUrl) {
   const marker = '<!-- goldpick-page-about -->';
   const body = [
     p('Gold Pick은 사기 전에 궁금한 차이를 정리하는 블로그입니다. 제품 수가 많아 비교가 어려운 품목을 골라, 무엇을 기준으로 봐야 하는지 정리합니다.'),
@@ -63,6 +64,9 @@ function aboutPage() {
 
     h2('주제별로 보기'),
     `<p style="margin:14px 0">${LABELS.map((label) => link(label, labelUrl(label))).join(' · ')}</p>`,
+    // 라벨 보관함은 Blogger 기본 robots.txt 가 막는 `/search` 경로라 크롤러가 따라오지 못한다.
+    // 과거 글로 가는 크롤링 가능한 경로는 이 목록 페이지뿐이다.
+    archiveUrl ? `<p style="margin:14px 0">${link('전체 글 목록 보기', archiveUrl)}</p>` : '',
 
     h2('제휴 안내'),
     p('이 블로그는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다. 수수료는 독자가 지불하는 가격에 영향을 주지 않습니다.'),
@@ -110,15 +114,17 @@ function privacyPage() {
 }
 
 const PAGES = [
-  { slug: 'about', build: aboutPage },
-  { slug: 'privacy', build: privacyPage },
+  { slug: 'about', build: (context) => aboutPage(context.archiveUrl) },
+  { slug: 'privacy', build: () => privacyPage() },
+  { slug: 'archive', build: (context) => buildArchivePage(context.posts), needsPosts: true },
 ];
 
-async function buildAll() {
+async function buildAll(context = {}) {
   await fs.mkdir(outputDir, { recursive: true });
   const built = [];
   for (const entry of PAGES) {
-    const page = entry.build();
+    if (entry.needsPosts && !(context.posts || []).length) continue;
+    const page = entry.build(context);
     const preview = `<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(page.title)}</title><body style="margin:0;padding:16px;background:#fff"><h1 style="font:bold 28px/1.45 Arial,'Malgun Gothic',sans-serif;max-width:760px;margin:20px auto;color:#10243f">${escapeHtml(page.title)}</h1>${page.content}</body></html>`;
     const previewPath = path.join(outputDir, `${entry.slug}-preview.html`);
     await fs.writeFile(previewPath, preview, 'utf8');
@@ -132,6 +138,35 @@ async function findExistingPage(client, blogId, marker) {
   return (list.items || []).find((item) => String(item.content).includes(marker)) || null;
 }
 
+async function listAllPosts(client, blogId) {
+  const posts = [];
+  let pageToken = '';
+  do {
+    const query = `/blogs/${blogId}/posts?maxResults=100&fetchBodies=false&fetchImages=false`
+      + `${pageToken ? `&pageToken=${encodeURIComponent(pageToken)}` : ''}`;
+    const list = await client.request(query);
+    for (const item of list.items || []) {
+      posts.push({ title: item.title, url: item.url, published: item.published, labels: item.labels || [] });
+    }
+    pageToken = list.nextPageToken || '';
+  } while (pageToken);
+  return posts;
+}
+
+async function savePage(client, blogId, entry) {
+  const { title, content, marker } = entry.page;
+  const existing = await findExistingPage(client, blogId, marker);
+  const saved = existing
+    ? await client.request(`/blogs/${blogId}/pages/${existing.id}`, { method: 'PUT', body: { title, content } })
+    : await client.request(`/blogs/${blogId}/pages`, { method: 'POST', body: { title, content } });
+
+  const checked = await client.request(`/blogs/${blogId}/pages/${saved.id}`);
+  if (checked.title !== title || !String(checked.content).includes(marker)) {
+    throw new Error(`${entry.slug}: 발행 결과 검증 실패`);
+  }
+  return { slug: entry.slug, id: checked.id, title: checked.title, url: checked.url, updated: Boolean(existing) };
+}
+
 async function publish() {
   const paths = bloggerPaths(root);
   const client = new BloggerClient({ token: await getAccessToken(paths) });
@@ -140,25 +175,28 @@ async function publish() {
     throw new Error(`예상과 다른 블로그입니다: ${blog.url}`);
   }
 
-  const built = await buildAll();
-  const receipts = [];
-  for (const entry of built) {
-    const { title, content, marker } = entry.page;
-    const existing = await findExistingPage(client, blog.id, marker);
-    const saved = existing
-      ? await client.request(`/blogs/${blog.id}/pages/${existing.id}`, { method: 'PUT', body: { title, content } })
-      : await client.request(`/blogs/${blog.id}/pages`, { method: 'POST', body: { title, content } });
+  const posts = await listAllPosts(client, blog.id);
 
-    const checked = await client.request(`/blogs/${blog.id}/pages/${saved.id}`);
-    if (checked.title !== title || !String(checked.content).includes(marker)) {
-      throw new Error(`${entry.slug}: 발행 결과 검증 실패`);
+  // 1차: 목록 페이지를 올려 URL을 받는다.
+  let receipts = [];
+  for (const entry of await buildAll({ posts })) {
+    receipts.push(await savePage(client, blog.id, entry));
+  }
+
+  // 2차: 받은 URL로 소개 페이지에서 목록 페이지를 가리킨다.
+  const archiveUrl = receipts.find((receipt) => receipt.slug === 'archive')?.url;
+  if (archiveUrl) {
+    const rebuilt = await buildAll({ posts, archiveUrl });
+    receipts = [];
+    for (const entry of rebuilt) {
+      receipts.push(await savePage(client, blog.id, entry));
     }
-    receipts.push({ slug: entry.slug, id: checked.id, title: checked.title, url: checked.url, updated: Boolean(existing) });
   }
 
   await fs.writeFile(
     path.join(outputDir, 'receipts.json'),
-    `${JSON.stringify({ blogId: blog.id, publishedAt: new Date().toISOString(), pages: receipts }, null, 2)}\n`,
+    `${JSON.stringify({ blogId: blog.id, publishedAt: new Date().toISOString(), postCount: posts.length, pages: receipts }, null, 2)}
+`,
     'utf8',
   );
   return receipts;
@@ -180,4 +218,4 @@ if (require.main === module) {
   main().catch((error) => { console.error(error.message); process.exitCode = 1; });
 }
 
-module.exports = { buildAll, publish, aboutPage, privacyPage };
+module.exports = { buildAll, publish, aboutPage, privacyPage, listAllPosts };
